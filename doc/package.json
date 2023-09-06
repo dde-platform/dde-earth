@@ -1,0 +1,27 @@
+{
+  "name": "doc",
+  "version": "0.0.0",
+  "description": "dde-earth sdk document site",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "start": "next start"
+  },
+  "author": "hongfaqiu",
+  "license": "MIT",
+  "dependencies": {
+    "next": "^13.4.19",
+    "nextra": "^2.12.3",
+    "nextra-theme-docs": "^2.12.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.9",
+    "@types/react": "^18.2.21",
+    "autoprefixer": "^10.4.15",
+    "postcss": "^8.4.29",
+    "tailwindcss": "^3.3.3"
+  }
+}

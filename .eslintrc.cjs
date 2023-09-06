@@ -15,12 +15,18 @@ module.exports = {
       },
     },
     {
-      files: ['.eslintrc.cjs', 'commitlint.config.js', 'rollup.config.{js,ts}'],
+      files: [
+        '.eslintrc.cjs',
+        'postcss.config.js',
+        'tailwind.config.js',
+        'commitlint.config.js',
+        'rollup.config.{js,ts}',
+      ],
       env: {
         node: true,
       },
     },
   ],
-  ignorePatterns: ['dist'],
+  ignorePatterns: ['dist', 'next-env.d.ts'],
   root: true,
 };
