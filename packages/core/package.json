@@ -1,0 +1,33 @@
+{
+  "name": "@dde-earth/core",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/index.min.js",
+  "module": "./dist/es/index.js",
+  "types": "./dist/src/typings/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "vitest",
+    "build": "rimraf dist && rollup -c",
+    "dev": "rimraf dist && pnpm run build --watch"
+  },
+  "keywords": [
+    "cesium",
+    "dde"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "cesium": "*"
+  },
+  "devDependencies": {
+    "cesium": "latest"
+  },
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "singleQuote": true,
+  "trailingComma": "all",
+	"useTabs": false,
+	"tabWidth": 2,
+	"importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "^@/(.*)$",
+    "(.css|.scss)$",
+    "^[./]",
+    "^types$"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+	"plugins": ["@trivago/prettier-plugin-sort-imports"]
+}
