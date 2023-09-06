@@ -14,10 +14,24 @@
     "release": "turbo build --filter=doc^... && changeset publish",
     "prepare": "husky install"
   },
+  "lint-staged": {
+    "*.{md,json}": [
+      "prettier --cache --write"
+    ],
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --cache --write"
+    ],
+    "*.ts?(x)": [
+      "eslint --fix",
+      "prettier --cache --parser=typescript --write"
+    ]
+  },
   "devDependencies": {
     "@changesets/cli": "^2.22.0",
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
+    "@commitlint/types": "^17.4.4",
     "@trivago/prettier-plugin-sort-imports": "^4.2.0",
     "@types/node": "^20.5.7",
     "@typescript-eslint/eslint-plugin": "^6.5.0",

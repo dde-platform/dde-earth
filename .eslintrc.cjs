@@ -21,5 +21,6 @@ module.exports = {
       },
     },
   ],
+  ignorePatterns: ['dist'],
   root: true,
 };
