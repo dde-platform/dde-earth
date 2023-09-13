@@ -51,13 +51,12 @@
     "rollup": "^3.28.1",
     "rollup-plugin-dts": "^6.0.0",
     "rollup-plugin-esbuild": "^5.0.0",
-    "rollup-plugin-node-externals": "^6.1.1",
     "turbo": "latest",
     "typescript": "^5.2.2",
     "vitest": "^0.34.3"
   },
   "packageManager": "pnpm@8.6.12",
   "engines": {
-    "node": "^18.0.0 || >=20.0.0"
+    "node": ">=16"
   }
 }

@@ -2,9 +2,10 @@
   "name": "dde-earth",
   "version": "0.0.0",
   "type": "module",
-  "main": "./dist/index.min.js",
+  "main": "./dist/lib/index.js",
   "module": "./dist/es/index.js",
-  "types": "./dist/src/typings/index.d.ts",
+  "unpkg": "./dist/index.min.js",
+  "types": "./dist/typings/index.d.ts",
   "files": [
     "dist"
   ],
@@ -14,7 +15,7 @@
   "scripts": {
     "test": "vitest",
     "build": "rimraf dist && rollup -c",
-    "dev": "rimraf dist && pnpm run build --watch"
+    "dev": "rimraf dist && rollup -c --watch"
   },
   "keywords": [
     "cesium",

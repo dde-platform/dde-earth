@@ -12,6 +12,9 @@ module.exports = {
       rules: {
         '@typescript-eslint/no-unused-expressions': 'off',
         '@typescript-eslint/ban-types': 'off',
+        '@typescript-eslint/no-namespace': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/ban-ts-comment': 'off',
       },
     },
     {
@@ -20,7 +23,7 @@ module.exports = {
         'postcss.config.js',
         'tailwind.config.js',
         'commitlint.config.js',
-        'rollup.config.{js,ts}',
+        'rollup.config.{js,mjs}',
       ],
       env: {
         node: true,
