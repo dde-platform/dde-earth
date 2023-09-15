@@ -1,16 +1,19 @@
-import { Tail } from '../utils/ts';
-import { Earth } from './Earth';
+import { Tail } from '../utils/types';
+import { Earth } from './earth';
+import { BasePlugin } from './plugin';
 
 export class PluginManager {
   private _destroyed: boolean = false;
-  plugins: Record<string, Earth.Plugin> = {};
-  constructor(readonly earth: Earth) {}
+  constructor(
+    readonly earth: Earth,
+    public readonly plugins: Record<string, BasePlugin> = {},
+  ) {}
 
   get destroyed() {
     return this._destroyed;
   }
 
-  use<T extends Earth.Plugin>(
+  use<T extends BasePlugin>(
     plugin: T,
     ...options: Tail<Parameters<T['init']>>
   ) {
@@ -39,7 +42,7 @@ export class PluginManager {
     });
   }
 
-  destory() {
+  destroy() {
     this.remove(Object.keys(this.plugins));
     // @ts-ignore
     this.plugins = undefined;

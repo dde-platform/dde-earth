@@ -1,5 +1,5 @@
 {
-  "name": "dde-earth",
+  "name": "@dde-earth/plugin-subscriber",
   "version": "0.0.0",
   "type": "module",
   "main": "./dist/lib/index.js",
@@ -23,10 +23,14 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "cesium": "*"
+    "cesium": "*",
+    "dde-earth": "*"
   },
   "devDependencies": {
     "cesium": "latest"
+  },
+  "dependencies": {
+    "dde-earth": "workspace:^"
   },
   "engines": {
     "node": "^18.0.0 || >=20.0.0"

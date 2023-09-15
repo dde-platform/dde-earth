@@ -4,3 +4,6 @@ export type Tail<T extends any[]> = ((...args: T) => void) extends (
 ) => void
   ? R
   : never;
+export type EventArgs = { [key: string]: any };
+
+export type EventNames<M extends EventArgs> = Extract<keyof M, string>;

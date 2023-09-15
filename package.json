@@ -3,7 +3,7 @@
   "scripts": {
     "build": "turbo build --filter=./packages/\\*",
     "build:all": "turbo build",
-    "dev": "turbo dev --filter=!doc --no-cache --continue",
+    "dev": "turbo dev --filter=./packages/\\* --no-cache --continue",
     "dev:doc": "turbo run dev --filter=doc...",
     "lint": "eslint --cache --ignore-path .gitignore --max-warnings 0 .",
     "lint:prettier": "prettier --cache --check --ignore-path .gitignore --ignore-path .prettierignore .",

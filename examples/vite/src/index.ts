@@ -4,4 +4,6 @@ import './index.css';
 
 const earth = new Earth('container');
 
-console.log(earth);
+earth.on('LEFT_CLICK', (event) => {
+  console.log(event);
+});

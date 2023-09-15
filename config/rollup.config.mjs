@@ -52,6 +52,7 @@ export default defineConfig([
       name: 'DDEEarth',
       globals: {
         cesium: 'Cesium',
+        'dde-earth': 'DDEEarth',
       },
     },
     external,

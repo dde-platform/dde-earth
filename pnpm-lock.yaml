@@ -117,6 +117,9 @@ importers:
 
   examples/vite:
     dependencies:
+      '@dde-earth/plugin-subscriber':
+        specifier: workspace:^
+        version: link:../../packages/plugin-subscriber
       cesium:
         specifier: ^1.109.0
         version: 1.109.0
@@ -135,6 +138,16 @@ importers:
         version: 1.2.22(cesium@1.109.0)(rollup@2.79.1)(vite@4.3.9)
 
   packages/dde-earth:
+    devDependencies:
+      cesium:
+        specifier: latest
+        version: 1.109.0
+
+  packages/plugin-subscriber:
+    dependencies:
+      dde-earth:
+        specifier: workspace:^
+        version: link:../dde-earth
     devDependencies:
       cesium:
         specifier: latest

@@ -6,18 +6,24 @@ import {
   Viewer,
 } from 'cesium';
 
-import { EarthOptions } from '../typings';
-import { PluginManager } from './PluginManager';
+import { Subscriber } from '../plugins/Subscriber';
+import { EventEmitter } from './event';
+import { BasePlugin } from './plugin';
+import { PluginManager } from './pluginManager';
 
 export class Earth {
-  public readonly viewer: Viewer;
-  public readonly options: EarthOptions;
-  public readonly pluginManager: PluginManager;
   private _destroyed: boolean = false;
+  public readonly viewer: Viewer;
+  public readonly options: Earth.EarthOptions;
+  public readonly eventEmitter: EventEmitter;
+  public readonly plugins: Record<string, BasePlugin> = {};
+  public readonly pluginManager: PluginManager;
+  public readonly builtInPlugins: Record<string, BasePlugin> = {};
+  public readonly builtInPluginManager: PluginManager;
 
   constructor(
     public readonly container: string | Element,
-    options?: EarthOptions,
+    options?: Earth.EarthOptions,
   ) {
     this.options = {
       ...Earth.defaultOptions,
@@ -25,7 +31,16 @@ export class Earth {
     };
     this.viewer = new Viewer(container, this.options);
     this.resetStatus();
-    this.pluginManager = new PluginManager(this);
+    this.eventEmitter = new EventEmitter();
+    this.on = this.eventEmitter.on.bind(this.eventEmitter);
+    this.off = this.eventEmitter.off.bind(this.eventEmitter);
+    this.emit = this.eventEmitter.emit.bind(this.eventEmitter);
+    this.pluginManager = new PluginManager(this, this.plugins);
+    this.usePlugin = this.pluginManager.use.bind(this.pluginManager);
+    this.getPlugin = this.pluginManager.get.bind(this.pluginManager);
+    this.removePlugin = this.pluginManager.remove.bind(this.pluginManager);
+    this.builtInPluginManager = new PluginManager(this, this.builtInPlugins);
+    this._registerBuiltInPlugins();
   }
 
   get destroyed() {
@@ -55,6 +70,15 @@ export class Earth {
         this.viewer.scene.morphTo3D(0);
         break;
     }
+  }
+
+  private _registerBuiltInPlugins() {
+    this.builtInPluginManager.use(new Subscriber(), {
+      pickResult: {
+        enable: true,
+        moveDebounce: 100,
+      },
+    });
   }
 
   resetStatus() {
@@ -88,14 +112,44 @@ export class Earth {
     });
   }
 
+  on: (typeof EventEmitter.prototype)['on'];
+  off: (typeof EventEmitter.prototype)['off'];
+  emit: (typeof EventEmitter.prototype)['emit'];
+
+  usePlugin: (typeof PluginManager.prototype)['use'];
+  getPlugin: (typeof PluginManager.prototype)['get'];
+  removePlugin: (typeof PluginManager.prototype)['remove'];
+
   destroy() {
     this.viewer.destroy();
-    this.pluginManager.destory();
+    this.pluginManager.destroy();
+    this.builtInPluginManager.destroy();
+    this.eventEmitter.destroy();
     this._destroyed = true;
   }
 }
 
 export namespace Earth {
+  export type EarthOptions = {
+    /** plugins list */
+    plugins?: BasePlugin[];
+    /**
+     * scene background color
+     * @default'#00000099'
+     */
+    backgroundColor?: string;
+    /**
+     * globe base color
+     * @default'#4F4F4F'
+     */
+    baseColor?: string;
+    /**
+     * default viewport
+     * @default[116.3, 39.9, 20000000]
+     */
+    defaultViewPort?: number[];
+  } & Viewer.ConstructorOptions;
+
   export const defaultOptions: EarthOptions = {
     backgroundColor: '#00000099',
     baseColor: '#4F4F4F',
@@ -121,17 +175,5 @@ export namespace Earth {
         alpha: true,
       },
     },
-  };
-
-  export type Plugin = {
-    /** plugin name, do not repeat, will appear in warnings or errors */
-    name: string;
-    /** get or set plugin's enable */
-    get enable(): boolean;
-    set enable(val: boolean);
-    get destroyed(): boolean;
-
-    init(earth: Earth, ...options: any[]): Plugin;
-    destroy(): void;
   };
 }

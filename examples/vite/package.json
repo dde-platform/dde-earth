@@ -11,6 +11,7 @@
     "vite-plugin-cesium": "^1.2.22"
   },
   "dependencies": {
+    "@dde-earth/plugin-subscriber": "workspace:^",
     "cesium": "^1.109.0",
     "dde-earth": "workspace:^"
   },
