@@ -14,10 +14,7 @@
     "outDir": "./dist",
     "declaration": true,
     "inlineSourceMap": true,
-    "types": ["node"],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "types": ["node"]
   },
   "include": ["src/**/*"],
   "exclude": ["**/dist/**"]

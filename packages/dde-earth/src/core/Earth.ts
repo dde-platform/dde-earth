@@ -6,20 +6,15 @@ import {
   Viewer,
 } from 'cesium';
 
-import { Subscriber } from '../plugins/Subscriber';
-import { EventEmitter } from './event';
-import { BasePlugin } from './plugin';
+import { IPlugin } from './plugin';
 import { PluginManager } from './pluginManager';
 
 export class Earth {
   private _destroyed: boolean = false;
   public readonly viewer: Viewer;
   public readonly options: Earth.EarthOptions;
-  public readonly eventEmitter: EventEmitter;
-  public readonly plugins: Record<string, BasePlugin> = {};
+  public readonly plugins: Record<string, IPlugin> = {};
   public readonly pluginManager: PluginManager;
-  public readonly builtInPlugins: Record<string, BasePlugin> = {};
-  public readonly builtInPluginManager: PluginManager;
 
   constructor(
     public readonly container: string | Element,
@@ -31,16 +26,10 @@ export class Earth {
     };
     this.viewer = new Viewer(container, this.options);
     this.resetStatus();
-    this.eventEmitter = new EventEmitter();
-    this.on = this.eventEmitter.on.bind(this.eventEmitter);
-    this.off = this.eventEmitter.off.bind(this.eventEmitter);
-    this.emit = this.eventEmitter.emit.bind(this.eventEmitter);
     this.pluginManager = new PluginManager(this, this.plugins);
     this.usePlugin = this.pluginManager.use.bind(this.pluginManager);
     this.getPlugin = this.pluginManager.get.bind(this.pluginManager);
     this.removePlugin = this.pluginManager.remove.bind(this.pluginManager);
-    this.builtInPluginManager = new PluginManager(this, this.builtInPlugins);
-    this._registerBuiltInPlugins();
   }
 
   get destroyed() {
@@ -70,15 +59,6 @@ export class Earth {
         this.viewer.scene.morphTo3D(0);
         break;
     }
-  }
-
-  private _registerBuiltInPlugins() {
-    this.builtInPluginManager.use(new Subscriber(), {
-      pickResult: {
-        enable: true,
-        moveDebounce: 100,
-      },
-    });
   }
 
   resetStatus() {
@@ -112,9 +92,21 @@ export class Earth {
     });
   }
 
-  on: (typeof EventEmitter.prototype)['on'];
-  off: (typeof EventEmitter.prototype)['off'];
-  emit: (typeof EventEmitter.prototype)['emit'];
+  on<T extends Earth.EventTypes = Earth.EventTypes>(
+    event: T,
+    fn: Earth.EventFunc<T>,
+  ): any {
+    const plugin = this.pluginManager.getPluginWithEvent(event);
+    plugin?.on(event, fn);
+  }
+
+  off<T extends Earth.EventTypes = Earth.EventTypes>(
+    event: T,
+    fn?: Earth.EventFunc<T>,
+  ): any {
+    const plugin = this.pluginManager.getPluginWithEvent(event);
+    plugin?.off(event, fn);
+  }
 
   usePlugin: (typeof PluginManager.prototype)['use'];
   getPlugin: (typeof PluginManager.prototype)['get'];
@@ -123,8 +115,6 @@ export class Earth {
   destroy() {
     this.viewer.destroy();
     this.pluginManager.destroy();
-    this.builtInPluginManager.destroy();
-    this.eventEmitter.destroy();
     this._destroyed = true;
   }
 }
@@ -132,7 +122,7 @@ export class Earth {
 export namespace Earth {
   export type EarthOptions = {
     /** plugins list */
-    plugins?: BasePlugin[];
+    plugins?: IPlugin[];
     /**
      * scene background color
      * @default'#00000099'
@@ -156,6 +146,7 @@ export namespace Earth {
     defaultViewPort: [116.3, 39.9, 20000000],
 
     baseLayerPicker: false,
+    baseLayer: false,
     animation: false,
     fullscreenButton: false,
     geocoder: false,
@@ -176,4 +167,12 @@ export namespace Earth {
       },
     },
   };
+
+  export interface Events {}
+
+  export type EventTypes = keyof Events;
+
+  export type EventFunc<T extends keyof Events = keyof Events> = (
+    ...args: Events[T]
+  ) => void;
 }

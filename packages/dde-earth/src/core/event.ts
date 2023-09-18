@@ -1,13 +1,23 @@
-import { Subscriber } from '../plugins/Subscriber';
-
 export class EventEmitter {
-  public callbacks: { [key in EventEmitter.EventTypes]: Function[] } =
-    {} as any;
+  override: EventEmitter.Override;
+  constructor(override?: Partial<EventEmitter.Override>) {
+    this.override = {
+      ...EventEmitter.defaultOptions,
+      ...override,
+    };
+  }
+
+  private callbacks: { [key: string]: Function[] } = {};
 
   public on<T extends EventEmitter.EventTypes = EventEmitter.EventTypes>(
     event: T,
     fn: EventEmitter.EventFunc<T>,
-  ): this {
+  ): any {
+    if (this.override['on'][event]) {
+      this.override['on'][event](event, fn);
+      return;
+    }
+
     if (!this.callbacks[event]) {
       this.callbacks[event] = [];
     }
@@ -20,7 +30,12 @@ export class EventEmitter {
   public emit<T extends EventEmitter.EventTypes>(
     event: T,
     ...args: EventEmitter.Events[T]
-  ): this {
+  ): any {
+    if (this.override['emit'][event]) {
+      this.override['emit'][event](event, ...(args as any[]));
+      return;
+    }
+
     const callbacks = this.callbacks[event];
 
     if (callbacks) {
@@ -33,7 +48,12 @@ export class EventEmitter {
   public off<T extends EventEmitter.EventTypes>(
     event: T,
     fn?: EventEmitter.EventFunc<T>,
-  ): this {
+  ): any {
+    if (this.override['off'][event]) {
+      this.override['off'][event](event, fn);
+      return;
+    }
+
     const callbacks = this.callbacks[event];
 
     if (callbacks) {
@@ -53,13 +73,23 @@ export class EventEmitter {
 }
 
 export namespace EventEmitter {
-  export interface Events
-    extends Record<Subscriber.EventType, Subscriber.Args> {}
+  export type Override = {
+    on: Record<EventTypes, (typeof EventEmitter.prototype)['on']>;
+    off: Record<EventTypes, (typeof EventEmitter.prototype)['off']>;
+    emit: Record<EventTypes, (typeof EventEmitter.prototype)['off']>;
+  };
+
+  export const defaultOptions: Override = {
+    on: {},
+    off: {},
+    emit: {},
+  };
+
+  export interface Events {}
 
   export type EventTypes = keyof Events;
 
   export type EventFunc<T extends keyof Events = keyof Events> = (
-    event: T,
-    args: Events[T],
+    ...args: Events[T]
   ) => void;
 }
