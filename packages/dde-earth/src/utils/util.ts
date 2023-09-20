@@ -36,3 +36,20 @@ function getCommonPrefixLength(str1: string, str2: string): number {
 
   return commonPrefixLength;
 }
+export function deepMerge(target: any, source: any): any {
+  if (typeof target !== 'object' || typeof source !== 'object') {
+    return source;
+  }
+
+  for (const key in source) {
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
+      if (Object.prototype.hasOwnProperty.call(target, key)) {
+        target[key] = deepMerge(target[key], source[key]);
+      } else {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+}

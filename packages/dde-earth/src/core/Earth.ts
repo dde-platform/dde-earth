@@ -6,6 +6,7 @@ import {
   Viewer,
 } from 'cesium';
 
+import { I18N } from '../i18n';
 import { IPlugin } from './plugin';
 import { PluginManager } from './pluginManager';
 
@@ -15,6 +16,7 @@ export class Earth {
   public readonly options: Earth.EarthOptions;
   public readonly plugins: Record<string, IPlugin> = {};
   public readonly pluginManager: PluginManager;
+  public readonly i18n: I18N;
 
   constructor(
     public readonly container: string | Element,
@@ -27,6 +29,7 @@ export class Earth {
     this.viewer = new Viewer(container, this.options);
     this.resetStatus();
     this.pluginManager = new PluginManager(this, this.plugins);
+    this.i18n = new I18N(this.options.toolOptions?.i18n);
     this.usePlugin = this.pluginManager.use.bind(this.pluginManager);
     this.getPlugin = this.pluginManager.get.bind(this.pluginManager);
     this.removePlugin = this.pluginManager.remove.bind(this.pluginManager);
@@ -138,6 +141,9 @@ export namespace Earth {
      * @default[116.3, 39.9, 20000000]
      */
     defaultViewPort?: number[];
+    toolOptions?: {
+      i18n?: Partial<I18N.Options>;
+    };
   } & Viewer.ConstructorOptions;
 
   export const defaultOptions: EarthOptions = {

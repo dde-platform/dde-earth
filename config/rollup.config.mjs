@@ -1,3 +1,4 @@
+import json from '@rollup/plugin-json';
 import { readFileSync } from 'fs';
 import { builtinModules } from 'module';
 import path from 'path';
@@ -12,6 +13,7 @@ const plugins = [
   esbuild({
     target: 'node14',
   }),
+  json(),
 ];
 
 const external = [
@@ -66,6 +68,6 @@ export default defineConfig([
       format: 'esm',
     },
     external,
-    plugins: [dts({ respectExternal: true })],
+    plugins: [dts({ respectExternal: true }), json()],
   },
 ]);

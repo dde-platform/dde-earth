@@ -8,7 +8,10 @@ import { Earth, WithEventPlugin } from 'dde-earth';
 
 import './api';
 
-export class Subscriber extends WithEventPlugin<Subscriber.Args> {
+export class Subscriber extends WithEventPlugin<
+  Subscriber.Args,
+  Subscriber.Intl
+> {
   public readonly name = 'Subscriber';
   public readonly eventList: Subscriber.EventType[] = [
     'LEFT_DOWN',
@@ -38,12 +41,12 @@ export class Subscriber extends WithEventPlugin<Subscriber.Args> {
   private _enablePickResult: boolean = false;
   private _lastResult: any;
 
-  constructor(options?: WithEventPlugin.Options) {
+  constructor(options?: WithEventPlugin.Options<Subscriber.Intl>) {
     super(options);
   }
 
   public init(earth: Earth, options: Subscriber.SubscriberOptions = {}) {
-    this._earth = earth;
+    super.init(earth, options);
     this._viewer = earth.viewer;
     this._handler = new ScreenSpaceEventHandler(
       options.element || this._viewer.canvas,
@@ -138,7 +141,7 @@ export class Subscriber extends WithEventPlugin<Subscriber.Args> {
   }
 
   destroy(): void {
-    this._destroyed = true;
+    super.destroy();
     this._handler.destroy();
   }
 }
@@ -151,6 +154,8 @@ export namespace Subscriber {
       moveDebounce?: number;
     };
   }
+
+  export type Intl = {};
 
   export type Args = [options: Subscriber.SubscriberOptions];
 
