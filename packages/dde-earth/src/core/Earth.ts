@@ -116,8 +116,8 @@ export class Earth {
   removePlugin: (typeof PluginManager.prototype)['remove'];
 
   destroy() {
-    this.viewer.destroy();
     this.pluginManager.destroy();
+    this.viewer.destroy();
     this._destroyed = true;
   }
 }

@@ -1,14 +1,11 @@
 import {
   DeepPartial,
-  MessageKeys,
-  NamespaceKeys,
-  NestedKeyOf,
-  NestedValueOf,
+  NestedIds,
+  NestedKeys,
   deepMerge,
   findMostSimilarString,
 } from '../utils';
-import enUS from './messages/en-US.json';
-import zhCN from './messages/zh-CN.json';
+import intlMessages from './messages';
 
 export class I18N {
   private _locale: I18N.Languages;
@@ -45,39 +42,15 @@ export class I18N {
       this.options.fallBackLanguage = this.options.defaultLanguage;
     }
     this._locale = this.options.defaultLanguage;
-    this._localeMessages = {
-      'en-US': enUS,
-      'zh-CN': zhCN,
-    };
+    this._localeMessages = intlMessages;
     this._messages = this._localeMessages[this.locale];
   }
 
   getT<
     Intl = I18N.IntlMessages,
-    NestedKey extends NamespaceKeys<Intl, NestedKeyOf<Intl>> = NamespaceKeys<
-      Intl,
-      NestedKeyOf<Intl>
-    >,
+    NestedKey extends NestedKeys<Intl> = NestedKeys<Intl>,
   >(namespace?: NestedKey) {
-    return (
-      id: MessageKeys<
-        NestedValueOf<
-          {
-            '!': Intl;
-          },
-          [NestedKey] extends [never] ? '!' : `!.${NestedKey}`
-        >,
-        NestedKeyOf<
-          NestedValueOf<
-            {
-              '!': Intl;
-            },
-            [NestedKey] extends [never] ? '!' : `!.${NestedKey}`
-          >
-        >
-      >,
-      values?: Record<string, any>,
-    ) => {
+    return (id: NestedIds<Intl, NestedKey>, values?: Record<string, any>) => {
       const newId = namespace ? `${namespace}.${String(id)}` : id;
       const val = this._translateFunc(this._messages, newId, values);
 
@@ -130,12 +103,10 @@ export class I18N {
 }
 
 export namespace I18N {
-  export type IntlMessages = typeof enUS;
+  export type IntlMessages = (typeof intlMessages)['en-US'];
 
-  export interface LocaleMessages {
-    'zh-CN': any;
-    'en-US': any;
-  }
+  export interface LocaleMessages
+    extends Record<keyof typeof intlMessages, any> {}
 
   export type Languages = keyof LocaleMessages;
 

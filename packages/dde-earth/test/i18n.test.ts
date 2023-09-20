@@ -42,9 +42,9 @@ describe('intl', () => {
     expect(t('dde')).toBe('深时数字地球');
   });
 
-  it('should throw error when switch to de-DE', () => {
-    expect(() => (intl.locale = 'de-DE' as any)).toThrowError(
-      `Can't find locale "de-DE", do you mean "en-US"?`,
+  it('should throw error when switch to en-EU', () => {
+    expect(() => (intl.locale = 'en-EU' as any)).toThrowError(
+      `Can't find locale "en-EU", do you mean "en-US"?`,
     );
   });
 
