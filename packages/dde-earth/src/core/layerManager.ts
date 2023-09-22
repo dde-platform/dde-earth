@@ -6,7 +6,7 @@ import { LayerItem } from './layerItem';
 export class LayerManager {
   private _isDestroyed: boolean = false;
   private _baseLayer?: ImageryLayer;
-  readonly layerList: LayerItem[] = [];
+  private _layerList: LayerItem[] = [];
   readonly viewer: Viewer;
 
   get isDestroyed() {
@@ -15,6 +15,10 @@ export class LayerManager {
 
   get baseLayer() {
     return this._baseLayer;
+  }
+
+  get layerList() {
+    return this._layerList;
   }
 
   set baseLayer(layer: ImageryLayer | undefined) {
@@ -38,14 +42,20 @@ export class LayerManager {
       throw new Error(`Layer with id: "${id}" already exists`);
     }
 
-    this.layerList.push(layer);
+    this._layerList.push(layer);
+  }
+
+  remove(layer: LayerItem<any>) {
+    this._layerList = this._layerList.filter((item) => item !== layer);
   }
 
   getLayerById(id: string) {
-    return this.layerList.find((layer) => layer.id === id);
+    return this._layerList.find((layer) => layer.id === id);
   }
 
   destroy() {
+    this.baseLayer = undefined;
+    this._layerList = [];
     this._isDestroyed = true;
   }
 }

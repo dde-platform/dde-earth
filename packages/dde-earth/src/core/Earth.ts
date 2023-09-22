@@ -144,7 +144,7 @@ export class Earth {
     }
   }
 
-  removeLayer(param: string | LayerItem): void {
+  async removeLayer(param: string | LayerItem): Promise<boolean> {
     let layerItem: LayerItem | undefined;
     if (typeof param === 'string') {
       layerItem = this.layerManager.getLayerById(param);
@@ -152,8 +152,13 @@ export class Earth {
       layerItem = param;
     }
     if (layerItem) {
-      layerItem.remove();
+      const bool = await layerItem.remove();
+      if (bool) {
+        this.layerManager.remove(layerItem);
+        return true;
+      }
     }
+    return false;
   }
 
   usePlugin: (typeof PluginManager.prototype)['use'];
@@ -162,6 +167,7 @@ export class Earth {
 
   destroy() {
     this.pluginManager.destroy();
+    this.layerManager.destroy();
     this.viewer.destroy();
     this._isDestroyed = true;
   }

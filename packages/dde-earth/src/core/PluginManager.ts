@@ -1,6 +1,7 @@
 import { findMostSimilarString } from '../utils';
 import { Tail } from '../utils/types';
 import { Earth } from './earth';
+import { LayerManager } from './layerManager';
 import { IPlugin, LayerPlugin, WithEventPlugin } from './plugin';
 
 export class PluginManager {
@@ -41,7 +42,7 @@ export class PluginManager {
     return plugin;
   }
 
-  getPluginWithEvent(event: string) {
+  getPluginWithEvent<T extends Earth.EventTypes = Earth.EventTypes>(event: T) {
     const plugins = Object.entries(this.plugins);
     for (let i = 0; i < plugins.length; i++) {
       const plugin = plugins[i][1];
@@ -49,7 +50,7 @@ export class PluginManager {
         plugin instanceof WithEventPlugin &&
         plugin.eventList.includes(event)
       ) {
-        return plugin;
+        return plugin as WithEventPlugin<any[], any, T, Earth.Events[T]>;
       }
     }
     throw new Error(
@@ -57,11 +58,16 @@ export class PluginManager {
     );
   }
 
-  getPluginWithMethod(method: string) {
+  getPluginWithMethod<T extends LayerManager.LayerMethod = string>(
+    method: T,
+  ): LayerPlugin<LayerManager.LayerMap[T]> {
     const plugins = Object.entries(this.plugins);
     for (let i = 0; i < plugins.length; i++) {
       const plugin = plugins[i][1];
-      if (plugin instanceof LayerPlugin && plugin.methodList.includes(method)) {
+      if (
+        plugin instanceof LayerPlugin &&
+        plugin.methodList.includes(method as string)
+      ) {
         return plugin;
       }
     }
