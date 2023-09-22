@@ -1,17 +1,17 @@
 import { findMostSimilarString } from '../utils';
 import { Tail } from '../utils/types';
 import { Earth } from './earth';
-import { IPlugin, WithEventPlugin } from './plugin';
+import { IPlugin, LayerPlugin, WithEventPlugin } from './plugin';
 
 export class PluginManager {
-  private _destroyed: boolean = false;
+  private _isDestroyed: boolean = false;
   constructor(
     readonly earth: Earth,
     public readonly plugins: Record<string, IPlugin> = {},
   ) {}
 
-  get destroyed() {
-    return this._destroyed;
+  get isDestroyed() {
+    return this._isDestroyed;
   }
 
   use<T extends IPlugin>(plugin: T, ...options: Tail<Parameters<T['init']>>) {
@@ -52,7 +52,22 @@ export class PluginManager {
         return plugin;
       }
     }
-    return undefined;
+    throw new Error(
+      `eventPlugin with event:"${event}" not found, please add loader`,
+    );
+  }
+
+  getPluginWithMethod(method: string) {
+    const plugins = Object.entries(this.plugins);
+    for (let i = 0; i < plugins.length; i++) {
+      const plugin = plugins[i][1];
+      if (plugin instanceof LayerPlugin && plugin.methodList.includes(method)) {
+        return plugin;
+      }
+    }
+    throw new Error(
+      `layerPlugin with method:"${method}" not found, please add loader`,
+    );
   }
 
   remove(name: string | string[]) {
@@ -67,6 +82,6 @@ export class PluginManager {
     this.remove(Object.keys(this.plugins));
     // @ts-ignore
     this.plugins = undefined;
-    this._destroyed = true;
+    this._isDestroyed = true;
   }
 }

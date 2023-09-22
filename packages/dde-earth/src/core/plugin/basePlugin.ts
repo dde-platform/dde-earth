@@ -1,9 +1,9 @@
-import { I18N } from '../i18n';
-import { deepMerge } from '../utils';
-import { Earth } from './earth';
+import { I18N } from '../../i18n';
+import { deepMerge } from '../../utils';
+import { Earth } from '../earth';
 
 export abstract class BasePlugin<
-  T extends any[] = [],
+  InitOptions extends any[] = [],
   Intl extends Record<string, any> = any,
 > {
   /** plugin name, do not repeat, will appear in warnings or errors */
@@ -13,7 +13,7 @@ export abstract class BasePlugin<
 
   protected _earth!: Earth;
   protected _enable = true;
-  protected _destroyed = false;
+  protected _isDestroyed = false;
 
   get earth() {
     return this._earth;
@@ -28,8 +28,8 @@ export abstract class BasePlugin<
     this._enable = val;
   }
 
-  get destroyed(): boolean {
-    return this._destroyed;
+  get isDestroyed(): boolean {
+    return this._isDestroyed;
   }
 
   constructor(options?: BasePlugin.Options<Intl>) {
@@ -37,11 +37,11 @@ export abstract class BasePlugin<
     if (name) {
       this.name = name;
     }
-    deepMerge(this._intl, intl);
+    this._intl = deepMerge(this._intl, intl);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  init(_earth: Earth, ..._options: T): this {
+  init(_earth: Earth, ..._options: InitOptions): this {
     this._earth = _earth;
 
     // extends intl messages
@@ -55,7 +55,7 @@ export abstract class BasePlugin<
   protected _getT!: typeof I18N.prototype.getT<Intl>;
 
   destroy(): void {
-    this._destroyed = true;
+    this._isDestroyed = true;
   }
 }
 
@@ -65,25 +65,3 @@ export namespace BasePlugin {
     intl?: I18N.ExtendMessages<Intl>;
   }
 }
-
-export abstract class WithEventPlugin<
-  T extends any[] = any[],
-  Intl extends Record<string, any> = any,
-  Events extends string = string,
-  Args extends any[] = [],
-> extends BasePlugin<T, Intl> {
-  public readonly eventList: Events[] = [];
-
-  constructor(options?: WithEventPlugin.Options<Intl>) {
-    super(options);
-  }
-
-  abstract on(event: Events, fn: (...args: Args) => void): any;
-  abstract off(event: Events, fn?: (...args: Args) => void): any;
-}
-
-export namespace WithEventPlugin {
-  export interface Options<Intl = any> extends BasePlugin.Options<Intl> {}
-}
-
-export type IPlugin = WithEventPlugin | BasePlugin;

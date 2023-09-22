@@ -7,16 +7,20 @@ import {
 } from 'cesium';
 
 import { I18N } from '../i18n';
-import { IPlugin } from './plugin';
+import { convertToAsync } from '../utils';
+import { LayerItem } from './layerItem';
+import { LayerManager } from './layerManager';
+import { IPlugin, LayerPlugin } from './plugin';
 import { PluginManager } from './pluginManager';
 
 export class Earth {
-  private _destroyed: boolean = false;
+  private _isDestroyed: boolean = false;
   public readonly viewer: Viewer;
   public readonly options: Earth.EarthOptions;
   public readonly plugins: Record<string, IPlugin> = {};
   public readonly pluginManager: PluginManager;
   public readonly i18n: I18N;
+  public readonly layerManager: LayerManager;
 
   constructor(
     public readonly container: string | Element,
@@ -28,15 +32,16 @@ export class Earth {
     };
     this.viewer = new Viewer(container, this.options);
     this.resetStatus();
-    this.pluginManager = new PluginManager(this, this.plugins);
     this.i18n = new I18N(this.options.toolOptions?.i18n);
+    this.layerManager = new LayerManager(this);
+    this.pluginManager = new PluginManager(this, this.plugins);
     this.usePlugin = this.pluginManager.use.bind(this.pluginManager);
     this.getPlugin = this.pluginManager.get.bind(this.pluginManager);
     this.removePlugin = this.pluginManager.remove.bind(this.pluginManager);
   }
 
-  get destroyed() {
-    return this._destroyed;
+  get isDestroyed() {
+    return this._isDestroyed;
   }
 
   /**
@@ -111,6 +116,46 @@ export class Earth {
     plugin?.off(event, fn);
   }
 
+  async addLayer<Lyr extends LayerManager.Layer = LayerManager.Layer>(
+    layer: Lyr['metaData'],
+    options: Earth.AddLayerOptions = {},
+  ) {
+    try {
+      const plugin = this.pluginManager.getPluginWithMethod(
+        layer.method,
+      ) as LayerPlugin<Lyr>;
+      const instance = await convertToAsync(plugin?.add(layer));
+      if (instance) {
+        const layerItem = new LayerItem(plugin, {
+          metaData: layer,
+          instance,
+        });
+        this.layerManager.add(layerItem);
+        const { zoom } = options;
+        if (zoom) {
+          plugin.zoomTo(instance);
+        }
+        return layerItem;
+      } else {
+        return undefined;
+      }
+    } catch (e) {
+      return undefined;
+    }
+  }
+
+  removeLayer(param: string | LayerItem): void {
+    let layerItem: LayerItem | undefined;
+    if (typeof param === 'string') {
+      layerItem = this.layerManager.getLayerById(param);
+    } else {
+      layerItem = param;
+    }
+    if (layerItem) {
+      layerItem.remove();
+    }
+  }
+
   usePlugin: (typeof PluginManager.prototype)['use'];
   getPlugin: (typeof PluginManager.prototype)['get'];
   removePlugin: (typeof PluginManager.prototype)['remove'];
@@ -118,7 +163,7 @@ export class Earth {
   destroy() {
     this.pluginManager.destroy();
     this.viewer.destroy();
-    this._destroyed = true;
+    this._isDestroyed = true;
   }
 }
 
@@ -181,4 +226,8 @@ export namespace Earth {
   export type EventFunc<T extends keyof Events = keyof Events> = (
     ...args: Events[T]
   ) => void;
+
+  export interface AddLayerOptions {
+    zoom?: boolean;
+  }
 }

@@ -53,3 +53,34 @@ export function deepMerge(target: any, source: any): any {
 
   return target;
 }
+
+export function generateUUID(): string {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    const r = (Math.random() * 16) | 0,
+      v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
+export async function convertToAsync<T = any>(
+  result: T | Promise<T>,
+): Promise<T> {
+  if (result instanceof Promise) {
+    return await result;
+  } else {
+    return result;
+  }
+}
+
+export function convertToAsyncFunc<T extends (...args: any[]) => any>(
+  func: T,
+): (...args: Parameters<T>) => Promise<ReturnType<T>> {
+  return async function (...args: Parameters<T>): Promise<ReturnType<T>> {
+    const result = func(...args);
+    if (result instanceof Promise) {
+      return await result;
+    } else {
+      return result;
+    }
+  };
+}

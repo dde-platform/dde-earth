@@ -76,10 +76,10 @@ export class Subscriber extends WithEventPlugin<
   }
 
   private _eventRegister(event: Subscriber.EventType): void {
-    if (this._destroyed) return;
+    if (this._isDestroyed) return;
     this._handler.setInputAction((movement: Subscriber.EventArgs) => {
       if (
-        this._destroyed ||
+        this._isDestroyed ||
         !this._enable ||
         (event === 'MOUSE_MOVE' && !this._shouldUpdate())
       )
