@@ -1,57 +1,63 @@
 import { generateUUID } from '../utils';
+import { Earth } from './earth';
 import { LayerManager } from './layerManager';
-import { LayerPlugin } from './plugin';
 
-export class LayerItem<
-  Lyr extends LayerManager.Layer = LayerManager.Layer,
-  Loader extends LayerPlugin<Lyr> = LayerPlugin<Lyr>,
-  Instance = Lyr['instance'],
+export abstract class LayerItem<
+  Lyr extends LayerManager.BaseLayer = LayerManager.BaseLayer,
+  Instance = any,
 > {
-  readonly metaData: Lyr['metaData'];
-  readonly instance: Instance;
-  readonly id: string;
+  readonly data: Lyr;
+  readonly method: Lyr['method'];
+  private _instance?: Instance;
+  readonly id: any;
+  readonly readyPromise: Promise<this>;
+  private _ready: boolean = false;
+  private _isDestroyed: boolean = false;
 
-  get show(): boolean {
-    return this.loader.getShow(this.instance);
+  get isDestroyed() {
+    return this._isDestroyed;
   }
 
-  set show(value: boolean) {
-    this.loader.setShow(this.instance, value);
+  get ready() {
+    return this._ready;
+  }
+
+  abstract get show(): boolean;
+  abstract set show(value: boolean);
+
+  get instance() {
+    return this._instance;
   }
 
   constructor(
-    readonly loader: Loader,
-    options: LayerItem.Options<Lyr>,
+    readonly earth: Earth,
+    data: Lyr,
   ) {
-    const { id = generateUUID(), metaData, instance } = options;
-    this.id = id;
-    this.metaData = metaData;
-    this.instance = instance;
+    this.id = data.id ?? generateUUID();
+    this.data = { ...data, id: this.id };
+    this.method = data.method;
+    this.readyPromise = new Promise<this>((resolve, reject) => {
+      this._init(data)
+        .then((instance) => {
+          this._instance = instance;
+          this._ready = true;
+          resolve(this);
+        })
+        .catch(reject);
+    });
   }
 
-  async render(renderOptions: Lyr['metaData']['renderOptions']) {
-    return this.loader.render(this.instance, renderOptions);
-  }
-
-  zoomTo() {
-    this.loader.zoomTo(this.instance);
-  }
-
-  async remove() {
-    return this.loader.remove(this.instance);
-  }
+  abstract _init(data: Lyr): Promise<Instance>;
+  abstract zoomTo(): void;
+  abstract remove(): boolean | Promise<boolean>;
+  abstract render: (
+    renderOptions: Lyr['renderOptions'],
+  ) => boolean | Promise<boolean>;
 
   destroy() {
     this.remove();
-  }
-}
-
-export namespace LayerItem {
-  export interface Options<
-    Lyr extends LayerManager.Layer = LayerManager.Layer,
-  > {
-    id?: string;
-    metaData: Lyr['metaData'];
-    instance: Lyr['instance'];
+    this._ready = false;
+    this._instance = undefined;
+    this._isDestroyed = true;
   }
 }

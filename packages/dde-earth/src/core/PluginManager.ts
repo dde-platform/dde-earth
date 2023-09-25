@@ -1,8 +1,7 @@
 import { findMostSimilarString } from '../utils';
 import { Tail } from '../utils/types';
 import { Earth } from './earth';
-import { LayerManager } from './layerManager';
-import { IPlugin, LayerPlugin, WithEventPlugin } from './plugin';
+import { IPlugin, WithEventPlugin } from './plugin';
 
 export class PluginManager {
   private _isDestroyed: boolean = false;
@@ -55,24 +54,6 @@ export class PluginManager {
     }
     throw new Error(
       `eventPlugin with event:"${event}" not found, please add loader`,
-    );
-  }
-
-  getPluginWithMethod<T extends LayerManager.LayerMethod = string>(
-    method: T,
-  ): LayerPlugin<LayerManager.LayerMap[T]> {
-    const plugins = Object.entries(this.plugins);
-    for (let i = 0; i < plugins.length; i++) {
-      const plugin = plugins[i][1];
-      if (
-        plugin instanceof LayerPlugin &&
-        plugin.methodList.includes(method as string)
-      ) {
-        return plugin;
-      }
-    }
-    throw new Error(
-      `layerPlugin with method:"${method}" not found, please add loader`,
     );
   }
 

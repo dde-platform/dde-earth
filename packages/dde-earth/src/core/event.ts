@@ -1,23 +1,12 @@
+import { Earth } from './earth';
+
 export class EventEmitter {
-  override: EventEmitter.Override;
-  constructor(override?: Partial<EventEmitter.Override>) {
-    this.override = {
-      ...EventEmitter.defaultOptions,
-      ...override,
-    };
-  }
+  public callbacks: { [key: string]: Function[] } = {} as any;
 
-  private callbacks: { [key: string]: Function[] } = {};
-
-  public on<T extends EventEmitter.EventTypes = EventEmitter.EventTypes>(
+  public on<T extends Earth.EventTypes = Earth.EventTypes>(
     event: T,
-    fn: EventEmitter.EventFunc<T>,
-  ): any {
-    if (this.override['on'][event]) {
-      this.override['on'][event](event, fn);
-      return;
-    }
-
+    fn: Earth.EventFunc<T>,
+  ): this {
     if (!this.callbacks[event]) {
       this.callbacks[event] = [];
     }
@@ -27,15 +16,10 @@ export class EventEmitter {
     return this;
   }
 
-  public emit<T extends EventEmitter.EventTypes>(
+  public emit<T extends Earth.EventTypes>(
     event: T,
-    ...args: EventEmitter.Events[T]
-  ): any {
-    if (this.override['emit'][event]) {
-      this.override['emit'][event](event, ...(args as any[]));
-      return;
-    }
-
+    ...args: Earth.Events[T]
+  ): this {
     const callbacks = this.callbacks[event];
 
     if (callbacks) {
@@ -45,15 +29,10 @@ export class EventEmitter {
     return this;
   }
 
-  public off<T extends EventEmitter.EventTypes>(
+  public off<T extends Earth.EventTypes>(
     event: T,
-    fn?: EventEmitter.EventFunc<T>,
-  ): any {
-    if (this.override['off'][event]) {
-      this.override['off'][event](event, fn);
-      return;
-    }
-
+    fn?: Earth.EventFunc<T>,
+  ): this {
     const callbacks = this.callbacks[event];
 
     if (callbacks) {
@@ -70,26 +49,4 @@ export class EventEmitter {
   destroy(): void {
     this.callbacks = {} as any;
   }
-}
-
-export namespace EventEmitter {
-  export type Override = {
-    on: Record<EventTypes, (typeof EventEmitter.prototype)['on']>;
-    off: Record<EventTypes, (typeof EventEmitter.prototype)['off']>;
-    emit: Record<EventTypes, (typeof EventEmitter.prototype)['off']>;
-  };
-
-  export const defaultOptions: Override = {
-    on: {},
-    off: {},
-    emit: {},
-  };
-
-  export interface Events {}
-
-  export type EventTypes = keyof Events;
-
-  export type EventFunc<T extends keyof Events = keyof Events> = (
-    ...args: Events[T]
-  ) => void;
 }

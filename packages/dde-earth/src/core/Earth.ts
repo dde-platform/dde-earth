@@ -7,23 +7,24 @@ import {
 } from 'cesium';
 
 import { I18N } from '../i18n';
-import { convertToAsync } from '../utils';
+import { EventEmitter } from './event';
 import { LayerItem } from './layerItem';
 import { LayerManager } from './layerManager';
-import { IPlugin, LayerPlugin } from './plugin';
+import { IPlugin } from './plugin';
 import { PluginManager } from './pluginManager';
 
 export class Earth {
   private _isDestroyed: boolean = false;
-  public readonly viewer: Viewer;
-  public readonly options: Earth.EarthOptions;
-  public readonly plugins: Record<string, IPlugin> = {};
-  public readonly pluginManager: PluginManager;
-  public readonly i18n: I18N;
-  public readonly layerManager: LayerManager;
+  readonly viewer: Viewer;
+  readonly options: Earth.EarthOptions;
+  readonly plugins: Record<string, IPlugin> = {};
+  readonly pluginManager: PluginManager;
+  readonly i18n: I18N;
+  readonly layerManager: LayerManager;
+  readonly eventEmitter: EventEmitter;
 
   constructor(
-    public readonly container: string | Element,
+    readonly container: string | Element,
     options?: Earth.EarthOptions,
   ) {
     this.options = {
@@ -33,7 +34,14 @@ export class Earth {
     this.viewer = new Viewer(container, this.options);
     this.resetStatus();
     this.i18n = new I18N(this.options.toolOptions?.i18n);
+
+    this.eventEmitter = new EventEmitter();
+    this.emit = this.eventEmitter.emit.bind(this.eventEmitter);
+
     this.layerManager = new LayerManager(this);
+    this.addLayer = this.layerManager.addLayer.bind(this.layerManager);
+    this.removeLayer = this.layerManager.removeLayer.bind(this.layerManager);
+
     this.pluginManager = new PluginManager(this, this.plugins);
     this.usePlugin = this.pluginManager.use.bind(this.pluginManager);
     this.getPlugin = this.pluginManager.get.bind(this.pluginManager);
@@ -106,6 +114,7 @@ export class Earth {
   ): any {
     const plugin = this.pluginManager.getPluginWithEvent(event);
     plugin?.on(event, fn);
+    this.eventEmitter.on(event, fn);
   }
 
   off<T extends Earth.EventTypes = Earth.EventTypes>(
@@ -114,56 +123,17 @@ export class Earth {
   ): any {
     const plugin = this.pluginManager.getPluginWithEvent(event);
     plugin?.off(event, fn);
+    this.eventEmitter.off(event, fn);
   }
 
-  async addLayer<Lyr extends LayerManager.Layer = LayerManager.Layer>(
-    layer: Lyr['metaData'],
-    options: Earth.AddLayerOptions = {},
-  ) {
-    try {
-      const plugin = this.pluginManager.getPluginWithMethod(
-        layer.method,
-      ) as LayerPlugin<Lyr>;
-      const instance = await convertToAsync(plugin?.add(layer));
-      if (instance) {
-        const layerItem = new LayerItem(plugin, {
-          metaData: layer,
-          instance,
-        });
-        this.layerManager.add(layerItem);
-        const { zoom } = options;
-        if (zoom) {
-          plugin.zoomTo(instance);
-        }
-        return layerItem;
-      } else {
-        return undefined;
-      }
-    } catch (e) {
-      return undefined;
-    }
-  }
-
-  async removeLayer(param: string | LayerItem): Promise<boolean> {
-    let layerItem: LayerItem | undefined;
-    if (typeof param === 'string') {
-      layerItem = this.layerManager.getLayerById(param);
-    } else {
-      layerItem = param;
-    }
-    if (layerItem) {
-      const bool = await layerItem.remove();
-      if (bool) {
-        this.layerManager.remove(layerItem);
-        return true;
-      }
-    }
-    return false;
-  }
+  emit: (typeof EventEmitter.prototype)['emit'];
 
   usePlugin: (typeof PluginManager.prototype)['use'];
   getPlugin: (typeof PluginManager.prototype)['get'];
   removePlugin: (typeof PluginManager.prototype)['remove'];
+
+  addLayer: (typeof LayerManager.prototype)['addLayer'];
+  removeLayer: (typeof LayerManager.prototype)['removeLayer'];
 
   destroy() {
     this.pluginManager.destroy();
@@ -225,7 +195,11 @@ export namespace Earth {
     },
   };
 
-  export interface Events {}
+  export interface Events {
+    'layer:add': [layerItem: LayerItem];
+    'layer:remove': [id: string];
+    'layer:render': [layerItem: LayerItem];
+  }
 
   export type EventTypes = keyof Events;
 
