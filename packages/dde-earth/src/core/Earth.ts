@@ -38,7 +38,9 @@ export class Earth {
     this.eventEmitter = new EventEmitter();
     this.emit = this.eventEmitter.emit.bind(this.eventEmitter);
 
-    this.layerManager = new LayerManager(this);
+    this.layerManager = new LayerManager(this, {
+      baseLayer: this.options.baseLayer,
+    });
     this.addLayer = this.layerManager.addLayer.bind(this.layerManager);
     this.removeLayer = this.layerManager.removeLayer.bind(this.layerManager);
 
@@ -112,7 +114,7 @@ export class Earth {
     event: T,
     fn: Earth.EventFunc<T>,
   ): any {
-    const plugin = this.pluginManager.getPluginWithEvent(event);
+    const plugin = this.pluginManager?.getPluginWithEvent(event);
     plugin?.on(event, fn);
     this.eventEmitter.on(event, fn);
   }
@@ -121,7 +123,7 @@ export class Earth {
     event: T,
     fn?: Earth.EventFunc<T>,
   ): any {
-    const plugin = this.pluginManager.getPluginWithEvent(event);
+    const plugin = this.pluginManager?.getPluginWithEvent(event);
     plugin?.off(event, fn);
     this.eventEmitter.off(event, fn);
   }

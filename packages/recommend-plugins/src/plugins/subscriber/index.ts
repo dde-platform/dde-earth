@@ -46,7 +46,7 @@ export class Subscriber extends WithEventPlugin<
   }
 
   public init(earth: Earth, options: Subscriber.SubscriberOptions = {}) {
-    super.init(earth, options);
+    this._init(earth);
     this._viewer = earth.viewer;
     this._handler = new ScreenSpaceEventHandler(
       options.element || this._viewer.canvas,

@@ -40,16 +40,15 @@ export abstract class BasePlugin<
     this._intl = deepMerge(this._intl, intl);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  init(_earth: Earth, ..._options: InitOptions): this {
+  protected _init(_earth: Earth) {
     this._earth = _earth;
 
     // extends intl messages
     _earth.i18n.extend(this._intl);
     this._getT = _earth.i18n.getT.bind(_earth.i18n);
-
-    return this;
   }
+
+  abstract init(_earth: Earth, ..._options: InitOptions): this;
 
   /** get translation's api */
   protected _getT!: typeof I18N.prototype.getT<Intl>;

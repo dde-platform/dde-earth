@@ -48,21 +48,6 @@ export default defineConfig([
   {
     input: './src/index.ts',
     output: {
-      format: 'umd',
-      sourcemap: true,
-      file: pkg.unpkg,
-      name: 'DDEEarth',
-      globals: {
-        cesium: 'Cesium',
-        'dde-earth': 'DDEEarth',
-      },
-    },
-    external,
-    plugins,
-  },
-  {
-    input: './src/index.ts',
-    output: {
       dir: path.dirname(pkg.types),
       entryFileNames: '[name].d.ts',
       format: 'esm',

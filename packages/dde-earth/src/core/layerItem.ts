@@ -37,22 +37,21 @@ export abstract class LayerItem<
     this.data = { ...data, id: this.id };
     this.method = data.method;
     this.readyPromise = new Promise<this>((resolve, reject) => {
-      this._init(data)
+      this.init(data)
         .then((instance) => {
           this._instance = instance;
           this._ready = true;
+          this.render(data.renderOptions);
           resolve(this);
         })
         .catch(reject);
     });
   }
 
-  abstract _init(data: Lyr): Promise<Instance>;
+  abstract init(data: Lyr): Promise<Instance>;
   abstract zoomTo(): void;
   abstract remove(): boolean | Promise<boolean>;
-  abstract render: (
-    renderOptions: Lyr['renderOptions'],
-  ) => boolean | Promise<boolean>;
+  abstract render(renderOptions: Lyr['renderOptions']): void;
 
   destroy() {
     this.remove();

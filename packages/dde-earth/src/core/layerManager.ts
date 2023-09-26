@@ -8,7 +8,7 @@ export class LayerManager {
   private _isDestroyed: boolean = false;
   private _baseLayer?: ImageryLayer;
   private _layerList: LayerItem[] = [];
-  private _loaders: LayerManager.Loaders = {};
+  private _loaders: Record<string, LayerManager.Loader> = {};
   readonly viewer: Viewer;
 
   get isDestroyed() {
@@ -39,8 +39,16 @@ export class LayerManager {
     this._baseLayer = layer;
   }
 
-  constructor(readonly earth: Earth) {
+  constructor(
+    readonly earth: Earth,
+    options: LayerManager.Options = {},
+  ) {
     this.viewer = earth.viewer;
+    const { baseLayer } = options;
+    if (baseLayer instanceof ImageryLayer) {
+      this._baseLayer = baseLayer;
+    }
+
     this.earth.on('layer:remove', (id) => {
       this._layerList = this._layerList.filter((item) => item.id !== id);
     });
@@ -62,25 +70,31 @@ export class LayerManager {
     });
   }
 
-  getLoaderByMethod<Method extends LayerManager.Methods = LayerManager.Methods>(
-    method: Method,
-  ) {
+  getLoaderByMethod(method: string) {
     return this._loaders[method];
   }
 
-  async addLayer<Method extends LayerManager.Methods = LayerManager.Methods>(
-    data: LayerManager.BaseLayer<Method>,
-  ) {
+  async addLayer<
+    Method extends LayerManager.LoaderMethods = LayerManager.LoaderMethods,
+  >(
+    data: LayerManager.LoaderTypes[Method]['data'],
+    options?: LayerManager.AddLayerOptions,
+  ): Promise<Awaited<LayerManager.LoaderTypes[Method]['layerItem']>> {
     const { id = generateUUID(), method } = data;
     if (this.getLayerById(id)) {
       throw new Error(`Layer with id: "${id}" already exists`);
     }
     const loader = this.getLoaderByMethod(method);
-    const layerItem = loader(this.earth, data as any);
+    const layerItem = await loader(this.earth, data as any);
     await layerItem.readyPromise;
 
     this._layerList.push(layerItem);
     this.earth.emit('layer:add', layerItem);
+
+    if (options?.zoom) {
+      layerItem.zoomTo();
+    }
+    return layerItem as any;
   }
 
   async removeLayer(param: string | LayerItem) {
@@ -113,6 +127,14 @@ export class LayerManager {
 }
 
 export namespace LayerManager {
+  export interface Options {
+    baseLayer?: false | ImageryLayer;
+  }
+
+  export interface AddLayerOptions {
+    zoom?: boolean;
+  }
+
   export interface BaseLayer<
     Method = string,
     Render extends Record<string, any> = any,
@@ -126,11 +148,19 @@ export namespace LayerManager {
   export type Loader<T extends BaseLayer = BaseLayer, Instance = any> = (
     earth: Earth,
     data: T,
-  ) => LayerItem<T, Instance>;
+  ) => LayerItem<T, Instance> | Promise<LayerItem<T, Instance>>;
 
-  export interface Loaders extends Record<string, Loader> {}
+  export interface Loaders {}
 
-  export type Methods = keyof Loaders;
+  type ExtractLoaderTypes<T extends Loaders> = {
+    [K in keyof T]: {
+      data: T[K] extends Loader<infer U, any> ? U : never;
+      instance: T[K] extends Loader<any, infer V> ? V : any;
+      layerItem: T[K] extends Loader ? ReturnType<T[K]> : any;
+    };
+  };
 
-  export type LayerItems = ReturnType<Loaders[keyof Loaders]>;
+  export type LoaderTypes = ExtractLoaderTypes<Loaders>;
+
+  export type LoaderMethods = keyof LoaderTypes;
 }
