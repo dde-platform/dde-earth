@@ -67,3 +67,4 @@ console.log(layer);
 layer.render({
   alpha: 0.5,
 });
+console.log(earth.isSubscriberEnabled());

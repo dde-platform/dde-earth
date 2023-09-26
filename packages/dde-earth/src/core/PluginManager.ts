@@ -29,16 +29,26 @@ export class PluginManager {
     return plugin;
   }
 
-  get(name: string) {
-    const plugin = this.plugins[name];
-    if (!plugin) {
-      const similarKey = findMostSimilarString(Object.keys(this.plugins), name);
-      const msg =
-        `Can't find plugin with name "${name}"` +
-        (similarKey ? `, do you mean "${similarKey}"?` : '');
-      throw new Error(msg);
+  get(param: string | Function) {
+    if (typeof param === 'string') {
+      const plugin = this.plugins[param];
+      if (!plugin) {
+        const similarKey = findMostSimilarString(
+          Object.keys(this.plugins),
+          param,
+        );
+        const msg =
+          `Can't find plugin with name "${param}"` +
+          (similarKey ? `, do you mean "${similarKey}"?` : '');
+        throw new Error(msg);
+      }
+      return plugin;
     }
-    return plugin;
+    if (typeof param === 'function') {
+      return Object.values(this.plugins).find(
+        (plugin) => plugin instanceof param,
+      );
+    }
   }
 
   getPluginWithEvent<T extends Earth.EventTypes = Earth.EventTypes>(event: T) {
