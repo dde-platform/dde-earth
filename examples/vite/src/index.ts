@@ -1,6 +1,6 @@
 import { LayerLoaders, Subscriber } from '@dde-earth/recommend-plugins';
 import { ArcGisMapServerImageryProvider, ImageryLayer } from 'cesium';
-import { Earth } from 'dde-earth';
+import { Earth, I18N } from 'dde-earth';
 
 import './index.css';
 
@@ -43,7 +43,9 @@ earth.i18n.extend({
 });
 
 earth.i18n.locale = 'de-DE' as any;
-const str = earth.i18n.getT<typeof msg>('dde-earth')('test');
+const str = (earth.i18n.getT as I18N.TranslateFunc<typeof msg>)()(
+  'dde-earth.home',
+);
 console.log(str);
 
 earth.usePlugin(new LayerLoaders());

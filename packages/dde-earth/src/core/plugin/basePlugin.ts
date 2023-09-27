@@ -51,7 +51,7 @@ export abstract class BasePlugin<
   abstract init(_earth: Earth, ..._options: InitOptions): this;
 
   /** get translation's api */
-  protected _getT!: typeof I18N.prototype.getT<Intl>;
+  protected _getT!: I18N.TranslateFunc<Intl>;
 
   destroy(): void {
     this._isDestroyed = true;

@@ -1,6 +1,6 @@
 import { Earth } from 'dde-earth';
 
-import { Subscriber } from '.';
+import { Subscriber } from './Subscriber';
 
 declare module 'dde-earth' {
   interface Earth {

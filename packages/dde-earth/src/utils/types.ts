@@ -39,11 +39,13 @@ export type MessageKeys<ObjectType, Keys extends string> = {
     : never;
 }[Keys];
 
-export type NestedKeys<Intl> = NamespaceKeys<Intl, NestedKeyOf<Intl>>;
+export type NestedKeys<Intl> =
+  | NamespaceKeys<Intl, NestedKeyOf<Intl>>
+  | undefined;
 
 export type NestedIds<
   Intl,
-  NestedKey extends NestedKeys<Intl> = NestedKeys<Intl>,
+  NestedKey extends NestedKeys<Intl> = never,
 > = MessageKeys<
   NestedValueOf<
     {
@@ -60,6 +62,8 @@ export type NestedIds<
     >
   >
 >;
+
+export type CheckUndefined<T> = T extends undefined ? never : T;
 
 export type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];

@@ -46,10 +46,9 @@ export class I18N {
     this._messages = this._localeMessages[this.locale];
   }
 
-  getT<
-    Intl = I18N.IntlMessages,
-    NestedKey extends NestedKeys<Intl> = NestedKeys<Intl>,
-  >(namespace?: NestedKey) {
+  getT<Intl = I18N.IntlMessages, NestedKey extends NestedKeys<Intl> = never>(
+    namespace?: NestedKey,
+  ) {
     return (id: NestedIds<Intl, NestedKey>, values?: Record<string, any>) => {
       const newId = namespace ? `${namespace}.${String(id)}` : id;
       const val = this._translateFunc(this._messages, newId, values);
@@ -123,4 +122,13 @@ export namespace I18N {
     fallBackLanguage?: Languages | undefined | null;
     onLocaleChanged?(locale: string): void;
   }
+
+  export type TranslateFunc<I = {}, Intl = I & IntlMessages> = <
+    NestedKey extends NestedKeys<Intl> = never,
+  >(
+    namespace?: NestedKey | undefined,
+  ) => (
+    id: NestedIds<Intl, NestedKey>,
+    values?: Record<string, any>,
+  ) => string | undefined;
 }
