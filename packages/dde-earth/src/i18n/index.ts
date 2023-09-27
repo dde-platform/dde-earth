@@ -97,7 +97,7 @@ export class I18N {
   }
 
   extend(messages: any) {
-    deepMerge(this._localeMessages, messages);
+    this._localeMessages = deepMerge(this._localeMessages, messages);
   }
 }
 

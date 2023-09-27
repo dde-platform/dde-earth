@@ -1,11 +1,11 @@
 import { BasePlugin } from './basePlugin';
 
 export abstract class WithEventPlugin<
-  T extends any[] = any[],
+  InitOptions extends any[] = any[],
   Intl extends Record<string, any> = any,
   Events extends string = string,
   Args extends any[] = [],
-> extends BasePlugin<T, Intl> {
+> extends BasePlugin<InitOptions, Intl> {
   public readonly eventList: Events[] = [];
 
   constructor(options?: WithEventPlugin.Options<Intl>) {

@@ -41,17 +41,21 @@ export function deepMerge(target: any, source: any): any {
     return source;
   }
 
+  const newTarget = {
+    ...target,
+  };
+
   for (const key in source) {
     if (Object.prototype.hasOwnProperty.call(source, key)) {
-      if (Object.prototype.hasOwnProperty.call(target, key)) {
-        target[key] = deepMerge(target[key], source[key]);
+      if (Object.prototype.hasOwnProperty.call(newTarget, key)) {
+        newTarget[key] = deepMerge(newTarget[key], source[key]);
       } else {
-        target[key] = source[key];
+        newTarget[key] = source[key];
       }
     }
   }
 
-  return target;
+  return newTarget;
 }
 
 export function generateUUID(): string {

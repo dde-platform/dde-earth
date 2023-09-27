@@ -1,11 +1,7 @@
-import { Earth } from 'dde-earth';
-
-import { WMSLayerItem } from './WMSLayerItem';
+import { LayerLoaders } from '.';
 
 declare module 'dde-earth' {
   namespace LayerManager {
-    interface Loaders {
-      wms: (earth: Earth, data: WMSLayerItem.Data) => Promise<WMSLayerItem>;
-    }
+    interface Loaders extends LayerLoaders.Loaders {}
   }
 }

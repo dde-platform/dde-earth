@@ -8,11 +8,17 @@ export abstract class LayerItem<
 > {
   readonly data: Lyr;
   readonly method: Lyr['method'];
-  private _instance?: Instance;
+  protected _instance?: Instance;
   readonly id: any;
   readonly readyPromise: Promise<this>;
-  private _ready: boolean = false;
-  private _isDestroyed: boolean = false;
+  protected _ready: boolean = false;
+  protected _isDestroyed: boolean = false;
+  protected abstract readonly defaultRenderOptions: Lyr['renderOptions'];
+  protected _renderOptions?: Lyr['renderOptions'];
+
+  get renderOptions() {
+    return this._renderOptions;
+  }
 
   get isDestroyed() {
     return this._isDestroyed;
@@ -32,16 +38,21 @@ export abstract class LayerItem<
   constructor(
     readonly earth: Earth,
     data: Lyr,
+    readonly options: LayerItem.Options,
   ) {
     this.id = data.id ?? generateUUID();
     this.data = { ...data, id: this.id };
+    this._renderOptions = {
+      ...options.defaultRenderOptions,
+      ...data.renderOptions,
+    };
     this.method = data.method;
     this.readyPromise = new Promise<this>((resolve, reject) => {
       this.init(data)
         .then((instance) => {
           this._instance = instance;
           this._ready = true;
-          this.render(data.renderOptions);
+          this.render(this.renderOptions);
           resolve(this);
         })
         .catch(reject);
@@ -58,5 +69,13 @@ export abstract class LayerItem<
     this._ready = false;
     this._instance = undefined;
     this._isDestroyed = true;
+  }
+}
+
+export namespace LayerItem {
+  export interface Options<
+    Lyr extends LayerManager.BaseLayer = LayerManager.BaseLayer,
+  > {
+    defaultRenderOptions: Lyr['renderOptions'];
   }
 }

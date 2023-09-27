@@ -48,7 +48,15 @@ const str = (earth.i18n.getT as I18N.TranslateFunc<typeof msg>)()(
 );
 console.log(str);
 
-earth.usePlugin(new LayerLoaders());
+earth.usePlugin(
+  new LayerLoaders({
+    defaultRenderOptions: {
+      wms: {
+        alpha: 0.5,
+      },
+    },
+  }),
+);
 
 const layer = await earth.addLayer(
   {
@@ -66,7 +74,3 @@ const layer = await earth.addLayer(
 );
 
 console.log(layer);
-layer.render({
-  alpha: 0.5,
-});
-console.log(earth.isSubscriberEnabled());
