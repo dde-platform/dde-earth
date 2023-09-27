@@ -7,7 +7,7 @@ export abstract class BasePlugin<
   Intl extends Record<string, any> = any,
 > {
   /** plugin name, do not repeat, will appear in warnings or errors */
-  public readonly name!: string;
+  readonly name: string;
   /** Internationalized Dictionary */
   protected _intl: I18N.ExtendMessages<Intl> = {};
 
@@ -33,10 +33,8 @@ export abstract class BasePlugin<
   }
 
   constructor(options?: BasePlugin.Options<Intl>) {
-    const { name, intl = {} } = options || {};
-    if (name) {
-      this.name = name;
-    }
+    const { name = this.constructor.name, intl = {} } = options || {};
+    this.name = name;
     this._intl = deepMerge(this._intl, intl);
   }
 

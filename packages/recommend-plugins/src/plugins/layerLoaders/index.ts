@@ -3,9 +3,7 @@ import { BasePlugin, Earth } from 'dde-earth';
 import './api';
 
 export class LayerLoaders extends BasePlugin {
-  readonly name = 'LayerLoaders';
-
-  constructor(options?: BasePlugin.Options) {
+  constructor(options?: LayerLoaders.Options) {
     super(options);
   }
 
@@ -19,4 +17,8 @@ export class LayerLoaders extends BasePlugin {
     });
     return this;
   }
+}
+
+export namespace LayerLoaders {
+  export interface Options extends BasePlugin.Options {}
 }

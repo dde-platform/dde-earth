@@ -10,7 +10,6 @@ export class Subscriber extends WithEventPlugin<
   Subscriber.Args,
   Subscriber.Intl
 > {
-  public readonly name = 'Subscriber';
   public readonly eventList: Subscriber.EventType[] = [
     'LEFT_DOWN',
     'LEFT_UP',
@@ -145,6 +144,8 @@ export class Subscriber extends WithEventPlugin<
 }
 
 export namespace Subscriber {
+  export interface Options extends WithEventPlugin.Options<Subscriber.Intl> {}
+
   export interface SubscriberOptions {
     element?: HTMLCanvasElement;
     pickResult?: {
