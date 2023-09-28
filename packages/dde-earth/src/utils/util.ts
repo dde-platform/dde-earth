@@ -6,12 +6,20 @@ export function findMostSimilarString(
     return null;
   }
 
+  const lowercaseTarget = target.toLowerCase();
+
   let mostSimilarString = strings[0];
-  let longestPrefixLength = getCommonPrefixLength(mostSimilarString, target);
+  let longestPrefixLength = getCommonPrefixLength(
+    mostSimilarString.toLowerCase(),
+    lowercaseTarget,
+  );
 
   for (let i = 1; i < strings.length; i++) {
     const currentString = strings[i];
-    const currentPrefixLength = getCommonPrefixLength(currentString, target);
+    const currentPrefixLength = getCommonPrefixLength(
+      currentString.toLowerCase(),
+      lowercaseTarget,
+    );
 
     if (currentPrefixLength > longestPrefixLength) {
       mostSimilarString = currentString;
@@ -36,6 +44,7 @@ function getCommonPrefixLength(str1: string, str2: string): number {
 
   return commonPrefixLength;
 }
+
 export function deepMerge(target: any, source: any): any {
   if (typeof target !== 'object' || typeof source !== 'object') {
     return source;

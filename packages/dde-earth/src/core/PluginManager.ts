@@ -1,5 +1,6 @@
 import { findMostSimilarString } from '../utils';
 import { Tail } from '../utils/types';
+import Debug from './debug';
 import { Earth } from './earth';
 import { IPlugin, WithEventPlugin } from './plugin';
 
@@ -16,12 +17,9 @@ export class PluginManager {
 
   use<T extends IPlugin>(plugin: T, ...options: Tail<Parameters<T['init']>>) {
     const name = plugin.name;
-    if (!name) {
-      throw new Error('The property pluginName is necessary');
-    }
     if (this.plugins[name]) {
       this.remove(name);
-      console.warn(
+      Debug.warn(
         `the is one plugin with same pluginName [${name}] exist, destroy the old instance`,
       );
     }
@@ -29,7 +27,7 @@ export class PluginManager {
     return plugin;
   }
 
-  get(param: string | Function) {
+  get<T extends IPlugin = IPlugin>(param: string | Function): T | undefined {
     if (typeof param === 'string') {
       const plugin = this.plugins[param];
       if (!plugin) {
@@ -40,14 +38,14 @@ export class PluginManager {
         const msg =
           `Can't find plugin with name "${param}"` +
           (similarKey ? `, do you mean "${similarKey}"?` : '');
-        throw new Error(msg);
+        Debug.warn(msg);
       }
-      return plugin;
+      return plugin as any;
     }
     if (typeof param === 'function') {
       return Object.values(this.plugins).find(
         (plugin) => plugin instanceof param,
-      );
+      ) as any;
     }
   }
 
@@ -62,9 +60,10 @@ export class PluginManager {
         return plugin as WithEventPlugin<any[], any, T, Earth.Events[T]>;
       }
     }
-    throw new Error(
+    Debug.warn(
       `eventPlugin with event:"${event}" not found, please add loader`,
     );
+    return undefined;
   }
 
   remove(name: string | string[]) {

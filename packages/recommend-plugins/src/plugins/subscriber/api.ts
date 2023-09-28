@@ -6,6 +6,7 @@ declare module 'dde-earth' {
   interface Earth {
     isSubscriberEnabled: () => boolean;
     toggleSubscriber: (enable: boolean) => Earth;
+    getSubscriber: () => Subscriber | undefined;
   }
   namespace Earth {
     interface Events
@@ -30,4 +31,9 @@ Earth.prototype.toggleSubscriber = function (enable: boolean) {
     subscriber.enable = enable;
   }
   return this;
+};
+
+Earth.prototype.getSubscriber = function () {
+  const subscriber = this.getPlugin<Subscriber>(Subscriber);
+  return subscriber;
 };

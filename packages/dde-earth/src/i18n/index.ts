@@ -1,3 +1,4 @@
+import Debug from '../core/debug';
 import {
   DeepPartial,
   NestedIds,
@@ -55,7 +56,7 @@ export class I18N {
 
       const { fallBackLanguage } = this.options;
       if (!val && this.locale !== fallBackLanguage && fallBackLanguage) {
-        console.warn(
+        Debug.warn(
           `Can not find "${this.locale}" translation with id: "${id}" , use "${fallBackLanguage}" replaced`,
         );
         return this._translateFunc(

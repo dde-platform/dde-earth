@@ -43,8 +43,8 @@ earth.i18n.extend({
 });
 
 earth.i18n.locale = 'de-DE' as any;
-const str = (earth.i18n.getT as I18N.TranslateFunc<typeof msg>)()(
-  'dde-earth.home',
+const str = (earth.i18n.getT as I18N.TranslateFunc<typeof msg>)('dde-earth')(
+  'test',
 );
 console.log(str);
 
@@ -58,19 +58,16 @@ earth.usePlugin(
   }),
 );
 
-const layer = await earth.addLayer(
-  {
-    layerName: 'wms',
-    method: 'wms',
-    url: 'https://ahocevar.com/geoserver/wms',
-    layers: 'ne:ne',
-    renderOptions: {
-      hue: 3,
-    },
+const layer = await earth.addLayer({
+  layerName: 'wms',
+  method: 'wms',
+  url: 'https://ahocevar.com/geoserver/wms',
+  layers: 'ne:ne',
+  renderOptions: {
+    hue: 3,
   },
-  {
-    zoom: true,
-  },
-);
+});
 
 console.log(layer);
+const plugin = earth.getPlugin('layer');
+console.log(plugin);
