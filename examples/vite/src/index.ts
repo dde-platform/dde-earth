@@ -1,3 +1,4 @@
+import { TIFFLayerLoader } from '@dde-earth/plugin-tiff-loader';
 import { LayerLoaders, Subscriber } from '@dde-earth/recommend-plugins';
 import { ArcGisMapServerImageryProvider, ImageryLayer } from 'cesium';
 import { Earth, I18N } from 'dde-earth';
@@ -58,16 +59,37 @@ earth.usePlugin(
   }),
 );
 
-const layer = await earth.addLayer({
-  layerName: 'wms',
-  method: 'wms',
-  url: 'https://ahocevar.com/geoserver/wms',
-  layers: 'ne:ne',
-  renderOptions: {
-    hue: 3,
-  },
-});
+earth
+  .addLayer({
+    layerName: 'wms',
+    method: 'wms',
+    url: 'https://ahocevar.com/geoserver/wms',
+    layers: 'ne:ne',
+    renderOptions: {
+      hue: 3,
+    },
+  })
+  .then((layer) => {
+    console.log(layer);
+  });
 
-console.log(layer);
 const plugin = earth.getPlugin('layer');
 console.log(plugin);
+
+earth.usePlugin(new TIFFLayerLoader());
+
+earth
+  .addLayer({
+    method: 'tiff',
+    url: '/cogtif.tif',
+    layerName: 'cogtiff',
+  })
+  .then((layer) => {
+    layer.render({
+      alpha: 0.5,
+      single: {
+        colorScale: 'rainbow',
+      },
+    });
+    console.log(layer);
+  });

@@ -38,6 +38,7 @@ export abstract class BasePlugin<
     this._intl = deepMerge(this._intl, intl);
   }
 
+  /** should be executed when implement init function */
   protected _init(_earth: Earth) {
     this._earth = _earth;
 
