@@ -1,4 +1,4 @@
-import { BasePlugin, Earth, LayerManager, deepMerge } from 'dde-earth';
+import { BasePlugin, Earth, deepMerge } from 'dde-earth';
 
 import { TIFFLayerItem } from './TIFFLayerItem';
 import './api';
@@ -10,9 +10,9 @@ export class TIFFLayerLoader extends BasePlugin {
   constructor(options?: TIFFLayerLoader.Options) {
     super(options);
     this.defaultRenderOptions = deepMerge(
+      TIFFLayerItem.defaultRenderOptions,
       options?.defaultRenderOptions,
-      TIFFLayerLoader.defaultRenderOptions,
-    );
+    ) as any;
   }
 
   init(earth: Earth) {
@@ -21,7 +21,7 @@ export class TIFFLayerLoader extends BasePlugin {
       tiff: async (earth: Earth, data: any) => {
         const { TIFFLayerItem } = await import('./TIFFLayerItem');
         return new TIFFLayerItem(earth, data, {
-          defaultRenderOptions: this.defaultRenderOptions.tiff,
+          defaultRenderOptions: this.defaultRenderOptions,
         });
       },
     });
@@ -31,21 +31,9 @@ export class TIFFLayerLoader extends BasePlugin {
 
 export namespace TIFFLayerLoader {
   export interface Options extends BasePlugin.Options {
-    defaultRenderOptions?: ExtractLoaderOptions<Loaders>;
+    defaultRenderOptions?: TIFFLayerItem.RenderOptions;
   }
   export interface Loaders {
     tiff: (earth: Earth, data: TIFFLayerItem.Data) => Promise<TIFFLayerItem>;
   }
-
-  export type ExtractLoaderOptions<T extends Loaders> = {
-    [K in keyof T]: T[K] extends LayerManager.Loader<infer U, any>
-      ? U['renderOptions']
-      : never;
-  };
-
-  export const defaultRenderOptions: NonNullable<
-    Required<Options['defaultRenderOptions']>
-  > = {
-    tiff: TIFFLayerItem.defaultRenderOptions,
-  };
 }

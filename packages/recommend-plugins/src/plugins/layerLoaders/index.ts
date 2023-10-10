@@ -10,8 +10,8 @@ export class LayerLoaders extends BasePlugin {
   constructor(options?: LayerLoaders.Options) {
     super(options);
     this.defaultRenderOptions = deepMerge(
-      options?.defaultRenderOptions,
       LayerLoaders.defaultRenderOptions,
+      options?.defaultRenderOptions,
     );
   }
 

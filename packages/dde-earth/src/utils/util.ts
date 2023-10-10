@@ -45,26 +45,44 @@ function getCommonPrefixLength(str1: string, str2: string): number {
   return commonPrefixLength;
 }
 
-export function deepMerge(target: any, source: any): any {
-  if (typeof target !== 'object' || typeof source !== 'object') {
-    return source;
-  }
+/**
+ * Deeply merges multiple objects into the original object.
+ * @param target The original object where other objects will be merged into.
+ * @param sources The list of objects to merge.
+ * @returns The merged original object.
+ */
+export function deepMerge(target: any, ...sources: any[]) {
+  const mergedObj = { ...target };
+  /**
+   * Recursively merges the target object and the source object.
+   * @param targetObj The target object.
+   * @param sourceObj The source object.
+   * @returns The merged object.
+   */
+  function merge(targetObj: any, sourceObj: any) {
+    if (typeof targetObj !== 'object' || typeof sourceObj !== 'object') {
+      return sourceObj;
+    }
 
-  const newTarget = {
-    ...target,
-  };
-
-  for (const key in source) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
-      if (Object.prototype.hasOwnProperty.call(newTarget, key)) {
-        newTarget[key] = deepMerge(newTarget[key], source[key]);
-      } else {
-        newTarget[key] = source[key];
+    for (const key in sourceObj) {
+      if (Object.prototype.hasOwnProperty.call(sourceObj, key)) {
+        if (Object.prototype.hasOwnProperty.call(targetObj, key)) {
+          targetObj[key] = merge(targetObj[key], sourceObj[key]);
+        } else {
+          targetObj[key] = sourceObj[key];
+        }
       }
     }
+
+    return targetObj;
   }
 
-  return newTarget;
+  // Iterate through all source objects and merge them into the target object one by one
+  for (const source of sources) {
+    merge(mergedObj, source);
+  }
+
+  return mergedObj;
 }
 
 export function generateUUID(): string {
