@@ -8,10 +8,11 @@ import {
 
 import { I18N } from '../i18n';
 import { EventEmitter } from './event';
-import { LayerItem } from './layerItem';
 import { LayerManager } from './layerManager';
-import { IPlugin } from './plugin';
 import { PluginManager } from './pluginManager';
+
+import type { LayerItem } from './layerItem';
+import type { IPlugin } from './plugin';
 
 export class Earth {
   private _isDestroyed: boolean = false;

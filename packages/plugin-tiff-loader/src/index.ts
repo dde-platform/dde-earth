@@ -1,7 +1,11 @@
-import { BasePlugin, Earth, deepMerge } from 'dde-earth';
+import { BasePlugin, deepMerge } from 'dde-earth';
 
-import { TIFFLayerItem } from './TIFFLayerItem';
 import './api';
+
+import { defaultRenderOptions } from './constant';
+
+import type { Earth } from 'dde-earth';
+import type { TIFFLayerItem } from './TIFFLayerItem';
 
 export class TIFFLayerLoader extends BasePlugin {
   readonly defaultRenderOptions: NonNullable<
@@ -10,7 +14,7 @@ export class TIFFLayerLoader extends BasePlugin {
   constructor(options?: TIFFLayerLoader.Options) {
     super(options);
     this.defaultRenderOptions = deepMerge(
-      TIFFLayerItem.defaultRenderOptions,
+      defaultRenderOptions,
       options?.defaultRenderOptions,
     ) as any;
   }

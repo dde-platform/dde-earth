@@ -1,10 +1,14 @@
-import { ImageryLayer } from 'cesium';
-import { LayerItem, LayerManager } from 'dde-earth';
+import { LayerItem } from 'dde-earth';
+
+import { DefaultRenderOptions } from './constant';
+
+import type { ImageryLayer } from 'cesium';
+import type { LayerManager } from 'dde-earth';
 
 export abstract class RasterLayerItem<
   Data extends LayerManager.BaseLayer,
 > extends LayerItem<Data, RasterLayerItem.Instance> {
-  defaultRenderOptions = RasterLayerItem.defaultRenderOptions;
+  defaultRenderOptions = DefaultRenderOptions.raster;
 
   get show() {
     return this.instance?.show ?? false;
@@ -56,13 +60,4 @@ export namespace RasterLayerItem {
     gamma?: number;
     contrast?: number;
   }
-
-  export const defaultRenderOptions: RenderOptions = {
-    brightness: 1,
-    alpha: 1,
-    gamma: 1,
-    saturation: 1,
-    contrast: 1,
-    hue: 0,
-  };
 }

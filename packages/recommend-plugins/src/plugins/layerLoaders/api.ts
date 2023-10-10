@@ -1,4 +1,4 @@
-import { LayerLoaders } from '.';
+import type { LayerLoaders } from '.';
 
 declare module 'dde-earth' {
   namespace LayerManager {

@@ -1,8 +1,10 @@
 import { findMostSimilarString } from '../utils';
-import { Tail } from '../utils/types';
 import Debug from './debug';
-import { Earth } from './earth';
-import { IPlugin, WithEventPlugin } from './plugin';
+import { WithEventPlugin } from './plugin';
+
+import type { Tail } from '../utils/types';
+import type { Earth } from './earth';
+import type { IPlugin } from './plugin';
 
 export class PluginManager {
   private _isDestroyed: boolean = false;

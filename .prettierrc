@@ -7,10 +7,10 @@
     "<THIRD_PARTY_MODULES>",
     "^@/(.*)$",
     "(.css|.scss)$",
-    "^[./]",
-    "^types$"
+    "^[./]"
   ],
+  "importOrderTypeImportsToBottom": true,
   "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true,
-	"plugins": ["@trivago/prettier-plugin-sort-imports"]
+  "importOrderSortIndividualImports": true,
+	"plugins": ["@serverless-guru/prettier-plugin-import-order"]
 }

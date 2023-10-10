@@ -1,7 +1,9 @@
 import { TIFFLayerLoader } from '@dde-earth/plugin-tiff-loader';
 import { LayerLoaders, Subscriber } from '@dde-earth/recommend-plugins';
 import { ArcGisMapServerImageryProvider, ImageryLayer } from 'cesium';
-import { Earth, I18N } from 'dde-earth';
+import { Earth } from 'dde-earth';
+
+import type { I18N } from 'dde-earth';
 
 import './index.css';
 
@@ -77,7 +79,6 @@ const plugin = earth.getPlugin('layer');
 console.log(plugin);
 
 earth.usePlugin(new TIFFLayerLoader());
-
 earth
   .addLayer({
     method: 'tiff',

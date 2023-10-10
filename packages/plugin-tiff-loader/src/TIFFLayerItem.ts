@@ -1,7 +1,11 @@
-import { ImageryLayer } from 'cesium';
-import { LayerItem, LayerManager } from 'dde-earth';
-import {
-  TIFFImageryProvider,
+import { LayerItem } from 'dde-earth';
+import { TIFFImageryProvider } from 'tiff-imagery-provider';
+
+import { basicRenderOptions, defaultRenderOptions } from './constant';
+
+import type { ImageryLayer } from 'cesium';
+import type { LayerManager } from 'dde-earth';
+import type {
   TIFFImageryProviderOptions,
   TIFFImageryProviderRenderOptions,
 } from 'tiff-imagery-provider';
@@ -10,7 +14,7 @@ export class TIFFLayerItem extends LayerItem<
   TIFFLayerItem.Data,
   TIFFLayerItem.Instance
 > {
-  defaultRenderOptions = TIFFLayerItem.defaultRenderOptions;
+  defaultRenderOptions = defaultRenderOptions;
 
   get show() {
     return this.instance?.show ?? false;
@@ -49,7 +53,7 @@ export class TIFFLayerItem extends LayerItem<
   async render(options: TIFFLayerItem.RenderOptions) {
     if (
       Object.keys(options).some(
-        (name) => !Object.keys(TIFFLayerItem.basicRenderOptions).includes(name),
+        (name) => !Object.keys(basicRenderOptions).includes(name),
       )
     ) {
       if (this.instance) {
@@ -112,17 +116,4 @@ export namespace TIFFLayerItem {
 
   export type RenderOptions = BasicRenderOptions &
     TIFFImageryProviderRenderOptions;
-
-  export const basicRenderOptions: BasicRenderOptions = {
-    brightness: 1,
-    alpha: 1,
-    gamma: 1,
-    saturation: 1,
-    contrast: 1,
-    hue: 0,
-  };
-
-  export const defaultRenderOptions: RenderOptions = {
-    ...basicRenderOptions,
-  };
 }

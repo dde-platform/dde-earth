@@ -1,4 +1,4 @@
-import { TIFFLayerLoader } from '.';
+import type { TIFFLayerLoader } from '.';
 
 declare module 'dde-earth' {
   namespace LayerManager {

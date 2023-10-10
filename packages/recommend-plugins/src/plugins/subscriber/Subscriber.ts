@@ -1,10 +1,8 @@
-import {
-  Cartesian2,
-  ScreenSpaceEventHandler,
-  ScreenSpaceEventType,
-  Viewer,
-} from 'cesium';
-import { Earth, WithEventPlugin } from 'dde-earth';
+import { ScreenSpaceEventHandler, ScreenSpaceEventType } from 'cesium';
+import { WithEventPlugin } from 'dde-earth';
+
+import type { Cartesian2, Viewer } from 'cesium';
+import type { Earth } from 'dde-earth';
 
 export class Subscriber extends WithEventPlugin<
   Subscriber.Args,

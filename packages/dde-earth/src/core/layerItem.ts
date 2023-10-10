@@ -1,6 +1,7 @@
 import { generateUUID } from '../utils';
-import { Earth } from './earth';
-import { LayerManager } from './layerManager';
+
+import type { Earth } from './earth';
+import type { LayerManager } from './layerManager';
 
 export abstract class LayerItem<
   Lyr extends LayerManager.BaseLayer = LayerManager.BaseLayer,

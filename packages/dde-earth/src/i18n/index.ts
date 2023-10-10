@@ -1,12 +1,8 @@
 import Debug from '../core/debug';
-import {
-  DeepPartial,
-  NestedIds,
-  NestedKeys,
-  deepMerge,
-  findMostSimilarString,
-} from '../utils';
+import { deepMerge, findMostSimilarString } from '../utils';
 import intlMessages from './messages';
+
+import type { DeepPartial, NestedIds, NestedKeys } from '../utils';
 
 export class I18N {
   private _locale: I18N.Languages;

@@ -1,7 +1,11 @@
-import { BasePlugin, Earth, LayerManager, deepMerge } from 'dde-earth';
+import { BasePlugin, deepMerge } from 'dde-earth';
 
-import { WMSLayerItem } from './WMSLayerItem';
+import type { Earth, LayerManager } from 'dde-earth';
+import type { WMSLayerItem } from './WMSLayerItem';
+
 import './api';
+
+import { DefaultRenderOptions } from './constant';
 
 export class LayerLoaders extends BasePlugin {
   readonly defaultRenderOptions: NonNullable<
@@ -46,6 +50,6 @@ export namespace LayerLoaders {
   export const defaultRenderOptions: NonNullable<
     Required<Options['defaultRenderOptions']>
   > = {
-    wms: WMSLayerItem.defaultRenderOptions,
+    wms: DefaultRenderOptions.raster,
   };
 }

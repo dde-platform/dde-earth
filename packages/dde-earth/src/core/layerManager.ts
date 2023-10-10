@@ -1,8 +1,10 @@
-import { ImageryLayer, Viewer } from 'cesium';
+import { ImageryLayer } from 'cesium';
 
 import { generateUUID } from '../utils';
-import { Earth } from './earth';
-import { LayerItem } from './layerItem';
+
+import type { Viewer } from 'cesium';
+import type { Earth } from './earth';
+import type { LayerItem } from './layerItem';
 
 export class LayerManager {
   private _isDestroyed: boolean = false;

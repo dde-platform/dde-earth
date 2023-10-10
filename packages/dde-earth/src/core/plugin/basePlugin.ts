@@ -1,6 +1,7 @@
-import { I18N } from '../../i18n';
 import { deepMerge } from '../../utils';
-import { Earth } from '../earth';
+
+import type { I18N } from '../../i18n';
+import type { Earth } from '../earth';
 
 export abstract class BasePlugin<
   InitOptions extends any[] = [],
