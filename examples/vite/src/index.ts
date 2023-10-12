@@ -30,6 +30,7 @@ earth.usePlugin(new Subscriber(), {
 earth.on('LEFT_CLICK', (movement, result) => {
   console.log(movement, result);
 });
+
 const msg = {
   'dde-earth': {
     home: 'test',
@@ -84,10 +85,13 @@ earth
     method: 'tiff',
     url: '/cogtif.tif',
     layerName: 'cogtiff',
+    renderOptions: {
+      alpha: 0.5,
+    },
   })
   .then((layer) => {
     layer.render({
-      alpha: 0.5,
+      alpha: 0.7,
       single: {
         colorScale: 'rainbow',
       },

@@ -31,6 +31,11 @@ module.exports = {
         node: true,
       },
     },
+    {
+      files: '**/*.{html}',
+      extends: ['eslint:recommended', 'plugin:prettier/recommended'],
+      plugins: ['prettier'],
+    },
   ],
   ignorePatterns: ['dist', 'next-env.d.ts'],
   root: true,

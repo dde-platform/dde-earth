@@ -4,7 +4,6 @@
   "type": "module",
   "main": "./dist/lib/index.js",
   "module": "./dist/es/index.js",
-  "unpkg": "./dist/index.min.js",
   "types": "./dist/typings/index.d.ts",
   "files": [
     "dist"

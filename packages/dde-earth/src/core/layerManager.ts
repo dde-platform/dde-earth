@@ -81,12 +81,19 @@ export class LayerManager {
   >(
     data: LayerManager.LoaderTypes[Method]['data'],
     options?: LayerManager.AddLayerOptions,
-  ): Promise<Awaited<LayerManager.LoaderTypes[Method]['layerItem']>> {
+  ): Promise<
+    Awaited<LayerManager.LoaderTypes[Method]['layerItem']> | undefined
+  > {
     const { id = generateUUID(), method } = data;
     if (this.getLayerById(id)) {
       throw new Error(`Layer with id: "${id}" already exists`);
     }
     const loader = this.getLoaderByMethod(method);
+    if (!loader) {
+      throw new Error(
+        `Loader with method "${method}" not found, please add loader`,
+      );
+    }
     const layerItem = await loader(this.earth, data as any);
     await layerItem.readyPromise;
 

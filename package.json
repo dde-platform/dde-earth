@@ -35,6 +35,7 @@
     "@commitlint/config-conventional": "^17.7.0",
     "@commitlint/types": "^17.4.4",
     "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-typescript": "^11.1.5",
     "@serverless-guru/prettier-plugin-import-order": "^0.4.2",
     "@types/node": "^20.5.7",
     "@typescript-eslint/eslint-plugin": "^6.5.0",

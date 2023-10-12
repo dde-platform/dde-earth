@@ -29,6 +29,7 @@ export class TIFFLayerItem extends LayerItem<
       ...data,
       renderOptions: data.renderOptions,
     });
+    this._basicRender(data.renderOptions);
     const layer = this.earth.viewer.imageryLayers.addImageryProvider(
       imageryProvider as any,
     );
@@ -50,12 +51,30 @@ export class TIFFLayerItem extends LayerItem<
     }
   }
 
+  private _basicRender(options: TIFFLayerItem.BasicRenderOptions = {}) {
+    if (this.instance) {
+      Object.entries(options).map(([name, value]) => {
+        if (
+          Object.keys(basicRenderOptions).includes(name) &&
+          Object.prototype.hasOwnProperty.call(this.instance, name)
+        ) {
+          (this.instance as any)[name] = value;
+        }
+      });
+    }
+  }
+
   async render(options: TIFFLayerItem.RenderOptions) {
     if (
       Object.keys(options).some(
         (name) => !Object.keys(basicRenderOptions).includes(name),
       )
     ) {
+      this._renderOptions = {
+        ...this._renderOptions,
+        ...options,
+      };
+
       if (this.instance) {
         const index = this.earth.viewer.imageryLayers.indexOf(this.instance);
         const bool = this.earth.viewer.imageryLayers.remove(
@@ -67,7 +86,7 @@ export class TIFFLayerItem extends LayerItem<
             this.data.url,
             {
               ...this.data,
-              renderOptions: options,
+              renderOptions: this._renderOptions,
             },
           );
           const layer = this.earth.viewer.imageryLayers.addImageryProvider(
@@ -76,20 +95,10 @@ export class TIFFLayerItem extends LayerItem<
           );
           this._instance = layer;
         }
-      } else {
-        if (this.instance) {
-          Object.entries(options).map(([name, value]) => {
-            if (Object.prototype.hasOwnProperty.call(this.instance, name)) {
-              (this.instance as any)[name] = value;
-            }
-          });
-        }
       }
 
-      this._renderOptions = {
-        ...this._renderOptions,
-        ...options,
-      };
+      this._basicRender(this._renderOptions);
+
       this.earth.viewer.scene.requestRender();
     }
   }

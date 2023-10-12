@@ -1,3 +1,3 @@
-import config from '../../config/rollup.config.mjs';
+import { createConfig } from '../../shared/rollup.config.mjs';
 
-export default config;
+export default createConfig();
