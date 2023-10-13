@@ -16,7 +16,7 @@ const pkg = getPkg();
 export function getPlugins() {
   return [
     esbuild({
-      target: 'node14',
+      minify: true,
     }),
     json(),
   ];
@@ -44,7 +44,7 @@ export function createConfig(replace = {}) {
       ? {
           input: './src/index.ts',
           output: {
-            dir: pkg.module,
+            dir: path.dirname(pkg.module),
             format: 'es',
             sourcemap: true,
             preserveModules: true, // 保留模块结构
@@ -58,7 +58,7 @@ export function createConfig(replace = {}) {
       ? {
           input: './src/index.ts',
           output: {
-            dir: pkg.main,
+            dir: path.dirname(pkg.main),
             format: 'cjs',
             sourcemap: true,
             preserveModules: true, // 保留模块结构
@@ -89,7 +89,7 @@ export function createConfig(replace = {}) {
     {
       input: './src/index.ts',
       output: {
-        dir: pkg.types,
+        dir: path.dirname(pkg.types),
         entryFileNames: '[name].d.ts',
         format: 'esm',
       },
