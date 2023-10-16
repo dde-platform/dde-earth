@@ -8,7 +8,7 @@ export abstract class BasePlugin<
   Intl extends Record<string, any> = any,
 > {
   /** plugin name, do not repeat, will appear in warnings or errors */
-  readonly name: string;
+  readonly name: string = '';
   /** Internationalized Dictionary */
   protected _intl: I18N.ExtendMessages<Intl> = {};
 
@@ -17,7 +17,16 @@ export abstract class BasePlugin<
   protected _isDestroyed = false;
 
   get earth() {
+    if (!this._earth) {
+      throw new Error(
+        `Can't find 'earth' in the prototype. Did you execute the '_init' function when implementing the 'init' function?`,
+      );
+    }
     return this._earth;
+  }
+
+  get viewer() {
+    return this.earth?.viewer;
   }
 
   /** get or set plugin's enable */
@@ -34,8 +43,10 @@ export abstract class BasePlugin<
   }
 
   constructor(options?: BasePlugin.Options<Intl>) {
-    const { name = this.constructor.name, intl = {} } = options || {};
-    this.name = name;
+    if (!this.name) this.name = this.constructor.name;
+
+    const { name, intl = {} } = options || {};
+    if (name) this.name = name;
     this._intl = deepMerge(this._intl, intl);
   }
 

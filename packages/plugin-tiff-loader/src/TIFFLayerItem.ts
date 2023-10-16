@@ -29,10 +29,10 @@ export class TIFFLayerItem extends LayerItem<
       ...data,
       renderOptions: data.renderOptions,
     });
-    this._basicRender(data.renderOptions);
     const layer = this.earth.viewer.imageryLayers.addImageryProvider(
       imageryProvider as any,
     );
+    TIFFLayerItem.basicRender(layer, data.renderOptions);
     return layer;
   }
 
@@ -51,14 +51,17 @@ export class TIFFLayerItem extends LayerItem<
     }
   }
 
-  private _basicRender(options: TIFFLayerItem.BasicRenderOptions = {}) {
-    if (this.instance) {
+  static basicRender(
+    layer: ImageryLayer | undefined,
+    options: TIFFLayerItem.BasicRenderOptions = {},
+  ) {
+    if (layer) {
       Object.entries(options).map(([name, value]) => {
         if (
           Object.keys(basicRenderOptions).includes(name) &&
-          Object.prototype.hasOwnProperty.call(this.instance, name)
+          Object.prototype.hasOwnProperty.call(layer, name)
         ) {
-          (this.instance as any)[name] = value;
+          (layer as any)[name] = value;
         }
       });
     }
@@ -97,7 +100,7 @@ export class TIFFLayerItem extends LayerItem<
         }
       }
 
-      this._basicRender(this._renderOptions);
+      TIFFLayerItem.basicRender(this.instance, this._renderOptions);
 
       this.earth.viewer.scene.requestRender();
     }

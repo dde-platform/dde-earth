@@ -16,6 +16,7 @@ import type { IPlugin } from './plugin';
 
 export class Earth {
   private _isDestroyed: boolean = false;
+  private _ready: boolean = false;
   readonly viewer: Viewer;
   readonly options: Earth.EarthOptions;
   readonly plugins: Record<string, IPlugin> = {};
@@ -49,6 +50,11 @@ export class Earth {
     this.usePlugin = this.pluginManager.use.bind(this.pluginManager);
     this.getPlugin = this.pluginManager.get.bind(this.pluginManager);
     this.removePlugin = this.pluginManager.remove.bind(this.pluginManager);
+    this._ready = true;
+  }
+
+  get ready() {
+    return this._ready;
   }
 
   get isDestroyed() {

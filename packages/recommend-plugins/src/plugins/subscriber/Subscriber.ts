@@ -8,6 +8,8 @@ export class Subscriber extends WithEventPlugin<
   Subscriber.Args,
   Subscriber.Intl
 > {
+  name = 'Subscriber';
+
   public readonly eventList: Subscriber.EventType[] = [
     'LEFT_DOWN',
     'LEFT_UP',

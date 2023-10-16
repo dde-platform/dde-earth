@@ -1,5 +1,9 @@
 import { TIFFLayerLoader } from '@dde-earth/plugin-tiff-loader';
-import { LayerLoaders, Subscriber } from '@dde-earth/recommend-plugins';
+import {
+  LayerLoaders,
+  LayerSwitcher,
+  Subscriber,
+} from '@dde-earth/recommend-plugins';
 import { ArcGisMapServerImageryProvider, ImageryLayer } from 'cesium';
 import { Earth } from 'dde-earth';
 
@@ -7,10 +11,8 @@ import type { I18N } from 'dde-earth';
 
 import './index.css';
 
+// Earth initialization
 const earth = new Earth('container', {
-  toolOptions: {
-    i18n: {},
-  },
   baseLayer: ImageryLayer.fromProviderAsync(
     ArcGisMapServerImageryProvider.fromUrl(
       'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
@@ -20,7 +22,12 @@ const earth = new Earth('container', {
     ),
     {},
   ),
+  toolOptions: {
+    i18n: {},
+  },
 });
+
+// use earth subscriber plugin
 earth.usePlugin(new Subscriber(), {
   pickResult: {
     enable: true,
@@ -31,6 +38,7 @@ earth.on('LEFT_CLICK', (movement, result) => {
   console.log(movement, result);
 });
 
+// Globalization test
 const msg = {
   'dde-earth': {
     home: 'test',
@@ -52,18 +60,19 @@ const str = (earth.i18n.getT as I18N.TranslateFunc<typeof msg>)('dde-earth')(
 );
 console.log(str);
 
-earth.usePlugin(
-  new LayerLoaders({
-    defaultRenderOptions: {
-      wms: {
-        alpha: 0.5,
+setTimeout(async () => {
+  // use basic layer loader
+  earth.usePlugin(
+    new LayerLoaders({
+      defaultRenderOptions: {
+        wms: {
+          alpha: 0.5,
+        },
       },
-    },
-  }),
-);
+    }),
+  );
 
-earth
-  .addLayer({
+  const wmsLayer = await earth.addLayer({
     layerName: 'wms',
     method: 'wms',
     url: 'https://ahocevar.com/geoserver/wms',
@@ -71,30 +80,32 @@ earth
     renderOptions: {
       hue: 3,
     },
-  })
-  .then((layer) => {
-    console.log(layer);
   });
+  console.log(wmsLayer);
 
-const plugin = earth.getPlugin('layer');
-console.log(plugin);
+  const plugin = earth.getPlugin('layer');
+  console.log(plugin);
 
-earth.usePlugin(new TIFFLayerLoader());
-earth
-  .addLayer({
+  // use tiff layer loader plugin
+  earth.usePlugin(new TIFFLayerLoader());
+  const tiffLayer = await earth.addLayer({
     method: 'tiff',
     url: '/cogtif.tif',
     layerName: 'cogtiff',
     renderOptions: {
       alpha: 0.5,
     },
-  })
-  .then((layer) => {
-    layer.render({
-      alpha: 0.7,
-      single: {
-        colorScale: 'rainbow',
-      },
-    });
-    console.log(layer);
   });
+  tiffLayer.render({
+    alpha: 1,
+    single: {
+      colorScale: 'rainbow',
+    },
+  });
+  console.log(tiffLayer);
+
+  // use LayerSwither plugin
+  earth.usePlugin(new LayerSwitcher());
+  earth.on('layer:move', (info) => console.log('layer:move', info));
+  earth.moveLayer(wmsLayer, tiffLayer);
+}, 0);

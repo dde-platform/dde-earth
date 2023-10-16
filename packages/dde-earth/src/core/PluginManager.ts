@@ -62,9 +62,6 @@ export class PluginManager {
         return plugin as WithEventPlugin<any[], any, T, Earth.Events[T]>;
       }
     }
-    Debug.warn(
-      `eventPlugin with event:"${event}" not found, please add loader`,
-    );
     return undefined;
   }
 

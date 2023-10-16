@@ -16,7 +16,7 @@ const pkg = getPkg();
 export function getPlugins() {
   return [
     esbuild({
-      minify: true,
+      minify: process.env.NODE_ENV === 'production',
     }),
     json(),
   ];
