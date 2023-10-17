@@ -28,7 +28,9 @@ export class NCLayerItem extends LayerItem<
   async init(data: NCLayerItem.Data) {
     const particleObj = await new Particle3D(this.earth.viewer, {
       ...data,
-      //注意：render尚未搞定
+      //使用basicRenderOptions替换原cesium-particle包的默认渲染选项
+      ...basicRenderOptions,
+      //引入用户输入的渲染选项
       ...data.renderOptions,
     });
     particleObj
@@ -119,9 +121,7 @@ export class NCLayerItem extends LayerItem<
 export namespace NCLayerItem {
   export type Method = 'nc';
 
-  //=======================================================================
-  //提供Option定义==========================================================
-  //=======================================================================
+  //Define the type of the Options
   export type FileType = 'nc' | 'json';
   export type Fields = {
     U?: string;
