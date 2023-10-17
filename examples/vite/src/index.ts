@@ -173,12 +173,13 @@ loadButton.addEventListener('click', () => {
       layerName: 'nc-demo',
       method: 'nc',
       input: file[0],
-      renderOptions: basicRenderOptions,
+      //renderOptions: basicRenderOptions,
     })
     .then((layer) => {
-      /* layer.render({
+      layer.render({
+        layer: layer.instance,
         ...basicRenderOptions,
-      }); */
+      });
       console.log(layer);
     });
 });

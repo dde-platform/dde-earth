@@ -26,7 +26,6 @@ export class NCLayerItem extends LayerItem<
   }
 
   async init(data: NCLayerItem.Data) {
-    this._basicRender(data.renderOptions);
     const particleObj = await new Particle3D(this.earth.viewer, {
       ...data,
       //注意：render尚未搞定
@@ -42,6 +41,7 @@ export class NCLayerItem extends LayerItem<
         this._instance = undefined;
         window.alert(e);
       });
+    NCLayerItem.basicRender(particleObj, data.renderOptions);
     return particleObj;
   }
 
@@ -62,14 +62,17 @@ export class NCLayerItem extends LayerItem<
     }
   }
 
-  private _basicRender(options: NCLayerItem.RenderOptions = {}) {
-    if (this.instance) {
+  static basicRender(
+    layer: Particle3D | undefined,
+    options: NCLayerItem.RenderOptions = {},
+  ) {
+    if (layer) {
       Object.entries(options).map(([name, value]) => {
         if (
           Object.keys(basicRenderOptions).includes(name) &&
-          Object.prototype.hasOwnProperty.call(this.instance, name)
+          Object.prototype.hasOwnProperty.call(layer, name)
         ) {
-          (this.instance as any)[name] = value;
+          (layer as any)[name] = value;
         }
       });
     }
@@ -106,7 +109,7 @@ export class NCLayerItem extends LayerItem<
         this._instance = particleObj;
       }
 
-      this._basicRender(this._renderOptions);
+      NCLayerItem.basicRender(this.instance, this._renderOptions);
 
       this.earth.viewer.scene.requestRender();
     }
