@@ -10,9 +10,16 @@
   </head>
 
   <body>
-    <div style="position: fixed; z-index: 3; background-color: aliceblue;border-width: 3px;border-radius: 3px;padding:10px;">
-      <input id="fileInput" type="file">
-      <button id="load" >load</button>
+    <div style="position: fixed; z-index: 3; background-color: aliceblue;border-radius: 3px;padding:10px;">
+      <label>NC plugin test:</label>
+      <div style="border-width: 2px; border-style:dashed; border-radius:3px; padding:3px; margin-top:3px;">
+        <input id="fileInput" type="file">
+        <button id="load" >Load</button>
+        <button id="render0" >Default Render</button>
+        <button id="render1" >Render 1</button>
+        <button id="render2" >Render 2</button>
+        <button id="remove" >Remove</button>
+      </div>
     </div>
     <div id="container"></div>
   </body>
