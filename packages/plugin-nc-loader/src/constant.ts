@@ -5,7 +5,7 @@ const defaultValueRange = { min: -100, max: 100 };
 const defaultOffset = { lon: 0, lat: 0, lev: 0 };
 
 // 默认的粒子运行参数
-const defaultParticleSystemOptions = {
+export const defaultParticleSystemOptions = {
   maxParticles: 500 * 500, // 最大粒子数(会自动取平方数)
   particleHeight: 1000.0, // 粒子高度
   fadeOpacity: 0.95, // 拖尾透明度
@@ -41,14 +41,18 @@ const defaultColorTable = [
 
 const defaultColour = 'speed';
 
-export const basicRenderOptions: NCLayerItem.RenderOptions = {
+export const defaultStaticRenderOptions: NCLayerItem.NCStaticRenderOptions = {
   valueRange: defaultValueRange,
   offset: defaultOffset,
-  userInput: defaultParticleSystemOptions,
   colorTable: defaultColorTable,
   colour: defaultColour,
 };
 
+export const defaultActiveRenderOptions: NCLayerItem.NCActiveRenderOptions = {
+  ...defaultParticleSystemOptions,
+};
+
 export const defaultRenderOptions: NCLayerItem.RenderOptions = {
-  ...basicRenderOptions,
+  ...defaultStaticRenderOptions,
+  ...defaultActiveRenderOptions,
 };

@@ -1,9 +1,9 @@
 import { Particle3D } from 'cesium-particle';
 import { LayerItem } from 'dde-earth';
 
-import { basicRenderOptions, defaultRenderOptions } from './constant';
+import { defaultRenderOptions, defaultStaticRenderOptions } from './constant';
 
-import type { JsonData, UserInput } from 'cesium-particle';
+import type { JsonData } from 'cesium-particle';
 import type { LayerManager } from 'dde-earth';
 
 export class NCLayerItem extends LayerItem<
@@ -28,10 +28,9 @@ export class NCLayerItem extends LayerItem<
   async init(data: NCLayerItem.Data) {
     const particleObj = await new Particle3D(this.earth.viewer, {
       ...data,
-      //使用basicRenderOptions替换原cesium-particle包的默认渲染选项
-      ...basicRenderOptions,
-      //引入用户输入的渲染选项
-      ...data.renderOptions,
+      //引入默认渲染选项和用户的渲染选项
+      ...{ ...defaultRenderOptions, ...data.renderOptions },
+      userInput: { ...defaultRenderOptions, ...data.renderOptions },
     });
     particleObj
       .init()
@@ -43,7 +42,6 @@ export class NCLayerItem extends LayerItem<
         this._instance = undefined;
         window.alert(e);
       });
-    NCLayerItem.basicRender(particleObj, data.renderOptions);
     return particleObj;
   }
 
@@ -64,54 +62,53 @@ export class NCLayerItem extends LayerItem<
     }
   }
 
-  static basicRender(
-    layer: Particle3D | undefined,
-    options: NCLayerItem.RenderOptions = {},
-  ) {
-    if (layer) {
-      Object.entries(options).map(([name, value]) => {
-        if (
-          Object.keys(basicRenderOptions).includes(name) &&
-          Object.prototype.hasOwnProperty.call(layer, name)
-        ) {
-          (layer as any)[name] = value;
-        }
-      });
-    }
-  }
-
   async render(options: NCLayerItem.RenderOptions) {
     if (
       Object.keys(options).some(
-        (name) => !Object.keys(basicRenderOptions).includes(name),
+        (name) => !Object.keys(defaultRenderOptions).includes(name),
       )
     ) {
       this._renderOptions = {
         ...this._renderOptions,
         ...options,
       };
-
-      if (this.instance) {
-        this.instance.remove();
-        this._instance = undefined;
-        const particleObj = await new Particle3D(this.earth.viewer, {
-          ...this.data,
-          ...this._renderOptions,
-        });
-        particleObj
-          .init()
-          .then(() => {
-            particleObj.show();
-          })
-          .catch((e) => {
-            particleObj.remove();
-            this._instance = undefined;
-            window.alert(e);
+      if (
+        //如果更改了静态的渲染设置，则需要重新加载整个particle对象
+        Object.keys(options).some((name) => {
+          if (Object.keys(defaultStaticRenderOptions).includes(name)) {
+            console.log(name);
+            return true;
+          }
+        })
+      ) {
+        if (this.instance) {
+          console.log('重加载渲染');
+          this.instance.remove();
+          this._instance = undefined;
+          const particleObj = await new Particle3D(this.earth.viewer, {
+            ...this.data,
+            ...this._renderOptions,
+            userInput: this._renderOptions,
           });
-        this._instance = particleObj;
+          particleObj
+            .init()
+            .then(() => {
+              particleObj.show();
+            })
+            .catch((e) => {
+              particleObj.remove();
+              this._instance = undefined;
+              window.alert(e);
+            });
+          this._instance = particleObj;
+        }
+      } else {
+        //否则，由于只加载了静态选项，所以可以直接更改渲染设置
+        if (this.instance) {
+          console.log('动态渲染');
+          this.instance.optionsChange(this._renderOptions); // 更新粒子系统配置
+        }
       }
-
-      NCLayerItem.basicRender(this.instance, this._renderOptions);
 
       this.earth.viewer.scene.requestRender();
     }
@@ -121,8 +118,7 @@ export class NCLayerItem extends LayerItem<
 export namespace NCLayerItem {
   export type Method = 'nc';
 
-  //Define the type of the Options
-  export type FileType = 'nc' | 'json';
+  //补全每一项的类型
   export type Fields = {
     U?: string;
     V?: string;
@@ -132,28 +128,58 @@ export namespace NCLayerItem {
     lat?: string;
     lev?: string;
   };
-  export type ValueRange = {
-    min?: number;
-    max?: number;
-  };
-  export type Offset = {
-    lon?: number;
-    lat?: number;
-    lev?: number;
-  };
-  export type ColorTable = number[][];
-  export type Colour = 'speed' | 'height';
-
   export type NCImageryProviderOptions = {
-    fileType?: FileType;
+    fileType?: 'nc' | 'json';
     fields?: Fields;
   };
+
+  //静态的渲染选项，需要重新加载ParticleOBJ。
+  export type NCStaticRenderOptions = {
+    colorTable?: number[][];
+    colour?: 'speed' | 'height';
+    valueRange?: {
+      min?: number;
+      max?: number;
+    };
+    offset?: {
+      lon?: number;
+      lat?: number;
+      lev?: number;
+    };
+  };
+  //动态的渲染选项，可以直接替换。
+  export type NCActiveRenderOptions = {
+    maxParticles?: number;
+    particleHeight?: number;
+    fadeOpacity?: number;
+    dropRate?: number;
+    dropRateBump?: number;
+    speedFactor?: number;
+    lineWidth?: number;
+    dynamic?: boolean;
+  };
+
+  //完整的渲染选项，对用户可见
   export type NCImageryProviderRenderOptions = {
-    valueRange?: ValueRange;
-    offset?: Offset;
-    userInput?: UserInput;
-    colorTable?: ColorTable;
-    colour?: Colour;
+    colorTable?: number[][];
+    maxParticles?: number;
+    particleHeight?: number;
+    fadeOpacity?: number;
+    dropRate?: number;
+    dropRateBump?: number;
+    speedFactor?: number;
+    lineWidth?: number;
+    dynamic?: boolean;
+    colour?: 'speed' | 'height';
+    valueRange?: {
+      min?: number;
+      max?: number;
+    };
+    offset?: {
+      lon?: number;
+      lat?: number;
+      lev?: number;
+    };
   };
 
   export type Data = LayerManager.BaseLayer<Method, RenderOptions> &
