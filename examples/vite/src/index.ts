@@ -172,6 +172,7 @@ render0Button.addEventListener('click', () => {
     loadedNCLayer.render({
       layer: loadedNCLayer.instance,
       colorTable: defaultColorTable,
+      maxParticles: 500 * 500,
     });
   } else alert('please load an nc file first!');
 });
@@ -181,7 +182,8 @@ render1Button.addEventListener('click', () => {
   if (loadedNCLayer) {
     loadedNCLayer.render({
       layer: loadedNCLayer.instance,
-      colorTable: [[0.015686, 0.054902, 0.847059]],
+      //colorTable: [[0.015686, 0.054902, 0.847059]],
+      maxParticles: 100 * 100,
     });
   } else alert('please load an nc file first!');
 });
@@ -200,6 +202,7 @@ render2Button.addEventListener('click', () => {
         [1.0, 0.282353, 0.0],
         [0.619608, 0.0, 0.0],
       ],
+      maxParticles: 100 * 100,
     });
   } else alert('please load an nc file first!');
 });
