@@ -23,7 +23,7 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "cesium": "*"
+    "cesium": ">=1.100.0"
   },
   "devDependencies": {
     "cesium": "latest"

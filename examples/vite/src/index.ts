@@ -106,6 +106,6 @@ setTimeout(async () => {
 
   // use LayerSwither plugin
   earth.usePlugin(new LayerSwitcher());
-  earth.on('layer:move', (info) => console.log('layer:move', info));
-  earth.moveLayer(wmsLayer, tiffLayer);
+  /* earth.on('layer:move', (info) => console.log('layer:move', info));
+  earth.moveLayer(wmsLayer, tiffLayer); */
 }, 0);
