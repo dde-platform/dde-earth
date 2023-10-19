@@ -165,6 +165,14 @@ loadButton.addEventListener('click', () => {
     alert('please select an nc file first!');
   } else console.log('an NC-file reload is happend');
 });
+//测试移除图层
+const removeButton = document.getElementById('remove');
+removeButton.addEventListener('click', () => {
+  if (loadedNCLayer) {
+    loadedNCLayer.remove();
+    loadedNCLayer = undefined;
+  } else alert('please load an nc file first!');
+});
 //测试渲染1（默认渲染）
 const render0Button = document.getElementById('render0');
 render0Button.addEventListener('click', () => {
@@ -176,20 +184,29 @@ render0Button.addEventListener('click', () => {
     });
   } else alert('please load an nc file first!');
 });
-//测试渲染2
+//测试粒子数更改1（动态渲染）
 const render1Button = document.getElementById('render1');
 render1Button.addEventListener('click', () => {
   if (loadedNCLayer) {
     loadedNCLayer.render({
       layer: loadedNCLayer.instance,
-      //colorTable: [[0.015686, 0.054902, 0.847059]],
       maxParticles: 100 * 100,
     });
   } else alert('please load an nc file first!');
 });
-//测试渲染3
+//测试粒子数更改2（动态渲染）
 const render2Button = document.getElementById('render2');
 render2Button.addEventListener('click', () => {
+  if (loadedNCLayer) {
+    loadedNCLayer.render({
+      layer: loadedNCLayer.instance,
+      maxParticles: 300 * 300,
+    });
+  } else alert('please load an nc file first!');
+});
+//测试色带更改（重加载渲染）
+const render3Button = document.getElementById('render3');
+render3Button.addEventListener('click', () => {
   if (loadedNCLayer) {
     loadedNCLayer.render({
       layer: loadedNCLayer.instance,
@@ -202,15 +219,21 @@ render2Button.addEventListener('click', () => {
         [1.0, 0.282353, 0.0],
         [0.619608, 0.0, 0.0],
       ],
-      maxParticles: 100 * 100,
     });
   } else alert('please load an nc file first!');
 });
-//测试移除图层
-const removeButton = document.getElementById('remove');
-removeButton.addEventListener('click', () => {
+
+//测试显示图层
+const showButton = document.getElementById('show');
+showButton.addEventListener('click', () => {
   if (loadedNCLayer) {
-    loadedNCLayer.remove();
-    loadedNCLayer = undefined;
+    loadedNCLayer.show = true;
+  } else alert('please load an nc file first!');
+});
+//测试显示图层
+const hideButton = document.getElementById('hide');
+hideButton.addEventListener('click', () => {
+  if (loadedNCLayer) {
+    loadedNCLayer.show = false;
   } else alert('please load an nc file first!');
 });
