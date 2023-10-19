@@ -19,29 +19,23 @@ export class NCLayerItem extends LayerItem<
 
   set show(val: boolean) {
     if (this.instance) {
-      if (this.instance.primitives[0]?.show) {
-        this.instance?.hide();
-      } else this.instance?.show();
+      if (this.instance.primitives[0]?.show !== val) {
+        if (this.instance.primitives[0]?.show) {
+          this.instance?.hide();
+        } else this.instance?.show();
+      }
     }
   }
 
   async init(data: NCLayerItem.Data) {
-    const particleObj = await new Particle3D(this.earth.viewer, {
+    const particleObj = new Particle3D(this.earth.viewer, {
       ...data,
       //引入默认渲染选项和用户的渲染选项
       ...{ ...defaultRenderOptions, ...data.renderOptions },
       userInput: { ...defaultRenderOptions, ...data.renderOptions },
     });
-    particleObj
-      .init()
-      .then(() => {
-        particleObj.show();
-      })
-      .catch((e) => {
-        particleObj.remove();
-        this._instance = undefined;
-        window.alert(e);
-      });
+    await particleObj.init();
+    particleObj.show();
     return particleObj;
   }
 
@@ -90,16 +84,8 @@ export class NCLayerItem extends LayerItem<
             ...this._renderOptions,
             userInput: this._renderOptions,
           });
-          particleObj
-            .init()
-            .then(() => {
-              particleObj.show();
-            })
-            .catch((e) => {
-              particleObj.remove();
-              this._instance = undefined;
-              window.alert(e);
-            });
+          await particleObj.init();
+          particleObj.show();
           this._instance = particleObj;
         }
       } else {
