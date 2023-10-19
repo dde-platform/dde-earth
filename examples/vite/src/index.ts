@@ -1,3 +1,4 @@
+import { MVTLayerLoader } from '@dde-earth/plugin-mvt-loader';
 import { TIFFLayerLoader } from '@dde-earth/plugin-tiff-loader';
 import {
   LayerLoaders,
@@ -106,6 +107,21 @@ setTimeout(async () => {
 
   // use LayerSwither plugin
   earth.usePlugin(new LayerSwitcher());
-  /* earth.on('layer:move', (info) => console.log('layer:move', info));
-  earth.moveLayer(wmsLayer, tiffLayer); */
+  earth.on('layer:move', (info) => console.log('layer:move', info));
+  earth.moveLayer(wmsLayer, tiffLayer);
+
+  //use mvt layer loader plugin
+  earth.usePlugin(new MVTLayerLoader());
+  const mvtLayer = await earth.addLayer({
+    method: 'mvt',
+    url: '/style.json',
+    layerName: 'mvt_test',
+    renderOptions: {
+      alpha: 0.5,
+    },
+  });
+  mvtLayer.render({
+    alpha: 0.5,
+  });
+  console.log(mvtLayer);
 }, 0);

@@ -14,6 +14,7 @@
   "dependencies": {
     "@dde-earth/plugin-tiff-loader": "workspace:^",
     "@dde-earth/recommend-plugins": "workspace:^",
+    "@dde-earth/plugin-mvt-loader": "workspace:^",
     "cesium": "^1.109.0",
     "dde-earth": "workspace:^"
   },

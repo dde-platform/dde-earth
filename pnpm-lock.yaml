@@ -123,6 +123,9 @@ importers:
 
   examples/vite:
     dependencies:
+      '@dde-earth/plugin-mvt-loader':
+        specifier: workspace:^
+        version: link:../../packages/plugin-mvt-loader
       '@dde-earth/plugin-tiff-loader':
         specifier: workspace:^
         version: link:../../packages/plugin-tiff-loader
@@ -152,14 +155,14 @@ importers:
         specifier: latest
         version: 1.110.0
 
-  packages/plugin-nc-loader:
+  packages/plugin-mvt-loader:
     dependencies:
-      cesium-particle:
-        specifier: ^0.9.1
-        version: 0.9.1
       dde-earth:
         specifier: workspace:^
         version: link:../dde-earth
+      mvt-imagery-provider:
+        specifier: ^1.0.2
+        version: 1.0.2(cesium@1.110.0)
     devDependencies:
       cesium:
         specifier: latest
@@ -2134,10 +2137,6 @@ packages:
     resolution: {integrity: sha512-MFETx3tbTjE7Uk6vvnWINA/1iJ7LuMdO4fcq8UfF0pRbj01aGLduVvQcRyswuACJdpnHgg8E3rQLhaRdNEJS0w==}
     dev: false
 
-  /@types/utf8@2.1.6:
-    resolution: {integrity: sha512-pRs2gYF5yoKYrgSaira0DJqVg2tFuF+Qjp838xS7K+mJyY2jJzjsrl6y17GbIa4uMRogMbxs+ghNCvKg6XyNrA==}
-    dev: false
-
   /@typescript-eslint/eslint-plugin@6.5.0(@typescript-eslint/parser@6.5.0)(eslint@8.48.0)(typescript@5.2.2):
     resolution: {integrity: sha512-2pktILyjvMaScU6iK3925uvGU87E+N9rh372uGZgiMYwafaw9SXq86U04XPq3UH6tzRvNgBsub6x2DacHc33lw==}
     engines: {node: ^16.0.0 || >=18.0.0}
@@ -2550,12 +2549,6 @@ packages:
 
   /ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
-    dev: false
-
-  /cesium-particle@0.9.1:
-    resolution: {integrity: sha512-n7E4xYNOXXk0aVvhEim7OVoMpASWWuDjod5OKN1+0f9q5qFbloKFtP4GDrBTo3xnam6KwDho/Glz8ymj8WRgcA==}
-    dependencies:
-      netcdfjs: 1.0.0
     dev: false
 
   /cesium@1.109.0:
@@ -4236,13 +4229,6 @@ packages:
     resolution: {integrity: sha512-7m1vEcPCxXYI8HqnL8CKI6siDyD+eIWSwgB3DZA+ZTogxk9I4CDnj4wilt9x/+/QbHI4YG5YZNmC6458/e9Ktg==}
     dev: false
 
-  /iobuffer@4.0.1:
-    resolution: {integrity: sha512-lNwccuTGOfghw+xYNgnKRQPx1PMtL7EaNHbZGCvjlIMdS7LdmwurEZ7tmzWEk9quGahZMOzsDcM/TKsLZjpEew==}
-    dependencies:
-      '@types/utf8': 2.1.6
-      utf8: 3.0.0
-    dev: false
-
   /is-alphabetical@2.0.1:
     resolution: {integrity: sha512-FWyyY60MeTNyeSRpkM2Iry0G9hpr7/9kD40mD/cGQEuilcZYS4okz8SN2Q6rLCJ8gbCt6fN+rC+6tMGS99LaxQ==}
     dev: false
@@ -5406,6 +5392,21 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: true
 
+  /mvt-basic-render@0.3.5:
+    resolution: {integrity: sha512-5krXhDMl2MpJgTMhaEwVtomjVGk89HneYIQemqCkx1dCpi4F2VU+Z2T0JAmcBvryMWLf+2mOHaNvcl7qlTuBSQ==}
+    engines: {node: '>=12.21.0'}
+    hasBin: true
+    dev: false
+
+  /mvt-imagery-provider@1.0.2(cesium@1.110.0):
+    resolution: {integrity: sha512-o/KzwSUSTvHlPmmBwFlFeqKKup8yAOeZdJo+GezjWaty51OL45R8pZZji5amgXBtKJnIe7M3q1/bO6oiDzJz9Q==}
+    peerDependencies:
+      cesium: '*'
+    dependencies:
+      cesium: 1.110.0
+      mvt-basic-render: 0.3.5
+    dev: false
+
   /mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
     dependencies:
@@ -5418,12 +5419,6 @@ packages:
     resolution: {integrity: sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
-
-  /netcdfjs@1.0.0:
-    resolution: {integrity: sha512-v9Fj0WHgVE0lAMrZgK+NjOVxhbiqxT302Wqu7FzgQjWUFtq+SeEQho89pMCC7nWNRHoS4CriyYmxXjKKLDFuig==}
-    dependencies:
-      iobuffer: 4.0.1
-    dev: false
 
   /next-mdx-remote@4.4.1(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-1BvyXaIou6xy3XoNF4yaMZUCb6vD2GTAa5ciOa6WoO+gAUTYsb1K4rI/HSC2ogAWLrb/7VSV52skz07vOzmqIQ==}
@@ -7043,10 +7038,6 @@ packages:
 
   /urijs@1.19.11:
     resolution: {integrity: sha512-HXgFDgDommxn5/bIv0cnQZsPhHDA90NPHD6+c/v21U5+Sx5hoP8+dP9IZXBU1gIfvdRfhG8cel9QNPeionfcCQ==}
-
-  /utf8@3.0.0:
-    resolution: {integrity: sha512-E8VjFIQ/TyQgp+TZfS6l8yp/xWppSAHzidGiRrqe4bK4XP9pTRyKFgGJpO3SN7zdX4DeomTrwaseCHovfpFcqQ==}
-    dev: false
 
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
