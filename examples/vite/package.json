@@ -12,6 +12,7 @@
     "vite-plugin-cesium": "^1.2.22"
   },
   "dependencies": {
+    "@dde-earth/plugin-nc-loader": "workspace:^",
     "@dde-earth/plugin-tiff-loader": "workspace:^",
     "@dde-earth/recommend-plugins": "workspace:^",
     "@dde-earth/plugin-mvt-loader": "workspace:^",
