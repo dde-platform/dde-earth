@@ -140,29 +140,46 @@ const fileInput: any = document.getElementById('fileInput');
 fileInput.onchange = function () {
   file[0] = fileInput.files[0];
   console.log(file[0]);
+  console.log(file[0]);
 };
-
+//加载插件
+earth.usePlugin(new NCLayerLoader());
 //类型为NCLayerItem
 let loadedNCLayer: any = undefined;
-//测试加载功能
+//测试按文件加载功能
 const loadButton = document.getElementById('load');
 loadButton.addEventListener('click', () => {
   if (file[0] && loadedNCLayer === undefined) {
-    earth.usePlugin(new NCLayerLoader());
     earth
       .addLayer({
         layerName: 'nc-demo',
         method: 'nc',
-        input: file[0],
+        url: file[0],
         renderOptions: {},
       })
       .then((layer) => {
         loadedNCLayer = layer;
         console.log(loadedNCLayer);
       });
-  }
-  if (!file[0]) {
-    alert('please select an nc file first!');
+  } else if (!file[0]) {
+    alert('Please select a file first!');
+  } else console.log('an NC-file reload is happend');
+});
+//测试url加载图层
+const load2Button = document.getElementById('load2');
+load2Button.addEventListener('click', () => {
+  if (loadedNCLayer === undefined) {
+    earth
+      .addLayer({
+        layerName: 'nc-demo',
+        method: 'nc',
+        url: './demo.nc',
+        renderOptions: {},
+      })
+      .then((layer) => {
+        loadedNCLayer = layer;
+        console.log(loadedNCLayer);
+      });
   } else console.log('an NC-file reload is happend');
 });
 //测试移除图层
@@ -230,7 +247,7 @@ showButton.addEventListener('click', () => {
     loadedNCLayer.show = true;
   } else alert('please load an nc file first!');
 });
-//测试显示图层
+//测试隐藏图层
 const hideButton = document.getElementById('hide');
 hideButton.addEventListener('click', () => {
   if (loadedNCLayer) {
