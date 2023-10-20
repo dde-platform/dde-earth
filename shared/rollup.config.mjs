@@ -39,6 +39,9 @@ const onwarn = (warning) => {
 };
 
 export function createConfig(replace = {}) {
+  /**
+   * @type {import('rollup').RollupOptions}
+   */
   const config = [
     pkg.module
       ? {

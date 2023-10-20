@@ -91,7 +91,7 @@ export class LayerManager {
     const loader = this.getLoaderByMethod(method);
     if (!loader) {
       throw new Error(
-        `Loader with method "${method}" not found, please add loader`,
+        `Layer loader with method "${method}" not found, please add loader`,
       );
     }
     const layerItem = await loader(this.earth, data as any);

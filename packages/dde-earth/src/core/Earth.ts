@@ -10,6 +10,7 @@ import { I18N } from '../i18n';
 import { EventEmitter } from './event';
 import { LayerManager } from './layerManager';
 import { PluginManager } from './pluginManager';
+import { TerrainManager } from './terrainManager';
 
 import type { LayerItem } from './layerItem';
 import type { IPlugin } from './plugin';
@@ -24,6 +25,7 @@ export class Earth {
   readonly i18n: I18N;
   readonly layerManager: LayerManager;
   readonly eventEmitter: EventEmitter;
+  readonly terrainManager: TerrainManager;
 
   constructor(
     readonly container: string | Element,
@@ -35,16 +37,26 @@ export class Earth {
     };
     this.viewer = new Viewer(container, this.options);
     this.resetStatus();
-    this.i18n = new I18N(this.options.toolOptions?.i18n);
 
     this.eventEmitter = new EventEmitter();
     this.emit = this.eventEmitter.emit.bind(this.eventEmitter);
+
+    this.i18n = new I18N({
+      ...this.options.toolOptions?.i18n,
+      onLocaleChanged: (locale) => {
+        this.emit('lang:change', locale);
+        this.options.toolOptions?.i18n?.onLocaleChanged?.(locale);
+      },
+    });
 
     this.layerManager = new LayerManager(this, {
       baseLayer: this.options.baseLayer,
     });
     this.addLayer = this.layerManager.addLayer.bind(this.layerManager);
     this.removeLayer = this.layerManager.removeLayer.bind(this.layerManager);
+
+    this.terrainManager = new TerrainManager(this);
+    this.setTerrain = this.terrainManager.setTerrain.bind(this.terrainManager);
 
     this.pluginManager = new PluginManager(this, this.plugins);
     this.usePlugin = this.pluginManager.use.bind(this.pluginManager);
@@ -141,8 +153,12 @@ export class Earth {
   getPlugin: (typeof PluginManager.prototype)['get'];
   removePlugin: (typeof PluginManager.prototype)['remove'];
 
+  /** add layer using layer loader */
   addLayer: (typeof LayerManager.prototype)['addLayer'];
   removeLayer: (typeof LayerManager.prototype)['removeLayer'];
+
+  /** set terrain using terrain loader */
+  setTerrain: (typeof TerrainManager.prototype)['setTerrain'];
 
   destroy() {
     this.pluginManager.destroy();
@@ -208,6 +224,8 @@ export namespace Earth {
     'layer:add': [layerItem: LayerItem];
     'layer:remove': [id: string];
     'layer:render': [layerItem: LayerItem];
+    'lang:change': [lang: string];
+    'terrain:change': [terrain: any];
   }
 
   export type EventTypes = keyof Events;

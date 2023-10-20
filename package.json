@@ -13,6 +13,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset",
     "version": "changeset version",
+    "postinstall": "pnpm build",
     "release": "pnpm build && pnpm test && changeset publish",
     "prepare": "husky install"
   },

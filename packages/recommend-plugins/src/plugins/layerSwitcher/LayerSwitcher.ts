@@ -130,7 +130,7 @@ export class LayerSwitcher extends BasePlugin {
    * @param sourceLayer
    * @returns boolean
    */
-  moveLayer = (target: LayerItem, source: LayerItem) => {
+  moveLayer(target: LayerItem, source: LayerItem) {
     let bool = false;
     const targetLayer = target.instance,
       sourceLayer = source.instance;
@@ -174,5 +174,5 @@ export class LayerSwitcher extends BasePlugin {
     }
 
     return bool;
-  };
+  }
 }
