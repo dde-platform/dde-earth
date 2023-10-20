@@ -11,6 +11,7 @@ export class NCLayerItem extends LayerItem<
   NCLayerItem.Instance
 > {
   defaultRenderOptions = defaultRenderOptions;
+  inputFile: Blob | JsonData = new Blob();
 
   get show() {
     //由于原包没写show的状态，所以使用第一个几何体的show属性作为判断
@@ -28,15 +29,33 @@ export class NCLayerItem extends LayerItem<
   }
 
   async init(data: NCLayerItem.Data) {
-    const particleObj = new Particle3D(this.earth.viewer, {
-      ...data,
-      //引入默认渲染选项和用户的渲染选项
-      ...{ ...defaultRenderOptions, ...data.renderOptions },
-      userInput: { ...defaultRenderOptions, ...data.renderOptions },
-    });
-    await particleObj.init();
-    particleObj.show();
-    return particleObj;
+    //如果传入的是URL，先fetch文件
+    if (typeof data.url === 'string') {
+      const blob = await fetch(data.url).then((response) => response.blob());
+      this.inputFile = blob;
+      const particleObj = new Particle3D(this.earth.viewer, {
+        ...data,
+        input: this.inputFile,
+        //引入默认渲染选项和用户的渲染选项
+        ...{ ...defaultRenderOptions, ...data.renderOptions },
+        userInput: { ...defaultRenderOptions, ...data.renderOptions },
+      });
+      await particleObj.init();
+      particleObj.show();
+      return particleObj;
+    } else {
+      this.inputFile = data.url;
+      const particleObj = new Particle3D(this.earth.viewer, {
+        ...data,
+        input: this.inputFile,
+        //引入默认渲染选项和用户的渲染选项
+        ...{ ...defaultRenderOptions, ...data.renderOptions },
+        userInput: { ...defaultRenderOptions, ...data.renderOptions },
+      });
+      await particleObj.init();
+      particleObj.show();
+      return particleObj;
+    }
   }
 
   remove() {
@@ -70,18 +89,17 @@ export class NCLayerItem extends LayerItem<
         //如果更改了静态的渲染设置，则需要重新加载整个particle对象
         Object.keys(options).some((name) => {
           if (Object.keys(defaultStaticRenderOptions).includes(name)) {
-            console.log(name);
             return true;
           }
         })
       ) {
         if (this.instance) {
-          console.log('重加载渲染');
           this.instance.remove();
           this._instance = undefined;
           const particleObj = await new Particle3D(this.earth.viewer, {
             ...this.data,
             ...this._renderOptions,
+            input: this.inputFile,
             userInput: this._renderOptions,
           });
           await particleObj.init();
@@ -91,7 +109,6 @@ export class NCLayerItem extends LayerItem<
       } else {
         //否则，由于只加载了静态选项，所以可以直接更改渲染设置
         if (this.instance) {
-          console.log('动态渲染');
           this.instance.optionsChange(this._renderOptions); // 更新粒子系统配置
         }
       }
@@ -170,7 +187,7 @@ export namespace NCLayerItem {
 
   export type Data = LayerManager.BaseLayer<Method, RenderOptions> &
     NCImageryProviderOptions & {
-      input: Blob | JsonData;
+      url: string | Blob | JsonData;
     };
 
   export type Instance = Particle3D;
