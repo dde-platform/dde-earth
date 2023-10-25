@@ -28,6 +28,7 @@ export class I18N {
     }
     this._locale = val;
     this._messages = this._localeMessages[val];
+    this.options.onLocaleChanged?.(val);
   }
 
   constructor(options?: Partial<I18N.Options>) {

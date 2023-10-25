@@ -30,6 +30,8 @@ const earth = new Earth('container', {
   },
 });
 
+console.log(earth);
+
 // use earth subscriber plugin
 earth.usePlugin(new Subscriber(), {
   pickResult: {
@@ -57,7 +59,7 @@ earth.i18n.extend({
   'en-US': msg,
 });
 
-earth.i18n.locale = 'de-DE' as any;
+earth.i18n.locale = 'de-DE';
 const str = (earth.i18n.getT as I18N.TranslateFunc<typeof msg>)('dde-earth')(
   'test',
 );
@@ -75,7 +77,7 @@ setTimeout(async () => {
     }),
   );
 
-  const wmsLayer = await earth.addLayer({
+  const wmsLayer = await earth.addLayer<'wms'>({
     layerName: 'wms',
     method: 'wms',
     url: 'https://ahocevar.com/geoserver/wms',
@@ -91,7 +93,7 @@ setTimeout(async () => {
 
   // use tiff layer loader plugin
   earth.usePlugin(new TIFFLayerLoader());
-  const tiffLayer = await earth.addLayer({
+  const tiffLayer = await earth.addLayer<'tiff'>({
     method: 'tiff',
     url: '/cogtif.tif',
     layerName: 'cogtiff',
@@ -100,21 +102,16 @@ setTimeout(async () => {
     },
   });
   tiffLayer.render({
-    alpha: 1,
+    alpha: 0.7,
     single: {
       colorScale: 'rainbow',
     },
   });
   console.log(tiffLayer);
 
-  // use LayerSwither plugin
-  earth.usePlugin(new LayerSwitcher());
-  earth.on('layer:move', (info) => console.log('layer:move', info));
-  earth.moveLayer(wmsLayer, tiffLayer);
-
   //use mvt layer loader plugin
   earth.usePlugin(new MVTLayerLoader());
-  const mvtLayer = await earth.addLayer({
+  const mvtLayer = await earth.addLayer<'mvt'>({
     method: 'mvt',
     url: '/style.json',
     layerName: 'mvt_test',
@@ -126,6 +123,11 @@ setTimeout(async () => {
     alpha: 0.5,
   });
   console.log(mvtLayer);
+
+  // use LayerSwither plugin
+  earth.usePlugin(new LayerSwitcher());
+  earth.on('layer:move', (info) => console.log('layer:move', info));
+  earth.moveLayer(mvtLayer, tiffLayer);
 }, 0);
 
 //NC图层加载测试

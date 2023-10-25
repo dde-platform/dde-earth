@@ -1,3 +1,4 @@
+import dynamicImportVars from '@rollup/plugin-dynamic-import-vars';
 import json from '@rollup/plugin-json';
 import { readFileSync } from 'fs';
 import { builtinModules } from 'module';
@@ -19,6 +20,7 @@ export function getPlugins() {
       minify: process.env.NODE_ENV === 'production',
     }),
     json(),
+    dynamicImportVars(),
   ];
 }
 

@@ -115,3 +115,13 @@ export function convertToAsyncFunc<T extends (...args: any[]) => any>(
     }
   };
 }
+
+export function mergeAndDistinctArrays<T>(...arrays: T[][]): T[] {
+  const mergedArray: T[] = [];
+
+  for (const array of arrays) {
+    mergedArray.push(...array);
+  }
+
+  return Array.from(new Set(mergedArray));
+}

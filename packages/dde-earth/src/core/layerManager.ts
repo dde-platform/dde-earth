@@ -76,9 +76,7 @@ export class LayerManager {
     return this._loaders[method];
   }
 
-  async addLayer<
-    Method extends LayerManager.LoaderMethods = LayerManager.LoaderMethods,
-  >(
+  async addLayer<Method extends LayerManager.LoaderMethods>(
     data: LayerManager.LoaderTypes[Method]['data'],
     options?: LayerManager.AddLayerOptions,
   ): Promise<
