@@ -13,7 +13,8 @@
     "access": "public"
   },
   "scripts": {
-    "test": "vitest",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "build": "rimraf dist && rollup -c",
     "dev": "rollup -c --watch"
   },
