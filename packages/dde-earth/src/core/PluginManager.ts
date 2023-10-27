@@ -1,5 +1,5 @@
 import { findMostSimilarString } from '../utils';
-import Debug from './debug';
+import { Debug } from './debug';
 import { WithEventPlugin } from './plugin';
 
 import type { Tail } from '../utils/types';

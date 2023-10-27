@@ -18,7 +18,7 @@ function getLog(type: keyof typeof STYLE) {
   };
 }
 
-const Debug = {
+export const Debug = {
   info: getLog('info'),
 
   warn: getLog('warn'),
@@ -27,5 +27,3 @@ const Debug = {
 
   trace: getLog('trace'),
 };
-
-export default Debug;

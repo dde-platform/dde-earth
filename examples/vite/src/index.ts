@@ -59,7 +59,7 @@ earth.i18n.extend({
   'en-US': msg,
 });
 
-earth.i18n.locale = 'de-DE';
+earth.i18n.locale = 'de-DE' as any;
 const str = (earth.i18n.getT as I18N.TranslateFunc<typeof msg>)('dde-earth')(
   'test',
 );
@@ -119,7 +119,7 @@ setTimeout(async () => {
       alpha: 0.5,
     },
   });
-  mvtLayer.render({
+  await mvtLayer.render({
     alpha: 0.5,
   });
   console.log(mvtLayer);
@@ -127,7 +127,8 @@ setTimeout(async () => {
   // use LayerSwither plugin
   earth.usePlugin(new LayerSwitcher());
   earth.on('layer:move', (info) => console.log('layer:move', info));
-  earth.moveLayer(mvtLayer, tiffLayer);
+  console.log(earth.viewer.imageryLayers);
+  earth.moveLayer(tiffLayer, mvtLayer);
 }, 0);
 
 //NC图层加载测试

@@ -4,9 +4,9 @@ import {
   Primitive,
   PrimitiveCollection,
 } from 'cesium';
-import { BasePlugin } from 'dde-earth';
+import { DataSource } from 'cesium';
+import { BasePlugin, Debug } from 'dde-earth';
 
-import type { DataSource } from 'cesium';
 import type { Earth, LayerItem } from 'dde-earth';
 
 export class LayerSwitcher extends BasePlugin {
@@ -35,6 +35,8 @@ export class LayerSwitcher extends BasePlugin {
       const { imageryLayers } = this.viewer;
       const dragIndex = imageryLayers.indexOf(dragLayer);
       const dropIndex = imageryLayers.indexOf(dropLayer);
+
+      if (dragIndex == -1 || dropIndex == -1) return false;
       const num = dropIndex - dragIndex;
 
       if (num <= 0) {
@@ -48,7 +50,7 @@ export class LayerSwitcher extends BasePlugin {
       }
       this.viewer.scene.requestRender();
       return true;
-    } catch {
+    } catch (e) {
       return false;
     }
   }
@@ -67,6 +69,8 @@ export class LayerSwitcher extends BasePlugin {
       const { dataSources } = this.viewer;
       const dragIndex = dataSources.indexOf(dragLayer);
       const dropIndex = dataSources.indexOf(dropLayer);
+      if (dragIndex == -1 || dropIndex == -1) return false;
+
       const num = dropIndex - dragIndex;
       if (num <= 0) {
         for (let i = num; i < 0; i += 1) {
@@ -96,8 +100,8 @@ export class LayerSwitcher extends BasePlugin {
     }
     try {
       const { primitives } = this.viewer.scene;
-      let dragIndex = 0;
-      let dropIndex = 0;
+      let dragIndex = -1;
+      let dropIndex = -1;
       for (let i = 0; i < primitives.length; i += 1) {
         const primitive = primitives.get(i);
         if (primitive === dragLayer) {
@@ -107,6 +111,8 @@ export class LayerSwitcher extends BasePlugin {
           dropIndex = i;
         }
       }
+      if (dragIndex == -1 || dropIndex == -1) return false;
+
       const num = dropIndex - dragIndex;
       if (num <= 0) {
         for (let i = num; i < 0; i += 1) {
@@ -125,52 +131,65 @@ export class LayerSwitcher extends BasePlugin {
   }
 
   /**
-   * 移动不同类型的图层
-   * @param targetLayer
+   * move source layer upper to target layer
    * @param sourceLayer
+   * @param targetLayer
    * @returns boolean
    */
-  moveLayer(target: LayerItem, source: LayerItem) {
-    let bool = false;
-    const targetLayer = target.instance,
-      sourceLayer = source.instance;
+  moveLayer(source: LayerItem, target: LayerItem) {
+    let bool = false,
+      avaliable = false;
+    const sourceLayer = source.instance,
+      targetLayer = target.instance;
 
     if (
-      targetLayer instanceof ImageryLayer &&
-      sourceLayer instanceof ImageryLayer
+      sourceLayer instanceof ImageryLayer &&
+      targetLayer instanceof ImageryLayer
     ) {
-      bool = this._moveImageLayer(targetLayer, sourceLayer);
-    }
-    if (targetLayer.entities && sourceLayer.entities) {
-      bool = this._moveVectorLayer(targetLayer, sourceLayer);
+      avaliable = true;
+      bool = this._moveImageLayer(sourceLayer, targetLayer);
     }
     if (
-      [targetLayer, sourceLayer].every((layer) =>
+      sourceLayer instanceof DataSource &&
+      targetLayer instanceof DataSource
+    ) {
+      avaliable = true;
+      bool = this._moveVectorLayer(sourceLayer, targetLayer);
+    }
+    if (
+      [sourceLayer, targetLayer].every((layer) =>
         [Cesium3DTileset, Primitive, PrimitiveCollection].some(
           (type) => layer instanceof type,
         ),
       )
     ) {
-      bool = this._movePrimitiveLayer(targetLayer, sourceLayer);
+      avaliable = true;
+      bool = this._movePrimitiveLayer(sourceLayer, targetLayer);
     }
     if (bool) {
-      const targetIndex = this.earth.layerManager.layerList.findIndex(
-        (item) => item === target,
-      );
       const sourceIndex = this.earth.layerManager.layerList.findIndex(
         (item) => item === source,
       );
-      if (targetIndex !== -1 && sourceIndex !== -1) {
-        this.earth.layerManager.layerList[targetIndex] = source;
-        this.earth.layerManager.layerList[sourceIndex] = target;
+      const targetIndex = this.earth.layerManager.layerList.findIndex(
+        (item) => item === target,
+      );
+      if (sourceIndex !== -1 && targetIndex !== -1) {
+        this.earth.layerManager.layerList.splice(targetIndex + 1, 0, source);
+        this.earth.layerManager.layerList.splice(sourceIndex, 1);
       }
       this.earth.emit('layer:move', {
-        targetLayer,
         sourceLayer,
-        targetIndex,
+        targetLayer,
         sourceIndex,
+        targetIndex,
         layerList: this.earth.layerManager.layerList,
       });
+    } else {
+      if (avaliable) {
+        Debug.warn(
+          `Move layer avaliable, but failed, please check if the input layer has been loaded`,
+        );
+      }
     }
 
     return bool;

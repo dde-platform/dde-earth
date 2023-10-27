@@ -1,4 +1,4 @@
-import Debug from '../core/debug';
+import { Debug } from '../core/debug';
 import { deepMerge, findMostSimilarString } from '../utils';
 import intlMessages from './messages';
 
