@@ -19,5 +19,6 @@
     "cesium": "^1.109.0",
     "dde-earth": "workspace:^"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "version": null
 }
