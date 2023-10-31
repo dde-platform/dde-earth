@@ -1,5 +1,11 @@
 # @dde-earth/plugin-tiff-loader
 
+## 1.0.1
+
+### Patch Changes
+
+- fix dynamic loader not effective
+
 ## 1.0.0
 
 ### Major Changes
