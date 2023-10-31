@@ -1,4 +1,4 @@
 import "./api";
 
 export * from "./TIFFLayerLoader";
-export * from "./TIFFLayerItem";
+export type { TIFFLayerItem } from "./TIFFLayerItem";

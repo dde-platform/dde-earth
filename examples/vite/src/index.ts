@@ -128,8 +128,8 @@ setTimeout(async () => {
   earth.usePlugin(new LayerSwitcher());
   earth.on("layer:move", (info) => console.log("layer:move", info));
   console.log(earth.viewer.imageryLayers);
-  earth.moveLayer(tiffLayer, mvtLayer);
-}, 0);
+  earth.moveLayer(wmsLayer, mvtLayer);
+}, 2000);
 
 //NC图层加载测试
 

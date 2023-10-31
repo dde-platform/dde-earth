@@ -1,4 +1,4 @@
 import "./api";
 
 export * from "./MVTLayerLoader";
-export * from "./MVTLayerItem";
+export type { MVTLayerItem } from "./MVTLayerItem";
