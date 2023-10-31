@@ -47,7 +47,7 @@
     "esbuild": "^0.19.2",
     "eslint": "^8.48.0",
     "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
     "happy-dom": "^10.11.2",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
