@@ -1,4 +1,4 @@
-import './api';
+import "./api";
 
-export * from './MVTLayerLoader';
-export * from './MVTLayerItem';
+export * from "./MVTLayerLoader";
+export * from "./MVTLayerItem";

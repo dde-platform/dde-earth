@@ -1,5 +1,6 @@
 {
   "name": "dde-earth-vite-example",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -19,6 +20,5 @@
     "cesium": "^1.109.0",
     "dde-earth": "workspace:^"
   },
-  "license": "MIT",
-  "version": null
+  "license": "MIT"
 }

@@ -1,3 +1,3 @@
-import './api';
+import "./api";
 
-export * from './TerrainManager';
+export * from "./TerrainManager";

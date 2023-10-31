@@ -1,4 +1,4 @@
-import type { Earth } from './earth';
+import type { Earth } from "./earth";
 
 export class EventEmitter {
   public callbacks: { [key: string]: Function[] } = {} as any;

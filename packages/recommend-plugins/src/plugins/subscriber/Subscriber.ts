@@ -1,31 +1,31 @@
-import { ScreenSpaceEventHandler, ScreenSpaceEventType } from 'cesium';
-import { WithEventPlugin } from 'dde-earth';
+import { ScreenSpaceEventHandler, ScreenSpaceEventType } from "cesium";
+import { WithEventPlugin } from "dde-earth";
 
-import type { Cartesian2, Viewer } from 'cesium';
-import type { Earth } from 'dde-earth';
+import type { Cartesian2, Viewer } from "cesium";
+import type { Earth } from "dde-earth";
 
 export class Subscriber extends WithEventPlugin<
   Subscriber.Args,
   Subscriber.Intl
 > {
-  name = 'Subscriber';
+  name = "Subscriber";
 
   public readonly eventList: Subscriber.EventType[] = [
-    'LEFT_DOWN',
-    'LEFT_UP',
-    'LEFT_CLICK',
-    'LEFT_DOUBLE_CLICK',
-    'RIGHT_DOWN',
-    'RIGHT_UP',
-    'RIGHT_CLICK',
-    'MIDDLE_DOWN',
-    'MIDDLE_UP',
-    'MIDDLE_CLICK',
-    'MOUSE_MOVE',
-    'WHEEL',
-    'PINCH_START',
-    'PINCH_MOVE',
-    'PINCH_END',
+    "LEFT_DOWN",
+    "LEFT_UP",
+    "LEFT_CLICK",
+    "LEFT_DOUBLE_CLICK",
+    "RIGHT_DOWN",
+    "RIGHT_UP",
+    "RIGHT_CLICK",
+    "MIDDLE_DOWN",
+    "MIDDLE_UP",
+    "MIDDLE_CLICK",
+    "MOUSE_MOVE",
+    "WHEEL",
+    "PINCH_START",
+    "PINCH_MOVE",
+    "PINCH_END",
   ];
   private _viewer!: Viewer;
 
@@ -78,12 +78,12 @@ export class Subscriber extends WithEventPlugin<
       if (
         this._isDestroyed ||
         !this._enable ||
-        (event === 'MOUSE_MOVE' && !this._shouldUpdate())
+        (event === "MOUSE_MOVE" && !this._shouldUpdate())
       )
         return;
 
       if (this._enablePickResult) {
-        if (event === 'MOUSE_MOVE' && movement.endPosition) {
+        if (event === "MOUSE_MOVE" && movement.endPosition) {
           this._lastResult = this._viewer.scene.pick(movement.endPosition);
         } else if (movement.position) {
           this._lastResult = this._viewer.scene.pick(movement.position);

@@ -1,4 +1,4 @@
-import { BasePlugin } from './basePlugin';
+import { BasePlugin } from "./basePlugin";
 
 export abstract class WithEventPlugin<
   InitOptions extends any[] = any[],

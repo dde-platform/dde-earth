@@ -1,10 +1,10 @@
-import { findMostSimilarString } from '../utils';
-import { Debug } from './debug';
-import { WithEventPlugin } from './plugin';
+import { findMostSimilarString } from "../utils";
+import { Debug } from "./debug";
+import { WithEventPlugin } from "./plugin";
 
-import type { Tail } from '../utils/types';
-import type { Earth } from './earth';
-import type { IPlugin } from './plugin';
+import type { Tail } from "../utils/types";
+import type { Earth } from "./earth";
+import type { IPlugin } from "./plugin";
 
 export class PluginManager {
   private _isDestroyed: boolean = false;
@@ -17,7 +17,7 @@ export class PluginManager {
     return this._isDestroyed;
   }
 
-  use<T extends IPlugin>(plugin: T, ...options: Tail<Parameters<T['init']>>) {
+  use<T extends IPlugin>(plugin: T, ...options: Tail<Parameters<T["init"]>>) {
     const name = plugin.name;
     if (this.plugins[name]) {
       this.remove(name);
@@ -30,7 +30,7 @@ export class PluginManager {
   }
 
   get<T extends IPlugin = IPlugin>(param: string | Function): T | undefined {
-    if (typeof param === 'string') {
+    if (typeof param === "string") {
       const plugin = this.plugins[param];
       if (!plugin) {
         const similarKey = findMostSimilarString(
@@ -39,12 +39,12 @@ export class PluginManager {
         );
         const msg =
           `Can't find plugin with name "${param}"` +
-          (similarKey ? `, do you mean "${similarKey}"?` : '');
+          (similarKey ? `, do you mean "${similarKey}"?` : "");
         Debug.warn(msg);
       }
       return plugin as any;
     }
-    if (typeof param === 'function') {
+    if (typeof param === "function") {
       return Object.values(this.plugins).find(
         (plugin) => plugin instanceof param,
       ) as any;

@@ -1,21 +1,21 @@
-import { generateUUID } from '../utils';
+import { generateUUID } from "../utils";
 
-import type { Earth } from './earth';
-import type { LayerManager } from './layerManager';
+import type { Earth } from "./earth";
+import type { LayerManager } from "./layerManager";
 
 export abstract class LayerItem<
   Lyr extends LayerManager.BaseLayer = LayerManager.BaseLayer,
   Instance = any,
 > {
   readonly data: Lyr;
-  readonly method: Lyr['method'];
+  readonly method: Lyr["method"];
   protected _instance?: Instance;
   readonly id: any;
   readonly readyPromise: Promise<this>;
   protected _ready: boolean = false;
   protected _isDestroyed: boolean = false;
-  protected abstract readonly defaultRenderOptions: Lyr['renderOptions'];
-  protected _renderOptions?: Lyr['renderOptions'];
+  protected abstract readonly defaultRenderOptions: Lyr["renderOptions"];
+  protected _renderOptions?: Lyr["renderOptions"];
 
   get renderOptions() {
     return this._renderOptions;
@@ -63,7 +63,7 @@ export abstract class LayerItem<
   abstract init(data: Lyr): Promise<Instance>;
   abstract zoomTo(): void;
   abstract remove(): boolean | Promise<boolean>;
-  abstract render(renderOptions: Lyr['renderOptions']): void;
+  abstract render(renderOptions: Lyr["renderOptions"]): void;
 
   destroy() {
     this.remove();
@@ -77,6 +77,6 @@ export namespace LayerItem {
   export interface Options<
     Lyr extends LayerManager.BaseLayer = LayerManager.BaseLayer,
   > {
-    defaultRenderOptions: Lyr['renderOptions'];
+    defaultRenderOptions: Lyr["renderOptions"];
   }
 }

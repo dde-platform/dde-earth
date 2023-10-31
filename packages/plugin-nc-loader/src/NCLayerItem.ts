@@ -1,10 +1,10 @@
-import { Particle3D } from 'cesium-particle';
-import { LayerItem } from 'dde-earth';
+import { Particle3D } from "cesium-particle";
+import { LayerItem } from "dde-earth";
 
-import { defaultRenderOptions, defaultStaticRenderOptions } from './constant';
+import { defaultRenderOptions, defaultStaticRenderOptions } from "./constant";
 
-import type { JsonData } from 'cesium-particle';
-import type { LayerManager } from 'dde-earth';
+import type { JsonData } from "cesium-particle";
+import type { LayerManager } from "dde-earth";
 
 export class NCLayerItem extends LayerItem<
   NCLayerItem.Data,
@@ -30,7 +30,7 @@ export class NCLayerItem extends LayerItem<
 
   async init(data: NCLayerItem.Data) {
     //如果传入的是URL，先fetch文件
-    if (typeof data.url === 'string') {
+    if (typeof data.url === "string") {
       const blob = await fetch(data.url).then((response) => response.blob());
       this.inputFile = blob;
       const particleObj = new Particle3D(this.earth.viewer, {
@@ -119,7 +119,7 @@ export class NCLayerItem extends LayerItem<
 }
 
 export namespace NCLayerItem {
-  export type Method = 'nc';
+  export type Method = "nc";
 
   //补全每一项的类型
   export type Fields = {
@@ -132,14 +132,14 @@ export namespace NCLayerItem {
     lev?: string;
   };
   export type NCImageryProviderOptions = {
-    fileType?: 'nc' | 'json';
+    fileType?: "nc" | "json";
     fields?: Fields;
   };
 
   //静态的渲染选项，需要重新加载ParticleOBJ。
   export type NCStaticRenderOptions = {
     colorTable?: number[][];
-    colour?: 'speed' | 'height';
+    colour?: "speed" | "height";
     valueRange?: {
       min?: number;
       max?: number;
@@ -173,7 +173,7 @@ export namespace NCLayerItem {
     speedFactor?: number;
     lineWidth?: number;
     dynamic?: boolean;
-    colour?: 'speed' | 'height';
+    colour?: "speed" | "height";
     valueRange?: {
       min?: number;
       max?: number;

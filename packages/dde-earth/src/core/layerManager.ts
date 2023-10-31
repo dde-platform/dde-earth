@@ -1,10 +1,10 @@
-import { ImageryLayer } from 'cesium';
+import { ImageryLayer } from "cesium";
 
-import { generateUUID } from '../utils';
+import { generateUUID } from "../utils";
 
-import type { Viewer } from 'cesium';
-import type { Earth } from './earth';
-import type { LayerItem } from './layerItem';
+import type { Viewer } from "cesium";
+import type { Earth } from "./earth";
+import type { LayerItem } from "./layerItem";
 
 export class LayerManager {
   private _isDestroyed: boolean = false;
@@ -51,7 +51,7 @@ export class LayerManager {
       this._baseLayer = baseLayer;
     }
 
-    this.earth.on('layer:remove', (id) => {
+    this.earth.on("layer:remove", (id) => {
       this._layerList = this._layerList.filter((item) => item.id !== id);
     });
   }
@@ -77,10 +77,10 @@ export class LayerManager {
   }
 
   async addLayer<Method extends LayerManager.LoaderMethods>(
-    data: LayerManager.LoaderTypes[Method]['data'],
+    data: LayerManager.LoaderTypes[Method]["data"],
     options?: LayerManager.AddLayerOptions,
   ): Promise<
-    Awaited<LayerManager.LoaderTypes[Method]['layerItem']> | undefined
+    Awaited<LayerManager.LoaderTypes[Method]["layerItem"]> | undefined
   > {
     const { id = generateUUID(), method } = data;
     if (this.getLayerById(id)) {
@@ -96,7 +96,7 @@ export class LayerManager {
     await layerItem.readyPromise;
 
     this._layerList.push(layerItem);
-    this.earth.emit('layer:add', layerItem);
+    this.earth.emit("layer:add", layerItem);
 
     if (options?.zoom) {
       layerItem.zoomTo();
@@ -106,7 +106,7 @@ export class LayerManager {
 
   async removeLayer(param: string | LayerItem) {
     let layerItem: LayerItem | undefined;
-    if (typeof param === 'string') {
+    if (typeof param === "string") {
       layerItem = this.getLayerById(param);
     } else {
       layerItem = param;
@@ -114,7 +114,7 @@ export class LayerManager {
     if (layerItem) {
       const bool = await layerItem.remove();
       if (bool) {
-        this.earth.emit('layer:remove', layerItem.id);
+        this.earth.emit("layer:remove", layerItem.id);
         return true;
       }
     }

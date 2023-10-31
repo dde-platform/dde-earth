@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build --filter=./packages/\\*",
-    "build:all": "turbo build",
+    "build:doc": "turbo run build --filter=doc...",
     "dev": "turbo dev --filter=./packages/\\* --no-cache --continue",
     "dev:doc": "turbo run dev --filter=doc...",
     "test": "turbo run test",

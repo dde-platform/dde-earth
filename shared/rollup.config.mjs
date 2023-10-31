@@ -1,15 +1,17 @@
-import dynamicImportVars from '@rollup/plugin-dynamic-import-vars';
-import json from '@rollup/plugin-json';
-import { readFileSync } from 'fs';
-import { builtinModules } from 'module';
-import path from 'path';
-import dts from 'rollup-plugin-dts';
-import esbuild from 'rollup-plugin-esbuild';
+import dynamicImportVars from "@rollup/plugin-dynamic-import-vars";
+import json from "@rollup/plugin-json";
+import { readFileSync } from "fs";
+import { builtinModules } from "module";
+import path from "path";
+import dts from "rollup-plugin-dts";
+import esbuild from "rollup-plugin-esbuild";
+
+const isProd = process.env.NODE_ENV === "production";
 
 const cwd = process.cwd();
 
 export function getPkg() {
-  return JSON.parse(readFileSync(path.join(cwd, 'package.json'), 'utf8'));
+  return JSON.parse(readFileSync(path.join(cwd, "package.json"), "utf8"));
 }
 
 const pkg = getPkg();
@@ -17,7 +19,7 @@ const pkg = getPkg();
 export function getPlugins() {
   return [
     esbuild({
-      minify: process.env.NODE_ENV === 'production',
+      minify: isProd,
     }),
     json(),
     dynamicImportVars(),
@@ -47,10 +49,10 @@ export function createConfig(replace = {}) {
   const config = [
     pkg.module
       ? {
-          input: './src/index.ts',
+          input: "./src/index.ts",
           output: {
             dir: path.dirname(pkg.module),
-            format: 'es',
+            format: "es",
             sourcemap: true,
             preserveModules: true, // 保留模块结构
           },
@@ -61,12 +63,11 @@ export function createConfig(replace = {}) {
       : undefined,
     pkg.main
       ? {
-          input: './src/index.ts',
+          input: "./src/index.ts",
           output: {
             dir: path.dirname(pkg.main),
-            format: 'cjs',
+            format: "cjs",
             sourcemap: true,
-            preserveModules: true, // 保留模块结构
           },
           external,
           plugins,
@@ -75,16 +76,16 @@ export function createConfig(replace = {}) {
       : undefined,
     pkg.unpkg
       ? {
-          input: './src/index.ts',
+          input: "./src/index.ts",
           output: {
-            format: 'umd',
+            format: "umd",
             sourcemap: true,
             file: pkg.unpkg,
-            name: 'DDE',
+            name: "DDE",
             inlineDynamicImports: true,
             globals: {
-              cesium: 'Cesium',
-              'dde-earth': 'DDE',
+              cesium: "Cesium",
+              "dde-earth": "DDE",
             },
           },
           external,
@@ -92,11 +93,11 @@ export function createConfig(replace = {}) {
         }
       : undefined,
     {
-      input: './src/index.ts',
+      input: "./src/index.ts",
       output: {
         dir: path.dirname(pkg.types),
-        entryFileNames: '[name].d.ts',
-        format: 'esm',
+        entryFileNames: "[name].d.ts",
+        format: "esm",
       },
       external,
       plugins: [dts({ respectExternal: true }), json()],
@@ -107,9 +108,9 @@ export function createConfig(replace = {}) {
   Object.entries(replace).map(([type, conf]) => {
     const index = config.findIndex((item) => item.output.format === type);
     if (index !== -1) {
-      config[index] = typeof conf === 'function' ? conf(config[index]) : conf;
+      config[index] = typeof conf === "function" ? conf(config[index]) : conf;
     } else {
-      config.push(typeof conf === 'function' ? conf() : conf);
+      config.push(typeof conf === "function" ? conf() : conf);
     }
   });
 

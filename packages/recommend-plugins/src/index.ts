@@ -1,3 +1,3 @@
-export * from './plugins/subscriber';
-export * from './plugins/layerLoaders';
-export * from './plugins/layerSwitcher';
+export * from "./plugins/subscriber";
+export * from "./plugins/layerLoaders";
+export * from "./plugins/layerSwitcher";

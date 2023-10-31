@@ -1,11 +1,11 @@
 // vite.config.ts
-import { defineConfig } from 'vitest/config';
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
-    environment: 'happy-dom',
+    environment: "happy-dom",
     coverage: {
-      provider: 'v8',
+      provider: "v8",
     },
   },
 });

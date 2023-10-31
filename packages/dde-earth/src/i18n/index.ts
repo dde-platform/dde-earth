@@ -1,8 +1,8 @@
-import { Debug } from '../core/debug';
-import { deepMerge, findMostSimilarString } from '../utils';
-import intlMessages from './messages';
+import { Debug } from "../core/debug";
+import { deepMerge, findMostSimilarString } from "../utils";
+import intlMessages from "./messages";
 
-import type { DeepPartial, NestedIds, NestedKeys } from '../utils';
+import type { DeepPartial, NestedIds, NestedKeys } from "../utils";
 
 export class I18N {
   private _locale: I18N.Languages;
@@ -23,7 +23,7 @@ export class I18N {
       const similarKey = findMostSimilarString(this.locales, val);
       const msg =
         `Can't find locale "${val}"` +
-        (similarKey ? `, do you mean "${similarKey}"?` : '');
+        (similarKey ? `, do you mean "${similarKey}"?` : "");
       throw new Error(msg);
     }
     this._locale = val;
@@ -82,10 +82,10 @@ export class I18N {
     id: string,
     values?: Record<string, any>,
   ): string | undefined {
-    const keys = id.split('.');
+    const keys = id.split(".");
     let value = messages;
     for (const key of keys) {
-      if (typeof value !== 'object') {
+      if (typeof value !== "object") {
         return undefined;
       }
       value = value[key];
@@ -100,7 +100,7 @@ export class I18N {
 }
 
 export namespace I18N {
-  export type IntlMessages = (typeof intlMessages)['en-US'];
+  export type IntlMessages = (typeof intlMessages)["en-US"];
 
   export interface LocaleMessages
     extends Record<keyof typeof intlMessages, any> {}
@@ -112,7 +112,7 @@ export namespace I18N {
   };
 
   export const defaultOptions: Options = {
-    defaultLanguage: 'en-US',
+    defaultLanguage: "en-US",
   };
 
   export interface Options {

@@ -1,13 +1,13 @@
-import { BasePlugin, deepMerge } from 'dde-earth';
+import { BasePlugin, deepMerge } from "dde-earth";
 
-import { defaultRenderOptions } from './constant';
+import { defaultRenderOptions } from "./constant";
 
-import type { Earth } from 'dde-earth';
-import type { TIFFLayerItem } from './TIFFLayerItem';
+import type { Earth } from "dde-earth";
+import type { TIFFLayerItem } from "./TIFFLayerItem";
 
 export class TIFFLayerLoader extends BasePlugin {
   readonly defaultRenderOptions: NonNullable<
-    Required<TIFFLayerLoader.Options['defaultRenderOptions']>
+    Required<TIFFLayerLoader.Options["defaultRenderOptions"]>
   >;
   constructor(options?: TIFFLayerLoader.Options) {
     super(options);
@@ -21,7 +21,7 @@ export class TIFFLayerLoader extends BasePlugin {
     this._init(earth);
     this.earth.layerManager.addLoader({
       tiff: async (earth: Earth, data: any) => {
-        const { TIFFLayerItem } = await import('./TIFFLayerItem');
+        const { TIFFLayerItem } = await import("./TIFFLayerItem");
         return new TIFFLayerItem(earth, data, {
           defaultRenderOptions: this.defaultRenderOptions,
         });

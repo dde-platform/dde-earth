@@ -1,6 +1,6 @@
-import type { MVTLayerLoader } from '.';
+import type { MVTLayerLoader } from ".";
 
-declare module 'dde-earth' {
+declare module "dde-earth" {
   namespace LayerManager {
     interface Loaders extends MVTLayerLoader.Loaders {}
   }

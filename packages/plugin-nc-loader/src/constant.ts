@@ -1,4 +1,4 @@
-import type { NCLayerItem } from './NCLayerItem';
+import type { NCLayerItem } from "./NCLayerItem";
 
 const defaultValueRange = { min: -100, max: 100 };
 
@@ -39,7 +39,7 @@ const defaultColorTable = [
   [0.619608, 0.0, 0.0],
 ];
 
-const defaultColour = 'speed';
+const defaultColour = "speed";
 
 export const defaultStaticRenderOptions: NCLayerItem.NCStaticRenderOptions = {
   valueRange: defaultValueRange,

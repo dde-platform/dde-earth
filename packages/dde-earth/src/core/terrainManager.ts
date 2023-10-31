@@ -1,6 +1,6 @@
-import { CesiumTerrainProvider, EllipsoidTerrainProvider } from 'cesium';
+import { CesiumTerrainProvider, EllipsoidTerrainProvider } from "cesium";
 
-import type { Earth } from './earth';
+import type { Earth } from "./earth";
 
 export class TerrainManager {
   private _data: any;
@@ -52,9 +52,9 @@ export class TerrainManager {
   async setTerrain<
     Method extends TerrainManager.LoaderMethods = TerrainManager.LoaderMethods,
   >(
-    data?: TerrainManager.LoaderTypes[Method]['data'],
+    data?: TerrainManager.LoaderTypes[Method]["data"],
   ): Promise<
-    | Awaited<TerrainManager.LoaderTypes[Method]['instance']>
+    | Awaited<TerrainManager.LoaderTypes[Method]["instance"]>
     | EllipsoidTerrainProvider
     | undefined
   > {
@@ -79,7 +79,7 @@ export class TerrainManager {
       this.earth.viewer.scene.terrainProvider = provider;
     }
 
-    this.earth.emit('terrain:change', data);
+    this.earth.emit("terrain:change", data);
 
     return provider;
   }
@@ -87,7 +87,7 @@ export class TerrainManager {
 
 export namespace TerrainManager {
   export interface Options<T extends LoaderMethods = LoaderMethods> {
-    terrain?: [T] extends [never] ? undefined : LoaderTypes[T]['data'];
+    terrain?: [T] extends [never] ? undefined : LoaderTypes[T]["data"];
   }
 
   type DataWithMethod<T extends string, U extends Record<string, any>> = {
@@ -107,10 +107,10 @@ export namespace TerrainManager {
 
   export interface Loaders {
     cesium: (
-      data: DataWithMethod<'cesium', CesiumTerrainProvider.ConstructorOptions>,
+      data: DataWithMethod<"cesium", CesiumTerrainProvider.ConstructorOptions>,
     ) => CesiumTerrainProvider;
     custom: (
-      data: DataWithMethod<'custom', CesiumTerrainProvider.ConstructorOptions>,
+      data: DataWithMethod<"custom", CesiumTerrainProvider.ConstructorOptions>,
     ) => Promise<CesiumTerrainProvider>;
   }
 

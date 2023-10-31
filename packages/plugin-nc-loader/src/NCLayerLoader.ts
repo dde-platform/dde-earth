@@ -1,13 +1,13 @@
-import { BasePlugin, deepMerge } from 'dde-earth';
+import { BasePlugin, deepMerge } from "dde-earth";
 
-import { defaultRenderOptions } from './constant';
+import { defaultRenderOptions } from "./constant";
 
-import type { Earth } from 'dde-earth';
-import type { NCLayerItem } from './NCLayerItem';
+import type { Earth } from "dde-earth";
+import type { NCLayerItem } from "./NCLayerItem";
 
 export class NCLayerLoader extends BasePlugin {
   readonly defaultRenderOptions: NonNullable<
-    Required<NCLayerLoader.Options['defaultRenderOptions']>
+    Required<NCLayerLoader.Options["defaultRenderOptions"]>
   >;
   constructor(options?: NCLayerLoader.Options) {
     super(options);
@@ -21,7 +21,7 @@ export class NCLayerLoader extends BasePlugin {
     this._init(earth);
     this.earth.layerManager.addLoader({
       nc: async (earth: Earth, data: any) => {
-        const { NCLayerItem } = await import('./NCLayerItem');
+        const { NCLayerItem } = await import("./NCLayerItem");
         return new NCLayerItem(earth, data, {
           defaultRenderOptions: this.defaultRenderOptions,
         });

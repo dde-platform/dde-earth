@@ -1,4 +1,4 @@
-import './api';
+import "./api";
 
-export * from './NCLayerLoader';
-export * from './NCLayerItem';
+export * from "./NCLayerLoader";
+export * from "./NCLayerItem";

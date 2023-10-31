@@ -1,4 +1,4 @@
-import type { RasterLayerItem } from './RasterLayerItem';
+import type { RasterLayerItem } from "./RasterLayerItem";
 
 export const DefaultRenderOptions: {
   raster: RasterLayerItem.RenderOptions;

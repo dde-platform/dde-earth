@@ -1,14 +1,14 @@
-import { deepMerge } from '../../utils';
+import { deepMerge } from "../../utils";
 
-import type { I18N } from '../../i18n';
-import type { Earth } from '../earth';
+import type { I18N } from "../../i18n";
+import type { Earth } from "../earth";
 
 export abstract class BasePlugin<
   InitOptions extends any[] = [],
   Intl extends Record<string, any> = any,
 > {
   /** plugin name, do not repeat, will appear in warnings or errors */
-  readonly name: string = '';
+  readonly name: string = "";
   /** Internationalized Dictionary */
   protected _intl: I18N.ExtendMessages<Intl> = {};
 

@@ -1,8 +1,8 @@
-import { Earth } from 'dde-earth';
+import { Earth } from "dde-earth";
 
-import { Subscriber } from './Subscriber';
+import { Subscriber } from "./Subscriber";
 
-declare module 'dde-earth' {
+declare module "dde-earth" {
   interface Earth {
     isSubscriberEnabled: () => boolean;
     toggleSubscriber: (enable: boolean) => Earth;

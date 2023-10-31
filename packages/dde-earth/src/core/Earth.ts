@@ -4,16 +4,16 @@ import {
   Color,
   SceneMode,
   Viewer,
-} from 'cesium';
+} from "cesium";
 
-import { I18N } from '../i18n';
-import { EventEmitter } from './event';
-import { LayerManager } from './layerManager';
-import { PluginManager } from './pluginManager';
-import { TerrainManager } from './terrainManager';
+import { I18N } from "../i18n";
+import { EventEmitter } from "./event";
+import { LayerManager } from "./layerManager";
+import { PluginManager } from "./pluginManager";
+import { TerrainManager } from "./terrainManager";
 
-import type { LayerItem } from './layerItem';
-import type { IPlugin } from './plugin';
+import type { LayerItem } from "./layerItem";
+import type { IPlugin } from "./plugin";
 
 export class Earth {
   private _isDestroyed: boolean = false;
@@ -44,7 +44,7 @@ export class Earth {
     this.i18n = new I18N({
       ...this.options.toolOptions?.i18n,
       onLocaleChanged: (locale) => {
-        this.emit('lang:change', locale);
+        this.emit("lang:change", locale);
         this.options.toolOptions?.i18n?.onLocaleChanged?.(locale);
       },
     });
@@ -147,18 +147,18 @@ export class Earth {
     this.eventEmitter.off(event, fn);
   }
 
-  emit: (typeof EventEmitter.prototype)['emit'];
+  emit: (typeof EventEmitter.prototype)["emit"];
 
-  usePlugin: (typeof PluginManager.prototype)['use'];
-  getPlugin: (typeof PluginManager.prototype)['get'];
-  removePlugin: (typeof PluginManager.prototype)['remove'];
+  usePlugin: (typeof PluginManager.prototype)["use"];
+  getPlugin: (typeof PluginManager.prototype)["get"];
+  removePlugin: (typeof PluginManager.prototype)["remove"];
 
   /** add layer using layer loader */
-  addLayer: (typeof LayerManager.prototype)['addLayer'];
-  removeLayer: (typeof LayerManager.prototype)['removeLayer'];
+  addLayer: (typeof LayerManager.prototype)["addLayer"];
+  removeLayer: (typeof LayerManager.prototype)["removeLayer"];
 
   /** set terrain using terrain loader */
-  setTerrain: (typeof TerrainManager.prototype)['setTerrain'];
+  setTerrain: (typeof TerrainManager.prototype)["setTerrain"];
 
   destroy() {
     this.pluginManager.destroy();
@@ -193,8 +193,8 @@ export namespace Earth {
   } & Viewer.ConstructorOptions;
 
   export const defaultOptions: EarthOptions = {
-    backgroundColor: '#00000099',
-    baseColor: '#4F4F4F',
+    backgroundColor: "#00000099",
+    baseColor: "#4F4F4F",
     defaultViewPort: [116.3, 39.9, 20000000],
 
     baseLayerPicker: false,
@@ -221,11 +221,11 @@ export namespace Earth {
   };
 
   export interface Events {
-    'layer:add': [layerItem: LayerItem];
-    'layer:remove': [id: string];
-    'layer:render': [layerItem: LayerItem];
-    'lang:change': [lang: string];
-    'terrain:change': [terrain: any];
+    "layer:add": [layerItem: LayerItem];
+    "layer:remove": [id: string];
+    "layer:render": [layerItem: LayerItem];
+    "lang:change": [lang: string];
+    "terrain:change": [terrain: any];
   }
 
   export type EventTypes = keyof Events;

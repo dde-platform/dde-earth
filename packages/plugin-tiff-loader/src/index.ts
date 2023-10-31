@@ -1,4 +1,4 @@
-import './api';
+import "./api";
 
-export * from './TIFFLayerLoader';
-export * from './TIFFLayerItem';
+export * from "./TIFFLayerLoader";
+export * from "./TIFFLayerItem";

@@ -49,16 +49,16 @@ export type NestedIds<
 > = MessageKeys<
   NestedValueOf<
     {
-      '!': Intl;
+      "!": Intl;
     },
-    [NestedKey] extends [never] ? '!' : `!.${NestedKey}`
+    [NestedKey] extends [never] ? "!" : `!.${NestedKey}`
   >,
   NestedKeyOf<
     NestedValueOf<
       {
-        '!': Intl;
+        "!": Intl;
       },
-      [NestedKey] extends [never] ? '!' : `!.${NestedKey}`
+      [NestedKey] extends [never] ? "!" : `!.${NestedKey}`
     >
   >
 >;

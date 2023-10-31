@@ -1,4 +1,4 @@
-import './api';
+import "./api";
 
-export * from './LayerLoaders';
-export * from './WMSLayerItem';
+export * from "./LayerLoaders";
+export * from "./WMSLayerItem";

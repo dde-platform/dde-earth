@@ -1,13 +1,13 @@
-import { BasePlugin, deepMerge } from 'dde-earth';
+import { BasePlugin, deepMerge } from "dde-earth";
 
-import { defaultRenderOptions } from './constant';
+import { defaultRenderOptions } from "./constant";
 
-import type { Earth } from 'dde-earth';
-import type { MVTLayerItem } from './MVTLayerItem';
+import type { Earth } from "dde-earth";
+import type { MVTLayerItem } from "./MVTLayerItem";
 
 export class MVTLayerLoader extends BasePlugin {
   readonly defaultRenderOptions: NonNullable<
-    Required<MVTLayerLoader.Options['defaultRenderOptions']>
+    Required<MVTLayerLoader.Options["defaultRenderOptions"]>
   >;
   constructor(options?: MVTLayerLoader.Options) {
     super(options);
@@ -21,7 +21,7 @@ export class MVTLayerLoader extends BasePlugin {
     this._init(earth);
     this.earth.layerManager.addLoader({
       mvt: async (earth: Earth, data: any) => {
-        const { MVTLayerItem } = await import('./MVTLayerItem');
+        const { MVTLayerItem } = await import("./MVTLayerItem");
         return new MVTLayerItem(earth, data, {
           defaultRenderOptions: this.defaultRenderOptions,
         });

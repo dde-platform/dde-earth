@@ -60,7 +60,7 @@ export function deepMerge(target: any, ...sources: any[]) {
    * @returns The merged object.
    */
   function merge(targetObj: any, sourceObj: any) {
-    if (typeof targetObj !== 'object' || typeof sourceObj !== 'object') {
+    if (typeof targetObj !== "object" || typeof sourceObj !== "object") {
       return sourceObj;
     }
 
@@ -86,9 +86,9 @@ export function deepMerge(target: any, ...sources: any[]) {
 }
 
 export function generateUUID(): string {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
     const r = (Math.random() * 16) | 0,
-      v = c === 'x' ? r : (r & 0x3) | 0x8;
+      v = c === "x" ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
 }

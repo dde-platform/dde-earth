@@ -1,14 +1,14 @@
-import { LayerItem } from 'dde-earth';
-import { TIFFImageryProvider } from 'tiff-imagery-provider';
+import { LayerItem } from "dde-earth";
+import { TIFFImageryProvider } from "tiff-imagery-provider";
 
-import { basicRenderOptions, defaultRenderOptions } from './constant';
+import { basicRenderOptions, defaultRenderOptions } from "./constant";
 
-import type { ImageryLayer } from 'cesium';
-import type { LayerManager } from 'dde-earth';
+import type { ImageryLayer } from "cesium";
+import type { LayerManager } from "dde-earth";
 import type {
   TIFFImageryProviderOptions,
   TIFFImageryProviderRenderOptions,
-} from 'tiff-imagery-provider';
+} from "tiff-imagery-provider";
 
 export class TIFFLayerItem extends LayerItem<
   TIFFLayerItem.Data,
@@ -108,7 +108,7 @@ export class TIFFLayerItem extends LayerItem<
 }
 
 export namespace TIFFLayerItem {
-  export type Method = 'tiff';
+  export type Method = "tiff";
 
   export type Data = LayerManager.BaseLayer<Method, RenderOptions> &
     TIFFImageryProviderOptions & {

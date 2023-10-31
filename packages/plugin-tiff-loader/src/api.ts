@@ -1,6 +1,6 @@
-import type { TIFFLayerLoader } from '.';
+import type { TIFFLayerLoader } from ".";
 
-declare module 'dde-earth' {
+declare module "dde-earth" {
   namespace LayerManager {
     interface Loaders extends TIFFLayerLoader.Loaders {}
   }

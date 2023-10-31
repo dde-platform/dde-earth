@@ -3,14 +3,14 @@ import {
   ImageryLayer,
   Primitive,
   PrimitiveCollection,
-} from 'cesium';
-import { DataSource } from 'cesium';
-import { BasePlugin, Debug } from 'dde-earth';
+} from "cesium";
+import { DataSource } from "cesium";
+import { BasePlugin, Debug } from "dde-earth";
 
-import type { Earth, LayerItem } from 'dde-earth';
+import type { Earth, LayerItem } from "dde-earth";
 
 export class LayerSwitcher extends BasePlugin {
-  name = 'LayerSwitcher';
+  name = "LayerSwitcher";
 
   constructor() {
     super();
@@ -177,7 +177,7 @@ export class LayerSwitcher extends BasePlugin {
         this.earth.layerManager.layerList.splice(targetIndex + 1, 0, source);
         this.earth.layerManager.layerList.splice(sourceIndex, 1);
       }
-      this.earth.emit('layer:move', {
+      this.earth.emit("layer:move", {
         sourceLayer,
         targetLayer,
         sourceIndex,

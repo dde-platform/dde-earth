@@ -1,10 +1,10 @@
-import { Earth } from 'dde-earth';
+import { Earth } from "dde-earth";
 
-import { LayerSwitcher } from './LayerSwitcher';
+import { LayerSwitcher } from "./LayerSwitcher";
 
-import type { LayerItem } from 'dde-earth';
+import type { LayerItem } from "dde-earth";
 
-declare module 'dde-earth' {
+declare module "dde-earth" {
   interface Earth {
     moveLayer: (
       targetLayer: LayerItem,
@@ -14,7 +14,7 @@ declare module 'dde-earth' {
 
   namespace Earth {
     interface Events {
-      'layer:move': [
+      "layer:move": [
         info: {
           targetLayer: LayerItem;
           sourceLayer: LayerItem;

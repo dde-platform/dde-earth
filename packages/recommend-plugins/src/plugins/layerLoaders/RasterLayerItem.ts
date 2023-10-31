@@ -1,9 +1,9 @@
-import { LayerItem } from 'dde-earth';
+import { LayerItem } from "dde-earth";
 
-import { DefaultRenderOptions } from './constant';
+import { DefaultRenderOptions } from "./constant";
 
-import type { ImageryLayer } from 'cesium';
-import type { LayerManager } from 'dde-earth';
+import type { ImageryLayer } from "cesium";
+import type { LayerManager } from "dde-earth";
 
 export abstract class RasterLayerItem<
   Data extends LayerManager.BaseLayer,

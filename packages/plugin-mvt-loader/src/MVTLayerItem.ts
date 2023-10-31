@@ -1,14 +1,14 @@
-import { LayerItem } from 'dde-earth';
-import MVTImageryProvider from 'mvt-imagery-provider';
+import { LayerItem } from "dde-earth";
+import MVTImageryProvider from "mvt-imagery-provider";
 
-import { defaultRenderOptions } from './constant';
+import { defaultRenderOptions } from "./constant";
 
-import type { ImageryLayer, Resource } from 'cesium';
-import type { LayerManager } from 'dde-earth';
+import type { ImageryLayer, Resource } from "cesium";
+import type { LayerManager } from "dde-earth";
 import type {
   MVTImageryProviderOptions,
   StyleSpecification,
-} from 'mvt-imagery-provider';
+} from "mvt-imagery-provider";
 
 export class MVTLayerItem extends LayerItem<
   MVTLayerItem.Data,
@@ -66,7 +66,7 @@ export class MVTLayerItem extends LayerItem<
 }
 
 export namespace MVTLayerItem {
-  export type Method = 'mvt';
+  export type Method = "mvt";
 
   export type Data = LayerManager.BaseLayer<Method, RenderOptions> &
     MVTImageryProviderOptions & {

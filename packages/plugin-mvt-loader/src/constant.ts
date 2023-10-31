@@ -1,4 +1,4 @@
-import type { MVTLayerItem } from './MVTLayerItem';
+import type { MVTLayerItem } from "./MVTLayerItem";
 
 export const basicRenderOptions: MVTLayerItem.BasicRenderOptions = {
   brightness: 1,

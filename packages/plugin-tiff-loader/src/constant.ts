@@ -1,4 +1,4 @@
-import type { TIFFLayerItem } from './TIFFLayerItem';
+import type { TIFFLayerItem } from "./TIFFLayerItem";
 
 export const basicRenderOptions: TIFFLayerItem.BasicRenderOptions = {
   brightness: 1,

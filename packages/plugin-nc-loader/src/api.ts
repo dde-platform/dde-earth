@@ -1,6 +1,6 @@
-import type { NCLayerLoader } from '.';
+import type { NCLayerLoader } from ".";
 
-declare module 'dde-earth' {
+declare module "dde-earth" {
   namespace LayerManager {
     interface Loaders extends NCLayerLoader.Loaders {}
   }
