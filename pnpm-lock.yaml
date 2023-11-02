@@ -139,8 +139,8 @@ importers:
         specifier: workspace:^
         version: link:../../packages/recommend-plugins
       cesium:
-        specifier: ^1.109.0
-        version: 1.109.0
+        specifier: ^1.110.1
+        version: 1.110.1
       dde-earth:
         specifier: workspace:^
         version: link:../../packages/dde-earth
@@ -153,7 +153,7 @@ importers:
         version: 4.3.9(@types/node@20.5.7)
       vite-plugin-cesium:
         specifier: ^1.2.22
-        version: 1.2.22(cesium@1.109.0)(rollup@2.79.1)(vite@4.3.9)
+        version: 1.2.22(cesium@1.110.1)(rollup@2.79.1)(vite@4.3.9)
 
   packages/dde-earth:
     devDependencies:
@@ -439,30 +439,6 @@ packages:
     resolution: {integrity: sha512-s3jaWicZd0pkP0jf5ysyHUI/RE7MHos6qlToFcGWXVp+ykHOy77OUMrfbgJ9it2C5bow7OIQwYYaHjk9XlBQ2A==}
     dev: false
 
-  /@cesium/engine@4.0.0:
-    resolution: {integrity: sha512-r9hQfSQ+Ob8+TEkFEx5gB2f06Sm5VC/k/Ypk34XjS4PiZqktS1K/UcHlmQLhMpsNQqXMx2sd/Rx+SRjyiL4qBQ==}
-    engines: {node: '>=14.0.0'}
-    dependencies:
-      '@tweenjs/tween.js': 21.0.0
-      '@zip.js/zip.js': 2.4.26
-      autolinker: 4.0.0
-      bitmap-sdf: 1.0.4
-      dompurify: 3.0.6
-      draco3d: 1.5.6
-      earcut: 2.2.4
-      grapheme-splitter: 1.0.4
-      jsep: 1.3.8
-      kdbush: 4.0.2
-      ktx-parse: 0.6.0
-      lerc: 2.0.0
-      mersenne-twister: 1.1.0
-      meshoptimizer: 0.19.0
-      pako: 2.1.0
-      protobufjs: 7.2.5
-      rbush: 3.0.1
-      topojson-client: 3.1.0
-      urijs: 1.19.11
-
   /@cesium/engine@5.0.0:
     resolution: {integrity: sha512-cN6jizJPScPc7CVtvWe5CQSUdfqOqkNzJX0Vu9JZjPsZSR06dr3YzG6SiE09dq/oZhP/T3zDz4CnyKouJDUCUA==}
     engines: {node: '>=14.0.0'}
@@ -510,13 +486,6 @@ packages:
       rbush: 3.0.1
       topojson-client: 3.1.0
       urijs: 1.19.11
-
-  /@cesium/widgets@4.0.0:
-    resolution: {integrity: sha512-4UT4jNmu9ScR8GUZ+wPDjPCI8LSuJDs7sbVfFR0CjGmfP3VqXIacNQduTI3RCRzes5u+Po23dxdIMtFMSycY4g==}
-    engines: {node: '>=14.0.0'}
-    dependencies:
-      '@cesium/engine': 4.0.0
-      nosleep.js: 0.12.0
 
   /@cesium/widgets@4.2.0:
     resolution: {integrity: sha512-69pEnugjDMrraJ1D6TDJfKNyFOVobT49GK5cOHb5ZR0EvSovfRXCwILI6+5Q6K68X3YkE5qnoyMwkEwJJR//BQ==}
@@ -2642,18 +2611,18 @@ packages:
       netcdfjs: 1.0.0
     dev: false
 
-  /cesium@1.109.0:
-    resolution: {integrity: sha512-dyxZnu2/8MScAfaKZJny0mksZOVoJkBiiyEG2EQviG6F37Lm2QcJYoF4ExWogiKgYYI0t2DuzVKAENmejQ95iQ==}
-    engines: {node: '>=14.0.0'}
-    dependencies:
-      '@cesium/engine': 4.0.0
-      '@cesium/widgets': 4.0.0
-
   /cesium@1.110.0:
     resolution: {integrity: sha512-EqoLbsmCImezmJpDW54HpiiQ6hbDLp1Nb++2As//5bVYCJOpkk2CBggj7MeD3rL8xdyTcPwDNFNouLN5CyWDpg==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@cesium/engine': 5.0.0
+      '@cesium/widgets': 4.2.0
+
+  /cesium@1.110.1:
+    resolution: {integrity: sha512-wlpIunlt6J5XLfm4AKj/Sx0yb0PI7jF8J+bcz/Kjy/K8JRu9WWto+MLXRLgx/++EFXpIzGcC+ZIUhEY/ThcOAA==}
+    engines: {node: '>=14.0.0'}
+    dependencies:
+      '@cesium/engine': 6.0.0
       '@cesium/widgets': 4.2.0
 
   /chai@4.3.8:
@@ -7258,13 +7227,13 @@ packages:
       - terser
     dev: true
 
-  /vite-plugin-cesium@1.2.22(cesium@1.109.0)(rollup@2.79.1)(vite@4.3.9):
+  /vite-plugin-cesium@1.2.22(cesium@1.110.1)(rollup@2.79.1)(vite@4.3.9):
     resolution: {integrity: sha512-OnS+VKNGck4kUu4/67Fdfhz0/zF9mDVNUp9hUWtX19C38O0mJsJy2MH1ev2QcrVLf6VieJ7vCGxkLchdB1n1HQ==}
     peerDependencies:
       cesium: ^1.95.0
       vite: '>=2.7.1'
     dependencies:
-      cesium: 1.109.0
+      cesium: 1.110.1
       fs-extra: 9.1.0
       rollup-plugin-external-globals: 0.6.1(rollup@2.79.1)
       serve-static: 1.15.0

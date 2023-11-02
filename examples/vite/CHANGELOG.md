@@ -1,5 +1,14 @@
 # dde-earth-vite-example
 
+## 0.0.2
+
+### Patch Changes
+
+- fix render priority
+- Updated dependencies
+  - @dde-earth/plugin-nc-loader@1.0.2
+  - @dde-earth/plugin-tiff-loader@1.0.2
+
 ## 0.0.1
 
 ### Patch Changes

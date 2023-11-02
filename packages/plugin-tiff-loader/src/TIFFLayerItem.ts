@@ -73,11 +73,6 @@ export class TIFFLayerItem extends LayerItem<
         (name) => !Object.keys(basicRenderOptions).includes(name),
       )
     ) {
-      this._renderOptions = {
-        ...this._renderOptions,
-        ...options,
-      };
-
       if (this.instance) {
         const index = this.earth.viewer.imageryLayers.indexOf(this.instance);
         const bool = this.earth.viewer.imageryLayers.remove(
@@ -99,11 +94,15 @@ export class TIFFLayerItem extends LayerItem<
           this._instance = layer;
         }
       }
-
-      TIFFLayerItem.basicRender(this.instance, this._renderOptions);
-
-      this.earth.viewer.scene.requestRender();
     }
+
+    TIFFLayerItem.basicRender(this.instance, this._renderOptions);
+    this._renderOptions = {
+      ...this._renderOptions,
+      ...options,
+    };
+
+    this.earth.viewer.scene.requestRender();
   }
 }
 

@@ -1,5 +1,11 @@
 # @dde-earth/plugin-nc-loader
 
+## 1.0.2
+
+### Patch Changes
+
+- fix render priority
+
 ## 1.0.1
 
 ### Patch Changes

@@ -81,10 +81,6 @@ export class NCLayerItem extends LayerItem<
         (name) => !Object.keys(defaultRenderOptions).includes(name),
       )
     ) {
-      this._renderOptions = {
-        ...this._renderOptions,
-        ...options,
-      };
       if (
         //如果更改了静态的渲染设置，则需要重新加载整个particle对象
         Object.keys(options).some((name) => {
@@ -109,9 +105,14 @@ export class NCLayerItem extends LayerItem<
       } else {
         //否则，由于只加载了静态选项，所以可以直接更改渲染设置
         if (this.instance) {
-          this.instance.optionsChange(this._renderOptions); // 更新粒子系统配置
+          this.instance.optionsChange(options); // 更新粒子系统配置
         }
       }
+
+      this._renderOptions = {
+        ...this._renderOptions,
+        ...options,
+      };
 
       this.earth.viewer.scene.requestRender();
     }
