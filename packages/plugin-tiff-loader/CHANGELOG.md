@@ -1,5 +1,13 @@
 # @dde-earth/plugin-tiff-loader
 
+## 1.0.3
+
+### Patch Changes
+
+- dont render at once after init layerItem
+- Updated dependencies
+  - dde-earth@1.0.1
+
 ## 1.0.2
 
 ### Patch Changes

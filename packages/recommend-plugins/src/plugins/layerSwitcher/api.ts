@@ -28,8 +28,8 @@ declare module "dde-earth" {
 }
 
 Earth.prototype.moveLayer = function (
-  targetLayer: LayerItem,
   sourceLayer: LayerItem,
+  targetLayer: LayerItem,
 ): boolean {
   const layerSwitcher = this.getPlugin<LayerSwitcher>(LayerSwitcher);
   if (!layerSwitcher) return false;

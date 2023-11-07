@@ -74,19 +74,19 @@ export class TIFFLayerItem extends LayerItem<
       )
     ) {
       if (this.instance) {
+        const imageryProvider = await TIFFImageryProvider.fromUrl(
+          this.data.url,
+          {
+            ...this.data,
+            renderOptions: this._renderOptions,
+          },
+        );
         const index = this.earth.viewer.imageryLayers.indexOf(this.instance);
         const bool = this.earth.viewer.imageryLayers.remove(
           this.instance,
           true,
         );
         if (bool) {
-          const imageryProvider = await TIFFImageryProvider.fromUrl(
-            this.data.url,
-            {
-              ...this.data,
-              renderOptions: this._renderOptions,
-            },
-          );
           const layer = this.earth.viewer.imageryLayers.addImageryProvider(
             imageryProvider as any,
             index,

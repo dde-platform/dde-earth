@@ -53,7 +53,6 @@ export abstract class LayerItem<
         .then((instance) => {
           this._instance = instance;
           this._ready = true;
-          this.render(this.renderOptions);
           resolve(this);
         })
         .catch(reject);

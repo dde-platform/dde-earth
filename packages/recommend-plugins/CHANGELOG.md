@@ -1,5 +1,13 @@
 # @dde-earth/recommend-plugins
 
+## 1.0.2
+
+### Patch Changes
+
+- dont render at once after init layerItem
+- Updated dependencies
+  - dde-earth@1.0.1
+
 ## 1.0.1
 
 ### Patch Changes
