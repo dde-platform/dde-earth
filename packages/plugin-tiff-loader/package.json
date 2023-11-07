@@ -1,6 +1,6 @@
 {
   "name": "@dde-earth/plugin-tiff-loader",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
   "main": "./dist/lib/index.js",
   "module": "./dist/es/index.js",
@@ -31,6 +31,6 @@
   },
   "dependencies": {
     "dde-earth": "workspace:^",
-    "tiff-imagery-provider": "^2.9.3"
+    "tiff-imagery-provider": "^2.9.4"
   }
 }

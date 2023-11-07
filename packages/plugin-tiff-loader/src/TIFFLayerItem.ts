@@ -25,10 +25,12 @@ export class TIFFLayerItem extends LayerItem<
   }
 
   async init(data: TIFFLayerItem.Data) {
-    const imageryProvider = await TIFFImageryProvider.fromUrl(data.url, {
-      ...data,
-      renderOptions: data.renderOptions,
-    });
+    const options = { ...data, renderOptions: data.renderOptions };
+    if ((options as any).url) delete (options as any).url;
+    const imageryProvider = await TIFFImageryProvider.fromUrl(
+      data.url,
+      options,
+    );
     const layer = this.earth.viewer.imageryLayers.addImageryProvider(
       imageryProvider as any,
     );
@@ -74,12 +76,17 @@ export class TIFFLayerItem extends LayerItem<
       )
     ) {
       if (this.instance) {
+        const newOptions = {
+          ...this.data,
+          renderOptions: {
+            ...this.data.renderOptions,
+            ...options,
+          },
+        };
+        if ((newOptions as any).url) delete (newOptions as any).url;
         const imageryProvider = await TIFFImageryProvider.fromUrl(
           this.data.url,
-          {
-            ...this.data,
-            renderOptions: this._renderOptions,
-          },
+          newOptions,
         );
         const index = this.earth.viewer.imageryLayers.indexOf(this.instance);
         const bool = this.earth.viewer.imageryLayers.remove(
@@ -96,7 +103,7 @@ export class TIFFLayerItem extends LayerItem<
       }
     }
 
-    TIFFLayerItem.basicRender(this.instance, this._renderOptions);
+    TIFFLayerItem.basicRender(this.instance, options);
     this._renderOptions = {
       ...this._renderOptions,
       ...options,
