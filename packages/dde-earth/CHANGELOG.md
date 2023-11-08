@@ -1,5 +1,11 @@
 # dde-earth
 
+## 1.0.2
+
+### Patch Changes
+
+- remove layer and change layerlist
+
 ## 1.0.1
 
 ### Patch Changes

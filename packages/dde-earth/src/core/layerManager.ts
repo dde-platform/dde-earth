@@ -115,6 +115,9 @@ export class LayerManager {
       const bool = await layerItem.remove();
       if (bool) {
         this.earth.emit("layer:remove", layerItem.id);
+        this._layerList = this._layerList.filter(
+          (item) => item.id !== layerItem?.id,
+        );
         return true;
       }
     }
