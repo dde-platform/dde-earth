@@ -17,7 +17,7 @@
     "@dde-earth/plugin-nc-loader": "workspace:^",
     "@dde-earth/plugin-tiff-loader": "workspace:^",
     "@dde-earth/recommend-plugins": "workspace:^",
-    "cesium": "^1.110.1",
+    "cesium": "latest",
     "dde-earth": "workspace:^"
   },
   "license": "MIT"

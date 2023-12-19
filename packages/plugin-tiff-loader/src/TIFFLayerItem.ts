@@ -45,10 +45,11 @@ export class TIFFLayerItem extends LayerItem<
     return false;
   }
 
-  zoomTo() {
+  zoomTo(options: LayerItem.ZoomToOptions = {}) {
     if (this.instance) {
       this.earth.viewer.flyTo(this.instance, {
         duration: 1,
+        ...options,
       });
     }
   }
@@ -70,19 +71,20 @@ export class TIFFLayerItem extends LayerItem<
   }
 
   async render(options: TIFFLayerItem.RenderOptions) {
+    this._renderOptions = {
+      ...this._renderOptions,
+      ...options,
+    };
     if (
       Object.keys(options).some(
         (name) => !Object.keys(basicRenderOptions).includes(name),
       )
     ) {
+      const newOptions = {
+        ...this.data,
+        renderOptions: this._renderOptions,
+      };
       if (this.instance) {
-        const newOptions = {
-          ...this.data,
-          renderOptions: {
-            ...this.data.renderOptions,
-            ...options,
-          },
-        };
         if ((newOptions as any).url) delete (newOptions as any).url;
         const imageryProvider = await TIFFImageryProvider.fromUrl(
           this.data.url,
@@ -103,13 +105,10 @@ export class TIFFLayerItem extends LayerItem<
       }
     }
 
-    TIFFLayerItem.basicRender(this.instance, options);
-    this._renderOptions = {
-      ...this._renderOptions,
-      ...options,
-    };
+    TIFFLayerItem.basicRender(this.instance, this._renderOptions);
 
     this.earth.viewer.scene.requestRender();
+    return this.instance;
   }
 }
 

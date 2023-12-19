@@ -12,7 +12,6 @@
     "clean": "turbo clean && rimraf node_modules",
     "coverage": "vitest run --coverage",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "postinstall": "pnpm build",
     "release": "pnpm build && pnpm test && changeset publish",
     "prepare": "husky install"
   },

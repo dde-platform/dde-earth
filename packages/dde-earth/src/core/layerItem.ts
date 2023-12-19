@@ -1,5 +1,6 @@
 import { generateUUID } from "../utils";
 
+import type { HeadingPitchRange } from "cesium";
 import type { Earth } from "./earth";
 import type { LayerManager } from "./layerManager";
 
@@ -11,7 +12,6 @@ export abstract class LayerItem<
   readonly method: Lyr["method"];
   protected _instance?: Instance;
   readonly id: any;
-  readonly readyPromise: Promise<this>;
   protected _ready: boolean = false;
   protected _isDestroyed: boolean = false;
   protected abstract readonly defaultRenderOptions: Lyr["renderOptions"];
@@ -39,7 +39,7 @@ export abstract class LayerItem<
   constructor(
     readonly earth: Earth,
     data: Lyr,
-    readonly options: LayerItem.Options,
+    readonly options: LayerItem.Options = {},
   ) {
     this.id = data.id ?? generateUUID();
     this.data = { ...data, id: this.id };
@@ -48,21 +48,20 @@ export abstract class LayerItem<
       ...data.renderOptions,
     };
     this.method = data.method;
-    this.readyPromise = new Promise<this>((resolve, reject) => {
-      this.init(data)
-        .then((instance) => {
-          this._instance = instance;
-          this._ready = true;
-          resolve(this);
-        })
-        .catch(reject);
-    });
+  }
+
+  async initial() {
+    this._instance = await this.init(this.data);
+    this._ready = true;
+    return this;
   }
 
   abstract init(data: Lyr): Promise<Instance>;
-  abstract zoomTo(): void;
+  abstract zoomTo(options?: LayerItem.ZoomToOptions): void;
   abstract remove(): boolean | Promise<boolean>;
-  abstract render(renderOptions: Lyr["renderOptions"]): void;
+  abstract render(
+    renderOptions: Lyr["renderOptions"],
+  ): Promise<Instance | undefined>;
 
   destroy() {
     this.remove();
@@ -76,6 +75,12 @@ export namespace LayerItem {
   export interface Options<
     Lyr extends LayerManager.BaseLayer = LayerManager.BaseLayer,
   > {
-    defaultRenderOptions: Lyr["renderOptions"];
+    defaultRenderOptions?: Lyr["renderOptions"];
   }
+
+  export type ZoomToOptions = {
+    duration?: number;
+    maximumHeight?: number;
+    offset?: HeadingPitchRange;
+  };
 }

@@ -1,6 +1,7 @@
 import { ImageryLayer } from "cesium";
 
 import { generateUUID } from "../utils";
+import { Debug } from "./debug";
 
 import type { Viewer } from "cesium";
 import type { Earth } from "./earth";
@@ -76,6 +77,38 @@ export class LayerManager {
     return this._loaders[method];
   }
 
+  async changeBaseLayer<Method extends LayerManager.LoaderMethods>(
+    data: LayerManager.LoaderTypes[Method]["data"] | null | undefined,
+  ) {
+    if (!data || !(data as any).url) {
+      this.baseLayer = undefined;
+      this.earth.viewer.scene.requestRender();
+      return;
+    }
+
+    const { method } = data;
+
+    const loader = this.getLoaderByMethod(method);
+    if (!loader) {
+      throw new Error(
+        `Layer loader with method "${method}" not found, please add loader`,
+      );
+    }
+    const layerItem = await loader(this.earth, data as any);
+    await layerItem.initial();
+    if (layerItem.instance instanceof ImageryLayer) {
+      this.earth.viewer.imageryLayers.lowerToBottom(layerItem.instance);
+      if (this._baseLayer) {
+        this.viewer.imageryLayers.remove(this._baseLayer);
+      }
+      this._baseLayer = layerItem.instance;
+    } else {
+      layerItem.destroy();
+      throw new Error(`Layer with method "${method}" is not ImageryLayer`);
+    }
+    this.earth.viewer.scene.requestRender();
+  }
+
   async addLayer<Method extends LayerManager.LoaderMethods>(
     data: LayerManager.LoaderTypes[Method]["data"],
     options?: LayerManager.AddLayerOptions,
@@ -84,7 +117,8 @@ export class LayerManager {
   > {
     const { id = generateUUID(), method } = data;
     if (this.getLayerById(id)) {
-      throw new Error(`Layer with id: "${id}" already exists`);
+      Debug.warn(`Layer with id: "${id}" already exists`);
+      return undefined;
     }
     const loader = this.getLoaderByMethod(method);
     if (!loader) {
@@ -93,10 +127,11 @@ export class LayerManager {
       );
     }
     const layerItem = await loader(this.earth, data as any);
-    await layerItem.readyPromise;
+    await layerItem.initial();
 
     this._layerList.push(layerItem);
     this.earth.emit("layer:add", layerItem);
+    this.earth.viewer.scene.requestRender();
 
     if (options?.zoom) {
       layerItem.zoomTo();
@@ -114,6 +149,7 @@ export class LayerManager {
     if (layerItem) {
       const bool = await layerItem.remove();
       if (bool) {
+        this.earth.viewer.scene.requestRender();
         this.earth.emit("layer:remove", layerItem.id);
         this._layerList = this._layerList.filter(
           (item) => item.id !== layerItem?.id,
@@ -150,7 +186,7 @@ export namespace LayerManager {
     Render extends Record<string, any> = any,
   > {
     id?: string;
-    layerName: string;
+    layerName?: string;
     method: Method;
     renderOptions?: Render;
   }
@@ -166,7 +202,7 @@ export namespace LayerManager {
     [K in keyof T]: {
       data: T[K] extends Loader<infer U, any> ? U : never;
       instance: T[K] extends Loader<any, infer V> ? V : any;
-      layerItem: T[K] extends Loader ? ReturnType<T[K]> : any;
+      layerItem: T[K] extends Loader<any, any> ? ReturnType<T[K]> : any;
     };
   };
 

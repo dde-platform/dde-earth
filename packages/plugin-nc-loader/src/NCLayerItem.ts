@@ -116,6 +116,7 @@ export class NCLayerItem extends LayerItem<
 
       this.earth.viewer.scene.requestRender();
     }
+    return this.instance;
   }
 }
 

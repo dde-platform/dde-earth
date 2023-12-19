@@ -52,7 +52,7 @@ export class PluginManager {
   }
 
   getPluginWithEvent<T extends Earth.EventTypes = Earth.EventTypes>(event: T) {
-    const plugins = Object.entries(this.plugins);
+    const plugins = Object.entries(this.plugins ?? {});
     for (let i = 0; i < plugins.length; i++) {
       const plugin = plugins[i][1];
       if (
@@ -76,7 +76,7 @@ export class PluginManager {
   destroy() {
     this.remove(Object.keys(this.plugins));
     // @ts-ignore
-    this.plugins = undefined;
+    this.plugins = {};
     this._isDestroyed = true;
   }
 }

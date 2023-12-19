@@ -42,7 +42,7 @@ export abstract class BasePlugin<
     return this._isDestroyed;
   }
 
-  constructor(options?: BasePlugin.Options<Intl>) {
+  constructor(readonly options?: BasePlugin.Options<Intl>) {
     if (!this.name) this.name = this.constructor.name;
 
     const { name, intl = {} } = options || {};

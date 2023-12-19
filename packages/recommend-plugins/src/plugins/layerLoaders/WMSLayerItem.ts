@@ -2,11 +2,17 @@ import { WebMapServiceImageryProvider } from "cesium";
 
 import { RasterLayerItem } from "./RasterLayerItem";
 
-import type { LayerManager } from "dde-earth";
-
 export class WMSLayerItem extends RasterLayerItem<WMSLayerItem.Data> {
   async init(data: WMSLayerItem.Data) {
-    const imageryProvider = new WebMapServiceImageryProvider(data);
+    const newData = this.handleData(data);
+    const imageryProvider = new WebMapServiceImageryProvider({
+      ...newData,
+      parameters: {
+        format: "image/png",
+        transparent: true,
+        ...newData.parameters,
+      },
+    });
     const layer =
       this.earth.viewer.imageryLayers.addImageryProvider(imageryProvider);
     return layer;
@@ -18,6 +24,6 @@ export namespace WMSLayerItem {
 
   export type RenderOptions = RasterLayerItem.RenderOptions;
 
-  export type Data = LayerManager.BaseLayer<Method, RenderOptions> &
+  export type Data = RasterLayerItem.Data<Method, RenderOptions> &
     WebMapServiceImageryProvider.ConstructorOptions;
 }

@@ -1,6 +1,6 @@
 {
-  "name": "@dde-earth/plugin-tiff-loader",
-  "version": "1.0.5",
+  "name": "@dde-earth/plugin-geojson-loader",
+  "version": "1.0.0",
   "type": "module",
   "main": "./dist/lib/index.js",
   "module": "./dist/es/index.js",
@@ -24,13 +24,16 @@
     "cesium": "*"
   },
   "devDependencies": {
+    "@types/geojson": "^7946.0.13",
     "cesium": "latest"
   },
   "engines": {
     "node": "^18.0.0 || >=20.0.0"
   },
   "dependencies": {
-    "dde-earth": "workspace:^",
-    "tiff-imagery-provider": "latest"
+    "@cesium-extends/geojson-render": "^1.0.3",
+    "@cesium-extends/primitive-geojson": "^1.0.5",
+    "@turf/turf": "^6.5.0",
+    "dde-earth": "workspace:^"
   }
 }

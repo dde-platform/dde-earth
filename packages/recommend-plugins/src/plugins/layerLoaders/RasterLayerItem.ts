@@ -1,8 +1,12 @@
+import {
+  GeographicTilingScheme,
+  type ImageryLayer,
+  WebMercatorTilingScheme,
+} from "cesium";
 import { LayerItem } from "dde-earth";
 
 import { DefaultRenderOptions } from "./constant";
 
-import type { ImageryLayer } from "cesium";
 import type { LayerManager } from "dde-earth";
 
 export abstract class RasterLayerItem<
@@ -33,7 +37,21 @@ export abstract class RasterLayerItem<
     }
   }
 
-  render(options: RasterLayerItem.RenderOptions) {
+  handleData<T extends RasterLayerItem.Data>(data: T) {
+    const { srs } = data;
+    let tilingScheme = new WebMercatorTilingScheme();
+
+    if (srs && /4326|4490/.test(srs)) {
+      tilingScheme = new GeographicTilingScheme();
+    }
+
+    return {
+      ...data,
+      tilingScheme,
+    };
+  }
+
+  async render(options: RasterLayerItem.RenderOptions) {
     if (this.instance) {
       Object.entries(options).map(([name, value]) => {
         if (Object.prototype.hasOwnProperty.call(this.instance, name)) {
@@ -46,11 +64,21 @@ export abstract class RasterLayerItem<
       ...options,
     };
     this.earth.viewer.scene.requestRender();
+    return this.instance;
   }
 }
 
 export namespace RasterLayerItem {
   export type Instance = ImageryLayer;
+
+  export type Data<
+    Method = any,
+    Render extends Record<string, any> = any,
+  > = LayerManager.BaseLayer<Method, Render> & {
+    srs?: string;
+    minimumLevel?: number;
+    maximumLevel?: number;
+  };
 
   export interface RenderOptions {
     alpha?: number;

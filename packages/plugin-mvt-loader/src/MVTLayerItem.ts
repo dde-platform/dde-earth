@@ -62,6 +62,7 @@ export class MVTLayerItem extends LayerItem<
       ...options,
     };
     this.earth.viewer.scene.requestRender();
+    return this.instance;
   }
 }
 

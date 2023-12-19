@@ -1,7 +1,8 @@
-import { ScreenSpaceEventHandler, ScreenSpaceEventType } from "cesium";
+import { ScreenSpaceEventHandler, ScreenSpaceEventType, defined } from "cesium";
+import { Math as CMath, Cartesian2 } from "cesium";
 import { WithEventPlugin } from "dde-earth";
 
-import type { Cartesian2, Viewer } from "cesium";
+import type { Cartesian3, Viewer } from "cesium";
 import type { Earth } from "dde-earth";
 
 export class Subscriber extends WithEventPlugin<
@@ -93,6 +94,9 @@ export class Subscriber extends WithEventPlugin<
       const callbacks = this._callbacks[event];
 
       if (callbacks) {
+        if (movement.position) {
+          movement.lonLat = this.cartesiantoLonlat(movement.position);
+        }
         callbacks.forEach((callback) =>
           callback.apply(this, [movement, this._lastResult]),
         );
@@ -137,6 +141,38 @@ export class Subscriber extends WithEventPlugin<
     return ScreenSpaceEventType[subscriberEventType];
   }
 
+  cartesiantoLonlat(
+    cartesian: Cartesian2 | Cartesian3 | undefined,
+    height?: number,
+  ) {
+    const viewer = this.viewer;
+    const scene = viewer.scene;
+    let pos = undefined;
+    let cartesian3: Cartesian3 | undefined;
+
+    if (cartesian instanceof Cartesian2) {
+      const pickedObject = scene.pick(cartesian);
+      if (scene.pickPositionSupported && defined(pickedObject)) {
+        cartesian3 = viewer.scene.pickPosition(cartesian);
+      } else {
+        cartesian3 = viewer.camera.pickEllipsoid(cartesian);
+      }
+    } else {
+      cartesian3 = cartesian;
+    }
+
+    if (cartesian3) {
+      const cartographic = viewer.scene.globe.ellipsoid.cartesianToCartographic(
+        cartesian3 as Cartesian3,
+      );
+      // 将弧度转为度的十进制度表示
+      const lon = +CMath.toDegrees(cartographic.longitude);
+      const lat = +CMath.toDegrees(cartographic.latitude);
+      pos = [lon, lat, height ?? cartographic.height];
+    }
+    return pos;
+  }
+
   destroy(): void {
     super.destroy();
     this._handler.destroy();
@@ -160,11 +196,12 @@ export namespace Subscriber {
 
   export interface EventArgs {
     position?: Cartesian2;
+    lonLat?: number[];
     endPosition?: Cartesian2;
     startPosition?: Cartesian2;
     [name: string]: any;
   }
-  export type ListenCallback<T> = (movement: EventArgs, substance: T) => void;
+  export type ListenCallback<T> = (movement: EventArgs, instance: T) => void;
 
   export type ExternalListenCallback = (
     movement: EventArgs,

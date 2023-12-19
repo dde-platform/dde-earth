@@ -1,5 +1,6 @@
 import {
   Cesium3DTileset,
+  GeoJsonDataSource,
   ImageryLayer,
   Primitive,
   PrimitiveCollection,
@@ -150,8 +151,9 @@ export class LayerSwitcher extends BasePlugin {
       bool = this._moveImageLayer(sourceLayer, targetLayer);
     }
     if (
-      sourceLayer instanceof DataSource &&
-      targetLayer instanceof DataSource
+      [sourceLayer, targetLayer].every((layer) =>
+        [DataSource, GeoJsonDataSource].some((type) => layer instanceof type),
+      )
     ) {
       avaliable = true;
       bool = this._moveVectorLayer(sourceLayer, targetLayer);
