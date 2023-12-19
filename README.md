@@ -1,4 +1,4 @@
-# npm-packages-monorepo-starter
+# dde-earth
 
 This is a development template for npm packages that includes a technology stack consisting of `monorepo`, `pnpm`, `turbo`, `changesets`, `rollup`, `eslint`, and more.
 

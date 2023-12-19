@@ -1,5 +1,18 @@
 # dde-earth
 
+## 1.1.0
+
+### Miner Changes
+
+- feat:
+
+  1. add terrainManager
+  2. now you can use loader to add baselayer
+
+  fix:
+
+  1. await layer adding
+
 ## 1.0.2
 
 ### Patch Changes
@@ -14,6 +27,6 @@
 
 ## 1.0.0
 
-### Major Changes
+### Miner Changes
 
 - the first release of dde-earth

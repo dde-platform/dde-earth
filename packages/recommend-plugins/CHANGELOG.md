@@ -1,5 +1,19 @@
 # @dde-earth/recommend-plugins
 
+## 1.1.0
+
+### Miner Changes
+
+- feat:
+  1. add some raster layer loaders
+  2. add layerSwitcher plugin
+  3. subscriber plugin now can return lon/lat
+
+### Patch Changes
+
+- Updated dependencies
+  - dde-earth@1.1.0
+
 ## 1.0.3
 
 ### Patch Changes
@@ -23,7 +37,7 @@
 
 ## 1.0.0
 
-### Major Changes
+### Miner Changes
 
 - the first release of dde-earth
 
