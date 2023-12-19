@@ -1,5 +1,16 @@
 # @dde-earth/plugin-tiff-loader
 
+## 2.0.0
+
+### Major Changes
+
+- fix layer render error
+
+### Patch Changes
+
+- Updated dependencies
+  - dde-earth@2.0.0
+
 ## 1.0.5
 
 ### Patch Changes
