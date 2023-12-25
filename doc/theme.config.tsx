@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useConfig } from "nextra-theme-docs";
 
 export default {
   logo: (
@@ -41,6 +42,11 @@ export default {
   project: {
     link: "https://github.com/hongfaqiu/dde-earth",
   },
+  useNextSeoProps() {
+    return {
+      titleTemplate: "%s – DDE-Earth",
+    };
+  },
   gitTimestamp({ timestamp }) {
     const { locale } = useRouter();
 
@@ -61,4 +67,15 @@ export default {
     { locale: "en-US", text: "English" },
     { locale: "zh-CN", text: "中文" },
   ],
+  head: () => {
+    const { title } = useConfig();
+    const ogTitle = title ? `${title} – DDE-Earth` : `DDE-Earth`;
+
+    return (
+      <>
+        <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+        <meta property="og:title" content={ogTitle} />
+      </>
+    );
+  },
 };
