@@ -13,7 +13,7 @@ const withNextra = nextra({
 export default withNextra({
   i18n: {
     locales: ["en-US", "zh-CN"],
-    defaultLocale: "zh-CN",
+    defaultLocale: "en-US",
   },
   redirects: () => {
     return [

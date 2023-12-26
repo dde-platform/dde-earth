@@ -1,5 +1,14 @@
+import useLocalesMap from "@components/components/use-locales-map";
 import { useRouter } from "next/router";
 import { useConfig } from "nextra-theme-docs";
+import {
+  editTextMap,
+  feedbackLinkMap,
+  headDescriptionMap,
+  searchPlaceholderMap,
+  tableOfContentsTitleMap,
+  titleMap,
+} from "translations/text";
 
 export default {
   logo: (
@@ -40,7 +49,21 @@ export default {
     </>
   ),
   project: {
-    link: "https://github.com/hongfaqiu/dde-earth",
+    link: "https://github.com/dde-platform/dde-earth",
+  },
+  docsRepositoryBase: "https://github.com/dde-platform/dde-earth/tree/main/doc",
+  toc: {
+    float: true,
+    title: () => useLocalesMap(tableOfContentsTitleMap),
+  },
+  search: {
+    placeholder: () => useLocalesMap(searchPlaceholderMap),
+  },
+  editLink: {
+    text: () => useLocalesMap(editTextMap),
+  },
+  feedback: {
+    content: () => useLocalesMap(feedbackLinkMap),
   },
   useNextSeoProps() {
     return {
@@ -68,13 +91,19 @@ export default {
     { locale: "zh-CN", text: "中文" },
   ],
   head: () => {
-    const { title } = useConfig();
-    const ogTitle = title ? `${title} – DDE-Earth` : `DDE-Earth`;
+    const { frontMatter, title } = useConfig();
+    const titleSuffix = useLocalesMap(titleMap);
+    const description = useLocalesMap(headDescriptionMap);
+    const ogTitle = title
+      ? `${title} – DDE-Earth`
+      : `DDE-Earth: ${titleSuffix}`;
+    const ogDescription = frontMatter.description || description;
 
     return (
       <>
         <link rel="icon" type="image/svg+xml" href="/logo.svg" />
         <meta property="og:title" content={ogTitle} />
+        <meta property="og:description" content={ogDescription} />
       </>
     );
   },
