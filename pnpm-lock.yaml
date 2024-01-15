@@ -155,10 +155,10 @@ importers:
   packages/plugin-geojson-loader:
     dependencies:
       '@cesium-extends/geojson-render':
-        specifier: ^1
+        specifier: ^1.0.4
         version: 1.0.4(cesium@1.113.0)
       '@cesium-extends/primitive-geojson':
-        specifier: ^1
+        specifier: ^1.0.7
         version: 1.0.7(cesium@1.113.0)
       '@turf/turf':
         specifier: ^6.5.0
