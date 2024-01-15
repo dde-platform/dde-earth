@@ -31,8 +31,8 @@
     "node": "^18.0.0 || >=20.0.0"
   },
   "dependencies": {
-    "@cesium-extends/geojson-render": "^1.0.3",
-    "@cesium-extends/primitive-geojson": "^1.0.5",
+    "@cesium-extends/geojson-render": "^1.0.4",
+    "@cesium-extends/primitive-geojson": "^1.0.7",
     "@turf/turf": "^6.5.0",
     "dde-earth": "workspace:^"
   }

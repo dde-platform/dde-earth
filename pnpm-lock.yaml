@@ -155,11 +155,11 @@ importers:
   packages/plugin-geojson-loader:
     dependencies:
       '@cesium-extends/geojson-render':
-        specifier: ^1.0.3
-        version: 1.0.3(cesium@1.112.0)
+        specifier: ^1
+        version: 1.0.4(cesium@1.113.0)
       '@cesium-extends/primitive-geojson':
-        specifier: ^1.0.5
-        version: 1.0.5(cesium@1.112.0)
+        specifier: ^1
+        version: 1.0.7(cesium@1.113.0)
       '@turf/turf':
         specifier: ^6.5.0
         version: 6.5.0
@@ -172,7 +172,7 @@ importers:
         version: 7946.0.13
       cesium:
         specifier: latest
-        version: 1.112.0
+        version: 1.113.0
 
   packages/plugin-mvt-loader:
     dependencies:
@@ -470,24 +470,24 @@ packages:
     resolution: {integrity: sha512-s3jaWicZd0pkP0jf5ysyHUI/RE7MHos6qlToFcGWXVp+ykHOy77OUMrfbgJ9it2C5bow7OIQwYYaHjk9XlBQ2A==}
     dev: false
 
-  /@cesium-extends/geojson-render@1.0.3(cesium@1.112.0):
-    resolution: {integrity: sha512-xKvYW5fh3jc18SysFWFpWB8pr0DTMjYjx2OMwbLRp1IKwoXMubYM0X/AOICkX61wH4K303Qw5uXTFpVSmDRRYg==}
+  /@cesium-extends/geojson-render@1.0.4(cesium@1.113.0):
+    resolution: {integrity: sha512-o4sdxdqyofhySD63F1F6TyhSU0ZUnY2AkqUmFk7njkkWbJylZ7NgcRPitzI1BfQYKjME2Plpv0+oBYGW/qFTWQ==}
     peerDependencies:
       cesium: '*'
     dependencies:
-      '@cesium-extends/primitive-geojson': 1.0.5(cesium@1.112.0)
+      '@cesium-extends/primitive-geojson': 1.0.7(cesium@1.113.0)
       '@turf/turf': 6.5.0
-      cesium: 1.112.0
+      cesium: 1.113.0
     dev: false
 
-  /@cesium-extends/primitive-geojson@1.0.5(cesium@1.112.0):
-    resolution: {integrity: sha512-yct++BAG530gdIFdRyCoKvRG74UesWVmpgQv+OSQaDfhYiFXzJIF8uYOjyIvgktdQq7fwWLEbxy3vfpA2ClLrQ==}
+  /@cesium-extends/primitive-geojson@1.0.7(cesium@1.113.0):
+    resolution: {integrity: sha512-v9CZ1Eru9M1TV3Dt0lSpiDohWdIAR+202nlrpMEryJeWGm60QlxjpV04udBNsvYWLeVlI3d7nyzPwZhW4GbynQ==}
     peerDependencies:
       cesium: '*'
     dependencies:
       '@turf/centroid': 6.5.0
       '@turf/helpers': 6.5.0
-      cesium: 1.112.0
+      cesium: 1.113.0
       nanoid: 4.0.2
     dev: false
 
@@ -515,11 +515,42 @@ packages:
       topojson-client: 3.1.0
       urijs: 1.19.11
 
+  /@cesium/engine@6.2.0:
+    resolution: {integrity: sha512-9Iv0JFsCp7wGi7ZzP88WlkBMfOjA49obFJ4I+p2gNIGSmKZRPdstzEqUWjyJDZeck3sZaLfYUsyRDmDCgOIaBw==}
+    engines: {node: '>=14.0.0'}
+    dependencies:
+      '@tweenjs/tween.js': 21.1.1
+      '@zip.js/zip.js': 2.4.26
+      autolinker: 4.0.0
+      bitmap-sdf: 1.0.4
+      dompurify: 3.0.8
+      draco3d: 1.5.6
+      earcut: 2.2.4
+      grapheme-splitter: 1.0.4
+      jsep: 1.3.8
+      kdbush: 4.0.2
+      ktx-parse: 0.6.0
+      lerc: 2.0.0
+      mersenne-twister: 1.1.0
+      meshoptimizer: 0.20.0
+      pako: 2.1.0
+      protobufjs: 7.2.5
+      rbush: 3.0.1
+      topojson-client: 3.1.0
+      urijs: 1.19.11
+
   /@cesium/widgets@4.3.1:
     resolution: {integrity: sha512-uT2cCd6D2JOxtDsvh0VzbrlKOvAJROacDPq2OXE7muHWx/FkXXL0Q6+ZWGbMuCdv/KsiMJpRUiU9jJDX9AS01A==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@cesium/engine': 6.1.1
+      nosleep.js: 0.12.0
+
+  /@cesium/widgets@4.4.0:
+    resolution: {integrity: sha512-K3kGy9rQAc1HVhPy4YE0ZIYK2RoQ9USpYh2l6NqtqFYXQy7buyctPjPC8aOvqX2+3Nn91+AOOyD1DHmkezR9BA==}
+    engines: {node: '>=14.0.0'}
+    dependencies:
+      '@cesium/engine': 6.2.0
       nosleep.js: 0.12.0
 
   /@changesets/apply-release-plan@6.1.4:
@@ -2945,6 +2976,9 @@ packages:
   /@tweenjs/tween.js@21.0.0:
     resolution: {integrity: sha512-qVfOiFh0U8ZSkLgA6tf7kj2MciqRbSCWaJZRwftVO7UbtVDNsZAXpWXqvCDtIefvjC83UJB+vHTDOGm5ibXjEA==}
 
+  /@tweenjs/tween.js@21.1.1:
+    resolution: {integrity: sha512-O2GetAwEC/0MOiRb3lxCLIt/eeugoDPX0nu+1SFWLqGKf835ZdWsfM9RzDpjF+aKkpYMhvOnEhO+SxMnHHjpfw==}
+
   /@types/acorn@4.0.6:
     resolution: {integrity: sha512-veQTnWP+1D/xbxVrPC3zHnCZRjSrKfhbMUlEA43iMZLu7EsnTtkJklIuwrCPbOi8YkvDQAiW05VQQFvvz9oieQ==}
     dependencies:
@@ -3055,6 +3089,12 @@ packages:
 
   /@types/node@20.10.5:
     resolution: {integrity: sha512-nNPsNE65wjMxEKI93yOP+NPGGBJz/PoN3kZsVLee0XMiJolxSekEVD8wRwBUBqkwc7UWop0edW50yrCQW4CyRw==}
+    dependencies:
+      undici-types: 5.26.5
+    dev: true
+
+  /@types/node@20.11.1:
+    resolution: {integrity: sha512-DsXojJUES2M+FE8CpptJTKpg+r54moV9ZEncPstni1WHFmTcCzeFLnMFfyhCVS8XNOy/OQG+8lVxRLRrVHmV5A==}
     dependencies:
       undici-types: 5.26.5
 
@@ -3483,7 +3523,7 @@ packages:
     dependencies:
       function-bind: 1.1.2
       get-intrinsic: 1.2.2
-      set-function-length: 1.1.1
+      set-function-length: 1.2.0
     dev: false
 
   /camelcase-css@2.0.1:
@@ -3515,6 +3555,13 @@ packages:
     dependencies:
       '@cesium/engine': 6.1.1
       '@cesium/widgets': 4.3.1
+
+  /cesium@1.113.0:
+    resolution: {integrity: sha512-OtbeMGXZn2dlNVYWCeq0JeGjgFPikXp6aTjo/azzuvOTj3JwgVie0tgNUGVlYDVi+fMPQqttC14lJbPYRL7etw==}
+    engines: {node: '>=14.0.0'}
+    dependencies:
+      '@cesium/engine': 6.2.0
+      '@cesium/widgets': 4.4.0
 
   /chai@4.3.8:
     resolution: {integrity: sha512-vX4YvVVtxlfSZ2VecZgFUTU5qPCYsobVI2O9FmwEXBhDigYGQA6jRXCycIs1yJnnWbZ6/+a2zNIF5DfVCcJBFQ==}
@@ -4215,6 +4262,9 @@ packages:
 
   /dompurify@3.0.6:
     resolution: {integrity: sha512-ilkD8YEnnGh1zJ240uJsW7AzE+2qpbOUYjacomn3AvJ6J4JhKGSZ2nh4wUIXPZrEPppaCLx5jFe8T89Rk8tQ7w==}
+
+  /dompurify@3.0.8:
+    resolution: {integrity: sha512-b7uwreMYL2eZhrSCRC4ahLTeZcPZxSmYfmcQGXGkXiZSNW1X85v+SDM5KsWcpivIiUBH47Ji7NtyUdpLeF5JZQ==}
 
   /draco3d@1.5.6:
     resolution: {integrity: sha512-+3NaRjWktb5r61ZFoDejlykPEFKT5N/LkbXsaddlw6xNSXBanUYpFc2AXXpbJDilPHazcSreU/DpQIaxfX0NfQ==}
@@ -6990,7 +7040,7 @@ packages:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.10.5
+      '@types/node': 20.11.1
       long: 5.2.3
 
   /protocols@2.0.1:
@@ -7407,11 +7457,12 @@ packages:
     resolution: {integrity: sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==}
     dev: true
 
-  /set-function-length@1.1.1:
-    resolution: {integrity: sha512-VoaqjbBJKiWtg4yRcKBQ7g7wnGnLV3M8oLvVWwOk2PdYY6PEFegR1vezXR0tw6fZGF9csVakIRjrJiy2veSBFQ==}
+  /set-function-length@1.2.0:
+    resolution: {integrity: sha512-4DBHDoyHlM1IRPGYcoxexgh67y4ueR53FKV1yyxwFMY7aCqcN/38M1+SwZ/qJQ8iLv7+ck385ot4CcisOAPT9w==}
     engines: {node: '>= 0.4'}
     dependencies:
       define-data-property: 1.1.1
+      function-bind: 1.1.2
       get-intrinsic: 1.2.2
       gopd: 1.0.1
       has-property-descriptors: 1.0.1
