@@ -32,7 +32,6 @@ jobs:
         uses: changesets/action@v1
         with:
           publish: pnpm release
-          version: pnpm run version # should be `pnpm run`
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
