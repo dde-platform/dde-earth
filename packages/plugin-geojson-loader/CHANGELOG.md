@@ -1,5 +1,11 @@
 # @dde-earth/plugin-geojson-loader
 
+## 1.1.1
+
+### Patch Changes
+
+- 2456e3b: update dep
+
 ## 1.1.0
 
 ### Minor Changes
