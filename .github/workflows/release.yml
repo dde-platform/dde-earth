@@ -22,7 +22,7 @@ jobs:
       - uses: pnpm/action-setup@v2
 
       - name: Install dependencies
-        run: pnpm Install
+        run: pnpm install
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
