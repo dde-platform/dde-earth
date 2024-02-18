@@ -139,6 +139,11 @@ export class LayerManager {
     return layerItem as any;
   }
 
+  /**
+   * remove layer from the layer list
+   * @param param layerName or LayerItem object
+   * @returns removed successfully or not
+   */
   async removeLayer(param: string | LayerItem) {
     let layerItem: LayerItem | undefined;
     if (typeof param === "string") {

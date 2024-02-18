@@ -1,11 +1,12 @@
 import { BasePlugin, deepMerge } from "dde-earth";
 
+import { ArcGisLayerItem } from "./ArcGisLayerItem";
+import { TMSLayerItem } from "./TMSLayerItem";
+import { WMSLayerItem } from "./WMSLayerItem";
+import { WMTSLayerItem } from "./WMTSLayerItem";
 import { DefaultRenderOptions } from "./constant";
 
 import type { Earth, LayerManager } from "dde-earth";
-import type { TMSLayerItem } from "./TMSLayerItem";
-import type { WMSLayerItem } from "./WMSLayerItem";
-import type { WMTSLayerItem } from "./WMTSLayerItem";
 
 export class LayerLoaders extends BasePlugin {
   readonly defaultRenderOptions: NonNullable<
@@ -24,22 +25,24 @@ export class LayerLoaders extends BasePlugin {
   init(earth: Earth) {
     this._init(earth);
     this.earth.layerManager.addLoader({
-      wms: async (earth: Earth, data: any) => {
-        const { WMSLayerItem } = await import("./WMSLayerItem");
+      wms: (earth: Earth, data: any) => {
         return new WMSLayerItem(earth, data, {
           defaultRenderOptions: this.defaultRenderOptions.wms,
         });
       },
-      wmts: async (earth: Earth, data: any) => {
-        const { WMTSLayerItem } = await import("./WMTSLayerItem");
+      wmts: (earth: Earth, data: any) => {
         return new WMTSLayerItem(earth, data, {
           defaultRenderOptions: this.defaultRenderOptions.wmts,
         });
       },
-      tms: async (earth: Earth, data: any) => {
-        const { TMSLayerItem } = await import("./TMSLayerItem");
+      tms: (earth: Earth, data: any) => {
         return new TMSLayerItem(earth, data, {
           defaultRenderOptions: this.defaultRenderOptions.tms,
+        });
+      },
+      arcgis: (earth: Earth, data: any) => {
+        return new ArcGisLayerItem(earth, data, {
+          defaultRenderOptions: this.defaultRenderOptions.arcgis,
         });
       },
     });
@@ -55,10 +58,14 @@ export namespace LayerLoaders {
     wms: (earth: Earth, data: WMSLayerItem.Data) => Promise<WMSLayerItem>;
     wmts: (earth: Earth, data: WMTSLayerItem.Data) => Promise<WMTSLayerItem>;
     tms: (earth: Earth, data: TMSLayerItem.Data) => Promise<TMSLayerItem>;
+    arcgis: (
+      earth: Earth,
+      data: ArcGisLayerItem.Data,
+    ) => Promise<ArcGisLayerItem>;
   }
 
   export type ExtractLoaderOptions<T extends Loaders> = {
-    [K in keyof T]: T[K] extends LayerManager.Loader<infer U, any>
+    [K in keyof T]?: T[K] extends LayerManager.Loader<infer U, any>
       ? U["renderOptions"]
       : never;
   };
@@ -69,5 +76,6 @@ export namespace LayerLoaders {
     wms: DefaultRenderOptions.raster,
     wmts: DefaultRenderOptions.raster,
     tms: DefaultRenderOptions.raster,
+    arcgis: DefaultRenderOptions.raster,
   };
 }

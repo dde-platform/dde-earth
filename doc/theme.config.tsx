@@ -1,4 +1,4 @@
-import useLocalesMap from "@components/components/use-locales-map";
+import useLocalesMap from "@components/use-locales-map";
 import { useRouter } from "next/router";
 import { useConfig } from "nextra-theme-docs";
 import {
