@@ -1,1 +1,1 @@
-C:/workspace/dde-earth/packages/dde-earth/README.md
+./packages/dde-earth/README.md
