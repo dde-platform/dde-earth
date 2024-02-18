@@ -7,8 +7,7 @@ Plugin based DDE(deep-time-digital-earth) earth sdk
     <img alt="" src="https://badgen.net/npm/v/dde-earth">
   </a>
   <a aria-label="Package size" href="https://bundlephobia.com/result?p=dde-earth">
-    <img alt="" src="https://img.shields.io/bundlephobia/minzip/dde-earth
-">
+    <img alt="" src="https://img.shields.io/bundlephobia/minzip/dde-earth">
   </a>
   <a aria-label="License" href="https://github.com/vercel/dde-earth/blob/main/LICENSE">
     <img alt="" src="https://badgen.net/npm/license/dde-earth">
