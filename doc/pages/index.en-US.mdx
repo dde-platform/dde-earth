@@ -1,11 +1,90 @@
 ---
-title: Plugin based earth sdk
+title: Plug-in based Earth Visualization Library
 ---
 
 import { Callout } from 'nextra-theme-docs';
 import { Bleed } from 'nextra-theme-docs';
+import Features from "../components/Features";
 
 {
 // wrapped with {} to mark it as javascript so mdx will not put it under a p tag
 }
 {<h1 className="text-center text-4xl tracking-tighter font-extrabold md:text-5xl mt-8">dde-earth</h1>}
+
+<Bleed>
+  <Features/>
+</Bleed>
+
+<Callout emoji="✅">
+  With dde-earth you can build a <strong>highly available</strong> Cesium Earth <strong>quickly</strong>.<br/>
+  The <strong>plug-in</strong> mechanism supports rapid expansion.
+</Callout>
+
+<div className="mt-16 mb-20 text-center">
+  [Getting Started](/docs/getting-started) · [Examples](/examples/basic) · [Blog](/blog) · [GitHub Repository](https://github.com/dde-platform/dde-earth)
+</div>
+
+## Overview [#overview]
+
+```ts
+import { Earth } from "dde-earth";
+import { TIFFLayerLoader } from "@dde-earth/plugin-tiff-loader";
+
+const earth = new Earth("container");
+
+// Use plugin, load tiff
+earth.usePlugin(new TIFFLayerLoader());
+
+earth.addLayer({
+  url: "./tiff.tiff",
+  method: "tiff",
+  renderOptions: {
+    single: {
+      colorScale: "rainbow",
+    },
+  },
+});
+```
+In this example, after initializing the earth in one line of code, by adding the `TIFFLayerLoader` plugin, the `earth` has the ability to load `tiff`.
+
+The complete TypeScript mechanism makes **dde-earth** have intelligent code hints. Developers will find that they have a `tiff` type layer when they call the `addLayer` method.
+
+## Features [#features]
+
+With just one line of code, you can save a lot of packaging work for cesium in your project and immediately have the following incredible features:
+
+- Lightweight (core package gzip compressed to only **3.9kb**)
+- Supports rapid **expansion** of earth capabilities through plugins
+- Supports **TypeScript**
+- Supports multiple languages
+- Layer management
+- Terrain management
+- Built-in event subscription (layer addition, layer removal, layer rendering, language switch, terrain switch…)
+- Layer operations (zoom, render)
+- …
+
+In addition, the official provides a wealth of plugins to choose from:
+
+- Mouse event subscription
+- Layer order swap
+- Basic layer loading (tms, wmts, wms, arcgis)
+- GeoJson loading and rendering
+- Mapbox vector tile loading and rendering
+- NetCDF loading and rendering
+- TIFF loading and rendering
+- Navigation tools
+- …
+
+And [more](/docs/getting-started).
+
+## Community [#community]
+
+<p className="flex h-6 mt-4 gap-2">
+  <img alt="stars" src="https://badgen.net/github/stars/dde-platform/dde-earth" />
+  <img alt="downloads" src="https://badgen.net/npm/dt/dde-earth" />
+  <img alt="license" src="https://badgen.net/npm/license/dde-earth" />
+</p>
+
+dde-earth was created by the [DDE](https://github.com/dde-platform) (deep-time-digital-earth) platform team.
+
+Welcome to join the [discussion on GitHub](https://github.com/dde-platform/dde-earth/discussions)!

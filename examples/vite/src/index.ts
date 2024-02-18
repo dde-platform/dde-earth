@@ -53,6 +53,11 @@ document.getElementById("addtiff").onclick = async () => {
     method: "tiff",
     url: "https://ddeassets-file.oss-cn-hongkong.aliyuncs.com/PaleoClimate/ts-a_51.tif?Expires=1708238465&OSSAccessKeyId=LTAI5t5i1Nsz8stMbSzCjbv5&Signature=xzuy8fP3rp5TgRPWMhTbElvYEXQ%3D",
     id: "cogtiff",
+    renderOptions: {
+      single: {
+        colorScale: "rainbow",
+      },
+    },
   });
 };
 

@@ -20,6 +20,27 @@ export const titleMap: Languages = {
   "zh-CN": "插件化的三维地球可视化库",
 };
 
+export const featuresMap: {
+  [K in keyof Languages]?: any;
+} = {
+  "en-US": {
+    Lightwight: "Lightwight",
+    plugin: "Plugin based",
+    internal: "Internationalization",
+    event: "Event subscription",
+    layer: "Layer Manager",
+    typescript: "TypeScript Ready",
+  },
+  "zh-CN": {
+    Lightwight: "小巧轻量",
+    plugin: "插件机制",
+    internal: "国际化支持",
+    event: "事件订阅",
+    layer: "图层管理",
+    typescript: "TypeScript完备",
+  },
+};
+
 export const headDescriptionMap: Languages = {
   "en-US":
     "DDE-Earth is a 3D Earth framework based on cesium. Its plug-in core has strong expanding capacity.",

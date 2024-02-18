@@ -4,8 +4,87 @@ title: 插件化的地球可视化库
 
 import { Callout } from 'nextra-theme-docs';
 import { Bleed } from 'nextra-theme-docs';
+import Features from "../components/Features";
 
 {
 // wrapped with {} to mark it as javascript so mdx will not put it under a p tag
 }
 {<h1 className="text-center text-4xl tracking-tighter font-extrabold md:text-5xl mt-8">dde-earth</h1>}
+
+<Bleed>
+  <Features/>
+</Bleed>
+
+<Callout emoji="✅">
+  使用 dde-earth 可以<strong>快速</strong>地搭建<strong>高可用</strong>的 Cesium 地球。<br/>
+  <strong>插件化</strong>机制支持快速扩展。
+</Callout>
+
+<div className="mt-16 mb-20 text-center">
+  [入门](/docs/getting-started) · [示例](/examples/basic) · [博客](/blog) · [GitHub 仓库](https://github.com/dde-platform/dde-earth)
+</div>
+
+## 概览 [#overview]
+
+```ts
+import { Earth } from "dde-earth";
+import { TIFFLayerLoader } from "@dde-earth/plugin-tiff-loader";
+
+const earth = new Earth("container");
+
+// 使用插件，加载tiff
+earth.usePlugin(new TIFFLayerLoader());
+
+earth.addLayer({
+  url: "./tiff.tiff",
+  method: "tiff",
+  renderOptions: {
+    single: {
+      colorScale: "rainbow",
+    },
+  },
+});
+```
+
+该示例中，在一行代码初始化地球完成后，通过添加`TIFFLayerLoader`这一插件，使`earth`拥有了加载`tiff`的能力。
+
+完备的TypeScript机制，使得**dde-earth**拥有智能的代码提示。开发者此时会发现调用`addLayer`方法时，多了一种`tiff`类型的图层。
+
+## 特性 [#features]
+
+仅需一行代码，你就可以省下项目中对cesium的大量封装工作，并立即拥有以下这些不可思议的特性：
+
+- 轻量化（核心包gzip压缩后仅**3.9kb**）
+- 支持通过**插件**快速扩展earth能力
+- 支持 **TypeScript**
+- 支持多语言
+- 图层管理
+- 地形管理
+- 内置事件订阅（图层添加、图层移除、图层渲染、多语言切换、地形切换…）
+- 图层操作（缩放、渲染）
+- ……
+
+此外，官方提供了丰富的插件可供选择：
+- 鼠标事件订阅
+- 图层顺序交换
+- 基础图层加载（tms、wmts、wms、arcgis）
+- GeoJson加载渲染
+- Mapbox矢量瓦片加载渲染
+- NetCDF加载渲染
+- TIFF加载渲染
+- 导航工具
+- ……
+
+以及 [更多](/docs/getting-started)。
+
+## 社区 [#community]
+
+<p className="flex h-6 mt-4 gap-2">
+  <img alt="stars" src="https://badgen.net/github/stars/dde-platform/dde-earth" />
+  <img alt="downloads" src="https://badgen.net/npm/dt/dde-earth" />
+  <img alt="license" src="https://badgen.net/npm/license/dde-earth" />
+</p>
+
+dde-earth 由 [DDE](https://github.com/dde-platform)（deep-time-digital-earth）大平台团队创建。
+
+欢迎加入 [GitHub 上的讨论](https://github.com/dde-platform/dde-earth/discussions)！
