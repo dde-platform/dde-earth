@@ -1,5 +1,11 @@
 # @dde-earth/recommend-plugins
 
+## 1.2.0
+
+### Minor Changes
+
+- 2c5eed3: add ArcGisLayerItem
+
 ## 1.1.0
 
 ### Miner Changes
