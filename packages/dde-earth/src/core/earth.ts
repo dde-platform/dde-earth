@@ -208,9 +208,6 @@ export namespace Earth {
     selectionIndicator: false,
     timeline: false,
     navigationHelpButton: false,
-    shouldAnimate: true,
-    requestRenderMode: true,
-    maximumRenderTimeChange: Infinity,
     useBrowserRecommendedResolution: false,
     orderIndependentTranslucency: false,
     contextOptions: {

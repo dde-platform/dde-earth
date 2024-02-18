@@ -1,4 +1,4 @@
-import type { Locale } from "@components/components/use-locales-map";
+import type { Locale } from "@components/use-locales-map";
 
 export type Languages<T = string> = {
   [key in Locale]?: T;
