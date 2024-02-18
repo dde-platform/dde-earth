@@ -1,5 +1,12 @@
 # @dde-earth/plugin-nc-loader
 
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies [455a56a]
+  - dde-earth@1.1.1
+
 ## 1.1.0
 
 ### Miner Changes
