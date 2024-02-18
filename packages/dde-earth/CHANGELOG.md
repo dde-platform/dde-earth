@@ -1,5 +1,11 @@
 # dde-earth
 
+## 1.1.1
+
+### Patch Changes
+
+- 455a56a: change default constructor options
+
 ## 1.1.0
 
 ### Miner Changes
