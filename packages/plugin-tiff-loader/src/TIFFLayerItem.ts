@@ -24,7 +24,7 @@ export class TIFFLayerItem extends LayerItem<
     if (this.instance) this.instance.show = val;
   }
 
-  async init(data: TIFFLayerItem.Data) {
+  async _init(data: TIFFLayerItem.Data) {
     const options = { ...data, renderOptions: data.renderOptions };
     if ((options as any).url) delete (options as any).url;
     const imageryProvider = await TIFFImageryProvider.fromUrl(
@@ -38,7 +38,7 @@ export class TIFFLayerItem extends LayerItem<
     return layer;
   }
 
-  remove() {
+  _remove() {
     if (this.instance) {
       return this.earth.viewer.imageryLayers.remove(this.instance);
     }
@@ -70,7 +70,7 @@ export class TIFFLayerItem extends LayerItem<
     }
   }
 
-  async render(options: TIFFLayerItem.RenderOptions) {
+  async _render(options: TIFFLayerItem.RenderOptions) {
     this._renderOptions = {
       ...this._renderOptions,
       ...options,

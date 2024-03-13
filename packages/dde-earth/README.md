@@ -19,12 +19,12 @@ Plugin based DDE(deep-time-digital-earth) earth sdk
 With just one line of code, you can save a lot of packaging work for cesium in your project and immediately have the following incredible features:
 
 - Lightweight (core package gzip compressed to only **3.9kb**)
-- Supports rapid expansion of earth capabilities through plugins
-- Supports TypeScript
-- Supports multiple languages
-- Layer management
-- Terrain management
-- Built-in event subscription (layer addition, layer removal, layer rendering, language switch, terrain switch…)
+- Supports rapid **expansion** of earth capabilities through **plugins**
+- Supports **TypeScript**
+- Supports **multiple languages**
+- **Layer** management
+- **Terrain** management
+- Built-in **event** subscription (layer addition, layer removal, layer rendering, language switch, terrain switch…)
 - Layer operations (zoom, render)
 - …
 
@@ -33,10 +33,10 @@ In addition, the official provides a wealth of plugins to choose from:
 - Mouse event subscription
 - Layer order swap
 - Basic layer loading (tms, wmts, wms, arcgis)
-- geojson loading and rendering
-- mvt loading and rendering
-- nc loading and rendering
-- tiff loading and rendering
+- **GeoJson** loading and rendering
+- **Mapbox vector tile** loading and rendering
+- **NetCDF** loading and rendering
+- **TIFF** loading and rendering
 - Navigation tools
 - …
 

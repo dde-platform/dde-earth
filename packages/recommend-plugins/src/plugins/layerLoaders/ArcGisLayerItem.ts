@@ -5,7 +5,7 @@ import { RasterLayerItem } from "./RasterLayerItem";
 import type { Resource } from "cesium";
 
 export class ArcGisLayerItem extends RasterLayerItem<ArcGisLayerItem.Data> {
-  async init(data: ArcGisLayerItem.Data) {
+  async _init(data: ArcGisLayerItem.Data) {
     const imageryProvider = await ArcGisMapServerImageryProvider.fromUrl(
       data.url,
       this.handleData(data),

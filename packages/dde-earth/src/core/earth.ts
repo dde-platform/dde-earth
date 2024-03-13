@@ -28,14 +28,17 @@ export class Earth {
   readonly terrainManager: TerrainManager;
 
   constructor(
-    readonly container: string | Element,
+    readonly container: string | Element | Viewer,
     options?: Earth.EarthOptions,
   ) {
     this.options = {
       ...Earth.defaultOptions,
       ...options,
     };
-    this.viewer = new Viewer(container, this.options);
+    this.viewer =
+      container instanceof Viewer
+        ? container
+        : new Viewer(container, this.options);
     this.resetStatus();
 
     this.eventEmitter = new EventEmitter();

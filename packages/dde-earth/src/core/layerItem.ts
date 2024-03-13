@@ -51,17 +51,33 @@ export abstract class LayerItem<
   }
 
   async initial() {
-    this._instance = await this.init(this.data);
+    this._instance = await this._init(this.data);
     this._ready = true;
     return this;
   }
 
-  abstract init(data: Lyr): Promise<Instance>;
+  protected abstract _init(data: Lyr): Promise<Instance>;
   abstract zoomTo(options?: LayerItem.ZoomToOptions): void;
-  abstract remove(): boolean | Promise<boolean>;
-  abstract render(
+  protected abstract _remove(): boolean | Promise<boolean>;
+  async remove(): Promise<boolean> {
+    if (await this._remove()) {
+      this.earth.emit("layer:remove", this.id);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  protected abstract _render(
     renderOptions: Lyr["renderOptions"],
   ): Promise<Instance | undefined>;
+  async render(
+    renderOptions: Lyr["renderOptions"],
+  ): Promise<Instance | undefined> {
+    if (await this._render(renderOptions)) {
+      this.earth.emit("layer:render", this);
+      return this.instance;
+    }
+  }
 
   destroy() {
     this.remove();

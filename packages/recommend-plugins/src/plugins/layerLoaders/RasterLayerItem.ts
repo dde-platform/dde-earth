@@ -22,7 +22,7 @@ export abstract class RasterLayerItem<
     if (this.instance) this.instance.show = val;
   }
 
-  remove() {
+  _remove() {
     if (this.instance) {
       return this.earth.viewer.imageryLayers.remove(this.instance);
     }
@@ -51,7 +51,7 @@ export abstract class RasterLayerItem<
     };
   }
 
-  async render(options: RasterLayerItem.RenderOptions) {
+  async _render(options: RasterLayerItem.RenderOptions) {
     if (this.instance) {
       Object.entries(options).map(([name, value]) => {
         if (Object.prototype.hasOwnProperty.call(this.instance, name)) {

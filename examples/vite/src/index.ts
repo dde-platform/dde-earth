@@ -22,6 +22,20 @@ earth.layerManager.changeBaseLayer({
   method: "arcgis",
 });
 
+const tmsLayer = await earth.addLayer({
+  url: "https://alpha.deep-time.org/tms/Scotese2018/5304326/{z}/{x}/{reverseY}.png",
+  srs: "EPSG:4326",
+  method: "tms",
+});
+
+earth.on("layer:render", (e) => {
+  console.log("render", e);
+});
+tmsLayer.render({
+  alpha: 0.5,
+});
+// earth.removeLayer(tmsLayer);
+
 console.log(earth);
 
 // Globalization test
@@ -51,7 +65,7 @@ earth.usePlugin(new TIFFLayerLoader());
 document.getElementById("addtiff").onclick = async () => {
   await earth.addLayer<"tiff">({
     method: "tiff",
-    url: "https://ddeassets-file.oss-cn-hongkong.aliyuncs.com/PaleoClimate/ts-a_51.tif?Expires=1708238465&OSSAccessKeyId=LTAI5t5i1Nsz8stMbSzCjbv5&Signature=xzuy8fP3rp5TgRPWMhTbElvYEXQ%3D",
+    url: "/cogtif.tif",
     id: "cogtiff",
     renderOptions: {
       single: {

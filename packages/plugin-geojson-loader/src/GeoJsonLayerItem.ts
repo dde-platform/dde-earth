@@ -46,7 +46,7 @@ export class GeoJsonLayerItem extends LayerItem<
     return this._summary;
   }
 
-  async init(data: GeoJsonLayerItem.Data): Promise<DataSource> {
+  async _init(data: GeoJsonLayerItem.Data): Promise<DataSource> {
     const { url, queryParameters, headers } = data;
     let geojson = url;
     if (typeof geojson === "string") {
@@ -76,7 +76,7 @@ export class GeoJsonLayerItem extends LayerItem<
     return dataSource;
   }
 
-  async render(options: GeoJsonLayerItem.RenderOptions) {
+  async _render(options: GeoJsonLayerItem.RenderOptions) {
     if (this.instance && options) {
       this._renderOptions = {
         ...this._renderOptions,
@@ -92,7 +92,7 @@ export class GeoJsonLayerItem extends LayerItem<
     return this.instance;
   }
 
-  remove(): boolean | Promise<boolean> {
+  _remove(): boolean | Promise<boolean> {
     let bool = false;
     if (this.instance) {
       bool = this.earth.viewer.dataSources.remove(this.instance);

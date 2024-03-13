@@ -28,7 +28,7 @@ export class NCLayerItem extends LayerItem<
     }
   }
 
-  async init(data: NCLayerItem.Data) {
+  async _init(data: NCLayerItem.Data) {
     //如果传入的是URL，先fetch文件
     if (typeof data.url === "string") {
       const blob = await fetch(data.url).then((response) => response.blob());
@@ -58,7 +58,7 @@ export class NCLayerItem extends LayerItem<
     }
   }
 
-  remove() {
+  _remove() {
     if (this.instance) {
       this.instance.remove();
       this._instance = undefined;
@@ -75,7 +75,7 @@ export class NCLayerItem extends LayerItem<
     }
   }
 
-  async render(options: NCLayerItem.RenderOptions) {
+  async _render(options: NCLayerItem.RenderOptions) {
     if (
       Object.keys(options).some(
         (name) => !Object.keys(defaultRenderOptions).includes(name),

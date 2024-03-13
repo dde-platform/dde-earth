@@ -24,3 +24,91 @@ import { Callout, Tab, Tabs } from 'nextra-theme-docs';
     ```
   </Tab>
 </Tabs>
+
+## 快速开始 [#quick-start]
+
+初始化地球只需要传入元素Id或者HTML元素。
+
+<Callout emoji="💡">
+可选的配置项包括地球背景色、自定义国际化内容等，点击 <Link href="/docs/API">`这里`</Link> 查看详细说明。
+</Callout>
+
+如果你已经有创建好的Cesium `Viewer`对象，也可以作为参数传入Earth构造函数中，即刻拥有Earth对象的所有能力。
+
+```ts
+import { Earth } from "dde-earth";
+
+const earth = new Earth("container");
+```
+
+默认的地球对象只拥有少数的功能，如二三维切换、重置默认视角等。需要添加更多插件才能实现诸如图层添加、地球事件订阅等能力。
+
+## 添加插件 [#add-plugins]
+
+添加一个插件非常容易，官方提供了一些常用的插件，下载npm包后，只需几行代码即可在Earth对象上获得插件拓展的能力。
+
+```ts
+import { Earth } from "dde-earth";
+import { LayerLoaders } from "@dde-earth/recommend-plugins";
+
+const earth = new Earth("container");
+
+// 使用基础图层添加插件
+earth.usePlugin(new LayerLoaders());
+```
+
+`LayerLoaders`插件支持添加诸多Cesium原生支持的地图服务协议
+
+```ts
+// 添加arcgis图层
+const arcgisLayer = await earth.addLayer({
+  url: "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+  enablePickFeatures: false,
+  method: "arcgis",
+});
+
+// 添加tms图层
+const tmsLayer = await earth.addLayer({
+  id: "scotese",
+  url: "https://alpha.deep-time.org/tms/Scotese2018/5304326/{z}/{x}/{reverseY}.png",
+  srs: "EPSG:4326", // 默认支持4326和3857投影
+  method: "tms",
+});
+```
+
+创建完成的地图对象集成了缩放、渲染等常用图层操作
+
+```ts
+// 调整渲染参数
+tmsLayer.render({
+  alpha: 0.5
+});
+
+// 缩放到地图
+tmsLayer.zoomTo();
+
+// 隐藏图层
+tmsLayer.show = false;
+```
+
+移除图层可以直接在地图对象上使用`remove`方法，也可以使用earth对象上的`removeLayer`方法
+
+```ts
+// 使用图层id移除图层
+earth.removeLayer("scotese");
+
+// 使用图层对象移除图层
+earth.removeLayer(tmsLayer);
+
+// 直接在图层对象上调用移除方法
+tmsLayer.remove();
+```
+
+对图层进行操作前，你可以添加监听事件，监听图层的添加、渲染、移除操作
+
+```ts
+// 添加图层渲染监听事件
+earth.on("layer:render", (layerItem) => {
+  console.log("render", layerItem);
+});
+```

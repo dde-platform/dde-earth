@@ -5,10 +5,10 @@ import { Callout, Tab, Tabs } from 'nextra-theme-docs';
 
 ## Installation [#installation]
 
-Inside your project directory, run the following:
+Run the following command in your project directory:
 
 <Tabs items={['pnpm', 'npm', 'yarn']}>
-   <Tab>
+  <Tab>
     ```bash
     pnpm add dde-earth
     ```
@@ -24,3 +24,91 @@ Inside your project directory, run the following:
     ```
   </Tab>
 </Tabs>
+
+## Quick Start [#quick-start]
+
+To initialize the Earth, pass in the element ID or HTML element.
+
+<Callout emoji="💡">
+Optional configurations include the Earth background color, custom internationalization content, etc. Click <Link href="/docs/API">`here`</Link> for more details.
+</Callout>
+
+If you already have a created Cesium `Viewer` object, you can also pass it as a parameter to the Earth constructor, and immediately gain all the capabilities of the Earth object.
+
+```ts
+import { Earth } from "dde-earth";
+
+const earth = new Earth("container");
+```
+
+The default Earth object only has a few features, such as switching between 2D and 3D, and resetting the default viewport. You need to add more plugins to enable capabilities like adding layers, subscribing to Earth events, and so on.
+
+## Adding Plugins [#add-plugins]
+
+Adding a plugin is very easy. The official team provides some commonly used plugins. After downloading the npm package, you only need a few lines of code to gain the extended capabilities of the plugin on the Earth object.
+
+```ts
+import { Earth } from "dde-earth";
+import { LayerLoaders } from "@dde-earth/recommend-plugins";
+
+const earth = new Earth("container");
+
+// Use the base layer addition plugin
+earth.usePlugin(new LayerLoaders());
+```
+
+The `LayerLoaders` plugin supports adding various map service protocols natively supported by Cesium.
+
+```ts
+// Add an ArcGIS layer
+const arcgisLayer = await earth.addLayer({
+  url: "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+  enablePickFeatures: false,
+  method: "arcgis",
+});
+
+// Add a TMS layer
+const tmsLayer = await earth.addLayer({
+  id: "scotese",
+  url: "https://alpha.deep-time.org/tms/Scotese2018/5304326/{z}/{x}/{reverseY}.png",
+  srs: "EPSG:4326", // Supports 4326 and 3857 projections by default
+  method: "tms",
+});
+```
+
+The created map object integrates common layer operations such as zooming and rendering.
+
+```ts
+// Adjust rendering parameters
+tmsLayer.render({
+  alpha: 0.5
+});
+
+// Zoom to the map
+tmsLayer.zoomTo();
+
+// Hide the layer
+tmsLayer.show = false;
+```
+
+To remove a layer, you can use the `remove` method directly on the map object or the `removeLayer` method on the earth object.
+
+```ts
+// Remove a layer using the layer ID
+earth.removeLayer("scotese");
+
+// Remove a layer using the layer object
+earth.removeLayer(tmsLayer);
+
+// Call the remove method directly on the layer object
+tmsLayer.remove();
+```
+
+Before operating on a layer, you can add event listeners to monitor the addition, rendering, and removal of the layer.
+
+```ts
+// Add a layer rendering event listener
+earth.on("layer:render", (layerItem) => {
+  console.log("render", layerItem);
+});
+```

@@ -3,7 +3,7 @@ import { UrlTemplateImageryProvider } from "cesium";
 import { RasterLayerItem } from "./RasterLayerItem";
 
 export class TMSLayerItem extends RasterLayerItem<TMSLayerItem.Data> {
-  async init(data: TMSLayerItem.Data) {
+  async _init(data: TMSLayerItem.Data) {
     const imageryProvider = new UrlTemplateImageryProvider(
       this.handleData(data),
     );

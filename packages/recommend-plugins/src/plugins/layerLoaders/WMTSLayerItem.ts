@@ -3,7 +3,7 @@ import { WebMapTileServiceImageryProvider } from "cesium";
 import { RasterLayerItem } from "./RasterLayerItem";
 
 export class WMTSLayerItem extends RasterLayerItem<WMTSLayerItem.Data> {
-  async init(data: WMTSLayerItem.Data) {
+  async _init(data: WMTSLayerItem.Data) {
     const imageryProvider = new WebMapTileServiceImageryProvider(
       this.handleData(data),
     );

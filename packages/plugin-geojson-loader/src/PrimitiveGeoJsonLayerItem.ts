@@ -33,7 +33,7 @@ export class PrimitiveGeojsonLayerItem extends LayerItem<
     return this._type;
   }
 
-  async init(
+  async _init(
     data: PrimitiveGeojsonLayerItem.Data,
   ): Promise<GeoJsonPrimitiveLayer> {
     const { url, queryParameters, headers } = data;
@@ -64,7 +64,7 @@ export class PrimitiveGeojsonLayerItem extends LayerItem<
     return primitiveLayer;
   }
 
-  async render(
+  async _render(
     options: PrimitiveGeojsonLayerItem.Data["renderOptions"],
     instance = this.instance,
   ) {
@@ -82,7 +82,7 @@ export class PrimitiveGeojsonLayerItem extends LayerItem<
     return instance;
   }
 
-  remove(): boolean | Promise<boolean> {
+  _remove(): boolean | Promise<boolean> {
     if (this.instance) {
       this.instance?.destroy();
       this.earth.viewer.scene.requestRender();

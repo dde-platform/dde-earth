@@ -23,7 +23,7 @@ export class MVTLayerItem extends LayerItem<
     if (this.instance) this.instance.show = val;
   }
 
-  async init(data: MVTLayerItem.Data) {
+  async _init(data: MVTLayerItem.Data) {
     const imageryProvider = await MVTImageryProvider.fromUrl(data.url, {
       ...data,
     });
@@ -33,7 +33,7 @@ export class MVTLayerItem extends LayerItem<
     return layer;
   }
 
-  remove() {
+  _remove() {
     if (this.instance) {
       return this.earth.viewer.imageryLayers.remove(this.instance);
     }
@@ -48,7 +48,7 @@ export class MVTLayerItem extends LayerItem<
     }
   }
 
-  async render(options: MVTLayerItem.RenderOptions) {
+  async _render(options: MVTLayerItem.RenderOptions) {
     if (this.instance) {
       Object.entries(options).map(([name, value]) => {
         if (Object.prototype.hasOwnProperty.call(this.instance, name)) {
