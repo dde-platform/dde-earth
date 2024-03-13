@@ -1,5 +1,16 @@
 # @dde-earth/plugin-mvt-loader
 
+## 1.2.0
+
+### Minor Changes
+
+- 8e8ddd7: refactor layerItem interface, add some layer subscription events
+
+### Patch Changes
+
+- Updated dependencies [8e8ddd7]
+  - dde-earth@1.2.0
+
 ## 1.1.1
 
 ### Patch Changes

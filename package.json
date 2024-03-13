@@ -13,6 +13,7 @@
     "coverage": "vitest run --coverage",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset",
+    "version": "changeset version",
     "release": "pnpm build && changeset publish",
     "prepare": "husky install"
   },

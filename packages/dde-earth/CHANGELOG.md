@@ -1,5 +1,11 @@
 # dde-earth
 
+## 1.2.0
+
+### Minor Changes
+
+- 8e8ddd7: refactor layerItem interface, add some layer subscription events
+
 ## 1.1.1
 
 ### Patch Changes
