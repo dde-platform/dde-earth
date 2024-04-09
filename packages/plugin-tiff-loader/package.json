@@ -31,6 +31,6 @@
   },
   "dependencies": {
     "dde-earth": "workspace:^",
-    "tiff-imagery-provider": "latest"
+    "tiff-imagery-provider": "^2.10.5"
   }
 }

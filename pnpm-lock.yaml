@@ -131,7 +131,7 @@ importers:
         version: link:../../packages/recommend-plugins
       cesium:
         specifier: latest
-        version: 1.112.0
+        version: 1.115.0
       dde-earth:
         specifier: workspace:^
         version: link:../../packages/dde-earth
@@ -144,22 +144,22 @@ importers:
         version: 4.3.9(@types/node@20.5.7)
       vite-plugin-cesium:
         specifier: ^1.2.22
-        version: 1.2.22(cesium@1.112.0)(rollup@2.79.1)(vite@4.3.9)
+        version: 1.2.22(cesium@1.115.0)(rollup@2.79.1)(vite@4.3.9)
 
   packages/dde-earth:
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.112.0
+        version: 1.115.0
 
   packages/plugin-geojson-loader:
     dependencies:
       '@cesium-extends/geojson-render':
         specifier: ^1.0.4
-        version: 1.0.4(cesium@1.113.0)
+        version: 1.0.4(cesium@1.115.0)
       '@cesium-extends/primitive-geojson':
         specifier: ^1.0.7
-        version: 1.0.7(cesium@1.113.0)
+        version: 1.0.7(cesium@1.115.0)
       '@turf/turf':
         specifier: ^6.5.0
         version: 6.5.0
@@ -172,7 +172,7 @@ importers:
         version: 7946.0.13
       cesium:
         specifier: latest
-        version: 1.113.0
+        version: 1.115.0
 
   packages/plugin-mvt-loader:
     dependencies:
@@ -181,11 +181,11 @@ importers:
         version: link:../dde-earth
       mvt-imagery-provider:
         specifier: ^1.0.2
-        version: 1.0.2(cesium@1.112.0)
+        version: 1.0.2(cesium@1.115.0)
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.112.0
+        version: 1.115.0
 
   packages/plugin-nc-loader:
     dependencies:
@@ -198,7 +198,7 @@ importers:
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.112.0
+        version: 1.115.0
 
   packages/plugin-tiff-loader:
     dependencies:
@@ -206,12 +206,12 @@ importers:
         specifier: workspace:^
         version: link:../dde-earth
       tiff-imagery-provider:
-        specifier: latest
-        version: 2.9.6(cesium@1.112.0)
+        specifier: ^2.10.5
+        version: 2.10.5(cesium@1.115.0)
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.112.0
+        version: 1.115.0
 
   packages/recommend-plugins:
     dependencies:
@@ -221,7 +221,7 @@ importers:
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.112.0
+        version: 1.115.0
 
 packages:
 
@@ -470,37 +470,37 @@ packages:
     resolution: {integrity: sha512-s3jaWicZd0pkP0jf5ysyHUI/RE7MHos6qlToFcGWXVp+ykHOy77OUMrfbgJ9it2C5bow7OIQwYYaHjk9XlBQ2A==}
     dev: false
 
-  /@cesium-extends/geojson-render@1.0.4(cesium@1.113.0):
+  /@cesium-extends/geojson-render@1.0.4(cesium@1.115.0):
     resolution: {integrity: sha512-o4sdxdqyofhySD63F1F6TyhSU0ZUnY2AkqUmFk7njkkWbJylZ7NgcRPitzI1BfQYKjME2Plpv0+oBYGW/qFTWQ==}
     peerDependencies:
       cesium: '*'
     dependencies:
-      '@cesium-extends/primitive-geojson': 1.0.7(cesium@1.113.0)
+      '@cesium-extends/primitive-geojson': 1.0.7(cesium@1.115.0)
       '@turf/turf': 6.5.0
-      cesium: 1.113.0
+      cesium: 1.115.0
     dev: false
 
-  /@cesium-extends/primitive-geojson@1.0.7(cesium@1.113.0):
+  /@cesium-extends/primitive-geojson@1.0.7(cesium@1.115.0):
     resolution: {integrity: sha512-v9CZ1Eru9M1TV3Dt0lSpiDohWdIAR+202nlrpMEryJeWGm60QlxjpV04udBNsvYWLeVlI3d7nyzPwZhW4GbynQ==}
     peerDependencies:
       cesium: '*'
     dependencies:
       '@turf/centroid': 6.5.0
       '@turf/helpers': 6.5.0
-      cesium: 1.113.0
+      cesium: 1.115.0
       nanoid: 4.0.2
     dev: false
 
-  /@cesium/engine@6.1.1:
-    resolution: {integrity: sha512-PY8A742SR5rHagjaDCG7G6LWYeMXdyBJOoTkkaaLGh4XYBCdan/aygPO0CTTq26hAyjf9Ugi7HCoRe0ruNvgGg==}
+  /@cesium/engine@8.0.0:
+    resolution: {integrity: sha512-0HvvpoKPrb1Go6MnKsTk0Vn2HV4wv+UAlZGbzG3sD/QjEm4FOYj/sLFrwQqmCn6nFN1aRbhAH1xXJnA9bF+1Wg==}
     engines: {node: '>=14.0.0'}
     dependencies:
-      '@tweenjs/tween.js': 21.0.0
-      '@zip.js/zip.js': 2.4.26
+      '@tweenjs/tween.js': 23.1.1
+      '@zip.js/zip.js': 2.7.40
       autolinker: 4.0.0
       bitmap-sdf: 1.0.4
-      dompurify: 3.0.6
-      draco3d: 1.5.6
+      dompurify: 3.0.9
+      draco3d: 1.5.7
       earcut: 2.2.4
       grapheme-splitter: 1.0.4
       jsep: 1.3.8
@@ -510,47 +510,16 @@ packages:
       mersenne-twister: 1.1.0
       meshoptimizer: 0.20.0
       pako: 2.1.0
-      protobufjs: 7.2.5
+      protobufjs: 7.2.6
       rbush: 3.0.1
       topojson-client: 3.1.0
       urijs: 1.19.11
 
-  /@cesium/engine@6.2.0:
-    resolution: {integrity: sha512-9Iv0JFsCp7wGi7ZzP88WlkBMfOjA49obFJ4I+p2gNIGSmKZRPdstzEqUWjyJDZeck3sZaLfYUsyRDmDCgOIaBw==}
+  /@cesium/widgets@5.0.0:
+    resolution: {integrity: sha512-004x7F5F8CHFnhWkuRbOrgduOug8q36/fqegs4UMdzgxOG9zNXfJoZInD6jwytCZJHH7aVcZvIoTKAdsS8bNKQ==}
     engines: {node: '>=14.0.0'}
     dependencies:
-      '@tweenjs/tween.js': 21.1.1
-      '@zip.js/zip.js': 2.4.26
-      autolinker: 4.0.0
-      bitmap-sdf: 1.0.4
-      dompurify: 3.0.8
-      draco3d: 1.5.6
-      earcut: 2.2.4
-      grapheme-splitter: 1.0.4
-      jsep: 1.3.8
-      kdbush: 4.0.2
-      ktx-parse: 0.6.0
-      lerc: 2.0.0
-      mersenne-twister: 1.1.0
-      meshoptimizer: 0.20.0
-      pako: 2.1.0
-      protobufjs: 7.2.5
-      rbush: 3.0.1
-      topojson-client: 3.1.0
-      urijs: 1.19.11
-
-  /@cesium/widgets@4.3.1:
-    resolution: {integrity: sha512-uT2cCd6D2JOxtDsvh0VzbrlKOvAJROacDPq2OXE7muHWx/FkXXL0Q6+ZWGbMuCdv/KsiMJpRUiU9jJDX9AS01A==}
-    engines: {node: '>=14.0.0'}
-    dependencies:
-      '@cesium/engine': 6.1.1
-      nosleep.js: 0.12.0
-
-  /@cesium/widgets@4.4.0:
-    resolution: {integrity: sha512-K3kGy9rQAc1HVhPy4YE0ZIYK2RoQ9USpYh2l6NqtqFYXQy7buyctPjPC8aOvqX2+3Nn91+AOOyD1DHmkezR9BA==}
-    engines: {node: '>=14.0.0'}
-    dependencies:
-      '@cesium/engine': 6.2.0
+      '@cesium/engine': 8.0.0
       nosleep.js: 0.12.0
 
   /@changesets/apply-release-plan@6.1.4:
@@ -1745,8 +1714,8 @@ packages:
       fastq: 1.15.0
     dev: true
 
-  /@petamoriken/float16@3.8.4:
-    resolution: {integrity: sha512-kB+NJ5Br56ZhElKsf0pM7/PQfrDdDVMRz8f0JM6eVOGE+L89z9hwcst9QvWBBnazzuqGTGtPsJNZoQ1JdNiGSQ==}
+  /@petamoriken/float16@3.8.6:
+    resolution: {integrity: sha512-GNJhABTtcmt9al/nqdJPycwFD46ww2+q2zwZzTjY0dFFwUAFRw9zszvEr9osyJRd9krRGy6hUDopWUg9fX7VVw==}
     dev: false
 
   /@pkgjs/parseargs@0.11.0:
@@ -2973,11 +2942,8 @@ packages:
       d3-voronoi: 1.1.2
     dev: false
 
-  /@tweenjs/tween.js@21.0.0:
-    resolution: {integrity: sha512-qVfOiFh0U8ZSkLgA6tf7kj2MciqRbSCWaJZRwftVO7UbtVDNsZAXpWXqvCDtIefvjC83UJB+vHTDOGm5ibXjEA==}
-
-  /@tweenjs/tween.js@21.1.1:
-    resolution: {integrity: sha512-O2GetAwEC/0MOiRb3lxCLIt/eeugoDPX0nu+1SFWLqGKf835ZdWsfM9RzDpjF+aKkpYMhvOnEhO+SxMnHHjpfw==}
+  /@tweenjs/tween.js@23.1.1:
+    resolution: {integrity: sha512-ZpboH7pCPPeyBWKf8c7TJswtCEQObFo3bOBYalm99NzZarATALYCo5OhbCa/n4RQyJyHfhkdx+hNrdL5ByFYDw==}
 
   /@types/acorn@4.0.6:
     resolution: {integrity: sha512-veQTnWP+1D/xbxVrPC3zHnCZRjSrKfhbMUlEA43iMZLu7EsnTtkJklIuwrCPbOi8YkvDQAiW05VQQFvvz9oieQ==}
@@ -3093,8 +3059,8 @@ packages:
       undici-types: 5.26.5
     dev: true
 
-  /@types/node@20.11.1:
-    resolution: {integrity: sha512-DsXojJUES2M+FE8CpptJTKpg+r54moV9ZEncPstni1WHFmTcCzeFLnMFfyhCVS8XNOy/OQG+8lVxRLRrVHmV5A==}
+  /@types/node@20.11.26:
+    resolution: {integrity: sha512-YwOMmyhNnAWijOBQweOJnQPl068Oqd4K3OFbTc6AHJwzweUwwWG3GIFY74OKks2PJUDkQPeddOQES9mLn1CTEQ==}
     dependencies:
       undici-types: 5.26.5
 
@@ -3325,8 +3291,9 @@ packages:
       pretty-format: 29.6.3
     dev: true
 
-  /@zip.js/zip.js@2.4.26:
-    resolution: {integrity: sha512-I9HBO3BHIxEMQmltmHM3iqUW6IHqi3gsL9wTSXvHTRpOrA6q2OxtR58EDSaOGjHhDVJ+wIOAxZyKq2x00AVmqw==}
+  /@zip.js/zip.js@2.7.40:
+    resolution: {integrity: sha512-kSYwO0Wth6G66QM4CejZqG0nRhBsVVTaR18M/Ta8EcqcvaV0dYrnDDyKAstfy0V5+ejK4b9w5xc1W0ECATJTvA==}
+    engines: {bun: '>=0.7.0', deno: '>=1.0.0', node: '>=16.5.0'}
 
   /acorn-jsx@5.3.2(acorn@8.11.2):
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -3549,19 +3516,12 @@ packages:
       netcdfjs: 1.0.0
     dev: false
 
-  /cesium@1.112.0:
-    resolution: {integrity: sha512-johaLB97GIBZF9qEfKHc04vQHgh3B0tikFE+QA5W+ZsL97KQjTcdlgwGNxCT2yMCgN5hZ+eSynoQhkqLdFuUDA==}
+  /cesium@1.115.0:
+    resolution: {integrity: sha512-aIC+JWO+0W/WDOAR1KIN+hEAUCZ98qUTQba7cPhW0fvMKiRVblDT1IJmZlb4dGBDtUGc0ZhwMXk2KpfM8BSztQ==}
     engines: {node: '>=14.0.0'}
     dependencies:
-      '@cesium/engine': 6.1.1
-      '@cesium/widgets': 4.3.1
-
-  /cesium@1.113.0:
-    resolution: {integrity: sha512-OtbeMGXZn2dlNVYWCeq0JeGjgFPikXp6aTjo/azzuvOTj3JwgVie0tgNUGVlYDVi+fMPQqttC14lJbPYRL7etw==}
-    engines: {node: '>=14.0.0'}
-    dependencies:
-      '@cesium/engine': 6.2.0
-      '@cesium/widgets': 4.4.0
+      '@cesium/engine': 8.0.0
+      '@cesium/widgets': 5.0.0
 
   /chai@4.3.8:
     resolution: {integrity: sha512-vX4YvVVtxlfSZ2VecZgFUTU5qPCYsobVI2O9FmwEXBhDigYGQA6jRXCycIs1yJnnWbZ6/+a2zNIF5DfVCcJBFQ==}
@@ -4260,14 +4220,11 @@ packages:
     resolution: {integrity: sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA==}
     dev: true
 
-  /dompurify@3.0.6:
-    resolution: {integrity: sha512-ilkD8YEnnGh1zJ240uJsW7AzE+2qpbOUYjacomn3AvJ6J4JhKGSZ2nh4wUIXPZrEPppaCLx5jFe8T89Rk8tQ7w==}
+  /dompurify@3.0.9:
+    resolution: {integrity: sha512-uyb4NDIvQ3hRn6NiC+SIFaP4mJ/MdXlvtunaqK9Bn6dD3RuB/1S/gasEjDHD8eiaqdSael2vBv+hOs7Y+jhYOQ==}
 
-  /dompurify@3.0.8:
-    resolution: {integrity: sha512-b7uwreMYL2eZhrSCRC4ahLTeZcPZxSmYfmcQGXGkXiZSNW1X85v+SDM5KsWcpivIiUBH47Ji7NtyUdpLeF5JZQ==}
-
-  /draco3d@1.5.6:
-    resolution: {integrity: sha512-+3NaRjWktb5r61ZFoDejlykPEFKT5N/LkbXsaddlw6xNSXBanUYpFc2AXXpbJDilPHazcSreU/DpQIaxfX0NfQ==}
+  /draco3d@1.5.7:
+    resolution: {integrity: sha512-m6WCKt/erDXcw+70IJXnG7M3awwQPAsZvJGX5zY7beBqpELw6RDGkYVU0W43AFxye4pDZ5i2Lbyc/NNGqwjUVQ==}
 
   /earcut@2.2.4:
     resolution: {integrity: sha512-/pjZsA1b4RPHbeWZQn66SWS8nZZWLQQ23oE3Eam7aroEFGEvwKAsJfZ9ytiEMycfzXWpca4FA9QIOehf7PocBQ==}
@@ -4791,17 +4748,18 @@ packages:
       rbush: 3.0.1
     dev: false
 
-  /geotiff@2.0.7:
-    resolution: {integrity: sha512-FKvFTNowMU5K6lHYY2f83d4lS2rsCNdpUC28AX61x9ZzzqPNaWFElWv93xj0eJFaNyOYA63ic5OzJ88dHpoA5Q==}
+  /geotiff@2.1.3:
+    resolution: {integrity: sha512-PT6uoF5a1+kbC3tHmZSUsLHBp2QJlHasxxxxPW47QIY1VBKpFB+FcDvX+MxER6UzgLQZ0xDzJ9s48B9JbOCTqA==}
     engines: {node: '>=10.19'}
     dependencies:
-      '@petamoriken/float16': 3.8.4
+      '@petamoriken/float16': 3.8.6
       lerc: 3.0.0
       pako: 2.1.0
       parse-headers: 2.0.5
       quick-lru: 6.1.2
-      web-worker: 1.2.0
+      web-worker: 1.3.0
       xml-utils: 1.7.0
+      zstddec: 0.1.0
     dev: false
 
   /get-caller-file@2.0.5:
@@ -5976,7 +5934,7 @@ packages:
       d3-sankey: 0.12.3
       dagre-d3-es: 7.0.10
       dayjs: 1.11.10
-      dompurify: 3.0.6
+      dompurify: 3.0.9
       elkjs: 0.8.2
       khroma: 2.1.0
       lodash-es: 4.17.21
@@ -5985,7 +5943,7 @@ packages:
       stylis: 4.3.0
       ts-dedent: 2.2.0
       uuid: 9.0.1
-      web-worker: 1.2.0
+      web-worker: 1.3.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -6452,12 +6410,12 @@ packages:
     hasBin: true
     dev: false
 
-  /mvt-imagery-provider@1.0.2(cesium@1.112.0):
+  /mvt-imagery-provider@1.0.2(cesium@1.115.0):
     resolution: {integrity: sha512-o/KzwSUSTvHlPmmBwFlFeqKKup8yAOeZdJo+GezjWaty51OL45R8pZZji5amgXBtKJnIe7M3q1/bO6oiDzJz9Q==}
     peerDependencies:
       cesium: '*'
     dependencies:
-      cesium: 1.112.0
+      cesium: 1.115.0
       mvt-basic-render: 0.3.5
     dev: false
 
@@ -7025,8 +6983,8 @@ packages:
     resolution: {integrity: sha512-9t5qARVofg2xQqKtytzt+lZ4d1Qvj8t5B8fEwXK6qOfgRLgH/b13QlgEyDh033NOS31nXeFbYv7CLUDG1CeifQ==}
     dev: false
 
-  /protobufjs@7.2.5:
-    resolution: {integrity: sha512-gGXRSXvxQ7UiPgfw8gevrfRWcTlSbOFg+p/N+JVJEK5VhueL2miT6qTymqAmjr1Q5WbOCyJbyrk6JfWKwlFn6A==}
+  /protobufjs@7.2.6:
+    resolution: {integrity: sha512-dgJaEDDL6x8ASUZ1YqWciTRrdOuYNzoOf27oHNfdyvKqHr5i0FV7FSLU+aIeFjyFgVxrpTOtQUi0BLLBymZaBw==}
     engines: {node: '>=12.0.0'}
     requiresBuild: true
     dependencies:
@@ -7040,7 +6998,7 @@ packages:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.11.1
+      '@types/node': 20.11.26
       long: 5.2.3
 
   /protocols@2.0.1:
@@ -7804,13 +7762,13 @@ packages:
       any-promise: 1.3.0
     dev: true
 
-  /tiff-imagery-provider@2.9.6(cesium@1.112.0):
-    resolution: {integrity: sha512-ihljBgKdI/MJqeG9kUFppYQ2E60PJd/aZ+3aKDEZ1UBuQ5aJ0SIHosPOUDnDT8wB5Ot1nGP0zGf5lYIHfBRqgw==}
+  /tiff-imagery-provider@2.10.5(cesium@1.115.0):
+    resolution: {integrity: sha512-eiRmaHVY26XI+e467Umt4sQa4px/cWnfzwyH1DKC1/2sWI/1gDO3fZ67yYNHIIECIfwynx6pjeXmIwMJfYpg3A==}
     peerDependencies:
       cesium: '*'
     dependencies:
-      cesium: 1.112.0
-      geotiff: 2.0.7
+      cesium: 1.115.0
+      geotiff: 2.1.3
     dev: false
 
   /tinybench@2.5.0:
@@ -8268,13 +8226,13 @@ packages:
       - terser
     dev: true
 
-  /vite-plugin-cesium@1.2.22(cesium@1.112.0)(rollup@2.79.1)(vite@4.3.9):
+  /vite-plugin-cesium@1.2.22(cesium@1.115.0)(rollup@2.79.1)(vite@4.3.9):
     resolution: {integrity: sha512-OnS+VKNGck4kUu4/67Fdfhz0/zF9mDVNUp9hUWtX19C38O0mJsJy2MH1ev2QcrVLf6VieJ7vCGxkLchdB1n1HQ==}
     peerDependencies:
       cesium: ^1.95.0
       vite: '>=2.7.1'
     dependencies:
-      cesium: 1.112.0
+      cesium: 1.115.0
       fs-extra: 9.1.0
       rollup-plugin-external-globals: 0.6.1(rollup@2.79.1)
       serve-static: 1.15.0
@@ -8431,8 +8389,8 @@ packages:
     resolution: {integrity: sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ==}
     dev: false
 
-  /web-worker@1.2.0:
-    resolution: {integrity: sha512-PgF341avzqyx60neE9DD+XS26MMNMoUQRz9NOZwW32nPQrF6p77f1htcnjBSEV8BGMKZ16choqUG4hyI0Hx7mA==}
+  /web-worker@1.3.0:
+    resolution: {integrity: sha512-BSR9wyRsy/KOValMgd5kMyr3JzpdeoR9KVId8u5GVlTTAtNChlsE4yTxeY7zMdNSyOmoKBv8NH2qeRY9Tg+IaA==}
     dev: false
 
   /which-module@2.0.1:
@@ -8553,6 +8511,10 @@ packages:
 
   /zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
+    dev: false
+
+  /zstddec@0.1.0:
+    resolution: {integrity: sha512-w2NTI8+3l3eeltKAdK8QpiLo/flRAr2p8AGeakfMZOXBxOg9HIu4LVDxBi81sYgVhFhdJjv1OrB5ssI8uFPoLg==}
     dev: false
 
   /zwitch@2.0.4:

@@ -5,8 +5,7 @@ import type { Earth } from "./earth";
 export class TerrainManager {
   private _data: any;
   private _loaders: Record<string, TerrainManager.Loader> = {
-    cesium: (data) => new CesiumTerrainProvider(data),
-    custom: (data) => CesiumTerrainProvider.fromIonAssetId(1, data),
+    cesium: (data) => CesiumTerrainProvider.fromIonAssetId(1, data),
   };
 
   get terrain() {
@@ -49,9 +48,7 @@ export class TerrainManager {
     return this._loaders[method];
   }
 
-  async setTerrain<
-    Method extends TerrainManager.LoaderMethods = TerrainManager.LoaderMethods,
-  >(
+  async setTerrain<Method extends TerrainManager.LoaderMethods>(
     data?: TerrainManager.LoaderTypes[Method]["data"],
   ): Promise<
     | Awaited<TerrainManager.LoaderTypes[Method]["instance"]>
@@ -59,6 +56,12 @@ export class TerrainManager {
     | undefined
   > {
     let provider = new EllipsoidTerrainProvider({});
+
+    if (!data || !(data as any).type) {
+      this._data = undefined;
+      this.earth.viewer.scene.terrainProvider = provider;
+      return provider;
+    }
 
     if (!data) {
       this._data = undefined;
@@ -90,7 +93,10 @@ export namespace TerrainManager {
     terrain?: [T] extends [never] ? undefined : LoaderTypes[T]["data"];
   }
 
-  type DataWithMethod<T extends string, U extends Record<string, any>> = {
+  export type DataWithMethod<
+    T extends string,
+    U extends Record<string, any>,
+  > = {
     type: T;
   } & U;
 
@@ -105,16 +111,19 @@ export namespace TerrainManager {
     };
   };
 
-  export interface Loaders {
+  export interface Loaders {}
+
+  interface CesiumWorldTerrainLoader {
     cesium: (
       data: DataWithMethod<"cesium", CesiumTerrainProvider.ConstructorOptions>,
     ) => CesiumTerrainProvider;
-    custom: (
-      data: DataWithMethod<"custom", CesiumTerrainProvider.ConstructorOptions>,
-    ) => Promise<CesiumTerrainProvider>;
   }
+
+  export interface Loaders extends CesiumWorldTerrainLoader {}
 
   export type LoaderTypes = ExtractLoaderTypes<Loaders>;
 
   export type LoaderMethods = keyof LoaderTypes;
+
+  export type LoaderDatas = ExtractLoaderTypes<Loaders>[LoaderMethods]["data"];
 }

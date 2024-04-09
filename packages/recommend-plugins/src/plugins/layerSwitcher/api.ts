@@ -33,5 +33,5 @@ Earth.prototype.moveLayer = function (
 ): boolean {
   const layerSwitcher = this.getPlugin<LayerSwitcher>(LayerSwitcher);
   if (!layerSwitcher) return false;
-  return layerSwitcher.moveLayer(targetLayer, sourceLayer);
+  return layerSwitcher.moveLayer(sourceLayer, targetLayer);
 };
