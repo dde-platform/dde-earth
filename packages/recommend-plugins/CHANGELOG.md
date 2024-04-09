@@ -1,5 +1,13 @@
 # @dde-earth/recommend-plugins
 
+## 1.3.1
+
+### Patch Changes
+
+- 86f4283: fix layer switcher swap error
+- Updated dependencies [86f4283]
+  - dde-earth@1.2.1
+
 ## 1.3.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # dde-earth
 
+## 1.2.1
+
+### Patch Changes
+
+- 86f4283: fix terrainManager failed to load terrain
+
 ## 1.2.0
 
 ### Minor Changes
