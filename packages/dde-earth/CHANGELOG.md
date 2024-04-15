@@ -1,5 +1,11 @@
 # dde-earth
 
+## 1.2.2
+
+### Patch Changes
+
+- handle plugins option
+
 ## 1.2.1
 
 ### Patch Changes

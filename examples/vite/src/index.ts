@@ -14,9 +14,8 @@ const earth = new Earth("container", {
   toolOptions: {
     i18n: {},
   },
+  plugins: [new LayerLoaders(), new TIFFLayerLoader()],
 });
-
-earth.usePlugin(new LayerLoaders());
 
 earth.layerManager.changeBaseLayer({
   url: "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
@@ -63,7 +62,6 @@ const str = (earth.i18n.getT as I18N.TranslateFunc<typeof msg>)("dde-earth")(
 );
 console.log(str);
 
-earth.usePlugin(new TIFFLayerLoader());
 earth.usePlugin(new MartiniTerrainLoader());
 
 earth.setTerrain({

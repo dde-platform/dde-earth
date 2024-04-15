@@ -1,5 +1,12 @@
 # @dde-earth/plugin-geojson-loader
 
+## 1.2.2
+
+### Patch Changes
+
+- Updated dependencies
+  - dde-earth@1.2.2
+
 ## 1.2.1
 
 ### Patch Changes

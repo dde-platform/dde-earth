@@ -20,7 +20,6 @@ export class Earth {
   private _ready: boolean = false;
   readonly viewer: Viewer;
   readonly options: Earth.EarthOptions;
-  readonly plugins: Record<string, IPlugin> = {};
   readonly pluginManager: PluginManager;
   readonly i18n: I18N;
   readonly layerManager: LayerManager;
@@ -61,10 +60,12 @@ export class Earth {
     this.terrainManager = new TerrainManager(this);
     this.setTerrain = this.terrainManager.setTerrain.bind(this.terrainManager);
 
-    this.pluginManager = new PluginManager(this, this.plugins);
+    this.pluginManager = new PluginManager(this);
     this.usePlugin = this.pluginManager.use.bind(this.pluginManager);
     this.getPlugin = this.pluginManager.get.bind(this.pluginManager);
     this.removePlugin = this.pluginManager.remove.bind(this.pluginManager);
+    options?.plugins?.map(this.usePlugin);
+
     this._ready = true;
   }
 
