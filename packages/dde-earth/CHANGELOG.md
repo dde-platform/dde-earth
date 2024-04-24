@@ -1,5 +1,11 @@
 # dde-earth
 
+## 1.2.3
+
+### Patch Changes
+
+- export EventEmitter
+
 ## 1.2.2
 
 ### Patch Changes

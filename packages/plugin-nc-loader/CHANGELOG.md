@@ -1,5 +1,12 @@
 # @dde-earth/plugin-nc-loader
 
+## 1.2.3
+
+### Patch Changes
+
+- Updated dependencies
+  - dde-earth@1.2.3
+
 ## 1.2.2
 
 ### Patch Changes

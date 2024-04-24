@@ -1,6 +1,6 @@
 {
   "name": "@dde-earth/recommend-plugins",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "type": "module",
   "main": "./dist/lib/index.js",
   "module": "./dist/es/index.js",

@@ -155,6 +155,22 @@ importers:
         specifier: latest
         version: 1.115.0
 
+  packages/plugin-feature-click:
+    dependencies:
+      '@cesium-extends/primitive-geojson':
+        specifier: ^1.0.7
+        version: 1.0.7(cesium@1.116.0)
+      dde-earth:
+        specifier: workspace:^
+        version: link:../dde-earth
+    devDependencies:
+      '@dde-earth/recommend-plugins':
+        specifier: workspace:^
+        version: link:../recommend-plugins
+      cesium:
+        specifier: latest
+        version: 1.116.0
+
   packages/plugin-geojson-loader:
     dependencies:
       '@cesium-extends/geojson-render':
@@ -504,6 +520,17 @@ packages:
       '@turf/centroid': 6.5.0
       '@turf/helpers': 6.5.0
       cesium: 1.115.0
+      nanoid: 4.0.2
+    dev: false
+
+  /@cesium-extends/primitive-geojson@1.0.7(cesium@1.116.0):
+    resolution: {integrity: sha512-v9CZ1Eru9M1TV3Dt0lSpiDohWdIAR+202nlrpMEryJeWGm60QlxjpV04udBNsvYWLeVlI3d7nyzPwZhW4GbynQ==}
+    peerDependencies:
+      cesium: '*'
+    dependencies:
+      '@turf/centroid': 6.5.0
+      '@turf/helpers': 6.5.0
+      cesium: 1.116.0
       nanoid: 4.0.2
     dev: false
 

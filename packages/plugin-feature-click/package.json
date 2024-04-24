@@ -1,10 +1,9 @@
 {
-  "name": "dde-earth",
-  "version": "1.2.3",
+  "name": "@dde-earth/plugin-feature-click",
+  "version": "1.3.3",
   "type": "module",
   "main": "./dist/lib/index.js",
   "module": "./dist/es/index.js",
-  "unpkg": "./dist/index.min.js",
   "types": "./dist/typings/index.d.ts",
   "files": [
     "dist"
@@ -13,8 +12,6 @@
     "access": "public"
   },
   "scripts": {
-    "test": "vitest run",
-    "test:watch": "vitest",
     "build": "rimraf dist && rollup -c",
     "dev": "rollup -c --watch"
   },
@@ -24,12 +21,17 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "cesium": ">=1.100.0"
+    "cesium": "*"
   },
   "devDependencies": {
+    "@dde-earth/recommend-plugins": "workspace:^",
     "cesium": "latest"
   },
   "engines": {
     "node": "^18.0.0 || >=20.0.0"
+  },
+  "dependencies": {
+    "@cesium-extends/primitive-geojson": "^1.0.7",
+    "dde-earth": "workspace:^"
   }
 }

@@ -1,5 +1,17 @@
 # dde-earth-vite-example
 
+## 0.0.12
+
+### Patch Changes
+
+- Updated dependencies
+  - dde-earth@1.2.3
+  - @dde-earth/plugin-martini-terrain-loader@1.0.3
+  - @dde-earth/plugin-mvt-loader@1.2.3
+  - @dde-earth/plugin-nc-loader@1.2.3
+  - @dde-earth/plugin-tiff-loader@1.2.3
+  - @dde-earth/recommend-plugins@1.3.3
+
 ## 0.0.11
 
 ### Patch Changes

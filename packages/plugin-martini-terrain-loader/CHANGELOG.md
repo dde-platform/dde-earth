@@ -1,5 +1,12 @@
 # @dde-earth/plugin-martini-terrain-loader
 
+## 1.0.3
+
+### Patch Changes
+
+- Updated dependencies
+  - dde-earth@1.2.3
+
 ## 1.0.2
 
 ### Patch Changes
