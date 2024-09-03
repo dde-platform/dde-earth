@@ -1,5 +1,11 @@
 # @dde-earth/plugin-nc-loader
 
+## 1.2.4
+
+### Patch Changes
+
+- fix nc render error
+
 ## 1.2.3
 
 ### Patch Changes
