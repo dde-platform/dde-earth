@@ -76,46 +76,37 @@ export class NCLayerItem extends LayerItem<
   }
 
   async _render(options: NCLayerItem.RenderOptions) {
+    this._renderOptions = {
+      ...this._renderOptions,
+      ...options,
+    };
     if (
-      Object.keys(options).some(
-        (name) => !Object.keys(defaultRenderOptions).includes(name),
+      //如果更改了静态的渲染设置，则需要重新加载整个particle对象
+      Object.keys(options).some((name) =>
+        Object.keys(defaultStaticRenderOptions).includes(name),
       )
     ) {
-      if (
-        //如果更改了静态的渲染设置，则需要重新加载整个particle对象
-        Object.keys(options).some((name) => {
-          if (Object.keys(defaultStaticRenderOptions).includes(name)) {
-            return true;
-          }
-        })
-      ) {
-        if (this.instance) {
-          this.instance.remove();
-          this._instance = undefined;
-          const particleObj = await new Particle3D(this.earth.viewer, {
-            ...this.data,
-            ...this._renderOptions,
-            input: this.inputFile,
-            userInput: this._renderOptions,
-          });
-          await particleObj.init();
-          particleObj.show();
-          this._instance = particleObj;
-        }
-      } else {
-        //否则，由于只加载了静态选项，所以可以直接更改渲染设置
-        if (this.instance) {
-          this.instance.optionsChange(options); // 更新粒子系统配置
-        }
+      if (this.instance) {
+        this.instance.remove();
+        this._instance = undefined;
+        const particleObj = new Particle3D(this.earth.viewer, {
+          ...this.data,
+          ...this._renderOptions,
+          input: this.inputFile,
+          userInput: this._renderOptions,
+        });
+        await particleObj.init();
+        particleObj.show();
+        this._instance = particleObj;
       }
-
-      this._renderOptions = {
-        ...this._renderOptions,
-        ...options,
-      };
-
-      this.earth.viewer.scene.requestRender();
+    } else {
+      //否则，由于只加载了静态选项，所以可以直接更改渲染设置
+      if (this.instance) {
+        this.instance.optionsChange(this._renderOptions); // 更新粒子系统配置
+      }
     }
+
+    this.earth.viewer.scene.requestRender();
     return this.instance;
   }
 }
