@@ -1,5 +1,11 @@
 # @dde-earth/plugin-tiff-loader
 
+## 1.2.4
+
+### Patch Changes
+
+- update dep
+
 ## 1.2.3
 
 ### Patch Changes

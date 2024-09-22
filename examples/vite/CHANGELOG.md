@@ -1,5 +1,12 @@
 # dde-earth-vite-example
 
+## 0.0.14
+
+### Patch Changes
+
+- Updated dependencies
+  - @dde-earth/plugin-tiff-loader@1.2.4
+
 ## 0.0.13
 
 ### Patch Changes
