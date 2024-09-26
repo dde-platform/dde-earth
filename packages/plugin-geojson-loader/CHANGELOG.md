@@ -1,5 +1,11 @@
 # @dde-earth/plugin-geojson-loader
 
+## 1.2.4
+
+### Patch Changes
+
+- 37c048e: compatible primitive geojson
+
 ## 1.2.3
 
 ### Patch Changes
