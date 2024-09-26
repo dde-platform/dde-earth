@@ -24,15 +24,15 @@
     "cesium": "*"
   },
   "devDependencies": {
-    "@types/geojson": "^7946.0.13",
+    "@types/geojson": "^7946.0.14",
     "cesium": "latest"
   },
   "engines": {
     "node": "^18.0.0 || >=20.0.0"
   },
   "dependencies": {
-    "@cesium-extends/geojson-render": "^1.0.4",
-    "@cesium-extends/primitive-geojson": "^1.0.7",
+    "@cesium-extends/geojson-render": "^1.0.6",
+    "@cesium-extends/primitive-geojson": "^1.0.9",
     "@turf/turf": "^6.5.0",
     "dde-earth": "workspace:^"
   }

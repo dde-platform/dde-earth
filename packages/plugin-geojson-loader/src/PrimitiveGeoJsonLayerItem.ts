@@ -48,8 +48,7 @@ export class PrimitiveGeojsonLayerItem extends LayerItem<
     const type = summaryGeoJSON(geojson)?.type ?? "mix";
     this._viewPort = getGeoJsonViewPort(geojson);
     this._type = type;
-    const primitiveObj = new GeoJsonPrimitiveLayer();
-    const primitiveLayer = await primitiveObj.load(geojson);
+    const primitiveLayer = await GeoJsonPrimitiveLayer.load(geojson);
     const renderOptions =
       data.renderOptions ?? this.options.defaultRenderOptions[this.type];
     this.defaultRenderOptions = renderOptions;
