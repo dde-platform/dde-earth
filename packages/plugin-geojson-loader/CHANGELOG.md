@@ -1,5 +1,11 @@
 # @dde-earth/plugin-geojson-loader
 
+## 1.2.5
+
+### Patch Changes
+
+- 029ca5b: fix default value error
+
 ## 1.2.4
 
 ### Patch Changes
