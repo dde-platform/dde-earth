@@ -134,7 +134,7 @@ importers:
         version: link:../../packages/recommend-plugins
       cesium:
         specifier: latest
-        version: 1.121.1
+        version: 1.122.0
       dde-earth:
         specifier: workspace:^
         version: link:../../packages/dde-earth
@@ -144,22 +144,22 @@ importers:
         version: 5.2.2
       vite:
         specifier: ^4.3.9
-        version: 4.3.9(@types/node@22.7.2)
+        version: 4.3.9(@types/node@22.7.5)
       vite-plugin-cesium:
         specifier: ^1.2.22
-        version: 1.2.22(cesium@1.121.1)(rollup@3.28.1)(vite@4.3.9(@types/node@22.7.2))
+        version: 1.2.22(cesium@1.122.0)(rollup@3.28.1)(vite@4.3.9(@types/node@22.7.5))
 
   packages/dde-earth:
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.121.1
+        version: 1.122.0
 
   packages/plugin-feature-click:
     dependencies:
       '@cesium-extends/primitive-geojson':
         specifier: ^1.0.7
-        version: 1.0.7(cesium@1.121.1)
+        version: 1.0.7(cesium@1.122.0)
       dde-earth:
         specifier: workspace:^
         version: link:../dde-earth
@@ -169,16 +169,16 @@ importers:
         version: link:../recommend-plugins
       cesium:
         specifier: latest
-        version: 1.121.1
+        version: 1.122.0
 
   packages/plugin-geojson-loader:
     dependencies:
       '@cesium-extends/geojson-render':
-        specifier: ^1.0.6
-        version: 1.0.6(cesium@1.121.1)
+        specifier: ^1.0.7
+        version: 1.0.7(cesium@1.122.0)
       '@cesium-extends/primitive-geojson':
         specifier: ^1.0.9
-        version: 1.0.9(cesium@1.121.1)
+        version: 1.0.9(cesium@1.122.0)
       '@turf/turf':
         specifier: ^6.5.0
         version: 6.5.0
@@ -191,20 +191,20 @@ importers:
         version: 7946.0.14
       cesium:
         specifier: latest
-        version: 1.121.1
+        version: 1.122.0
 
   packages/plugin-martini-terrain-loader:
     dependencies:
       '@zjugis/cesium-martini':
         specifier: 1.2.3
-        version: 1.2.3(cesium@1.121.1)
+        version: 1.2.3(cesium@1.122.0)
       dde-earth:
         specifier: workspace:^
         version: link:../dde-earth
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.121.1
+        version: 1.122.0
 
   packages/plugin-mvt-loader:
     dependencies:
@@ -213,11 +213,11 @@ importers:
         version: link:../dde-earth
       mvt-imagery-provider:
         specifier: ^1.0.2
-        version: 1.0.2(cesium@1.121.1)
+        version: 1.0.2(cesium@1.122.0)
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.121.1
+        version: 1.122.0
 
   packages/plugin-nc-loader:
     dependencies:
@@ -230,7 +230,7 @@ importers:
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.121.1
+        version: 1.122.0
 
   packages/plugin-tiff-loader:
     dependencies:
@@ -239,11 +239,11 @@ importers:
         version: link:../dde-earth
       tiff-imagery-provider:
         specifier: ^2.12.3
-        version: 2.12.3(cesium@1.121.1)
+        version: 2.12.3(cesium@1.122.0)
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.121.1
+        version: 1.122.0
 
   packages/recommend-plugins:
     dependencies:
@@ -253,7 +253,7 @@ importers:
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.121.1
+        version: 1.122.0
 
 packages:
 
@@ -387,8 +387,8 @@ packages:
   '@braintree/sanitize-url@6.0.4':
     resolution: {integrity: sha512-s3jaWicZd0pkP0jf5ysyHUI/RE7MHos6qlToFcGWXVp+ykHOy77OUMrfbgJ9it2C5bow7OIQwYYaHjk9XlBQ2A==}
 
-  '@cesium-extends/geojson-render@1.0.6':
-    resolution: {integrity: sha512-DveCc6hPIkzhmvGacM2ZyPeBhA8zou94Z/GfVrjvidKyM3Pflrg1gFH/OHSLsZkixll9NPIVVe1Hf0I5mRUNhA==}
+  '@cesium-extends/geojson-render@1.0.7':
+    resolution: {integrity: sha512-3BlH6YPZPP5aZf8+/UO57i76njYz6Xf8xjh67E0glgn55eqkH9BtePg2ERld3S5M9ROFbxxje5DHSJnvRh97Cg==}
     peerDependencies:
       cesium: '*'
 
@@ -402,12 +402,12 @@ packages:
     peerDependencies:
       cesium: '*'
 
-  '@cesium/engine@11.0.0':
-    resolution: {integrity: sha512-0z3mJNNly407h3/bAvGoGnjA0ygprkVz32z9x1VNmPXf9AuybKu7Q4wRrChUhC/qsNj3L45kP6KqyDuHSe2bhw==}
+  '@cesium/engine@11.1.0':
+    resolution: {integrity: sha512-vrEQAbYQuXt2cMYF9BpBu4Kxu+8uje1CrFHfyI5aNp7gCrUK1RYquldyqT7TDr3YKe7oZMHL+Xeb5Vm8ua6gZQ==}
     engines: {node: '>=14.0.0'}
 
-  '@cesium/widgets@8.0.0':
-    resolution: {integrity: sha512-Rnid5BbLBZjwFdbr3lgOwK3fhql/BeEbf5l9ZZE+Zc7V8Fb6wgKM8QmrL+bbJ+BtuiELp+SkNxcF97Ktifxb4g==}
+  '@cesium/widgets@8.1.0':
+    resolution: {integrity: sha512-WD5eokNfSQmB3oqe97KmdmDefwzooHaMWBm9kE/Af9edyD2j3eQVTrbNhiJ06UIyEjd01U1af2iDOawI9adAgA==}
     engines: {node: '>=14.0.0'}
 
   '@changesets/apply-release-plan@6.1.4':
@@ -1637,8 +1637,8 @@ packages:
   '@types/node@20.5.7':
     resolution: {integrity: sha512-dP7f3LdZIysZnmvP3ANJYTSwg+wLLl8p7RqniVlV7j+oXSXAbt9h0WIBFmJy5inWZoX9wZN6eXx+YXd9Rh3RBA==}
 
-  '@types/node@22.7.2':
-    resolution: {integrity: sha512-866lXSrpGpgyHBZUa2m9YNWqHDjjM0aBTJlNtYaGEw4rqY/dcD7deRVTbBBAJelfA7oaGDbNftXF/TL/A6RgoA==}
+  '@types/node@22.7.5':
+    resolution: {integrity: sha512-jML7s2NAzMWc//QSJ1a3prpk78cOPchGvXJsC3C6R6PSMoooztvRVQEz89gmBTBY1SPMaqo5teB4uNHPdetShQ==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -1945,8 +1945,8 @@ packages:
   cesium-particle@0.9.1:
     resolution: {integrity: sha512-n7E4xYNOXXk0aVvhEim7OVoMpASWWuDjod5OKN1+0f9q5qFbloKFtP4GDrBTo3xnam6KwDho/Glz8ymj8WRgcA==}
 
-  cesium@1.121.1:
-    resolution: {integrity: sha512-WpdaGFd8qCOHiE9khV0sWWjCMXAX1U9Aou8MzMC/F0Akp6YqcOk4HLk4LLhZKeOjO/Bh27iTIW2mxEZ5+dtCxg==}
+  cesium@1.122.0:
+    resolution: {integrity: sha512-zHxF4QMVE9/ukhxvV/UULzytZp5uz0JVjegc+qxfhHtvN3crFbpL6/8frkVrcQ0GTjH6/LT1AcMERj/bNdVYng==}
     engines: {node: '>=18.18.0'}
 
   chai@4.3.8:
@@ -2392,8 +2392,8 @@ packages:
     resolution: {integrity: sha512-yS+Q5i3hBf7GBkd4KG8a7eBNNWNGLTaEwwYWUijIYM7zrlYDM0BFXHjjPWlWZ1Rg7UaddZeIDmi9jF3HmqiQ2w==}
     engines: {node: '>=6.0.0'}
 
-  dompurify@3.1.6:
-    resolution: {integrity: sha512-cTOAhc36AalkjtBpfG6O8JimdTMWNXjiePT2xQH/ppBGi/4uIpmj8eKyIkMJErXWARyINV/sB38yf8JCLF5pbQ==}
+  dompurify@3.1.7:
+    resolution: {integrity: sha512-VaTstWtsneJY8xzy7DekmYWEOZcmzIe3Qb3zPd4STve1OBTa+e+WmS1ITQec1fZYXI3HCsOZZiSMpG6oxoWMWQ==}
 
   draco3d@1.5.7:
     resolution: {integrity: sha512-m6WCKt/erDXcw+70IJXnG7M3awwQPAsZvJGX5zY7beBqpELw6RDGkYVU0W43AFxye4pDZ5i2Lbyc/NNGqwjUVQ==}
@@ -4016,9 +4016,6 @@ packages:
   quickselect@2.0.0:
     resolution: {integrity: sha512-RKJ22hX8mHe3Y6wH/N3wCM6BWtjaxIyyUIkpHOvfFnxdI4yD4tBXEBKSbriGujF6jnSVkJrffuo6vxACiSSxIw==}
 
-  quickselect@3.0.0:
-    resolution: {integrity: sha512-XdjUArbK4Bm5fLLvlm5KpTFOiOThgfWWI4axAZDWg4E/0mKdZyI9tNEfds27qCi1ze/vwTR16kvmmGhRra3c2g==}
-
   range-parser@1.2.1:
     resolution: {integrity: sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==}
     engines: {node: '>= 0.6'}
@@ -4028,9 +4025,6 @@ packages:
 
   rbush@3.0.1:
     resolution: {integrity: sha512-XRaVO0YecOpEuIvbhbpTrZgoiI6xBlz6hnlr6EHhd+0x9ase6EmeN+hdwwUaJvLcsFFQ8iWVF1GAK1yB0BWi0w==}
-
-  rbush@4.0.1:
-    resolution: {integrity: sha512-IP0UpfeWQujYC8Jg162rMNc01Rf0gWMMAb2Uxus/Q0qOFw4lCcq6ZnQEZwUoJqWyUGJ9th7JjwI4yIWo+uvoAQ==}
 
   react-dom@18.2.0:
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
@@ -4076,8 +4070,8 @@ packages:
   regenerator-runtime@0.14.1:
     resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
 
-  regexp.prototype.flags@1.5.2:
-    resolution: {integrity: sha512-NcDiDkTLuPR+++OCKB0nWafEmhg/Da8aUPLPMQbK+bxKKCm1/S5he+AqYa4PlMCVBalb4/yxIRub6qkEx5yJbw==}
+  regexp.prototype.flags@1.5.3:
+    resolution: {integrity: sha512-vqlC04+RQoFalODCbCumG2xIOvapzVMHwsyIGM/SIE8fRhFFsXeH8/QQ+s0T0kDAhKc4k30s73/0ydkHQz6HlQ==}
     engines: {node: '>= 0.4'}
 
   rehype-katex@7.0.0:
@@ -5136,33 +5130,33 @@ snapshots:
 
   '@braintree/sanitize-url@6.0.4': {}
 
-  '@cesium-extends/geojson-render@1.0.6(cesium@1.121.1)':
+  '@cesium-extends/geojson-render@1.0.7(cesium@1.122.0)':
     dependencies:
-      '@cesium-extends/primitive-geojson': 1.0.9(cesium@1.121.1)
+      '@cesium-extends/primitive-geojson': 1.0.9(cesium@1.122.0)
       '@turf/turf': 6.5.0
-      cesium: 1.121.1
+      cesium: 1.122.0
 
-  '@cesium-extends/primitive-geojson@1.0.7(cesium@1.121.1)':
+  '@cesium-extends/primitive-geojson@1.0.7(cesium@1.122.0)':
     dependencies:
       '@turf/centroid': 6.5.0
       '@turf/helpers': 6.5.0
-      cesium: 1.121.1
+      cesium: 1.122.0
       nanoid: 4.0.2
 
-  '@cesium-extends/primitive-geojson@1.0.9(cesium@1.121.1)':
+  '@cesium-extends/primitive-geojson@1.0.9(cesium@1.122.0)':
     dependencies:
       '@turf/centroid': 6.5.0
       '@turf/helpers': 6.5.0
-      cesium: 1.121.1
+      cesium: 1.122.0
       nanoid: 4.0.2
 
-  '@cesium/engine@11.0.0':
+  '@cesium/engine@11.1.0':
     dependencies:
       '@tweenjs/tween.js': 25.0.0
       '@zip.js/zip.js': 2.7.52
       autolinker: 4.0.0
       bitmap-sdf: 1.0.4
-      dompurify: 3.1.6
+      dompurify: 3.1.7
       draco3d: 1.5.7
       earcut: 3.0.0
       grapheme-splitter: 1.0.4
@@ -5174,13 +5168,13 @@ snapshots:
       meshoptimizer: 0.21.0
       pako: 2.1.0
       protobufjs: 7.4.0
-      rbush: 4.0.1
+      rbush: 3.0.1
       topojson-client: 3.1.0
       urijs: 1.19.11
 
-  '@cesium/widgets@8.0.0':
+  '@cesium/widgets@8.1.0':
     dependencies:
-      '@cesium/engine': 11.0.0
+      '@cesium/engine': 11.1.0
       nosleep.js: 0.12.0
 
   '@changesets/apply-release-plan@6.1.4':
@@ -6774,7 +6768,7 @@ snapshots:
 
   '@types/node@20.5.7': {}
 
-  '@types/node@22.7.2':
+  '@types/node@22.7.5':
     dependencies:
       undici-types: 6.19.8
 
@@ -6934,9 +6928,9 @@ snapshots:
 
   '@zip.js/zip.js@2.7.52': {}
 
-  '@zjugis/cesium-martini@1.2.3(cesium@1.121.1)':
+  '@zjugis/cesium-martini@1.2.3(cesium@1.122.0)':
     dependencies:
-      cesium: 1.121.1
+      cesium: 1.122.0
 
   acorn-jsx@5.3.2(acorn@8.10.0):
     dependencies:
@@ -7104,10 +7098,10 @@ snapshots:
     dependencies:
       netcdfjs: 1.0.0
 
-  cesium@1.121.1:
+  cesium@1.122.0:
     dependencies:
-      '@cesium/engine': 11.0.0
-      '@cesium/widgets': 8.0.0
+      '@cesium/engine': 11.1.0
+      '@cesium/widgets': 8.1.0
 
   chai@4.3.8:
     dependencies:
@@ -7504,7 +7498,7 @@ snapshots:
       is-regex: 1.1.4
       object-is: 1.1.6
       object-keys: 1.1.1
-      regexp.prototype.flags: 1.5.2
+      regexp.prototype.flags: 1.5.3
 
   deep-is@0.1.4: {}
 
@@ -7572,7 +7566,7 @@ snapshots:
     dependencies:
       esutils: 2.0.3
 
-  dompurify@3.1.6: {}
+  dompurify@3.1.7: {}
 
   draco3d@1.5.7: {}
 
@@ -8833,7 +8827,7 @@ snapshots:
       d3-sankey: 0.12.3
       dagre-d3-es: 7.0.10
       dayjs: 1.11.10
-      dompurify: 3.1.6
+      dompurify: 3.1.7
       elkjs: 0.8.2
       khroma: 2.1.0
       lodash-es: 4.17.21
@@ -9191,9 +9185,9 @@ snapshots:
 
   mvt-basic-render@0.3.5: {}
 
-  mvt-imagery-provider@1.0.2(cesium@1.121.1):
+  mvt-imagery-provider@1.0.2(cesium@1.122.0):
     dependencies:
-      cesium: 1.121.1
+      cesium: 1.122.0
       mvt-basic-render: 0.3.5
 
   mz@2.7.0:
@@ -9608,7 +9602,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 22.7.2
+      '@types/node': 22.7.5
       long: 5.2.3
 
   protocols@2.0.1: {}
@@ -9627,8 +9621,6 @@ snapshots:
 
   quickselect@2.0.0: {}
 
-  quickselect@3.0.0: {}
-
   range-parser@1.2.1: {}
 
   rbush@2.0.2:
@@ -9638,10 +9630,6 @@ snapshots:
   rbush@3.0.1:
     dependencies:
       quickselect: 2.0.0
-
-  rbush@4.0.1:
-    dependencies:
-      quickselect: 3.0.0
 
   react-dom@18.2.0(react@18.2.0):
     dependencies:
@@ -9694,7 +9682,7 @@ snapshots:
 
   regenerator-runtime@0.14.1: {}
 
-  regexp.prototype.flags@1.5.2:
+  regexp.prototype.flags@1.5.3:
     dependencies:
       call-bind: 1.0.7
       define-properties: 1.2.1
@@ -10151,9 +10139,9 @@ snapshots:
     dependencies:
       any-promise: 1.3.0
 
-  tiff-imagery-provider@2.12.3(cesium@1.121.1):
+  tiff-imagery-provider@2.12.3(cesium@1.122.0):
     dependencies:
-      cesium: 1.121.1
+      cesium: 1.122.0
       geotiff: 2.1.3
 
   tinybench@2.5.0: {}
@@ -10463,24 +10451,24 @@ snapshots:
       - supports-color
       - terser
 
-  vite-plugin-cesium@1.2.22(cesium@1.121.1)(rollup@3.28.1)(vite@4.3.9(@types/node@22.7.2)):
+  vite-plugin-cesium@1.2.22(cesium@1.122.0)(rollup@3.28.1)(vite@4.3.9(@types/node@22.7.5)):
     dependencies:
-      cesium: 1.121.1
+      cesium: 1.122.0
       fs-extra: 9.1.0
       rollup-plugin-external-globals: 0.6.1(rollup@3.28.1)
       serve-static: 1.15.0
-      vite: 4.3.9(@types/node@22.7.2)
+      vite: 4.3.9(@types/node@22.7.5)
     transitivePeerDependencies:
       - rollup
       - supports-color
 
-  vite@4.3.9(@types/node@22.7.2):
+  vite@4.3.9(@types/node@22.7.5):
     dependencies:
       esbuild: 0.17.19
       postcss: 8.4.32
       rollup: 3.28.1
     optionalDependencies:
-      '@types/node': 22.7.2
+      '@types/node': 22.7.5
       fsevents: 2.3.3
 
   vite@4.4.9(@types/node@20.5.7):
