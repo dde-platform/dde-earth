@@ -1,0 +1,8 @@
+{
+  "index": "简介",
+  "globals": "全局导出",
+  "classes": "类",
+  "functions": "函数",
+  "variables": "变量",
+  "type-aliases": "类型别名"
+}

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["esnext", "dom"],
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "outDir": "./dist", // This probably doesn't matter for TypeDoc
+    "declaration": true,
+    "inlineSourceMap": true,
+    "types": ["node"]
+  },
+  "include": ["src/**/*"], // Only include src
+  "exclude": ["**/dist/**"] // Keep existing exclude
+}

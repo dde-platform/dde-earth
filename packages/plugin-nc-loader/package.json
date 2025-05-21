@@ -13,7 +13,8 @@
   },
   "scripts": {
     "build": "rimraf dist && rollup -c",
-    "dev": "rollup -c --watch"
+    "dev": "rollup -c --watch",
+    "docs": "typedoc"
   },
   "keywords": [
     "cesium",
@@ -24,7 +25,9 @@
     "cesium": "*"
   },
   "devDependencies": {
-    "cesium": "latest"
+    "cesium": "latest",
+    "typedoc": "^0.28.4",
+    "typedoc-plugin-markdown": "^4.6.3"
   },
   "engines": {
     "node": "^18.0.0 || >=20.0.0"
