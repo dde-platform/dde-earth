@@ -16,6 +16,7 @@ export interface NavigatorTheme {
     };
     rotationMarker: {
       background: string;
+      fill: string;
       hoverScale: number;
     };
   };
@@ -64,11 +65,12 @@ export const lightTheme: NavigatorTheme = {
     },
     innerGyro: {
       background: "transparent",
-      activeColor: "oklch(0.646 0.222 41.116)",
-      hoverColor: "oklch(0.646 0.222 41.116)",
+      activeColor: "oklch(0.705 0.213 47.604)",
+      hoverColor: "oklch(0.705 0.213 47.604)",
     },
     rotationMarker: {
       background: "transparent",
+      fill: "oklch(0.705 0.213 47.604)",
       hoverScale: 1.17,
     },
   },
@@ -79,8 +81,8 @@ export const lightTheme: NavigatorTheme = {
     gap: "8px",
     button: {
       background: "rgba(255, 255, 255, 0.8)",
-      hoverBackground: "oklch(0.646 0.222 41.116 / 0.8)",
-      activeBackground: "oklch(0.646 0.222 41.116)",
+      hoverBackground: "oklch(0.705 0.213 47.604 / 0.8)",
+      activeBackground: "oklch(0.705 0.213 47.604)",
       color: "#1f2937",
       activeColor: "#ffffff",
       fontSize: "20px",
@@ -123,8 +125,8 @@ export const darkTheme: NavigatorTheme = {
       ...lightTheme.zoomController.button,
       background: "rgba(0, 0, 0, 0.8)",
       color: "#f3f4f6",
-      hoverBackground: "oklch(0.646 0.222 41.116 / 0.8)",
-      activeBackground: "oklch(0.646 0.222 41.116)",
+      hoverBackground: "oklch(0.705 0.213 47.604 / 0.8)",
+      activeBackground: "oklch(0.705 0.213 47.604)",
       activeColor: "#ffffff",
     },
   },

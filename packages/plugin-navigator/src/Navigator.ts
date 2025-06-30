@@ -1,8 +1,8 @@
-import ZoomControl from "@cesium-extends/zoom-control";
 import { Cartesian3 } from "cesium";
 import { BasePlugin } from "dde-earth";
 
 import Compass from "./Compass";
+import ZoomController from "./ZoomController";
 import { StyleManager } from "./styles/StyleManager";
 import { themeManager } from "./theme";
 
@@ -12,7 +12,7 @@ import type { NavigatorTheme } from "./theme";
 export class Navigator extends BasePlugin {
   name = "Navigator";
   compass!: Compass;
-  zoomControl!: ZoomControl;
+  zoomControl!: ZoomController;
   private styleManager!: StyleManager;
   private themeUnsubscribe?: () => void;
   private initOptions?: Navigator.Options;
@@ -64,7 +64,7 @@ export class Navigator extends BasePlugin {
 
     const defaultView = earth.options.defaultViewPort as number[];
     this.compass = new Compass(earth.viewer, mergedOptions?.compass);
-    this.zoomControl = new ZoomControl(earth.viewer, {
+    this.zoomControl = new ZoomController(earth.viewer, {
       home: Cartesian3.fromDegrees(
         defaultView[0],
         defaultView[1],

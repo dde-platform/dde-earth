@@ -132,11 +132,14 @@ export class StyleManager {
         transition: ${transition.transform};
       }
 
+      .cesium-compass .rotation_marker svg path[fill="#4990E2"] {
+        fill: ${compass.rotationMarker.fill} !important;
+      }
+
       .cesium-compass .gyro-active,
       .cesium-compass .gyro:hover {
         background: ${compass.innerGyro.background};
-        outline: 2px solid ${compass.innerGyro.activeColor};
-        outline-offset: -1px;
+        /* Removed outline for no glow effect */
       }
 
       .cesium-compass .gyro-active svg,
@@ -147,6 +150,7 @@ export class StyleManager {
       /* Zoom Controller Styles */
       .cesium-zoom-controller {
         display: flex !important;
+        position: absolute;
         right: ${position.zoomControllerRight};
         bottom: ${position.bottom};
         top: auto;
@@ -156,6 +160,8 @@ export class StyleManager {
         padding: ${zoomController.padding};
         gap: ${zoomController.gap};
         transition: ${transition.all};
+        pointer-events: auto;
+        z-index: 1000;
       }
 
       .cesium-zoom-controller .cesium-button {
@@ -177,6 +183,8 @@ export class StyleManager {
       .cesium-zoom-controller .cesium-button:hover {
         background: ${zoomController.button.hoverBackground};
         transform: translateY(-1px);
+        outline: none;
+        box-shadow: none;
       }
 
       .cesium-zoom-controller .cesium-button:active {
