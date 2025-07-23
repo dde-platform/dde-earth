@@ -45,8 +45,6 @@ export class StyleManager {
         user-select: none;
         pointer-events: auto;
         transition: ${transition.all};
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
       }
 
       .cesium-compass:hover {
