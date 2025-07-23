@@ -3,7 +3,7 @@
   "scripts": {
     "build": "turbo build --filter=./packages/\\*",
     "build:doc": "turbo run build --filter=doc...",
-    "dev": "turbo dev --filter=./packages/\\* --no-cache --continue",
+    "dev": "turbo dev --filter=./packages/\\* --no-cache --continue --concurrency=11",
     "dev:doc": "turbo run dev --filter=doc...",
     "test": "turbo run test",
     "test:watch": "turbo run test:watch",

@@ -155,6 +155,16 @@ importers:
         specifier: latest
         version: 1.131.0
 
+  packages/plugin-amap-loader:
+    dependencies:
+      dde-earth:
+        specifier: workspace:^
+        version: link:../dde-earth
+    devDependencies:
+      cesium:
+        specifier: latest
+        version: 1.131.0
+
   packages/plugin-feature-click:
     dependencies:
       '@cesium-extends/primitive-geojson':
