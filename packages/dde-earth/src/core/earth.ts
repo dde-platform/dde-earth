@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-namespace */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Cartesian3,
   Math as CesiumMath,
@@ -212,11 +214,15 @@ export namespace Earth {
     selectionIndicator: false,
     timeline: false,
     navigationHelpButton: false,
+    shouldAnimate: true,
+    requestRenderMode: true,
+    maximumRenderTimeChange: Infinity,
     useBrowserRecommendedResolution: false,
     orderIndependentTranslucency: false,
     contextOptions: {
       webgl: {
         alpha: true,
+        preserveDrawingBuffer: true,
       },
     },
   };
