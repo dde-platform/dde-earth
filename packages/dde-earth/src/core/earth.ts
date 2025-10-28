@@ -108,9 +108,9 @@ export class Earth {
     const scene = this.viewer.scene;
     scene.fog.density = 0.0001; // 雾气中水分含量
     scene.globe.enableLighting = false;
-    scene.moon.show = false;
-    scene.sun.show = false;
-    scene.skyBox.show = false;
+    if (scene.moon) scene.moon.show = false;
+    if (scene.sun) scene.sun.show = false;
+    if (scene.skyBox) scene.skyBox.show = false;
     scene.backgroundColor = Color.fromCssColorString(
       this.options.backgroundColor as string,
     );
