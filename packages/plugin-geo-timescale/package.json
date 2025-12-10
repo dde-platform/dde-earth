@@ -1,0 +1,36 @@
+{
+  "name": "@dde-earth/plugin-geo-timescale",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./dist/lib/index.js",
+  "module": "./dist/es/index.js",
+  "types": "./dist/typings/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rimraf dist && rollup -c",
+    "dev": "rollup -c --watch"
+  },
+  "keywords": [
+    "cesium",
+    "dde"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "cesium": "*"
+  },
+  "devDependencies": {
+    "cesium": "latest"
+  },
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
+  },
+  "dependencies": {
+    "dde-earth": "workspace:^",
+    "@zjugis/geo-timeline": "^1.6.0"
+  }
+}
