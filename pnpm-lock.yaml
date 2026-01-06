@@ -288,6 +288,16 @@ importers:
         specifier: latest
         version: 1.132.0
 
+  packages/plugin-swipe:
+    dependencies:
+      dde-earth:
+        specifier: workspace:^
+        version: link:../dde-earth
+    devDependencies:
+      cesium:
+        specifier: latest
+        version: 1.137.0
+
   packages/plugin-tiff-loader:
     dependencies:
       dde-earth:
@@ -441,6 +451,10 @@ packages:
     resolution: {integrity: sha512-grL8/wiIkKLFG+FrizORhUTMpOcFMFawa0fmLH3I/1K46TcDQn6Gom+qrcGqbJoc4diYM75xsAC9M8Yajgh4rQ==}
     engines: {node: '>=20.19.0'}
 
+  '@cesium/engine@22.2.0':
+    resolution: {integrity: sha512-tMy65eWMJ/s0h38jeY5zBaqN5isEyx+u6JPNXNvuafF9FjTDYGjjSevgMr5iKF8LqjaxtQ3/PuWMimjvgv3ECw==}
+    engines: {node: '>=20.19.0'}
+
   '@cesium/wasm-splats@0.1.0-alpha.2':
     resolution: {integrity: sha512-t9pMkknv31hhIbLpMa8yPvmqfpvs5UkUjgqlQv9SeO8VerCXOYnyP8/486BDaFrztM0A7FMbRjsXtNeKvqQghA==}
 
@@ -450,6 +464,10 @@ packages:
 
   '@cesium/widgets@14.1.0':
     resolution: {integrity: sha512-/8xJTi95XZrdkmJGABEHuQLu2ZarJ59J4V21dmgU/GJAFoqnjPlqFaFajx5XBZzRufGFYW1vGsq9BMqbdOJn5Q==}
+    engines: {node: '>=20.19.0'}
+
+  '@cesium/widgets@14.2.0':
+    resolution: {integrity: sha512-Q+FrDynEwh1mxtdwN+uFzi2X4qIeoYwq0TnH/sdo0jhTPiM7qNYLiF2jmc0zxHRQFTOR1Sdzk3dqv60qjD0n5A==}
     engines: {node: '>=20.19.0'}
 
   '@changesets/apply-release-plan@7.0.12':
@@ -1858,6 +1876,10 @@ packages:
     resolution: {integrity: sha512-sHSFNNLgrgJQxpdLxdmjytT7qfs8dkn23tpPnXKweqvynQn+yAybepK6AwzYBbKQ017qBkrS/Wb4DORIFcjjhQ==}
     engines: {node: '>=20.19.0'}
 
+  cesium@1.137.0:
+    resolution: {integrity: sha512-mi8wMoHkkNWHdhAjyFUURom9r8Y6iUMr2307DwQ24MF3ZXSrL6yhsrTTAT+AiKrwcqEPqoe38y+qrFE0FA7iUg==}
+    engines: {node: '>=20.19.0'}
+
   chai@4.5.0:
     resolution: {integrity: sha512-RITGBfijLkBddZvnn8jdqoTypxvqbOLYQkGGxXzeFjVHvudaPw0HNFD9x928/eUwYWd2dPCugVqspGALTZZQKw==}
     engines: {node: '>=4'}
@@ -3168,6 +3190,9 @@ packages:
   meshoptimizer@0.25.0:
     resolution: {integrity: sha512-ewwuAo3ujPZ7T3Y2oTkEoLlXvNOqnr0cjyAxfv5djXJqwD9QlxDDO0qGtsqB4Z9QUVvhruKXg9q/xfK9I5S1xQ==}
 
+  meshoptimizer@1.0.1:
+    resolution: {integrity: sha512-Vix+QlA1YYT3FwmBBZ+49cE5y/b+pRrcXKqGpS5ouh33d3lSp2PoTpCw19E0cKDFWalembrHnIaZetf27a+W2g==}
+
   micromark-core-commonmark@1.1.0:
     resolution: {integrity: sha512-BgHO1aRbolh2hcrzL2d1La37V0Aoz73ymF8rAcKnohLy93titmv62E0gP8Hrx9PKcKrqCZ1BbLGbP3bEhoXYlw==}
 
@@ -3717,6 +3742,10 @@ packages:
 
   protobufjs@7.5.3:
     resolution: {integrity: sha512-sildjKwVqOI2kmFDiXQ6aEB0fjYTafpEvIBs8tOR8qI4spuL9OPROLVu2qZqi/xgCfsHIwVqlaF8JBjWFHnKbw==}
+    engines: {node: '>=12.0.0'}
+
+  protobufjs@8.0.0:
+    resolution: {integrity: sha512-jx6+sE9h/UryaCZhsJWbJtTEy47yXoGNYI4z8ZaRncM0zBKeRqjO2JEcOUYwrYGb1WLhXM1FfMzW3annvFv0rw==}
     engines: {node: '>=12.0.0'}
 
   protocols@2.0.2:
@@ -4735,6 +4764,30 @@ snapshots:
       topojson-client: 3.1.0
       urijs: 1.19.11
 
+  '@cesium/engine@22.2.0':
+    dependencies:
+      '@cesium/wasm-splats': 0.1.0-alpha.2
+      '@spz-loader/core': 0.3.0
+      '@tweenjs/tween.js': 25.0.0
+      '@zip.js/zip.js': 2.8.11
+      autolinker: 4.1.5
+      bitmap-sdf: 1.0.4
+      dompurify: 3.3.1
+      draco3d: 1.5.7
+      earcut: 3.0.2
+      grapheme-splitter: 1.0.4
+      jsep: 1.4.0
+      kdbush: 4.0.2
+      ktx-parse: 1.0.1
+      lerc: 2.0.0
+      mersenne-twister: 1.1.0
+      meshoptimizer: 1.0.1
+      pako: 2.1.0
+      protobufjs: 8.0.0
+      rbush: 4.0.1
+      topojson-client: 3.1.0
+      urijs: 1.19.11
+
   '@cesium/wasm-splats@0.1.0-alpha.2': {}
 
   '@cesium/widgets@13.0.0':
@@ -4745,6 +4798,11 @@ snapshots:
   '@cesium/widgets@14.1.0':
     dependencies:
       '@cesium/engine': 22.1.0
+      nosleep.js: 0.12.0
+
+  '@cesium/widgets@14.2.0':
+    dependencies:
+      '@cesium/engine': 22.2.0
       nosleep.js: 0.12.0
 
   '@changesets/apply-release-plan@7.0.12':
@@ -6589,6 +6647,11 @@ snapshots:
       '@cesium/engine': 22.1.0
       '@cesium/widgets': 14.1.0
 
+  cesium@1.137.0:
+    dependencies:
+      '@cesium/engine': 22.2.0
+      '@cesium/widgets': 14.2.0
+
   chai@4.5.0:
     dependencies:
       assertion-error: 1.1.0
@@ -8143,6 +8206,8 @@ snapshots:
 
   meshoptimizer@0.25.0: {}
 
+  meshoptimizer@1.0.1: {}
+
   micromark-core-commonmark@1.1.0:
     dependencies:
       decode-named-character-reference: 1.2.0
@@ -8852,6 +8917,21 @@ snapshots:
   property-information@7.1.0: {}
 
   protobufjs@7.5.3:
+    dependencies:
+      '@protobufjs/aspromise': 1.1.2
+      '@protobufjs/base64': 1.1.2
+      '@protobufjs/codegen': 2.0.4
+      '@protobufjs/eventemitter': 1.1.0
+      '@protobufjs/fetch': 1.1.0
+      '@protobufjs/float': 1.0.2
+      '@protobufjs/inquire': 1.1.0
+      '@protobufjs/path': 1.1.2
+      '@protobufjs/pool': 1.1.0
+      '@protobufjs/utf8': 1.1.0
+      '@types/node': 20.19.9
+      long: 5.3.2
+
+  protobufjs@8.0.0:
     dependencies:
       '@protobufjs/aspromise': 1.1.2
       '@protobufjs/base64': 1.1.2
