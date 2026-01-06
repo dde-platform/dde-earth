@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import * as Cesium from "cesium";
-import { ImageryLayer, SplitDirection } from "cesium";
+import { ImageryLayer, SplitDirection, Viewer } from "cesium";
 import { BasePlugin } from "dde-earth";
 
 import type { Earth } from "dde-earth";
@@ -24,7 +23,7 @@ export class Swipe extends BasePlugin {
   private _rightLayerIds: string[] = [];
   private _onLayerClick?: (id: string, side: "left" | "right") => void;
 
-  init(earth: Earth, options?: Swipe.Options) {
+  init(earth: Earth, options?: SwipeOptions) {
     this._init(earth);
 
     this._position = options?.initialPosition ?? this._position;
@@ -199,13 +198,13 @@ export class Swipe extends BasePlugin {
   hide() {
     // Hide should reset split so UI can toggle off without destroying plugin
     try {
-      const viewer = (this.earth as any)?.viewer as Cesium.Viewer | undefined;
+      const viewer = (this.earth as any)?.viewer as Viewer | undefined;
       if (!viewer) return;
 
       const imageryLayers = viewer.imageryLayers;
       for (let i = 0; i < imageryLayers.length; i++) {
         const layer = imageryLayers.get(i);
-        layer.splitDirection = Cesium.SplitDirection.NONE;
+        layer.splitDirection = SplitDirection.NONE;
       }
 
       viewer.scene.requestRender();
@@ -240,7 +239,7 @@ export class SwipeCore {
   private _inited = false;
 
   // 左侧图层 Cesium 对象
-  private leftCesiumLayers: Cesium.ImageryLayer[] = [];
+  private leftCesiumLayers: ImageryLayer[] = [];
 
   private constructor() {}
 
@@ -256,7 +255,7 @@ export class SwipeCore {
    */
   init(earth: Earth) {
     this.earth = earth;
-    const viewer = (earth as any).viewer as Cesium.Viewer | undefined;
+    const viewer = (earth as any).viewer as Viewer | undefined;
     if (!viewer) return;
 
     if (this._inited) return;
@@ -279,12 +278,12 @@ export class SwipeCore {
   }
 
   /** 设置左侧图层（Cesium 对象） */
-  setLeftCesiumLayers(layers: Cesium.ImageryLayer[]) {
+  setLeftCesiumLayers(layers: ImageryLayer[]) {
     this.leftCesiumLayers = layers;
     this.updateSplitLayers();
   }
 
-  getLeftCesiumLayers(): Cesium.ImageryLayer[] {
+  getLeftCesiumLayers(): ImageryLayer[] {
     return [...this.leftCesiumLayers];
   }
 
@@ -298,7 +297,7 @@ export class SwipeCore {
 
   /** 更新 Cesium 图层 splitDirection */
   private updateSplitLayers() {
-    const viewer = (this.earth as any)?.viewer as Cesium.Viewer | undefined;
+    const viewer = (this.earth as any)?.viewer as Viewer | undefined;
     if (!viewer) return;
 
     const scene: any = viewer.scene;
@@ -313,9 +312,9 @@ export class SwipeCore {
     for (let i = 0; i < imageryLayers.length; i++) {
       const layer = imageryLayers.get(i);
       if (this.leftCesiumLayers.includes(layer)) {
-        layer.splitDirection = Cesium.SplitDirection.LEFT;
+        layer.splitDirection = SplitDirection.LEFT;
       } else {
-        layer.splitDirection = Cesium.SplitDirection.RIGHT;
+        layer.splitDirection = SplitDirection.RIGHT;
       }
     }
 
@@ -332,13 +331,13 @@ export class SwipeCore {
   hide() {
     this.swipe?.hide();
 
-    const viewer = (this.earth as any)?.viewer as Cesium.Viewer | undefined;
+    const viewer = (this.earth as any)?.viewer as Viewer | undefined;
     if (!viewer) return;
 
     const imageryLayers = viewer.imageryLayers;
     for (let i = 0; i < imageryLayers.length; i++) {
       const layer = imageryLayers.get(i);
-      layer.splitDirection = Cesium.SplitDirection.NONE;
+      layer.splitDirection = SplitDirection.NONE;
     }
 
     viewer.scene.requestRender();
