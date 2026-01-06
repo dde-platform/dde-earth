@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-namespace */
 import { BasePlugin, deepMerge } from "dde-earth";
 
 import { ArcGisLayerItem } from "./ArcGisLayerItem";
+import { PICLayerItem } from "./PICLayerItem";
 import { TMSLayerItem } from "./TMSLayerItem";
 import { WMSLayerItem } from "./WMSLayerItem";
 import { WMTSLayerItem } from "./WMTSLayerItem";
@@ -45,6 +48,11 @@ export class LayerLoaders extends BasePlugin {
           defaultRenderOptions: this.defaultRenderOptions.arcgis,
         });
       },
+      pic: (earth: Earth, data: any) => {
+        return new PICLayerItem(earth, data, {
+          defaultRenderOptions: this.defaultRenderOptions.pic,
+        });
+      },
     });
     return this;
   }
@@ -62,6 +70,7 @@ export namespace LayerLoaders {
       earth: Earth,
       data: ArcGisLayerItem.Data,
     ) => Promise<ArcGisLayerItem>;
+    pic: (earth: Earth, data: PICLayerItem.Data) => Promise<PICLayerItem>;
   }
 
   export type ExtractLoaderOptions<T extends Loaders> = {
@@ -77,5 +86,6 @@ export namespace LayerLoaders {
     wmts: DefaultRenderOptions.raster,
     tms: DefaultRenderOptions.raster,
     arcgis: DefaultRenderOptions.raster,
+    pic: DefaultRenderOptions.raster,
   };
 }
