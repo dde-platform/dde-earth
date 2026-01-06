@@ -24,7 +24,7 @@
     "cesium": "*"
   },
   "devDependencies": {
-    "cesium": "latest"
+    "cesium": "1.132.0"
   },
   "engines": {
     "node": "^18.0.0 || >=20.0.0"
