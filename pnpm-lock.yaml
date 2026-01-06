@@ -165,6 +165,19 @@ importers:
         specifier: latest
         version: 1.132.0
 
+  packages/plugin-earth-measure:
+    dependencies:
+      '@cesium-extends/measure':
+        specifier: ^1.1.4
+        version: 1.1.4(cesium@1.136.0)
+      dde-earth:
+        specifier: workspace:^
+        version: link:../dde-earth
+    devDependencies:
+      cesium:
+        specifier: latest
+        version: 1.136.0
+
   packages/plugin-feature-click:
     dependencies:
       '@cesium-extends/primitive-geojson':
@@ -231,19 +244,6 @@ importers:
       '@zjugis/cesium-martini':
         specifier: 1.2.3
         version: 1.2.3(cesium@1.132.0)
-      dde-earth:
-        specifier: workspace:^
-        version: link:../dde-earth
-    devDependencies:
-      cesium:
-        specifier: latest
-        version: 1.132.0
-
-  packages/plugin-measure:
-    dependencies:
-      '@cesium-extends/measure':
-        specifier: ^1.1.4
-        version: 1.1.4(cesium@1.132.0)
       dde-earth:
         specifier: workspace:^
         version: link:../dde-earth
@@ -437,11 +437,19 @@ packages:
     resolution: {integrity: sha512-ymBxCUEV2HfQLmAp3qou0AlKkChIaMNkKQa/bCLLScfoCj0EBVtQH6Zgk8hP8MWreuR+vzmGOjdPsWLMkKgnrQ==}
     engines: {node: '>=20.19.0'}
 
+  '@cesium/engine@22.1.0':
+    resolution: {integrity: sha512-grL8/wiIkKLFG+FrizORhUTMpOcFMFawa0fmLH3I/1K46TcDQn6Gom+qrcGqbJoc4diYM75xsAC9M8Yajgh4rQ==}
+    engines: {node: '>=20.19.0'}
+
   '@cesium/wasm-splats@0.1.0-alpha.2':
     resolution: {integrity: sha512-t9pMkknv31hhIbLpMa8yPvmqfpvs5UkUjgqlQv9SeO8VerCXOYnyP8/486BDaFrztM0A7FMbRjsXtNeKvqQghA==}
 
   '@cesium/widgets@13.0.0':
     resolution: {integrity: sha512-Gc/ffnu4anzn6wDjLviYYOydb0OrGWY6ie5pKV+cNWbL48tfLRUZL6D3MJVS+qhSB3NhyA050v82NvPzYbqnuQ==}
+    engines: {node: '>=20.19.0'}
+
+  '@cesium/widgets@14.1.0':
+    resolution: {integrity: sha512-/8xJTi95XZrdkmJGABEHuQLu2ZarJ59J4V21dmgU/GJAFoqnjPlqFaFajx5XBZzRufGFYW1vGsq9BMqbdOJn5Q==}
     engines: {node: '>=20.19.0'}
 
   '@changesets/apply-release-plan@7.0.12':
@@ -914,42 +922,36 @@ packages:
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@napi-rs/simple-git-linux-arm64-musl@0.1.20':
     resolution: {integrity: sha512-93yMKzjzmpPJQg9zbSE3aXyph6lxjPc4G1YQaXQzDg6aaBuhJzIqQ9UMXFFNit6hiQWtOfIrg7NBPWu5GGsCCA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@napi-rs/simple-git-linux-ppc64-gnu@0.1.20':
     resolution: {integrity: sha512-7hUGBBowyeV+cbAR5fqGcLIEbcC0irRrBVZGbnch3U/gef93ljMq/JT8OxcZvDbOHqfDjZbD/C/nlt52lkxeUg==}
     engines: {node: '>= 10'}
     cpu: [ppc64]
     os: [linux]
-    libc: [glibc]
 
   '@napi-rs/simple-git-linux-s390x-gnu@0.1.20':
     resolution: {integrity: sha512-z9AY4rz9KedtzPDwroE6UXyr4nAOBTGc+Ry/gSyz8/D7gh7GLJXl0DYl6jLC8H6BjS1IB1/UGzvHvlcxrsjJ4A==}
     engines: {node: '>= 10'}
     cpu: [s390x]
     os: [linux]
-    libc: [glibc]
 
   '@napi-rs/simple-git-linux-x64-gnu@0.1.20':
     resolution: {integrity: sha512-Wun4ibl7xmW5TMMCK8P8PfUJ6Eqp1qnYfXk4vUavUWvXQ7kG3XwuzjRKK/NZ3aoD0TYww6YcONAs+nhnwDapFg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@napi-rs/simple-git-linux-x64-musl@0.1.20':
     resolution: {integrity: sha512-FmvuJi9X6rNZcD/BoD+5M7ZGg96hABbIH65TJQRMYEKfhxO8zQx7wWBK4eydGb1hlB05hqbapozU7j0YbG1DZw==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@napi-rs/simple-git-win32-arm64-msvc@0.1.20':
     resolution: {integrity: sha512-gKE2nUKiamjGvHB8yU0AeCh5crm46aGUoRhv+4lZl4iM8FXMCE3asBcRlnpunxA/YJeTCeLb5X64Wu0TouUOuQ==}
@@ -993,28 +995,24 @@ packages:
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@next/swc-linux-arm64-musl@13.5.9':
     resolution: {integrity: sha512-6VpS+bodQqzOeCwGxoimlRoosiWlSc0C224I7SQWJZoyJuT1ChNCo+45QQH+/GtbR/s7nhaUqmiHdzZC9TXnXA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@next/swc-linux-x64-gnu@13.5.9':
     resolution: {integrity: sha512-XxG3yj61WDd28NA8gFASIR+2viQaYZEFQagEodhI/R49gXWnYhiflTeeEmCn7Vgnxa/OfK81h1gvhUZ66lozpw==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@next/swc-linux-x64-musl@13.5.9':
     resolution: {integrity: sha512-/dnscWqfO3+U8asd+Fc6dwL2l9AZDl7eKtPNKW8mKLh4Y4wOpjJiamhe8Dx+D+Oq0GYVjuW0WwjIxYWVozt2bA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@next/swc-win32-arm64-msvc@13.5.9':
     resolution: {integrity: sha512-T/iPnyurOK5a4HRUcxAlss8uzoEf5h9tkd+W2dSWAfzxv8WLKlUgbfk+DH43JY3Gc2xK5URLuXrxDZ2mGfk/jw==}
@@ -1669,6 +1667,10 @@ packages:
     resolution: {integrity: sha512-3/A4JwrgkvGBlCxtItjxs8HrNbuTAAl/zlGkV6tC5Fb5k5nk4x2Dqxwl/YnUys5Ch+QB01eJ8Q5K/J2uXfy9Vw==}
     engines: {bun: '>=0.7.0', deno: '>=1.0.0', node: '>=16.5.0'}
 
+  '@zip.js/zip.js@2.8.11':
+    resolution: {integrity: sha512-0fztsk/0ryJ+2PPr9EyXS5/Co7OK8q3zY/xOoozEWaUsL5x+C0cyZ4YyMuUffOO2Dx/rAdq4JMPqW0VUtm+vzA==}
+    engines: {bun: '>=0.7.0', deno: '>=1.0.0', node: '>=18.0.0'}
+
   '@zjugis/cesium-martini@1.2.3':
     resolution: {integrity: sha512-QeP+jueku5a5Wk3Ce+rUzhOZuCMLCZHWGq2BXo2Yp0GQW3s3ElPyz663DWoJrIJF1tVKNSQoZVXfTihmN4xr3A==}
     peerDependencies:
@@ -1850,6 +1852,10 @@ packages:
 
   cesium@1.132.0:
     resolution: {integrity: sha512-FOurvzkUhnbXn/gqruBMkHqVpen7URNd5xemEhD76VzoYpRvOwWJWNaFeuBuB5AEJpFfGs5hVicGKFMzX/sUlw==}
+    engines: {node: '>=20.19.0'}
+
+  cesium@1.136.0:
+    resolution: {integrity: sha512-sHSFNNLgrgJQxpdLxdmjytT7qfs8dkn23tpPnXKweqvynQn+yAybepK6AwzYBbKQ017qBkrS/Wb4DORIFcjjhQ==}
     engines: {node: '>=20.19.0'}
 
   chai@4.5.0:
@@ -2246,6 +2252,9 @@ packages:
 
   dompurify@3.2.6:
     resolution: {integrity: sha512-/2GogDQlohXPZe6D6NOgQvXLPSYBqIWMnZ8zzOhn09REE4eyAzb+Hed3jhoM9OkuaJ8P6ZGTTVWQKAi8ieIzfQ==}
+
+  dompurify@3.3.1:
+    resolution: {integrity: sha512-qkdCKzLNtrgPFP1Vo+98FRzJnBRGe4ffyCea9IwHB1fyxPOeNTHpLKYGd4Uk9xvNoH0ZoOjwZxNptyMwqrId1Q==}
 
   draco3d@1.5.7:
     resolution: {integrity: sha512-m6WCKt/erDXcw+70IJXnG7M3awwQPAsZvJGX5zY7beBqpELw6RDGkYVU0W43AFxye4pDZ5i2Lbyc/NNGqwjUVQ==}
@@ -3155,6 +3164,9 @@ packages:
 
   meshoptimizer@0.24.0:
     resolution: {integrity: sha512-Iq/8cM5cK2B0P0QdKHexr30zEJn5sQxjXKtQJGp6LO7r1VUPwhgxau18pvybVDnEDsKE49GdlJYwqPX9A/P9Sw==}
+
+  meshoptimizer@0.25.0:
+    resolution: {integrity: sha512-ewwuAo3ujPZ7T3Y2oTkEoLlXvNOqnr0cjyAxfv5djXJqwD9QlxDDO0qGtsqB4Z9QUVvhruKXg9q/xfK9I5S1xQ==}
 
   micromark-core-commonmark@1.1.0:
     resolution: {integrity: sha512-BgHO1aRbolh2hcrzL2d1La37V0Aoz73ymF8rAcKnohLy93titmv62E0gP8Hrx9PKcKrqCZ1BbLGbP3bEhoXYlw==}
@@ -4630,16 +4642,16 @@ snapshots:
 
   '@braintree/sanitize-url@6.0.4': {}
 
-  '@cesium-extends/common@1.0.2(cesium@1.132.0)':
+  '@cesium-extends/common@1.0.2(cesium@1.136.0)':
     dependencies:
-      cesium: 1.132.0
+      cesium: 1.136.0
 
-  '@cesium-extends/drawer@1.3.7(cesium@1.132.0)':
+  '@cesium-extends/drawer@1.3.7(cesium@1.136.0)':
     dependencies:
-      '@cesium-extends/common': 1.0.2(cesium@1.132.0)
-      '@cesium-extends/subscriber': 1.1.1(cesium@1.132.0)
-      '@cesium-extends/tooltip': 1.2.3(cesium@1.132.0)
-      cesium: 1.132.0
+      '@cesium-extends/common': 1.0.2(cesium@1.136.0)
+      '@cesium-extends/subscriber': 1.1.1(cesium@1.136.0)
+      '@cesium-extends/tooltip': 1.2.3(cesium@1.136.0)
+      cesium: 1.136.0
 
   '@cesium-extends/geojson-render@1.0.8(cesium@1.132.0)':
     dependencies:
@@ -4647,17 +4659,17 @@ snapshots:
       '@turf/turf': 6.5.0
       cesium: 1.132.0
 
-  '@cesium-extends/measure@1.1.4(cesium@1.132.0)':
+  '@cesium-extends/measure@1.1.4(cesium@1.136.0)':
     dependencies:
-      '@cesium-extends/drawer': 1.3.7(cesium@1.132.0)
-      '@cesium-extends/subscriber': 1.1.1(cesium@1.132.0)
-      '@cesium-extends/tooltip': 1.2.3(cesium@1.132.0)
+      '@cesium-extends/drawer': 1.3.7(cesium@1.136.0)
+      '@cesium-extends/subscriber': 1.1.1(cesium@1.136.0)
+      '@cesium-extends/tooltip': 1.2.3(cesium@1.136.0)
       '@turf/area': 6.5.0
       '@turf/helpers': 6.5.0
       '@turf/intersect': 6.5.0
       '@turf/random': 6.5.0
       '@turf/voronoi': 6.5.0
-      cesium: 1.132.0
+      cesium: 1.136.0
 
   '@cesium-extends/primitive-geojson@1.0.11(cesium@1.132.0)':
     dependencies:
@@ -4666,14 +4678,14 @@ snapshots:
       cesium: 1.132.0
       nanoid: 4.0.2
 
-  '@cesium-extends/subscriber@1.1.1(cesium@1.132.0)':
+  '@cesium-extends/subscriber@1.1.1(cesium@1.136.0)':
     dependencies:
-      cesium: 1.132.0
+      cesium: 1.136.0
 
-  '@cesium-extends/tooltip@1.2.3(cesium@1.132.0)':
+  '@cesium-extends/tooltip@1.2.3(cesium@1.136.0)':
     dependencies:
-      '@cesium-extends/common': 1.0.2(cesium@1.132.0)
-      cesium: 1.132.0
+      '@cesium-extends/common': 1.0.2(cesium@1.136.0)
+      cesium: 1.136.0
 
   '@cesium/engine@19.0.0':
     dependencies:
@@ -4699,11 +4711,40 @@ snapshots:
       topojson-client: 3.1.0
       urijs: 1.19.11
 
+  '@cesium/engine@22.1.0':
+    dependencies:
+      '@cesium/wasm-splats': 0.1.0-alpha.2
+      '@spz-loader/core': 0.3.0
+      '@tweenjs/tween.js': 25.0.0
+      '@zip.js/zip.js': 2.8.11
+      autolinker: 4.1.5
+      bitmap-sdf: 1.0.4
+      dompurify: 3.3.1
+      draco3d: 1.5.7
+      earcut: 3.0.2
+      grapheme-splitter: 1.0.4
+      jsep: 1.4.0
+      kdbush: 4.0.2
+      ktx-parse: 1.0.1
+      lerc: 2.0.0
+      mersenne-twister: 1.1.0
+      meshoptimizer: 0.25.0
+      pako: 2.1.0
+      protobufjs: 7.5.3
+      rbush: 4.0.1
+      topojson-client: 3.1.0
+      urijs: 1.19.11
+
   '@cesium/wasm-splats@0.1.0-alpha.2': {}
 
   '@cesium/widgets@13.0.0':
     dependencies:
       '@cesium/engine': 19.0.0
+      nosleep.js: 0.12.0
+
+  '@cesium/widgets@14.1.0':
+    dependencies:
+      '@cesium/engine': 22.1.0
       nosleep.js: 0.12.0
 
   '@changesets/apply-release-plan@7.0.12':
@@ -6379,6 +6420,8 @@ snapshots:
 
   '@zip.js/zip.js@2.7.72': {}
 
+  '@zip.js/zip.js@2.8.11': {}
+
   '@zjugis/cesium-martini@1.2.3(cesium@1.132.0)':
     dependencies:
       cesium: 1.132.0
@@ -6540,6 +6583,11 @@ snapshots:
     dependencies:
       '@cesium/engine': 19.0.0
       '@cesium/widgets': 13.0.0
+
+  cesium@1.136.0:
+    dependencies:
+      '@cesium/engine': 22.1.0
+      '@cesium/widgets': 14.1.0
 
   chai@4.5.0:
     dependencies:
@@ -6938,6 +6986,10 @@ snapshots:
   dompurify@3.1.6: {}
 
   dompurify@3.2.6:
+    optionalDependencies:
+      '@types/trusted-types': 2.0.7
+
+  dompurify@3.3.1:
     optionalDependencies:
       '@types/trusted-types': 2.0.7
 
@@ -8088,6 +8140,8 @@ snapshots:
   mersenne-twister@1.1.0: {}
 
   meshoptimizer@0.24.0: {}
+
+  meshoptimizer@0.25.0: {}
 
   micromark-core-commonmark@1.1.0:
     dependencies:
