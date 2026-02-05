@@ -17,6 +17,13 @@ module.exports = {
         "@typescript-eslint/ban-ts-comment": "off",
         "@typescript-eslint/no-this-alias": "off",
         "@typescript-eslint/consistent-type-imports": "warn",
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            argsIgnorePattern: "^_",
+            varsIgnorePattern: "^_",
+          },
+        ],
       },
     },
     {

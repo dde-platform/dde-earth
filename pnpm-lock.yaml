@@ -117,18 +117,9 @@ importers:
 
   examples/vite:
     dependencies:
-      '@dde-earth/plugin-martini-terrain-loader':
+      '@dde-earth/plugin-drawer':
         specifier: workspace:^
-        version: link:../../packages/plugin-martini-terrain-loader
-      '@dde-earth/plugin-mvt-loader':
-        specifier: workspace:^
-        version: link:../../packages/plugin-mvt-loader
-      '@dde-earth/plugin-nc-loader':
-        specifier: workspace:^
-        version: link:../../packages/plugin-nc-loader
-      '@dde-earth/plugin-tiff-loader':
-        specifier: workspace:^
-        version: link:../../packages/plugin-tiff-loader
+        version: link:../../packages/plugin-drawer
       '@dde-earth/recommend-plugins':
         specifier: workspace:^
         version: link:../../packages/recommend-plugins
@@ -164,6 +155,16 @@ importers:
       cesium:
         specifier: latest
         version: 1.132.0
+
+  packages/plugin-drawer:
+    dependencies:
+      dde-earth:
+        specifier: workspace:^
+        version: link:../dde-earth
+    devDependencies:
+      cesium:
+        specifier: latest
+        version: 1.138.0
 
   packages/plugin-earth-measure:
     dependencies:
@@ -468,6 +469,10 @@ packages:
     resolution: {integrity: sha512-tMy65eWMJ/s0h38jeY5zBaqN5isEyx+u6JPNXNvuafF9FjTDYGjjSevgMr5iKF8LqjaxtQ3/PuWMimjvgv3ECw==}
     engines: {node: '>=20.19.0'}
 
+  '@cesium/engine@22.3.0':
+    resolution: {integrity: sha512-oDl+nWX/qfHYQ0lEdGxLqZoKEtTMghvJDzZKTycYfiIuDYDh8Kh0Oy45wr3mSJse3PuTj1e6hDmbw8vbycCOxw==}
+    engines: {node: '>=20.19.0'}
+
   '@cesium/wasm-splats@0.1.0-alpha.2':
     resolution: {integrity: sha512-t9pMkknv31hhIbLpMa8yPvmqfpvs5UkUjgqlQv9SeO8VerCXOYnyP8/486BDaFrztM0A7FMbRjsXtNeKvqQghA==}
 
@@ -481,6 +486,10 @@ packages:
 
   '@cesium/widgets@14.2.0':
     resolution: {integrity: sha512-Q+FrDynEwh1mxtdwN+uFzi2X4qIeoYwq0TnH/sdo0jhTPiM7qNYLiF2jmc0zxHRQFTOR1Sdzk3dqv60qjD0n5A==}
+    engines: {node: '>=20.19.0'}
+
+  '@cesium/widgets@14.3.0':
+    resolution: {integrity: sha512-1bS+Nv/uXwP0/NV0o4XeUA5nLCWttjTmKwl+pHnbZXp0ZwDmClb0xVDruDyVtLrUuRhsk84JZ4rXI/IT7HXOvA==}
     engines: {node: '>=20.19.0'}
 
   '@changesets/apply-release-plan@7.0.12':
@@ -1900,6 +1909,10 @@ packages:
 
   cesium@1.137.0:
     resolution: {integrity: sha512-mi8wMoHkkNWHdhAjyFUURom9r8Y6iUMr2307DwQ24MF3ZXSrL6yhsrTTAT+AiKrwcqEPqoe38y+qrFE0FA7iUg==}
+    engines: {node: '>=20.19.0'}
+
+  cesium@1.138.0:
+    resolution: {integrity: sha512-YX7Ttd4LzAxunuzcKPyOCQa+BPc2RmenqnkM5uZkk/GVwor724bd+F3kdVP4IyMbTgxFkchXuX2Aa8L1Y0/ZxA==}
     engines: {node: '>=20.19.0'}
 
   chai@4.5.0:
@@ -4807,6 +4820,30 @@ snapshots:
       topojson-client: 3.1.0
       urijs: 1.19.11
 
+  '@cesium/engine@22.3.0':
+    dependencies:
+      '@cesium/wasm-splats': 0.1.0-alpha.2
+      '@spz-loader/core': 0.3.0
+      '@tweenjs/tween.js': 25.0.0
+      '@zip.js/zip.js': 2.8.11
+      autolinker: 4.1.5
+      bitmap-sdf: 1.0.4
+      dompurify: 3.3.1
+      draco3d: 1.5.7
+      earcut: 3.0.2
+      grapheme-splitter: 1.0.4
+      jsep: 1.4.0
+      kdbush: 4.0.2
+      ktx-parse: 1.0.1
+      lerc: 2.0.0
+      mersenne-twister: 1.1.0
+      meshoptimizer: 1.0.1
+      pako: 2.1.0
+      protobufjs: 8.0.0
+      rbush: 4.0.1
+      topojson-client: 3.1.0
+      urijs: 1.19.11
+
   '@cesium/wasm-splats@0.1.0-alpha.2': {}
 
   '@cesium/widgets@13.0.0':
@@ -4816,12 +4853,17 @@ snapshots:
 
   '@cesium/widgets@14.1.0':
     dependencies:
-      '@cesium/engine': 22.1.0
+      '@cesium/engine': 22.2.0
       nosleep.js: 0.12.0
 
   '@cesium/widgets@14.2.0':
     dependencies:
       '@cesium/engine': 22.2.0
+      nosleep.js: 0.12.0
+
+  '@cesium/widgets@14.3.0':
+    dependencies:
+      '@cesium/engine': 22.3.0
       nosleep.js: 0.12.0
 
   '@changesets/apply-release-plan@7.0.12':
@@ -6672,6 +6714,11 @@ snapshots:
     dependencies:
       '@cesium/engine': 22.2.0
       '@cesium/widgets': 14.2.0
+
+  cesium@1.138.0:
+    dependencies:
+      '@cesium/engine': 22.3.0
+      '@cesium/widgets': 14.3.0
 
   chai@4.5.0:
     dependencies:
