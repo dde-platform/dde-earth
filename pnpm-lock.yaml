@@ -11,6 +11,9 @@ importers:
       '@changesets/cli':
         specifier: ^2.22.0
         version: 2.29.5
+      '@eslint/js':
+        specifier: ^9.39.2
+        version: 9.39.2
       '@rollup/plugin-dynamic-import-vars':
         specifier: ^2.0.7
         version: 2.1.5(rollup@3.29.5)
@@ -77,6 +80,9 @@ importers:
       typescript:
         specifier: ^5.2.2
         version: 5.8.3
+      typescript-eslint:
+        specifier: ^8.54.0
+        version: 8.54.0(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3)
       vitest:
         specifier: ^0.34.3
         version: 0.34.6(happy-dom@10.11.2)
@@ -117,15 +123,24 @@ importers:
 
   examples/vite:
     dependencies:
-      '@dde-earth/plugin-drawer':
+      '@dde-earth/plugin-martini-terrain-loader':
         specifier: workspace:^
-        version: link:../../packages/plugin-drawer
+        version: link:../../packages/plugin-martini-terrain-loader
+      '@dde-earth/plugin-mvt-loader':
+        specifier: workspace:^
+        version: link:../../packages/plugin-mvt-loader
+      '@dde-earth/plugin-nc-loader':
+        specifier: workspace:^
+        version: link:../../packages/plugin-nc-loader
+      '@dde-earth/plugin-tiff-loader':
+        specifier: workspace:^
+        version: link:../../packages/plugin-tiff-loader
       '@dde-earth/recommend-plugins':
         specifier: workspace:^
         version: link:../../packages/recommend-plugins
       cesium:
         specifier: latest
-        version: 1.132.0
+        version: 1.138.0
       dde-earth:
         specifier: workspace:^
         version: link:../../packages/dde-earth
@@ -138,13 +153,13 @@ importers:
         version: 4.5.14(@types/node@20.19.9)
       vite-plugin-cesium:
         specifier: ^1.2.22
-        version: 1.2.23(cesium@1.132.0)(rollup@3.29.5)(vite@4.5.14(@types/node@20.19.9))
+        version: 1.2.23(cesium@1.138.0)(rollup@3.29.5)(vite@4.5.14(@types/node@20.19.9))
 
   packages/dde-earth:
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.132.0
+        version: 1.138.0
 
   packages/plugin-amap-loader:
     dependencies:
@@ -154,10 +169,19 @@ importers:
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.132.0
+        version: 1.138.0
 
   packages/plugin-drawer:
     dependencies:
+      '@turf/helpers':
+        specifier: ^7.0.0
+        version: 7.3.3
+      '@turf/kinks':
+        specifier: ^7.0.0
+        version: 7.3.3
+      '@turf/unkink-polygon':
+        specifier: ^7.0.0
+        version: 7.3.3
       dde-earth:
         specifier: workspace:^
         version: link:../dde-earth
@@ -183,7 +207,7 @@ importers:
     dependencies:
       '@cesium-extends/primitive-geojson':
         specifier: ^1.0.7
-        version: 1.0.11(cesium@1.132.0)
+        version: 1.0.11(cesium@1.138.0)
       dde-earth:
         specifier: workspace:^
         version: link:../dde-earth
@@ -193,7 +217,7 @@ importers:
         version: link:../recommend-plugins
       cesium:
         specifier: latest
-        version: 1.132.0
+        version: 1.138.0
 
   packages/plugin-geo-timescale:
     dependencies:
@@ -206,16 +230,16 @@ importers:
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.136.0
+        version: 1.138.0
 
   packages/plugin-geojson-loader:
     dependencies:
       '@cesium-extends/geojson-render':
         specifier: ^1.0.7
-        version: 1.0.8(cesium@1.132.0)
+        version: 1.0.8(cesium@1.138.0)
       '@cesium-extends/primitive-geojson':
         specifier: ^1.0.9
-        version: 1.0.11(cesium@1.132.0)
+        version: 1.0.11(cesium@1.138.0)
       '@turf/turf':
         specifier: ^6.5.0
         version: 6.5.0
@@ -228,7 +252,7 @@ importers:
         version: 7946.0.16
       cesium:
         specifier: latest
-        version: 1.132.0
+        version: 1.138.0
 
   packages/plugin-globe-rotation:
     dependencies:
@@ -238,33 +262,33 @@ importers:
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.132.0
+        version: 1.138.0
 
   packages/plugin-graticule:
     dependencies:
       cesium-graticule:
         specifier: ^0.3.3
-        version: 0.3.3(cesium@1.132.0)
+        version: 0.3.3(cesium@1.138.0)
       dde-earth:
         specifier: workspace:^
         version: link:../dde-earth
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.132.0
+        version: 1.138.0
 
   packages/plugin-martini-terrain-loader:
     dependencies:
       '@zjugis/cesium-martini':
         specifier: 1.2.3
-        version: 1.2.3(cesium@1.132.0)
+        version: 1.2.3(cesium@1.138.0)
       dde-earth:
         specifier: workspace:^
         version: link:../dde-earth
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.132.0
+        version: 1.138.0
 
   packages/plugin-mvt-loader:
     dependencies:
@@ -273,11 +297,11 @@ importers:
         version: link:../dde-earth
       mvt-imagery-provider:
         specifier: ^1.0.2
-        version: 1.0.3(cesium@1.132.0)
+        version: 1.0.3(cesium@1.138.0)
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.132.0
+        version: 1.138.0
 
   packages/plugin-navigator:
     dependencies:
@@ -287,7 +311,7 @@ importers:
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.132.0
+        version: 1.138.0
 
   packages/plugin-nc-loader:
     dependencies:
@@ -300,7 +324,7 @@ importers:
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.132.0
+        version: 1.138.0
 
   packages/plugin-swipe:
     dependencies:
@@ -310,7 +334,7 @@ importers:
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.137.0
+        version: 1.138.0
 
   packages/plugin-tiff-loader:
     dependencies:
@@ -319,11 +343,11 @@ importers:
         version: link:../dde-earth
       tiff-imagery-provider:
         specifier: ^2.12.3
-        version: 2.17.1(cesium@1.132.0)
+        version: 2.17.1(cesium@1.138.0)
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.132.0
+        version: 1.138.0
 
   packages/recommend-plugins:
     dependencies:
@@ -333,7 +357,7 @@ importers:
     devDependencies:
       cesium:
         specifier: latest
-        version: 1.132.0
+        version: 1.138.0
 
 packages:
 
@@ -461,14 +485,6 @@ packages:
     resolution: {integrity: sha512-ymBxCUEV2HfQLmAp3qou0AlKkChIaMNkKQa/bCLLScfoCj0EBVtQH6Zgk8hP8MWreuR+vzmGOjdPsWLMkKgnrQ==}
     engines: {node: '>=20.19.0'}
 
-  '@cesium/engine@22.1.0':
-    resolution: {integrity: sha512-grL8/wiIkKLFG+FrizORhUTMpOcFMFawa0fmLH3I/1K46TcDQn6Gom+qrcGqbJoc4diYM75xsAC9M8Yajgh4rQ==}
-    engines: {node: '>=20.19.0'}
-
-  '@cesium/engine@22.2.0':
-    resolution: {integrity: sha512-tMy65eWMJ/s0h38jeY5zBaqN5isEyx+u6JPNXNvuafF9FjTDYGjjSevgMr5iKF8LqjaxtQ3/PuWMimjvgv3ECw==}
-    engines: {node: '>=20.19.0'}
-
   '@cesium/engine@22.3.0':
     resolution: {integrity: sha512-oDl+nWX/qfHYQ0lEdGxLqZoKEtTMghvJDzZKTycYfiIuDYDh8Kh0Oy45wr3mSJse3PuTj1e6hDmbw8vbycCOxw==}
     engines: {node: '>=20.19.0'}
@@ -478,14 +494,6 @@ packages:
 
   '@cesium/widgets@13.0.0':
     resolution: {integrity: sha512-Gc/ffnu4anzn6wDjLviYYOydb0OrGWY6ie5pKV+cNWbL48tfLRUZL6D3MJVS+qhSB3NhyA050v82NvPzYbqnuQ==}
-    engines: {node: '>=20.19.0'}
-
-  '@cesium/widgets@14.1.0':
-    resolution: {integrity: sha512-/8xJTi95XZrdkmJGABEHuQLu2ZarJ59J4V21dmgU/GJAFoqnjPlqFaFajx5XBZzRufGFYW1vGsq9BMqbdOJn5Q==}
-    engines: {node: '>=20.19.0'}
-
-  '@cesium/widgets@14.2.0':
-    resolution: {integrity: sha512-Q+FrDynEwh1mxtdwN+uFzi2X4qIeoYwq0TnH/sdo0jhTPiM7qNYLiF2jmc0zxHRQFTOR1Sdzk3dqv60qjD0n5A==}
     engines: {node: '>=20.19.0'}
 
   '@cesium/widgets@14.3.0':
@@ -823,8 +831,18 @@ packages:
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
 
+  '@eslint-community/eslint-utils@4.9.1':
+    resolution: {integrity: sha512-phrYmNiYppR7znFEdqgfWHXR6NCkZEK7hwWDHZUjit/2/U0r6XvkDl0SYnoM51Hq7FhCGdLDT6zxCCOY1hexsQ==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    peerDependencies:
+      eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
+
   '@eslint-community/regexpp@4.12.1':
     resolution: {integrity: sha512-CCZCDJuduB9OUkFkY2IgppNZMi2lBQgD2qzwXkEia16cge2pijY/aXi96CJMquDMn3nJdlPV1A5KrJEXwfLNzQ==}
+    engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
+
+  '@eslint-community/regexpp@4.12.2':
+    resolution: {integrity: sha512-EriSTlt5OC9/7SXkRSCAhfSxxoSUgBm33OH+IkwbdpgoqsSsUg7y3uh+IICI/Qg4BBWr3U2i39RpmycbxMq4ew==}
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
 
   '@eslint/config-array@0.21.0':
@@ -845,6 +863,10 @@ packages:
 
   '@eslint/js@9.31.0':
     resolution: {integrity: sha512-LOm5OVt7D4qiKCqoiPbA7LWmI+tbw1VbTUowBcUMgQSuM6poJufkFkYDcQpo5KfgD39TnNySV26QjOh7VFpSyw==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@eslint/js@9.39.2':
+    resolution: {integrity: sha512-q1mjIoW1VX4IvSocvM/vbTiveKC4k9eLrajNEuSsmjymSDEbpGddtpfOoN7YGAqBK3NG+uqo8ia4PDTt8buCYA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/object-schema@2.1.6':
@@ -1227,6 +1249,9 @@ packages:
   '@turf/area@6.5.0':
     resolution: {integrity: sha512-xCZdiuojokLbQ+29qR6qoMD89hv+JAgWjLrwSEWL+3JV8IXKeNFl6XkEJz9HGkVpnXvQKJoRz4/liT+8ZZ5Jyg==}
 
+  '@turf/area@7.3.3':
+    resolution: {integrity: sha512-FT66TCxUec+3RsCCyO1kWP57/tiEWEqYfpIs5n44dup401Cne/E+xunahEWxMfP/HSUxfcRQqrjH5vEulLrNoA==}
+
   '@turf/bbox-clip@6.5.0':
     resolution: {integrity: sha512-F6PaIRF8WMp8EmgU/Ke5B1Y6/pia14UAYB5TiBC668w5rVVjy5L8rTm/m2lEkkDMHlzoP9vNY4pxpNthE7rLcQ==}
 
@@ -1268,6 +1293,9 @@ packages:
 
   '@turf/boolean-point-in-polygon@6.5.0':
     resolution: {integrity: sha512-DtSuVFB26SI+hj0SjrvXowGTUCHlgevPAIsukssW6BG5MlNSBQAo70wpICBNJL6RjukXg8d2eXaAWuD/CqL00A==}
+
+  '@turf/boolean-point-in-polygon@7.3.3':
+    resolution: {integrity: sha512-hmXV4PofLAVbVZcnKk/yp//0s65huap+L3wKGKzbLWk57fWla/eRmFKx/iQ15xGu05zylHz5cA5AfriVGZHj2g==}
 
   '@turf/boolean-point-on-line@6.5.0':
     resolution: {integrity: sha512-A1BbuQ0LceLHvq7F/P7w3QvfpmZqbmViIUPHdNLvZimFNLo4e6IQunmzbe+8aSStH9QRZm3VOflyvNeXvvpZEQ==}
@@ -1359,6 +1387,9 @@ packages:
   '@turf/helpers@6.5.0':
     resolution: {integrity: sha512-VbI1dV5bLFzohYYdgqwikdMVpe7pJ9X3E+dlr425wa2/sMJqYDhTO++ec38/pcPvPE6oD9WEEeU3Xu3gza+VPw==}
 
+  '@turf/helpers@7.3.3':
+    resolution: {integrity: sha512-9Ias0L1GuZPIzO6sk8jraTEuLJye6n9LYNEdw69ZGOQ6C1IigjxkPW49zmn21aTv1z27vxdVLSS3r+78DB2QnQ==}
+
   '@turf/hex-grid@6.5.0':
     resolution: {integrity: sha512-Ln3tc2tgZT8etDOldgc6e741Smg1CsMKAz1/Mlel+MEL5Ynv2mhx3m0q4J9IB1F3a4MNjDeVvm8drAaf9SF33g==}
 
@@ -1371,6 +1402,9 @@ packages:
   '@turf/invariant@6.5.0':
     resolution: {integrity: sha512-Wv8PRNCtPD31UVbdJE/KVAWKe7l6US+lJItRR/HOEW3eh+U/JwRCSUl/KZ7bmjM/C+zLNoreM2TU6OoLACs4eg==}
 
+  '@turf/invariant@7.3.3':
+    resolution: {integrity: sha512-q6UDgWmtIlU+AIxt5Awnh18ZMSuNti6drCXbIBdGdgQaQ1qEiyGZDE3P9RKk6otoLXOBYecOuI0HIwf2IxurhQ==}
+
   '@turf/isobands@6.5.0':
     resolution: {integrity: sha512-4h6sjBPhRwMVuFaVBv70YB7eGz+iw0bhPRnp+8JBdX1UPJSXhoi/ZF2rACemRUr0HkdVB/a1r9gC32vn5IAEkw==}
 
@@ -1379,6 +1413,9 @@ packages:
 
   '@turf/kinks@6.5.0':
     resolution: {integrity: sha512-ViCngdPt1eEL7hYUHR2eHR662GvCgTc35ZJFaNR6kRtr6D8plLaDju0FILeFFWSc+o8e3fwxZEJKmFj9IzPiIQ==}
+
+  '@turf/kinks@7.3.3':
+    resolution: {integrity: sha512-+k6hB/1LIxqkt/2DTAYxx4ggq51V1iLNLm7s4a+ZV3orPob+zpVvpqENHx7ppuDHNx9x+gz1yR1AZNR0S3MXxw==}
 
   '@turf/length@6.5.0':
     resolution: {integrity: sha512-5pL5/pnw52fck3oRsHDcSGrj9HibvtlrZ0QNy2OcW8qBFDNgZ4jtl6U7eATVoyWPKBHszW3dWETW+iLV7UARig==}
@@ -1418,6 +1455,9 @@ packages:
 
   '@turf/meta@6.5.0':
     resolution: {integrity: sha512-RrArvtsV0vdsCBegoBtOalgdSOfkBrTJ07VkpiCnq/491W67hnMWmDu7e6Ztw0C3WldRYTXkg3SumfdzZxLBHA==}
+
+  '@turf/meta@7.3.3':
+    resolution: {integrity: sha512-Tz1j4h70iFB5SebWWoVv/uL59x4aOngXU+d1xQDXzOCn/O6txnreGVGMcYU362c5F06yqZx38H9UFTQ553lK0w==}
 
   '@turf/midpoint@6.5.0':
     resolution: {integrity: sha512-MyTzV44IwmVI6ec9fB2OgZ53JGNlgOpaYl9ArKoF49rXpL84F9rNATndbe0+MQIhdkw8IlzA6xVP4lZzfMNVCw==}
@@ -1536,6 +1576,9 @@ packages:
   '@turf/unkink-polygon@6.5.0':
     resolution: {integrity: sha512-8QswkzC0UqKmN1DT6HpA9upfa1HdAA5n6bbuzHy8NJOX8oVizVAqfEPY0wqqTgboDjmBR4yyImsdPGUl3gZ8JQ==}
 
+  '@turf/unkink-polygon@7.3.3':
+    resolution: {integrity: sha512-FlTX/T5vat9zyV1xngLfnl5IryGFrSLmDsJswII7AU8DtZKe7URyD7AW5TWPUKDHCAJEoiP8lrDCQrZsoO9F8g==}
+
   '@turf/voronoi@6.5.0':
     resolution: {integrity: sha512-C/xUsywYX+7h1UyNqnydHXiun4UPjK88VDghtoRypR9cLlb7qozkiLRphQxxsCM0KxyxpVPHBVQXdAL3+Yurow==}
 
@@ -1639,6 +1682,14 @@ packages:
       eslint: ^8.57.0 || ^9.0.0
       typescript: '>=4.8.4 <5.9.0'
 
+  '@typescript-eslint/eslint-plugin@8.54.0':
+    resolution: {integrity: sha512-hAAP5io/7csFStuOmR782YmTthKBJ9ND3WVL60hcOjvtGFb+HJxH4O5huAcmcZ9v9G8P+JETiZ/G1B8MALnWZQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      '@typescript-eslint/parser': ^8.54.0
+      eslint: ^8.57.0 || ^9.0.0
+      typescript: '>=4.8.4 <6.0.0'
+
   '@typescript-eslint/parser@8.38.0':
     resolution: {integrity: sha512-Zhy8HCvBUEfBECzIl1PKqF4p11+d0aUJS1GeUiuqK9WmOug8YCmC4h4bjyBvMyAMI9sbRczmrYL5lKg/YMbrcQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -1646,14 +1697,31 @@ packages:
       eslint: ^8.57.0 || ^9.0.0
       typescript: '>=4.8.4 <5.9.0'
 
+  '@typescript-eslint/parser@8.54.0':
+    resolution: {integrity: sha512-BtE0k6cjwjLZoZixN0t5AKP0kSzlGu7FctRXYuPAm//aaiZhmfq1JwdYpYr1brzEspYyFeF+8XF5j2VK6oalrA==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      eslint: ^8.57.0 || ^9.0.0
+      typescript: '>=4.8.4 <6.0.0'
+
   '@typescript-eslint/project-service@8.38.0':
     resolution: {integrity: sha512-dbK7Jvqcb8c9QfH01YB6pORpqX1mn5gDZc9n63Ak/+jD67oWXn3Gs0M6vddAN+eDXBCS5EmNWzbSxsn9SzFWWg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       typescript: '>=4.8.4 <5.9.0'
 
+  '@typescript-eslint/project-service@8.54.0':
+    resolution: {integrity: sha512-YPf+rvJ1s7MyiWM4uTRhE4DvBXrEV+d8oC3P9Y2eT7S+HBS0clybdMIPnhiATi9vZOYDc7OQ1L/i6ga6NFYK/g==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      typescript: '>=4.8.4 <6.0.0'
+
   '@typescript-eslint/scope-manager@8.38.0':
     resolution: {integrity: sha512-WJw3AVlFFcdT9Ri1xs/lg8LwDqgekWXWhH3iAF+1ZM+QPd7oxQ6jvtW/JPwzAScxitILUIFs0/AnQ/UWHzbATQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@typescript-eslint/scope-manager@8.54.0':
+    resolution: {integrity: sha512-27rYVQku26j/PbHYcVfRPonmOlVI6gihHtXFbTdB5sb6qA0wdAQAbyXFVarQ5t4HRojIz64IV90YtsjQSSGlQg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@typescript-eslint/tsconfig-utils@8.38.0':
@@ -1662,6 +1730,12 @@ packages:
     peerDependencies:
       typescript: '>=4.8.4 <5.9.0'
 
+  '@typescript-eslint/tsconfig-utils@8.54.0':
+    resolution: {integrity: sha512-dRgOyT2hPk/JwxNMZDsIXDgyl9axdJI3ogZ2XWhBPsnZUv+hPesa5iuhdYt2gzwA9t8RE5ytOJ6xB0moV0Ujvw==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      typescript: '>=4.8.4 <6.0.0'
+
   '@typescript-eslint/type-utils@8.38.0':
     resolution: {integrity: sha512-c7jAvGEZVf0ao2z+nnz8BUaHZD09Agbh+DY7qvBQqLiz8uJzRgVPj5YvOh8I8uEiH8oIUGIfHzMwUcGVco/SJg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -1669,8 +1743,19 @@ packages:
       eslint: ^8.57.0 || ^9.0.0
       typescript: '>=4.8.4 <5.9.0'
 
+  '@typescript-eslint/type-utils@8.54.0':
+    resolution: {integrity: sha512-hiLguxJWHjjwL6xMBwD903ciAwd7DmK30Y9Axs/etOkftC3ZNN9K44IuRD/EB08amu+Zw6W37x9RecLkOo3pMA==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      eslint: ^8.57.0 || ^9.0.0
+      typescript: '>=4.8.4 <6.0.0'
+
   '@typescript-eslint/types@8.38.0':
     resolution: {integrity: sha512-wzkUfX3plUqij4YwWaJyqhiPE5UCRVlFpKn1oCRn2O1bJ592XxWJj8ROQ3JD5MYXLORW84063z3tZTb/cs4Tyw==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@typescript-eslint/types@8.54.0':
+    resolution: {integrity: sha512-PDUI9R1BVjqu7AUDsRBbKMtwmjWcn4J3le+5LpcFgWULN3LvHC5rkc9gCVxbrsrGmO1jfPybN5s6h4Jy+OnkAA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@typescript-eslint/typescript-estree@8.38.0':
@@ -1679,6 +1764,12 @@ packages:
     peerDependencies:
       typescript: '>=4.8.4 <5.9.0'
 
+  '@typescript-eslint/typescript-estree@8.54.0':
+    resolution: {integrity: sha512-BUwcskRaPvTk6fzVWgDPdUndLjB87KYDrN5EYGetnktoeAvPtO4ONHlAZDnj5VFnUANg0Sjm7j4usBlnoVMHwA==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      typescript: '>=4.8.4 <6.0.0'
+
   '@typescript-eslint/utils@8.38.0':
     resolution: {integrity: sha512-hHcMA86Hgt+ijJlrD8fX0j1j8w4C92zue/8LOPAFioIno+W0+L7KqE8QZKCcPGc/92Vs9x36w/4MPTJhqXdyvg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -1686,8 +1777,19 @@ packages:
       eslint: ^8.57.0 || ^9.0.0
       typescript: '>=4.8.4 <5.9.0'
 
+  '@typescript-eslint/utils@8.54.0':
+    resolution: {integrity: sha512-9Cnda8GS57AQakvRyG0PTejJNlA2xhvyNtEVIMlDWOOeEyBkYWhGPnfrIAnqxLMTSTo6q8g12XVjjev5l1NvMA==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      eslint: ^8.57.0 || ^9.0.0
+      typescript: '>=4.8.4 <6.0.0'
+
   '@typescript-eslint/visitor-keys@8.38.0':
     resolution: {integrity: sha512-pWrTcoFNWuwHlA9CvlfSsGWs14JxfN1TH25zM5L7o0pRLhsoZkDnTsXfQRJBEWJoV5DL0jf+Z+sxiud+K0mq1g==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@typescript-eslint/visitor-keys@8.54.0':
+    resolution: {integrity: sha512-VFlhGSl4opC0bprJiItPQ1RfUhGDIBokcPwaFH4yiBCaNPeld/9VeXbiPO1cLyorQi1G1vL+ecBk1x8o1axORA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@ungap/structured-clone@1.3.0':
@@ -1901,14 +2003,6 @@ packages:
 
   cesium@1.132.0:
     resolution: {integrity: sha512-FOurvzkUhnbXn/gqruBMkHqVpen7URNd5xemEhD76VzoYpRvOwWJWNaFeuBuB5AEJpFfGs5hVicGKFMzX/sUlw==}
-    engines: {node: '>=20.19.0'}
-
-  cesium@1.136.0:
-    resolution: {integrity: sha512-sHSFNNLgrgJQxpdLxdmjytT7qfs8dkn23tpPnXKweqvynQn+yAybepK6AwzYBbKQ017qBkrS/Wb4DORIFcjjhQ==}
-    engines: {node: '>=20.19.0'}
-
-  cesium@1.137.0:
-    resolution: {integrity: sha512-mi8wMoHkkNWHdhAjyFUURom9r8Y6iUMr2307DwQ24MF3ZXSrL6yhsrTTAT+AiKrwcqEPqoe38y+qrFE0FA7iUg==}
     engines: {node: '>=20.19.0'}
 
   cesium@1.138.0:
@@ -2239,6 +2333,15 @@ packages:
       supports-color:
         optional: true
 
+  debug@4.4.3:
+    resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+
   decode-named-character-reference@1.2.0:
     resolution: {integrity: sha512-c6fcElNV6ShtZXmsgNgFFV5tVX2PaV4g+MOAkb8eXHvn6sryJBrZa9r0zV6+dtTyoCKxtDy5tyQ5ZwQuidtd+Q==}
 
@@ -2543,6 +2646,15 @@ packages:
 
   fastq@1.19.1:
     resolution: {integrity: sha512-GwLTyxkCXjXbxqIhTsMI2Nui8huMPtnxg7krajPJAjnEG/iiOS7i+zCtWGZR9G0NBKbXKh6X9m9UIsYX/N6vvQ==}
+
+  fdir@6.5.0:
+    resolution: {integrity: sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      picomatch: ^3 || ^4
+    peerDependenciesMeta:
+      picomatch:
+        optional: true
 
   file-entry-cache@8.0.0:
     resolution: {integrity: sha512-XXTUwCvisa5oacNGRP9SfNtYBNAMi+RPwBFmblZEF7N7swHYQS6/Zfk7SRwx4D5j3CH211YNRco1DEMNVfZCnQ==}
@@ -3219,9 +3331,6 @@ packages:
   meshoptimizer@0.24.0:
     resolution: {integrity: sha512-Iq/8cM5cK2B0P0QdKHexr30zEJn5sQxjXKtQJGp6LO7r1VUPwhgxau18pvybVDnEDsKE49GdlJYwqPX9A/P9Sw==}
 
-  meshoptimizer@0.25.0:
-    resolution: {integrity: sha512-ewwuAo3ujPZ7T3Y2oTkEoLlXvNOqnr0cjyAxfv5djXJqwD9QlxDDO0qGtsqB4Z9QUVvhruKXg9q/xfK9I5S1xQ==}
-
   meshoptimizer@1.0.1:
     resolution: {integrity: sha512-Vix+QlA1YYT3FwmBBZ+49cE5y/b+pRrcXKqGpS5ouh33d3lSp2PoTpCw19E0cKDFWalembrHnIaZetf27a+W2g==}
 
@@ -3693,6 +3802,9 @@ packages:
   pkg-types@1.3.1:
     resolution: {integrity: sha512-/Jm5M4RvtBFVkKWRu2BLUTNP8/M2a+UwuAX+ae4770q1qVGtfjG+WTCupoZixokjmHiry8uI+dlY8KXYV5HVVQ==}
 
+  point-in-polygon-hao@1.2.4:
+    resolution: {integrity: sha512-x2pcvXeqhRHlNRdhLs/tgFapAbSSe86wa/eqmj1G6pWftbEs5aVRJhRGM6FYSUERKu0PjekJzMq0gsI2XyiclQ==}
+
   point-in-polygon@1.1.0:
     resolution: {integrity: sha512-3ojrFwjnnw8Q9242TzgXuTD+eKiutbzyslcq1ydfu82Db2y+Ogbmyrkpv0Hgj31qwT3lbS9+QAAO/pIQM35XRw==}
 
@@ -3972,6 +4084,11 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  semver@7.7.3:
+    resolution: {integrity: sha512-SdsKMrI9TdgjdweUSR9MweHA4EJ8YxHn8DFaDisvhVlUOe4BF1tLD7GAj0lIqWVl+dPb/rExr0Btby5loQm20Q==}
+    engines: {node: '>=10'}
+    hasBin: true
+
   send@0.19.0:
     resolution: {integrity: sha512-dW41u5VfLXu8SJh5bwRmyYUbAoSB3c9uQh6L8h/KtsFREPWpbX1lrljJo186Jc4nmci/sGUZ9a0a0J2zgfq2hw==}
     engines: {node: '>= 0.8.0'}
@@ -4191,6 +4308,10 @@ packages:
   tinybench@2.9.0:
     resolution: {integrity: sha512-0+DUvqWMValLmha6lr4kD8iAMK1HzV0/aKnCtWb9v9641TnP/MFb7Pc2bxoxQjTXAErryXVgUOfv2YqNllqGeg==}
 
+  tinyglobby@0.2.15:
+    resolution: {integrity: sha512-j2Zq4NyQYG5XMST4cbs02Ak8iJUdxRM0XI5QyxXuZOzKOINmWurp3smXu3y5wDcJrptwpSjgXHzIQxR0omXljQ==}
+    engines: {node: '>=12.0.0'}
+
   tinypool@0.7.0:
     resolution: {integrity: sha512-zSYNUlYSMhJ6Zdou4cJwo/p7w5nmAH17GRfU/ui3ctvjXFErXXkruT4MWW6poDeXgCaIBlGLrfU6TbTXxyGMww==}
     engines: {node: '>=14.0.0'}
@@ -4238,6 +4359,12 @@ packages:
 
   ts-api-utils@2.1.0:
     resolution: {integrity: sha512-CUgTZL1irw8u29bzrOD/nH85jqyc74D6SshFgujOIA7osm2Rz7dYH77agkx7H4FBNxDq7Cjf+IjaX/8zwFW+ZQ==}
+    engines: {node: '>=18.12'}
+    peerDependencies:
+      typescript: '>=4.8.4'
+
+  ts-api-utils@2.4.0:
+    resolution: {integrity: sha512-3TaVTaAv2gTiMB35i3FiGJaRfwb3Pyn/j3m/bfAvGe8FB7CF6u+LMYqYlDh7reQf7UNvoTvdfAqHGmPGOSsPmA==}
     engines: {node: '>=18.12'}
     peerDependencies:
       typescript: '>=4.8.4'
@@ -4300,6 +4427,13 @@ packages:
   type-fest@1.4.0:
     resolution: {integrity: sha512-yGSza74xk0UG8k+pLh5oeoYirvIiWo5t0/o3zHHAO2tRDiZcxWP7fywNlXhqb6/r6sWvwi+RsyQMWhVLe4BVuA==}
     engines: {node: '>=10'}
+
+  typescript-eslint@8.54.0:
+    resolution: {integrity: sha512-CKsJ+g53QpsNPqbzUsfKVgd3Lny4yKZ1pP4qN3jdMOg/sisIDLGyDMezycquXLE5JsEU0wp3dGNdzig0/fmSVQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    peerDependencies:
+      eslint: ^8.57.0 || ^9.0.0
+      typescript: '>=4.8.4 <6.0.0'
 
   typescript@5.8.3:
     resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
@@ -4714,11 +4848,11 @@ snapshots:
       '@cesium-extends/tooltip': 1.2.3(cesium@1.132.0)
       cesium: 1.132.0
 
-  '@cesium-extends/geojson-render@1.0.8(cesium@1.132.0)':
+  '@cesium-extends/geojson-render@1.0.8(cesium@1.138.0)':
     dependencies:
-      '@cesium-extends/primitive-geojson': 1.0.11(cesium@1.132.0)
+      '@cesium-extends/primitive-geojson': 1.0.11(cesium@1.138.0)
       '@turf/turf': 6.5.0
-      cesium: 1.132.0
+      cesium: 1.138.0
 
   '@cesium-extends/measure@1.1.4(cesium@1.132.0)':
     dependencies:
@@ -4732,11 +4866,11 @@ snapshots:
       '@turf/voronoi': 6.5.0
       cesium: 1.132.0
 
-  '@cesium-extends/primitive-geojson@1.0.11(cesium@1.132.0)':
+  '@cesium-extends/primitive-geojson@1.0.11(cesium@1.138.0)':
     dependencies:
       '@turf/centroid': 6.5.0
       '@turf/helpers': 6.5.0
-      cesium: 1.132.0
+      cesium: 1.138.0
       nanoid: 4.0.2
 
   '@cesium-extends/subscriber@1.1.1(cesium@1.132.0)':
@@ -4772,54 +4906,6 @@ snapshots:
       topojson-client: 3.1.0
       urijs: 1.19.11
 
-  '@cesium/engine@22.1.0':
-    dependencies:
-      '@cesium/wasm-splats': 0.1.0-alpha.2
-      '@spz-loader/core': 0.3.0
-      '@tweenjs/tween.js': 25.0.0
-      '@zip.js/zip.js': 2.8.11
-      autolinker: 4.1.5
-      bitmap-sdf: 1.0.4
-      dompurify: 3.3.1
-      draco3d: 1.5.7
-      earcut: 3.0.2
-      grapheme-splitter: 1.0.4
-      jsep: 1.4.0
-      kdbush: 4.0.2
-      ktx-parse: 1.0.1
-      lerc: 2.0.0
-      mersenne-twister: 1.1.0
-      meshoptimizer: 0.25.0
-      pako: 2.1.0
-      protobufjs: 7.5.3
-      rbush: 4.0.1
-      topojson-client: 3.1.0
-      urijs: 1.19.11
-
-  '@cesium/engine@22.2.0':
-    dependencies:
-      '@cesium/wasm-splats': 0.1.0-alpha.2
-      '@spz-loader/core': 0.3.0
-      '@tweenjs/tween.js': 25.0.0
-      '@zip.js/zip.js': 2.8.11
-      autolinker: 4.1.5
-      bitmap-sdf: 1.0.4
-      dompurify: 3.3.1
-      draco3d: 1.5.7
-      earcut: 3.0.2
-      grapheme-splitter: 1.0.4
-      jsep: 1.4.0
-      kdbush: 4.0.2
-      ktx-parse: 1.0.1
-      lerc: 2.0.0
-      mersenne-twister: 1.1.0
-      meshoptimizer: 1.0.1
-      pako: 2.1.0
-      protobufjs: 8.0.0
-      rbush: 4.0.1
-      topojson-client: 3.1.0
-      urijs: 1.19.11
-
   '@cesium/engine@22.3.0':
     dependencies:
       '@cesium/wasm-splats': 0.1.0-alpha.2
@@ -4849,16 +4935,6 @@ snapshots:
   '@cesium/widgets@13.0.0':
     dependencies:
       '@cesium/engine': 19.0.0
-      nosleep.js: 0.12.0
-
-  '@cesium/widgets@14.1.0':
-    dependencies:
-      '@cesium/engine': 22.2.0
-      nosleep.js: 0.12.0
-
-  '@cesium/widgets@14.2.0':
-    dependencies:
-      '@cesium/engine': 22.2.0
       nosleep.js: 0.12.0
 
   '@cesium/widgets@14.3.0':
@@ -5148,7 +5224,14 @@ snapshots:
       eslint: 9.31.0(jiti@1.21.7)
       eslint-visitor-keys: 3.4.3
 
+  '@eslint-community/eslint-utils@4.9.1(eslint@9.31.0(jiti@1.21.7))':
+    dependencies:
+      eslint: 9.31.0(jiti@1.21.7)
+      eslint-visitor-keys: 3.4.3
+
   '@eslint-community/regexpp@4.12.1': {}
+
+  '@eslint-community/regexpp@4.12.2': {}
 
   '@eslint/config-array@0.21.0':
     dependencies:
@@ -5179,6 +5262,8 @@ snapshots:
       - supports-color
 
   '@eslint/js@9.31.0': {}
+
+  '@eslint/js@9.39.2': {}
 
   '@eslint/object-schema@2.1.6': {}
 
@@ -5517,6 +5602,13 @@ snapshots:
       '@turf/helpers': 6.5.0
       '@turf/meta': 6.5.0
 
+  '@turf/area@7.3.3':
+    dependencies:
+      '@turf/helpers': 7.3.3
+      '@turf/meta': 7.3.3
+      '@types/geojson': 7946.0.16
+      tslib: 2.8.1
+
   '@turf/bbox-clip@6.5.0':
     dependencies:
       '@turf/helpers': 6.5.0
@@ -5603,6 +5695,14 @@ snapshots:
     dependencies:
       '@turf/helpers': 6.5.0
       '@turf/invariant': 6.5.0
+
+  '@turf/boolean-point-in-polygon@7.3.3':
+    dependencies:
+      '@turf/helpers': 7.3.3
+      '@turf/invariant': 7.3.3
+      '@types/geojson': 7946.0.16
+      point-in-polygon-hao: 1.2.4
+      tslib: 2.8.1
 
   '@turf/boolean-point-on-line@6.5.0':
     dependencies:
@@ -5789,6 +5889,11 @@ snapshots:
 
   '@turf/helpers@6.5.0': {}
 
+  '@turf/helpers@7.3.3':
+    dependencies:
+      '@types/geojson': 7946.0.16
+      tslib: 2.8.1
+
   '@turf/hex-grid@6.5.0':
     dependencies:
       '@turf/distance': 6.5.0
@@ -5820,6 +5925,12 @@ snapshots:
     dependencies:
       '@turf/helpers': 6.5.0
 
+  '@turf/invariant@7.3.3':
+    dependencies:
+      '@turf/helpers': 7.3.3
+      '@types/geojson': 7946.0.16
+      tslib: 2.8.1
+
   '@turf/isobands@6.5.0':
     dependencies:
       '@turf/area': 6.5.0
@@ -5842,6 +5953,12 @@ snapshots:
   '@turf/kinks@6.5.0':
     dependencies:
       '@turf/helpers': 6.5.0
+
+  '@turf/kinks@7.3.3':
+    dependencies:
+      '@turf/helpers': 7.3.3
+      '@types/geojson': 7946.0.16
+      tslib: 2.8.1
 
   '@turf/length@6.5.0':
     dependencies:
@@ -5934,6 +6051,12 @@ snapshots:
   '@turf/meta@6.5.0':
     dependencies:
       '@turf/helpers': 6.5.0
+
+  '@turf/meta@7.3.3':
+    dependencies:
+      '@turf/helpers': 7.3.3
+      '@types/geojson': 7946.0.16
+      tslib: 2.8.1
 
   '@turf/midpoint@6.5.0':
     dependencies:
@@ -6307,6 +6430,16 @@ snapshots:
       '@turf/meta': 6.5.0
       rbush: 2.0.2
 
+  '@turf/unkink-polygon@7.3.3':
+    dependencies:
+      '@turf/area': 7.3.3
+      '@turf/boolean-point-in-polygon': 7.3.3
+      '@turf/helpers': 7.3.3
+      '@turf/meta': 7.3.3
+      '@types/geojson': 7946.0.16
+      rbush: 3.0.1
+      tslib: 2.8.1
+
   '@turf/voronoi@6.5.0':
     dependencies:
       '@turf/helpers': 6.5.0
@@ -6414,6 +6547,22 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@typescript-eslint/eslint-plugin@8.54.0(@typescript-eslint/parser@8.54.0(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3))(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3)':
+    dependencies:
+      '@eslint-community/regexpp': 4.12.2
+      '@typescript-eslint/parser': 8.54.0(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3)
+      '@typescript-eslint/scope-manager': 8.54.0
+      '@typescript-eslint/type-utils': 8.54.0(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3)
+      '@typescript-eslint/utils': 8.54.0(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3)
+      '@typescript-eslint/visitor-keys': 8.54.0
+      eslint: 9.31.0(jiti@1.21.7)
+      ignore: 7.0.5
+      natural-compare: 1.4.0
+      ts-api-utils: 2.4.0(typescript@5.8.3)
+      typescript: 5.8.3
+    transitivePeerDependencies:
+      - supports-color
+
   '@typescript-eslint/parser@8.38.0(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3)':
     dependencies:
       '@typescript-eslint/scope-manager': 8.38.0
@@ -6421,6 +6570,18 @@ snapshots:
       '@typescript-eslint/typescript-estree': 8.38.0(typescript@5.8.3)
       '@typescript-eslint/visitor-keys': 8.38.0
       debug: 4.4.1
+      eslint: 9.31.0(jiti@1.21.7)
+      typescript: 5.8.3
+    transitivePeerDependencies:
+      - supports-color
+
+  '@typescript-eslint/parser@8.54.0(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3)':
+    dependencies:
+      '@typescript-eslint/scope-manager': 8.54.0
+      '@typescript-eslint/types': 8.54.0
+      '@typescript-eslint/typescript-estree': 8.54.0(typescript@5.8.3)
+      '@typescript-eslint/visitor-keys': 8.54.0
+      debug: 4.4.3
       eslint: 9.31.0(jiti@1.21.7)
       typescript: 5.8.3
     transitivePeerDependencies:
@@ -6435,12 +6596,30 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@typescript-eslint/project-service@8.54.0(typescript@5.8.3)':
+    dependencies:
+      '@typescript-eslint/tsconfig-utils': 8.54.0(typescript@5.8.3)
+      '@typescript-eslint/types': 8.54.0
+      debug: 4.4.3
+      typescript: 5.8.3
+    transitivePeerDependencies:
+      - supports-color
+
   '@typescript-eslint/scope-manager@8.38.0':
     dependencies:
       '@typescript-eslint/types': 8.38.0
       '@typescript-eslint/visitor-keys': 8.38.0
 
+  '@typescript-eslint/scope-manager@8.54.0':
+    dependencies:
+      '@typescript-eslint/types': 8.54.0
+      '@typescript-eslint/visitor-keys': 8.54.0
+
   '@typescript-eslint/tsconfig-utils@8.38.0(typescript@5.8.3)':
+    dependencies:
+      typescript: 5.8.3
+
+  '@typescript-eslint/tsconfig-utils@8.54.0(typescript@5.8.3)':
     dependencies:
       typescript: 5.8.3
 
@@ -6456,7 +6635,21 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@typescript-eslint/type-utils@8.54.0(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3)':
+    dependencies:
+      '@typescript-eslint/types': 8.54.0
+      '@typescript-eslint/typescript-estree': 8.54.0(typescript@5.8.3)
+      '@typescript-eslint/utils': 8.54.0(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3)
+      debug: 4.4.3
+      eslint: 9.31.0(jiti@1.21.7)
+      ts-api-utils: 2.4.0(typescript@5.8.3)
+      typescript: 5.8.3
+    transitivePeerDependencies:
+      - supports-color
+
   '@typescript-eslint/types@8.38.0': {}
+
+  '@typescript-eslint/types@8.54.0': {}
 
   '@typescript-eslint/typescript-estree@8.38.0(typescript@5.8.3)':
     dependencies:
@@ -6474,6 +6667,21 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@typescript-eslint/typescript-estree@8.54.0(typescript@5.8.3)':
+    dependencies:
+      '@typescript-eslint/project-service': 8.54.0(typescript@5.8.3)
+      '@typescript-eslint/tsconfig-utils': 8.54.0(typescript@5.8.3)
+      '@typescript-eslint/types': 8.54.0
+      '@typescript-eslint/visitor-keys': 8.54.0
+      debug: 4.4.3
+      minimatch: 9.0.5
+      semver: 7.7.3
+      tinyglobby: 0.2.15
+      ts-api-utils: 2.4.0(typescript@5.8.3)
+      typescript: 5.8.3
+    transitivePeerDependencies:
+      - supports-color
+
   '@typescript-eslint/utils@8.38.0(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3)':
     dependencies:
       '@eslint-community/eslint-utils': 4.7.0(eslint@9.31.0(jiti@1.21.7))
@@ -6485,9 +6693,25 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@typescript-eslint/utils@8.54.0(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3)':
+    dependencies:
+      '@eslint-community/eslint-utils': 4.9.1(eslint@9.31.0(jiti@1.21.7))
+      '@typescript-eslint/scope-manager': 8.54.0
+      '@typescript-eslint/types': 8.54.0
+      '@typescript-eslint/typescript-estree': 8.54.0(typescript@5.8.3)
+      eslint: 9.31.0(jiti@1.21.7)
+      typescript: 5.8.3
+    transitivePeerDependencies:
+      - supports-color
+
   '@typescript-eslint/visitor-keys@8.38.0':
     dependencies:
       '@typescript-eslint/types': 8.38.0
+      eslint-visitor-keys: 4.2.1
+
+  '@typescript-eslint/visitor-keys@8.54.0':
+    dependencies:
+      '@typescript-eslint/types': 8.54.0
       eslint-visitor-keys: 4.2.1
 
   '@ungap/structured-clone@1.3.0': {}
@@ -6539,9 +6763,9 @@ snapshots:
 
   '@zip.js/zip.js@2.8.11': {}
 
-  '@zjugis/cesium-martini@1.2.3(cesium@1.132.0)':
+  '@zjugis/cesium-martini@1.2.3(cesium@1.138.0)':
     dependencies:
-      cesium: 1.132.0
+      cesium: 1.138.0
 
   '@zjugis/geo-timeline@1.6.0':
     dependencies:
@@ -6692,9 +6916,9 @@ snapshots:
 
   ccount@2.0.1: {}
 
-  cesium-graticule@0.3.3(cesium@1.132.0):
+  cesium-graticule@0.3.3(cesium@1.138.0):
     dependencies:
-      cesium: 1.132.0
+      cesium: 1.138.0
 
   cesium-particle@0.9.2:
     dependencies:
@@ -6704,16 +6928,6 @@ snapshots:
     dependencies:
       '@cesium/engine': 19.0.0
       '@cesium/widgets': 13.0.0
-
-  cesium@1.136.0:
-    dependencies:
-      '@cesium/engine': 22.1.0
-      '@cesium/widgets': 14.1.0
-
-  cesium@1.137.0:
-    dependencies:
-      '@cesium/engine': 22.2.0
-      '@cesium/widgets': 14.2.0
 
   cesium@1.138.0:
     dependencies:
@@ -7050,6 +7264,10 @@ snapshots:
       ms: 2.1.2
 
   debug@4.4.1:
+    dependencies:
+      ms: 2.1.3
+
+  debug@4.4.3:
     dependencies:
       ms: 2.1.3
 
@@ -7404,6 +7622,10 @@ snapshots:
   fastq@1.19.1:
     dependencies:
       reusify: 1.1.0
+
+  fdir@6.5.0(picomatch@4.0.3):
+    optionalDependencies:
+      picomatch: 4.0.3
 
   file-entry-cache@8.0.0:
     dependencies:
@@ -8268,8 +8490,6 @@ snapshots:
 
   meshoptimizer@0.24.0: {}
 
-  meshoptimizer@0.25.0: {}
-
   meshoptimizer@1.0.1: {}
 
   micromark-core-commonmark@1.1.0:
@@ -8606,9 +8826,9 @@ snapshots:
 
   mvt-basic-render@0.3.5: {}
 
-  mvt-imagery-provider@1.0.3(cesium@1.132.0):
+  mvt-imagery-provider@1.0.3(cesium@1.138.0):
     dependencies:
-      cesium: 1.132.0
+      cesium: 1.138.0
       mvt-basic-render: 0.3.5
 
   mz@2.7.0:
@@ -8909,6 +9129,10 @@ snapshots:
       confbox: 0.1.8
       mlly: 1.7.4
       pathe: 2.0.3
+
+  point-in-polygon-hao@1.2.4:
+    dependencies:
+      robust-predicates: 3.0.2
 
   point-in-polygon@1.1.0: {}
 
@@ -9236,6 +9460,8 @@ snapshots:
 
   semver@7.7.2: {}
 
+  semver@7.7.3: {}
+
   send@0.19.0:
     dependencies:
       debug: 2.6.9
@@ -9467,12 +9693,17 @@ snapshots:
     dependencies:
       any-promise: 1.3.0
 
-  tiff-imagery-provider@2.17.1(cesium@1.132.0):
+  tiff-imagery-provider@2.17.1(cesium@1.138.0):
     dependencies:
-      cesium: 1.132.0
+      cesium: 1.138.0
       geotiff: 2.1.3
 
   tinybench@2.9.0: {}
+
+  tinyglobby@0.2.15:
+    dependencies:
+      fdir: 6.5.0(picomatch@4.0.3)
+      picomatch: 4.0.3
 
   tinypool@0.7.0: {}
 
@@ -9512,6 +9743,10 @@ snapshots:
   trough@2.2.0: {}
 
   ts-api-utils@2.1.0(typescript@5.8.3):
+    dependencies:
+      typescript: 5.8.3
+
+  ts-api-utils@2.4.0(typescript@5.8.3):
     dependencies:
       typescript: 5.8.3
 
@@ -9557,6 +9792,17 @@ snapshots:
   type-detect@4.1.0: {}
 
   type-fest@1.4.0: {}
+
+  typescript-eslint@8.54.0(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3):
+    dependencies:
+      '@typescript-eslint/eslint-plugin': 8.54.0(@typescript-eslint/parser@8.54.0(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3))(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3)
+      '@typescript-eslint/parser': 8.54.0(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3)
+      '@typescript-eslint/typescript-estree': 8.54.0(typescript@5.8.3)
+      '@typescript-eslint/utils': 8.54.0(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3)
+      eslint: 9.31.0(jiti@1.21.7)
+      typescript: 5.8.3
+    transitivePeerDependencies:
+      - supports-color
 
   typescript@5.8.3: {}
 
@@ -9744,9 +9990,9 @@ snapshots:
       - supports-color
       - terser
 
-  vite-plugin-cesium@1.2.23(cesium@1.132.0)(rollup@3.29.5)(vite@4.5.14(@types/node@20.19.9)):
+  vite-plugin-cesium@1.2.23(cesium@1.138.0)(rollup@3.29.5)(vite@4.5.14(@types/node@20.19.9)):
     dependencies:
-      cesium: 1.132.0
+      cesium: 1.138.0
       fs-extra: 9.1.0
       rollup-plugin-external-globals: 0.6.1(rollup@3.29.5)
       serve-static: 1.16.2
