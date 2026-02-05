@@ -2,6 +2,7 @@ import { BasePlugin } from "dde-earth";
 
 import { getDefaultStyle, getDefaultTips, mergeStyle } from "./config";
 import {
+  BaseDrawer,
   CircleDrawer,
   PointDrawer,
   PolygonDrawer,
@@ -11,7 +12,6 @@ import {
 
 import type { Cartesian3, Entity } from "cesium";
 import type { Earth } from "dde-earth";
-import type { BaseDrawer } from "./drawers";
 import type {
   DrawByPositionsCircleOptions,
   DrawByPositionsLineOptions,

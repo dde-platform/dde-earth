@@ -1,8 +1,8 @@
-import { CallbackProperty, Cartesian3 } from "cesium";
+import { CallbackProperty, Cartesian3, Entity } from "cesium";
 
 import { BaseDrawer } from "./BaseDrawer";
 
-import type { Entity, PositionProperty } from "cesium";
+import type { PositionProperty } from "cesium";
 import type {
   DrawByPositionsCircleOptions,
   DrawResult,

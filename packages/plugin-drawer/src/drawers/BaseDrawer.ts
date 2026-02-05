@@ -1,8 +1,15 @@
-import { ScreenSpaceEventHandler, ScreenSpaceEventType, defined } from "cesium";
+import {
+  Cartesian2,
+  Cartesian3,
+  Entity,
+  ScreenSpaceEventHandler,
+  ScreenSpaceEventType,
+  defined,
+} from "cesium";
 
 import { getDefaultStyle, getDefaultTips, mergeStyle } from "../config";
 
-import type { Cartesian2, Cartesian3, Entity, Viewer } from "cesium";
+import type { Viewer } from "cesium";
 import type {
   BaseDrawerConfig,
   DrawResult,

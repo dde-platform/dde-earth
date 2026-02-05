@@ -1,6 +1,7 @@
+import { Entity } from "cesium";
+
 import { BaseDrawer } from "./BaseDrawer";
 
-import type { Entity } from "cesium";
 import type { Cartesian3 } from "cesium";
 import type {
   DrawByPositionsPointOptions,

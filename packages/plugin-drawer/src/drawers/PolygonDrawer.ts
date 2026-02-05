@@ -1,8 +1,8 @@
-import { CallbackProperty, PolygonHierarchy } from "cesium";
+import { CallbackProperty, Entity, PolygonHierarchy } from "cesium";
 
 import { BaseDrawer } from "./BaseDrawer";
 
-import type { Cartesian3, Entity } from "cesium";
+import type { Cartesian3 } from "cesium";
 import type {
   DrawByPositionsPolygonOptions,
   DrawResult,
@@ -19,16 +19,20 @@ export class PolygonDrawer extends BaseDrawer {
   /** 顶点实体列表 */
   private vertexEntities: Entity[] = [];
 
+  /** 动态多边形实体 */
+  private dynamicPolygonEntity: Entity | null = null;
+
   /** 动态边线实体 */
   private dynamicOutlineEntity: Entity | null = null;
 
   protected onStart(): void {
-    // 绘制过程中只显示边界线，不显示填充多边形
-    // 填充效果在 onComplete() 中创建最终实体时才显示
+    // 创建动态多边形和边线
+    this.createDynamicPolygon();
     this.createDynamicOutline();
   }
 
   protected onStop(): void {
+    this.removeDynamicPolygon();
     this.removeDynamicOutline();
     this.removeVertexEntities();
   }
@@ -38,6 +42,7 @@ export class PolygonDrawer extends BaseDrawer {
 
   protected onComplete(): void {
     // 移除动态元素和顶点
+    this.removeDynamicPolygon();
     this.removeDynamicOutline();
     this.removeVertexEntities();
 
