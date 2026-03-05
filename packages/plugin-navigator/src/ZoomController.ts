@@ -3,6 +3,7 @@ import {
   Cartesian3,
   Ellipsoid,
   IntersectionTests,
+  Matrix4,
   Ray,
   SceneMode,
 } from "cesium";
@@ -122,6 +123,8 @@ class ZoomController extends Widget {
    * @private
    */
   _refresh() {
+    // 解锁可能残留的 transform 锁定，防止 2D/2.5D 下 flyTo 触发 frustum 崩溃
+    this._viewer.camera.lookAtTransform(Matrix4.IDENTITY);
     if (this._options.home) {
       this._viewer.camera.flyTo({
         destination: this._options.home,
