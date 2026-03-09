@@ -79,14 +79,15 @@ class Widget {
    * hide widget
    */
   hide() {
-    if (this._wrapper) this._wrapper.style.display = "none";
+    if (this._wrapper)
+      this._wrapper.style.setProperty("display", "none", "important");
   }
 
   /**
    * show widget
    */
   show() {
-    if (this._wrapper) this._wrapper.style.display = "block";
+    if (this._wrapper) this._wrapper.style.removeProperty("display");
   }
 
   destroy() {
