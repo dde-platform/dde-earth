@@ -61,7 +61,7 @@ export class CircleDrawer extends BaseDrawer {
     });
 
     // 保存圆心和边缘点到 positions
-    this.positions = [this.centerPosition];
+    this.setPoints([this.centerPosition]);
   }
 
   protected onClear(): void {
@@ -231,7 +231,7 @@ export class CircleDrawer extends BaseDrawer {
     // 保存状态
     this.centerPosition = center;
     this.radius = radiusValue;
-    this.positions = [center];
+    this.setPoints([center]);
 
     // 创建圆形实体
     this.entity = this.viewer.entities.add({

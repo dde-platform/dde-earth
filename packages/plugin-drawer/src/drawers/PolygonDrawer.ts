@@ -101,11 +101,7 @@ export class PolygonDrawer extends BaseDrawer {
     this.addVertexEntity(position);
 
     // 更新提示
-    if (this.positions.length < 3) {
-      this.showTip(this.tips.bindPoint);
-    } else {
-      this.showTip(this.tips.bindLastPoint);
-    }
+    this.updateDrawingTip();
 
     this.requestRender();
   }
@@ -123,11 +119,7 @@ export class PolygonDrawer extends BaseDrawer {
       this.removeLastVertexEntity();
 
       // 更新提示
-      if (this.positions.length === 0) {
-        this.showTip(this.tips.init);
-      } else if (this.positions.length < 3) {
-        this.showTip(this.tips.bindPoint);
-      }
+      this.updateDrawingTip();
 
       this.requestRender();
     } else {
@@ -137,9 +129,30 @@ export class PolygonDrawer extends BaseDrawer {
   }
 
   protected onDoubleClick(_: Cartesian3 | null): void {
+    const removedDuplicatePoint = this.removeDoubleClickDuplicatePoint();
+    if (removedDuplicatePoint) {
+      this.removeLastVertexEntity();
+    }
+
     // 双击完成绘制（至少需要3个点）
     if (this.positions.length >= 3) {
       this.complete();
+    } else if (removedDuplicatePoint) {
+      this.updateDrawingTip();
+      this.requestRender();
+    }
+  }
+
+  /**
+   * 根据当前点数更新绘制提示
+   */
+  private updateDrawingTip(): void {
+    if (this.positions.length === 0) {
+      this.showTip(this.tips.init);
+    } else if (this.positions.length < 3) {
+      this.showTip(this.tips.bindPoint);
+    } else {
+      this.showTip(this.tips.bindLastPoint);
     }
   }
 
@@ -261,7 +274,7 @@ export class PolygonDrawer extends BaseDrawer {
     this.clear();
 
     // 保存坐标
-    this.positions = [...positions];
+    this.setPoints(positions);
 
     // 创建多边形实体（填充）
     this.entity = this.viewer.entities.add({

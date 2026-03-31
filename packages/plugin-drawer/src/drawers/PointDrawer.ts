@@ -109,7 +109,7 @@ export class PointDrawer extends BaseDrawer {
     this.clear();
 
     // 保存坐标
-    this.positions = [position];
+    this.setPoints([position]);
 
     // 创建点实体
     this.entity = this.viewer.entities.add({

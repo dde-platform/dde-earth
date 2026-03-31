@@ -131,7 +131,7 @@ export class RectangleDrawer extends BaseDrawer {
     if (this.startPosition) {
       // 清除起点，重新开始
       this.startPosition = null;
-      this.positions = [];
+      this.setPoints([]);
       this.removeStartPoint();
       this.showTip(this.tips.init);
       this.requestRender();
@@ -264,7 +264,7 @@ export class RectangleDrawer extends BaseDrawer {
     this.clear();
 
     // 保存坐标
-    this.positions = [positions[0], positions[1]];
+    this.setPoints([positions[0], positions[1]]);
 
     // 计算矩形边界
     const rectangle = this.calculateRectangle(positions[0], positions[1]);

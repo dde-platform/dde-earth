@@ -40,6 +40,9 @@ export abstract class BaseDrawer {
   /** 绘制的坐标点 */
   protected positions: Cartesian3[] = [];
 
+  /** 交互添加点时记录的屏幕坐标，用于识别双击产生的重复点 */
+  protected pointScreenPositions: Array<Cartesian2 | null> = [];
+
   /** 当前鼠标位置（用于动态预览） */
   protected currentMousePosition: Cartesian3 | null = null;
 
@@ -60,6 +63,9 @@ export abstract class BaseDrawer {
 
   /** 是否已销毁 */
   protected isDestroyed = false;
+
+  /** 当前待写入点位的屏幕坐标 */
+  private pendingPointScreenPosition: Cartesian2 | null = null;
 
   constructor(config: BaseDrawerConfig) {
     this.viewer = config.viewer;
@@ -175,7 +181,7 @@ export abstract class BaseDrawer {
     this.entity = null;
 
     // 清除坐标点
-    this.positions = [];
+    this.setPoints([]);
     this.currentMousePosition = null;
 
     // 清除事件处理器
@@ -247,7 +253,16 @@ export abstract class BaseDrawer {
     const position = this.getCartesian3FromScreen(event.position);
     if (!position) return;
 
-    this.onLeftClick(position);
+    this.pendingPointScreenPosition = new Cartesian2(
+      event.position.x,
+      event.position.y,
+    );
+
+    try {
+      this.onLeftClick(position);
+    } finally {
+      this.pendingPointScreenPosition = null;
+    }
   }
 
   /**
@@ -348,10 +363,26 @@ export abstract class BaseDrawer {
   }
 
   /**
+   * 直接设置点集合，保证交互缓存与点列表保持同步
+   */
+  protected setPoints(positions: Cartesian3[]): void {
+    this.positions = [...positions];
+    this.pointScreenPositions = this.positions.map(() => null);
+  }
+
+  /**
    * 添加点
    */
   protected addPoint(position: Cartesian3): void {
     this.positions.push(position);
+    this.pointScreenPositions.push(
+      this.pendingPointScreenPosition
+        ? new Cartesian2(
+            this.pendingPointScreenPosition.x,
+            this.pendingPointScreenPosition.y,
+          )
+        : null,
+    );
     this.options.onPointAdd?.(position, this.positions.length - 1);
   }
 
@@ -362,8 +393,37 @@ export abstract class BaseDrawer {
     if (this.positions.length === 0) return null;
 
     const removed = this.positions.pop()!;
+    this.pointScreenPositions.pop();
     this.options.onPointRemove?.(removed, this.positions.length);
     return removed;
+  }
+
+  /**
+   * 双击完成绘制时，移除第二击带来的尾部重复点
+   */
+  protected removeDoubleClickDuplicatePoint(pixelTolerance = 5): boolean {
+    if (this.positions.length < 2 || this.pointScreenPositions.length < 2) {
+      return false;
+    }
+
+    const lastScreenPosition =
+      this.pointScreenPositions[this.pointScreenPositions.length - 1];
+    const previousScreenPosition =
+      this.pointScreenPositions[this.pointScreenPositions.length - 2];
+
+    if (!lastScreenPosition || !previousScreenPosition) {
+      return false;
+    }
+
+    const xDiff = lastScreenPosition.x - previousScreenPosition.x;
+    const yDiff = lastScreenPosition.y - previousScreenPosition.y;
+    const distance = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+
+    if (distance > pixelTolerance) {
+      return false;
+    }
+
+    return this.removeLastPoint() !== null;
   }
 
   /**

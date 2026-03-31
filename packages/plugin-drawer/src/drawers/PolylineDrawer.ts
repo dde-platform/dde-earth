@@ -64,11 +64,7 @@ export class PolylineDrawer extends BaseDrawer {
     this.addVertexEntity(position);
 
     // 更新提示
-    if (this.positions.length === 1) {
-      this.showTip(this.tips.bindPoint);
-    } else {
-      this.showTip(this.tips.bindLastPoint);
-    }
+    this.updateDrawingTip();
 
     this.requestRender();
   }
@@ -86,11 +82,7 @@ export class PolylineDrawer extends BaseDrawer {
       this.removeLastVertexEntity();
 
       // 更新提示
-      if (this.positions.length === 0) {
-        this.showTip(this.tips.init);
-      } else if (this.positions.length === 1) {
-        this.showTip(this.tips.bindPoint);
-      }
+      this.updateDrawingTip();
 
       this.requestRender();
     } else {
@@ -100,9 +92,30 @@ export class PolylineDrawer extends BaseDrawer {
   }
 
   protected onDoubleClick(_: Cartesian3 | null): void {
+    const removedDuplicatePoint = this.removeDoubleClickDuplicatePoint();
+    if (removedDuplicatePoint) {
+      this.removeLastVertexEntity();
+    }
+
     // 双击完成绘制（至少需要2个点）
     if (this.positions.length >= 2) {
       this.complete();
+    } else if (removedDuplicatePoint) {
+      this.updateDrawingTip();
+      this.requestRender();
+    }
+  }
+
+  /**
+   * 根据当前点数更新绘制提示
+   */
+  private updateDrawingTip(): void {
+    if (this.positions.length === 0) {
+      this.showTip(this.tips.init);
+    } else if (this.positions.length === 1) {
+      this.showTip(this.tips.bindPoint);
+    } else {
+      this.showTip(this.tips.bindLastPoint);
     }
   }
 
@@ -188,7 +201,7 @@ export class PolylineDrawer extends BaseDrawer {
     this.clear();
 
     // 保存坐标
-    this.positions = [...positions];
+    this.setPoints(positions);
 
     // 创建线实体
     this.entity = this.viewer.entities.add({
