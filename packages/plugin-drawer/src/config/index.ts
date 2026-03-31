@@ -33,7 +33,6 @@ export const DEFAULT_POINT_STYLE = {
   outlineColor: Color.BLACK,
   outlineWidth: 1,
   heightReference: HeightReference.CLAMP_TO_GROUND,
-  disableDepthTestDistance: Number.POSITIVE_INFINITY,
 };
 
 /**
