@@ -1,4 +1,4 @@
-import {
+﻿import type {
   Cartesian2,
   Color,
   Entity,
@@ -24,13 +24,20 @@ export type MeasureUnits =
   | "degrees"
   | "hectares";
 
+export type MeasureType =
+  | "distance"
+  | "distanceSurface"
+  | "area"
+  | "areaSurface";
+
 export type MeasureLocaleOptions = {
   start: string;
   total: string;
   area: string;
   /**
-   * 格式化显示长度
-   * @param length 单位米
+   * 格式化长度显示文本
+   * @param length 原始长度，单位米
+   * @param unitedLength 按目标单位转换后的值
    * @param unit 目标单位
    */
   formatLength(
@@ -39,11 +46,25 @@ export type MeasureLocaleOptions = {
     unit: MeasureUnits,
   ): string;
   /**
-   * 格式化显示面积
-   * @param area 单位米
+   * 格式化面积显示文本
+   * @param area 原始面积，单位平方米
+   * @param unitedArea 按目标单位转换后的值
    * @param unit 目标单位
    */
   formatArea(area: number, unitedArea: number, unit: MeasureUnits): string;
+};
+
+export type MeasureLabelStyle = {
+  font?: string;
+  fillColor?: Color;
+  backgroundColor?: Color;
+  backgroundPadding?: Cartesian2;
+  outlineWidth?: number;
+  style?: LabelStyle;
+  pixelOffset?: Cartesian2;
+  scale?: number;
+  scaleByDistance?: NearFarScalar;
+  heightReference?: HeightReference;
 };
 
 export type MeasureRenderingOptions = {
@@ -51,56 +72,37 @@ export type MeasureRenderingOptions = {
   polygon?: PolygonGraphics.ConstructorOptions;
 };
 
+export type MeasureDrawerTips = {
+  init: string;
+  start: string;
+};
+
 export type MeasureOptions = {
-  labelStyle?: {
-    font?: string;
-    fillColor?: Color;
-    backgroundColor?: Color;
-    backgroundPadding?: Cartesian2;
-    outlineWidth?: number;
-    style?: LabelStyle;
-    pixelOffset?: Cartesian2;
-    scale?: number;
-    scaleByDistance?: NearFarScalar;
-    heightReference?: HeightReference;
-  };
+  labelStyle?: MeasureLabelStyle;
   /** defaults to kilometers */
   units?: MeasureUnits;
   onEnd?: (entity: Entity) => void;
-  /* drawerOptions: more detailed type could be found in @cesium-extends/drawer */
   drawerOptions?: {
-    // dynamicGraphicsOptions?: {
-    //   POINT: PointGraphics.ConstructorOptions;
-    //   POLYLINE: PolylineGraphics.ConstructorOptions;
-    //   POLYGON: PolygonGraphics.ConstructorOptions;
-    //   CIRCLE: EllipseGraphics.ConstructorOptions;
-    //   RECTANGLE: RectangleGraphics.ConstructorOptions;
-    // };
-    tips?: {
-      init: string;
-      start: string;
-    };
+    tips?: Partial<MeasureDrawerTips>;
   };
-  /**
-   * @example 
-   * {
-        start: '起点',
-        area: '面积',
-        total: '总计',
-        formatLength: (length, unitedLength) => {
-          if (length < 1000) {
-            return length + '米';
-          }
-          return unitedLength + '千米';
-        },
-        formatArea: (area, unitedArea) => {
-          if (area < 1000000) {
-            return area + '平方米';
-          }
-          return unitedArea + '平方千米';
-        }
-      }
-   */
   locale?: Partial<MeasureLocaleOptions>;
   renderingOptions?: MeasureRenderingOptions;
 };
+
+export type ResolvedMeasureOptions = {
+  labelStyle: MeasureLabelStyle;
+  units: MeasureUnits;
+  onEnd?: (entity: Entity) => void;
+  drawerOptions: {
+    tips: MeasureDrawerTips;
+  };
+  locale: MeasureLocaleOptions;
+  renderingOptions: MeasureRenderingOptions;
+};
+
+export interface MeasureTool {
+  readonly type: MeasureType;
+  start(): void;
+  end(): void;
+  destroy(): void;
+}
