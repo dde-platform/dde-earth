@@ -11,6 +11,7 @@ export class LayerManager {
   private _isDestroyed: boolean = false;
   private _baseLayer?: ImageryLayer;
   private _layerList: LayerItem[] = [];
+  private _pendingLayerIds = new Set<string>();
   private _loaders: Record<string, LayerManager.Loader> = {};
   readonly viewer: Viewer;
 
@@ -116,7 +117,7 @@ export class LayerManager {
     Awaited<LayerManager.LoaderTypes[Method]["layerItem"]> | undefined
   > {
     const { id = generateUUID(), method } = data;
-    if (this.getLayerById(id)) {
+    if (this.getLayerById(id) || this._pendingLayerIds.has(id)) {
       Debug.warn(`Layer with id: "${id}" already exists`);
       return undefined;
     }
@@ -126,17 +127,29 @@ export class LayerManager {
         `Layer loader with method "${method}" not found, please add loader`,
       );
     }
-    const layerItem = await loader(this.earth, data as any);
-    await layerItem.initial();
+    this._pendingLayerIds.add(id);
 
-    this._layerList.push(layerItem);
-    this.earth.emit("layer:add", layerItem);
-    this.earth.viewer.scene.requestRender();
+    try {
+      const layerItem = await loader(this.earth, data as any);
+      await layerItem.initial();
 
-    if (options?.zoom) {
-      layerItem.zoomTo();
+      if (this.getLayerById(id)) {
+        Debug.warn(`Layer with id: "${id}" already exists`);
+        await layerItem.remove();
+        return undefined;
+      }
+
+      this._layerList.push(layerItem);
+      this.earth.emit("layer:add", layerItem);
+      this.earth.viewer.scene.requestRender();
+
+      if (options?.zoom) {
+        layerItem.zoomTo();
+      }
+      return layerItem as any;
+    } finally {
+      this._pendingLayerIds.delete(id);
     }
-    return layerItem as any;
   }
 
   /**
