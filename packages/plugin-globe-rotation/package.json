@@ -13,7 +13,8 @@
   },
   "scripts": {
     "build": "rimraf dist && rollup -c",
-    "dev": "rollup -c --watch"
+    "dev": "rollup -c --watch",
+    "test": "node --test test/*.test.mjs"
   },
   "keywords": [
     "cesium",

@@ -70,6 +70,31 @@ rotationPlugin.init(earth, {
 
 ## API
 
+### Custom view state
+
+The plugin rotates around the Earth-centered Z axis in 3D. It preserves the
+globe center's screen position, viewing latitude, reference frame and frustum.
+It does not look up navigation controllers or application projection modes.
+
+Applications that maintain their own camera state can inject a rotation step:
+
+```typescript
+rotationPlugin.init(earth, {
+  rotationStep(viewer, angle) {
+    viewController.rotateGlobe(angle);
+  },
+});
+```
+
+`angle` is a delta in radians; positive values mean eastward globe rotation.
+The callback must preserve the globe center's screen position and scale, and
+update any camera state and notifications owned by the application. Navigation
+heading changes use a separate contract. The callback replaces the default step
+and is called only in 3D while camera inputs are enabled. The plugin owns frame
+scheduling and render requests. Applications can delegate ordinary camera views
+to the exported `rotateAroundEarthAxis(viewer.camera, angle)` helper; callers of
+that helper must ensure the camera is in 3D.
+
 ### Methods
 
 #### `init(earth: Earth, options?: GlobeRotation.Options)`
@@ -112,6 +137,8 @@ interface GlobeRotation.Options {
   autoStart?: boolean;
   /** Rotation speed (default: 0.03) */
   rotationSpeed?: number;
+  /** Custom state-aware globe rotation; defaults to camera rotation around Z. */
+  rotationStep?: GlobeRotation.RotationStep;
 }
 ```
 
@@ -153,6 +180,14 @@ const RotationControl: React.FC = () => {
   );
 };
 ```
+
+## Development checks
+
+Build `dde-earth` and this package with `pnpm exec rollup -c` in each package
+directory, then run `pnpm test` here. Tests require Node 22.15+ for the ESM
+resolution hook and do not import an application project. They cover perspective
+and orthographic cameras, translated/rotated reference frames, explicit injection,
+navigation independence, mode/input guards, and frame cleanup.
 
 ## License
 

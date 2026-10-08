@@ -1,4 +1,5 @@
 export * from "./earth";
+export * from "./cameraControls";
 export * from "./plugin";
 export * from "./layerItem";
 export * from "./layerManager";

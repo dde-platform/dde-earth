@@ -7,6 +7,7 @@ import {
   Ray,
   SceneMode,
 } from "cesium";
+import { getCameraControls } from "dde-earth";
 
 import Widget from "./Widget";
 import Icons from "./icons";
@@ -98,6 +99,11 @@ class ZoomController extends Widget {
    * @private
    */
   _zoomIn() {
+    const controls = getCameraControls(this._viewer);
+    if (controls) {
+      controls.zoom(0.5);
+      return;
+    }
     const scene = this._viewer.scene;
     const camera = scene.camera;
     if (scene.mode === SceneMode.SCENE3D) {
@@ -123,6 +129,11 @@ class ZoomController extends Widget {
    * @private
    */
   _refresh() {
+    const controls = getCameraControls(this._viewer);
+    if (controls) {
+      controls.reset();
+      return;
+    }
     // 解锁可能残留的 transform 锁定，防止 2D/2.5D 下 flyTo 触发 frustum 崩溃
     this._viewer.camera.lookAtTransform(Matrix4.IDENTITY);
     if (this._options.home) {
@@ -146,6 +157,11 @@ class ZoomController extends Widget {
    * @private
    */
   _zoomOut() {
+    const controls = getCameraControls(this._viewer);
+    if (controls) {
+      controls.zoom(2);
+      return;
+    }
     const scene = this._viewer.scene;
     const camera = scene.camera;
     if (scene.mode === SceneMode.SCENE3D) {

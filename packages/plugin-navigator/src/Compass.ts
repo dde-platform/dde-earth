@@ -11,6 +11,7 @@ import {
   Transforms,
   getTimestamp,
 } from "cesium";
+import { getCameraControls } from "dde-earth";
 
 import Widget from "./Widget";
 import Icons from "./icons";
@@ -125,6 +126,11 @@ class Compass extends Widget {
    * @private
    */
   protected _unbindEvent() {
+    this._rotateMouseUpFunction();
+    this._viewer.clock.onTick.removeEventListener(
+      this._orbitTickFunction,
+      this,
+    );
     this._viewer.scene.postRender.removeEventListener(
       this._postRenderHandler,
       this,
@@ -136,7 +142,8 @@ class Compass extends Widget {
    * @private
    */
   private _postRenderHandler() {
-    const heading = this._viewer.camera.heading;
+    const heading =
+      getCameraControls(this._viewer)?.heading ?? this._viewer.camera.heading;
     const innerSvg = this._outRing?.children.item(0) as HTMLElement;
     if (innerSvg) {
       innerSvg.style.cssText = `
@@ -222,6 +229,41 @@ class Compass extends Widget {
     const maxDistance = this._compassRectangle.width / 2.0;
     const vector = this._getVector(e);
     const distanceFraction = Cartesian2.magnitude(vector) / maxDistance;
+    const controls = getCameraControls(this._viewer);
+    if (controls) {
+      if (
+        !scene.screenSpaceCameraController.enableInputs ||
+        distanceFraction >= 1
+      )
+        return true;
+      this._rotateMouseUpFunction();
+      // 极地指南针内圈平移、外圈转动经线方向，不再改变观察地轴。
+      let previous = e;
+      this._mouseMoveHandle = (next: MouseEvent) => {
+        if (getCameraControls(this._viewer) !== controls) {
+          this._rotateMouseUpFunction();
+          return;
+        }
+        if (distanceFraction < 50 / 145) {
+          controls.pan(
+            next.clientX - previous.clientX,
+            next.clientY - previous.clientY,
+          );
+        } else {
+          const before = this._getVector(previous);
+          const after = this._getVector(next);
+          controls.rotate(
+            Math.atan2(-after.y, after.x) - Math.atan2(-before.y, before.x),
+          );
+        }
+        previous = next;
+      };
+      this._mouseUpHandle = () => this._rotateMouseUpFunction();
+      document.addEventListener("mousemove", this._mouseMoveHandle);
+      document.addEventListener("mouseup", this._mouseUpHandle);
+      e.preventDefault();
+      return true;
+    }
     if (distanceFraction < 50 / 145) {
       this._orbit(vector);
     } else if (distanceFraction < 1.0) {
@@ -239,6 +281,11 @@ class Compass extends Widget {
    * @private
    */
   private _handleDoubleClick() {
+    const controls = getCameraControls(this._viewer);
+    if (controls) {
+      controls.resetHeading();
+      return true;
+    }
     const scene = this._viewer.scene;
     const camera = scene.camera;
     const sscc = scene.screenSpaceCameraController;
